@@ -20,7 +20,7 @@
 \title{Pflichtenheft}
 \subtitle{Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
 \author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
-\date{29.11.17}
+\date{26.11.17}
 
 % define custom lists
 \usepackage{enumitem}
@@ -28,6 +28,10 @@
 % add glossary
 \usepackage{glossaries}
 \makeglossaries
+\def\threedigits#1{%
+  \ifnum#1<100 0\fi
+  \ifnum#1<10 0\fi
+  \number#1}
 \begin{document}
 
 \begin{titlepage}
@@ -35,7 +39,7 @@
 	\begin{center}
 	{\scshape\LARGE\bfseries Pflichtenheft \par}
 	\vspace{1cm}
-	{\scshape\Large Praktikum der Softwareentwicklung\\}
+	{\scshape\Large Praxis der Softwareentwicklung\\}
 	\vspace{1cm}
 	{\scshape\Large Wintersemester 17/18\\}
 	\vspace{3cm}
@@ -50,7 +54,7 @@
 	{\Large Houraalsadat Mortazavi Moshkenan}\\
 	{\Large Sonya}\\%TODO Nachname ergaenzen
 	\vfill
-	{\large 29.11.17 \par}
+	{\large 26.11.17 \par}
 	\end{center}
 \end{titlepage}
 \tableofcontents
@@ -59,9 +63,32 @@
 \section{Zielbestimmung}
 
 \subsection{Musskriterien}
-\subsection{Wunschkriterien}
-\subsection{Abgerenzungskriterien}
+\subsection*{Benuzter}
+\begin{itemize}[itemsep=0pt]
+ \item bla
+\end{itemize}
 
+\subsection*{Die Gruppen}
+\begin{itemize}[itemsep=0pt]
+ \item bla
+\end{itemize}
+
+\subsection*{Administrator der Gruppe}
+\begin{itemize}[itemsep=0pt]
+ \item 
+\end{itemize}
+
+
+
+
+\subsection{Wunschkriterien}
+\begin{itemize}[itemsep=0pt]
+\item bla
+\end{itemize}
+\subsection{Abgerenzungskriterien}
+\begin{itemize}[itemsep=0pt]
+\item bla
+\end{itemize}
 
 
 \section{Produkteinsatz}
@@ -77,18 +104,32 @@
 
 
 \section{Funktionale Anforderungen}
+\subsection{Benutzerkontofunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}}}, leftmargin=*]
+\item \textit{bla}
+\end{enumerate}
 
+\subsubsection{Administratorfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}}}, leftmargin=*]
+\item \textit{bla}
+\end{enumerate}
 
 \section{Produktdaten}
-
+\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}}}, leftmargin=*]
+\item \textit{bla}
+\end{enumerate}
 \section{Nichtfunktionale Anforderungen}
+\begin{enumerate}[label={\textbf{/NF\protect\threedigits{\theenumi}}}, leftmargin=*]
+\item \textit{bla}
+\end{enumerate}
+
 
 
 \section{Benutzungsschnittstelle}
 
 \section{Qualitätsbestimmungen}
 
-\section{globale Testfälle und Testszenarien}
+\section{Globale Testfälle und Testszenarien}
 
 \newpage
 \printglossary	
