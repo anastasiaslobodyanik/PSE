@@ -12,6 +12,8 @@
 		bookmarks=true,
 }
 \usepackage{fancyhdr}%<-------------to control headers and footers
+\usepackage{tabularx}%<------------- simpler table management
+\usepackage{float} 
 \usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
 \fancyhf{}
 \fancyfoot[C]{\thepage} %<----to get page number below text
@@ -73,12 +75,12 @@ description={definition} %todo
 	\vspace{2cm}
 	\vfill
 	{\bfseries {\Large Autoren}:\par}
-	{\Large Aleksandar Bachvarov}\\%TODO Nachname ergaenzen
+	{\Large Aleksandar Bachvarov}\\
 	{\Large Anastasia}\\%TODO Nachname ergaenzen
-	{\Large Atanas Dimitrov}\\%TODO Nachname ergaenzen
+	{\Large Atanas Dimitrov}\\
 	{\Large Dannie}\\%TODO Nachname ergaenzen
 	{\Large Houraalsadat Mortazavi Moshkenan}\\
-	{\Large Sonya Voneva}\\%TODO Nachname ergaenzen
+	{\Large Sonya Voneva}\\
 	\vfill
 	{\large 26.11.17 \par}
 	\end{center}
@@ -151,6 +153,7 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \subsection{Benutzerkontofunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}}}, leftmargin=*]
 \item \textit{bla}
+
 \end{enumerate}
 
 \subsubsection{Administratorfunktionen}
@@ -173,6 +176,65 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 \section{Qualitätsbestimmungen}
 
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{X c c c c}
+      \hline
+      
+      \textbf{{\large Produktivität}} & \textbf{{\large sehr gut}} & \textbf{{\large gut}} & \textbf{{\large normal} } &\textbf{{\large nicht relevant }}\\
+      
+      \hline      
+      \multicolumn{5}{l}{\textbf{Funktionalität}}\\      
+      \hline      
+      Angemessenheit & x & x & x & x\\
+	  Richtigkeit & x & x & x & x\\
+	  Interoperabilität & x & x & x & x\\
+	  Ordnungsmäßigkeit & x & x & x & x\\	
+      Sicherheit & x & x & x & x\\	
+		    
+	  \hline	  
+      \multicolumn{5}{l}{\textbf{Zuverlässigkeit}}\\     
+      \hline
+      Reife & x & x & x & x\\
+	  Fehlertoleranz & x & x & x & x\\
+	  Wiederherstellbarkeit & x & x & x & x\\
+		
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
+      \hline
+      Verständlichkeit & x & x & x & x\\
+	  Erlernbarkeit & x & x & x & x\\
+	  Bedienbarkeit & x & x & x & x\\
+	  
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Effizienz}}\\
+      \hline
+      Zeitverhalten & x & x & x & x\\
+	  Verbrauchsverhalten & x & x & x & x\\	
+	  
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Änderbarkeit}}\\
+      \hline
+      Analysierbarkeit & x & x & x & x\\
+	  Modifizierbarkeit & x & x & x & x\\
+	  Stabilität & x & x & x & x\\
+	  Prüfbarkeit & x & x & x & x\\
+	  
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
+      \hline
+      Anpassbarkeit & x & x & x & x\\
+	  Installierbarkeit & x & x & x & x\\
+	  Konformität & x & x & x & x\\
+	  Austauschbarkeit & x & x & x & x\\
+	  
+	  \hline      			
+    \end{tabularx}
+  \end{center}
+  
+\end{table}
+\renewcommand{\arraystretch}{1}
 \section{Globale Testfälle und Testszenarien}
 
 \newpage
