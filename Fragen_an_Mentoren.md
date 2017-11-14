@@ -8,3 +8,5 @@
 8. Sind Registrierungs-, An- und Abmeldeverfahren bereits implementiert?
 9. Ist die Datenverwaltung bereits implementiert?
 10. Was sind Anforderungen für Speicherkapazität und Antwortzeiten des Systems?
+11.An welche Zielgruppen ist das Produkt gerichtet? Nur Mitarbeiter von V-FOR-WaTer?
+12.Was sind die Software/Hardware-Anforderungen bez. des Produkts?
