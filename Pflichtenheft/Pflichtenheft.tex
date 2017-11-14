@@ -33,7 +33,7 @@
 \newglossaryentry{V-FOR-WaTer}
 {
 	name=V-FOR-WaTer,
-	description={definition} %todo
+	description={Die Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer)ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung}, 
 }
 \newglossaryentry{Benutzer}
 {
@@ -55,7 +55,11 @@ description={definition} %todo
 	name={Löschen-Request},
 	description={definition} %todo
 }
-
+\newglossaryentry{Web-portal}
+{
+	name={Web-portal},
+	description={definition} %TODO bitte ergaenzen.
+}
 \def\threedigits#1{%
   \ifnum#1<100 0\fi
   \ifnum#1<10 0\fi
@@ -88,9 +92,9 @@ description={definition} %todo
 \tableofcontents
 
 \newpage
-%Eineitung?
+%\section{Einleitung}
 \section{Zielbestimmung}
-Das Produkt dient  zum Autoriesierungsmanagement des  \gls{V-FOR-WaTer} Web-Portals.Dadurch können die in dem Webportal registierten \gls{Benutzer} ihre Profils verwalten, Ressourcen bearbeiten und zugreiffen.
+Das Produkt dient zum Autoriesierungsmanagement des \gls{V-FOR-WaTer} Web-Portals.Dadurch können die in dem \gls{Web-Portal} registrierten \gls{Benutzer} ihre Profils verwalten, Ressourcen bearbeiten und zugreiffen.
 
 \subsection{Musskriterien}
 Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
@@ -106,18 +110,22 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \item Der Benutzer kann seine eigene Ressourcen erstellen, besitzen und bearbeiten.
 \item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
 \item Der Benutzer kann Ressourcen lesen, auf die er Rechte hat.
+\end{itemize}
+\subsection*{Administrator}
+\begin{itemize}[itemsep=0pt]
+\item Der Admin kann Ressourcen löschen (dafür braucht er kein Request zu senden).
+\item Der Admin kann Benutzer(vom Portal/von der Gruppe?) entfernen.
+\item Der Admin unterstützt die Datenbankverwaltung.
+\end{itemize}
  
- \subsection*{Admin}
- \item Der Admin kann Ressourcen löschen (dafür braucht er kein Request zu senden).
- \item Der Admin kann Benutzer(vom Portal/von der Gruppe?) entfernen.
- \item Der Admin unterstützt die Datenbankverwaltung.
- 
- 
- \subsection*{Ressourcenbesitzer}
- \item Der Ressourcenbesitzer kann Rechte auf seine eigene Ressourcen vergeben.(Rechübergabe)
- \item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} dem Admin senden.(?)
- 
- \subsection*{Gruppe}(?)
+\subsection*{Ressourcenbesitzer}
+\begin{itemize}[itemsep=0pt]
+\item Der Ressourcenbesitzer kann Rechte auf seine eigene Ressourcen vergeben.(Rechübergabe)
+\item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} dem Admin senden.(?)
+\end{itemize}
+
+\subsection*{Gruppe}(?)
+\begin{itemize}[itemsep=0pt]
 \end{itemize}
 
 
@@ -151,18 +159,18 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 \section{Funktionale Anforderungen}
 \subsection{Benutzerkontofunktionen}
-\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}/}}, leftmargin=*]
 \item \textit{bla}
 
 \end{enumerate}
 
 \subsubsection{Administratorfunktionen}
-\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}/}}, leftmargin=*]
 \item \textit{bla}
 \end{enumerate}
 
 \section{Produktdaten}
-\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}/}}, leftmargin=*]
 \subsubsection{Personendaten}
 \item \textit{Benutzerdaten:}
 \begin{itemize}
