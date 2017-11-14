@@ -10,3 +10,5 @@
 10. Was sind Anforderungen für Speicherkapazität und Antwortzeiten des Systems?
 11. An welche Zielgruppen ist das Produkt gerichtet? Nur Mitarbeiter von V-FOR-WaTer?
 12. Was sind die Software/Hardware-Anforderungen bez. des Produkts?
+13. Führt das Versagen eines Requests zur automatischen Wiederholung?
+14. Sollen Hilfeverweise für Benutzer zur Verfügung gestellt werden?
