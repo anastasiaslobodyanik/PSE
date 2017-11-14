@@ -20,7 +20,7 @@
 \pagestyle{fancy} %<-------the page style itself
 
 \title{Pflichtenheft}
-\subtitle{Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
+\subtitle{Authorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
 \author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
 \date{26.11.17}
 
@@ -75,7 +75,7 @@ description={definition} %todo
 	\vspace{1cm}
 	{\scshape\Large Wintersemester 17/18\\}
 	\vspace{3cm}
-	{\huge\bfseries Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\par}
+	{\huge\bfseries Authorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\par}
 	\vspace{2cm}
 	\vfill
 	{\bfseries {\Large Autoren}:\par}
@@ -94,19 +94,19 @@ description={definition} %todo
 \newpage
 %\section{Einleitung}
 \section{Zielbestimmung}
-Das Produkt dient zum Autoriesierungsmanagement des \gls{V-FOR-WaTer} Web-Portals.Dadurch können die in dem \gls{Web-Portal} registrierten \gls{Benutzer} ihre Profils verwalten, Ressourcen bearbeiten und zugreiffen.
+Das Produkt dient zum Authorisierungsmanagement des \gls{V-FOR-WaTer} Web-Portals.Dadurch können die in dem \gls{Web-Portal} registrierten \gls{Benutzer} ihre Profils verwalten, Ressourcen bearbeiten und zugreifen.
 
 \subsection{Musskriterien}
 Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
-\subsection*{Benuzter}
+\subsection*{Benutzer}
 \begin{itemize}[itemsep=0pt]
 \item Unterscheidung zwischen \gls{Administrator} der Gruppe und Benutzer.
 \item Unterscheidung zwischen \gls{Ressourcenbesitzer} und Benutzer.
  
 \item Der Benutzer kann seine E-Mail-Adresse zu seinem Benutzeraccount hinzufügen.(?)
 \item Der Benutzer kann nach Ressourcen suchen.
-\item Der Benutzer kann zum Zugriff der Ressourcen ein Request dem Admistrator senden.
+\item Der Benutzer kann zum Zugriff der Ressourcen ein Request dem Administrator senden.
 \item Der Benutzer kann seine eigene Ressourcen erstellen, besitzen und bearbeiten.
 \item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
 \item Der Benutzer kann Ressourcen lesen, auf die er Rechte hat.
@@ -120,7 +120,7 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
  
 \subsection*{Ressourcenbesitzer}
 \begin{itemize}[itemsep=0pt]
-\item Der Ressourcenbesitzer kann Rechte auf seine eigene Ressourcen vergeben.(Rechübergabe)
+\item Der Ressourcenbesitzer kann Rechte auf seine eigene Ressourcen vergeben.(Rechteübergabe)
 \item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} dem Admin senden.(?)
 \end{itemize}
 
@@ -130,6 +130,8 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 
 \subsection{Wunschkriterien}
+Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
+Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert werden können.
 \begin{itemize}[itemsep=0pt]
 \item Der Benutzer kann ein Profilbild zu seinem Benutzeraccount hinzufügen.(?)
 \item Benachrichtigung wenn ein Ressource gelöscht wird
@@ -138,23 +140,53 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \item Verschiedene Möglichkeiten für Sortierung der Ressourcen
 \end{itemize}
 
-\subsection{Abgerenzungskriterien}
+\subsection{Abgrenzungskriterien}
 \begin{itemize}[itemsep=0pt]
-\item Das Produkt dient nicht zur Authentifikation.
+\item Das Produkt dient nicht zur Authentifizierung.
 \item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
 \end{itemize}
 
 
 \section{Produkteinsatz}
+Das Produkt wird in die Virtuelle Forschungsumgebung (VFU) für die Wasser-
+und Terrestrische Umweltforschung (V-FOR-WaTer) im Rahmen des Netzwerks
+Wasserforschung Baden-Württemberg eingesetzt. Die VFU legt ihre Schwerpunkte
+auf die Datenhaltung und den Direkten Zugriff auf Analysewerkzeuge für Daten
+aus der Wasser- und Umweltforschung. Das Produkt bezieht sich auf die
+Rechteverwaltung für diese Daten.
 
 \subsection{Anwendungsbereiche}
+\begin{itemize}[itemsep=0pt]
+\item Umweltforschungsbereich
+\item Datenhaltung
+\end{itemize}
+
 \subsection{Zielgruppen}
+\begin{itemize}[itemsep=0pt]
+\item Wissenschaftliche Mitarbeiter. %(von V-FOR-WaTer ?)
+\end{itemize}
+
 \subsection{Betriebsbedingungen}
+\begin{itemize}[itemsep=0pt]
+\item Einsatz in einem Webportal mit einer Datenbank.
+\end{itemize}
 
 
 \section{Produktumgebung}
-\subsection{Sofware}
+Das Produkt läuft in einem Webportal %(Client-Server Architektur?)
+
+\subsection{Software}
+\begin{itemize}[itemsep=0pt]
+\item SQLite – Datenbank
+\item Webbrowser
+\item Betriebssystemunabhängig
+\end{itemize}
+
 \subsection{Hardware}
+\begin{itemize}[itemsep=0pt]
+\item Standartrechner
+\item Smartphone
+\end{itemize}
 
 
 \section{Funktionale Anforderungen}
@@ -246,7 +278,7 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 
 
-\section{Benutzungsschnittstelle}
+\section{Benutzerschnittstelle}
 
 \section{Qualitätsbestimmungen}
 
