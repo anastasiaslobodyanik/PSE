@@ -60,12 +60,12 @@ description={definition} %todo
 	name={Web-Portal},
 	description={definition} %TODO bitte ergaenzen.
 }
-\newglossaryentry{Lese-Rechte}
+	\newglossaryentry{Zugriffsrechte}
 {
-	name={Lese-Rechte},
+	name={Zugriffsrechte},
 	description=
 	{
-		Rechte den Inhalt einer Ressource zu lesen.
+		Rechte den Inhalt einer Ressource zu lesen und auszuführen.
 	}
 }
 \newglossaryentry{Besitz-Rechte}
@@ -125,14 +125,13 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 \subsection*{Benutzer}
 \begin{itemize}[itemsep=0pt]
-\item Der Benutzer kann seine E-Mail-Adresse zu seinem Benutzeraccount hinzufügen.
 \item Der Benutzer kann nach Ressourcen suchen.
 \item Der Benutzer kann Ressourcen lesen, auf die er Lese-Rechte hat.
-\item Der Benutzer kann zum Zugriff der Ressourcen ein Request dem Ressourcenbesitzer senden.
+\item Der Benutzer kann ein Request dem Ressourcenbesitzer senden, um Lese-Rechte zu erwerben.
 \item Der Benutzer bekommt Rückmeldung ob sein Request erfolgreich gesendet war.
 \item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
 \item Der Benutzer kann seine eigenen Ressourcen erstellen. Damit wird er den Ressourcenbesitzer dieser Ressourcen.
-\item Der Benutzer kann ein Request für Admin-Rechte dem Admin senden.
+\item Der Benutzer kann seinen Namen ändern.
 \end{itemize}
  
 \subsection*{Ressourcenbesitzer}
@@ -141,6 +140,7 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben. %Gruppe in Glossar definieren
 \item Der Ressourcenbesitzer kann freiwillig seine Besitz-Rechte mit anderen Benutzern teilen.
 \item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} für seine eigenen Ressourcen dem Admin senden.
+\item Der Ressourcenbesitzer kann die E-Mail und Name vom Requst-Absender beim Request sehen.
 
 \end{itemize}
 
@@ -149,13 +149,9 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \item Der Admin kann Ressourcen löschen.
 \item Der Admin kann Benutzer(vom Portal) entfernen.
 \item Der Admin unterstützt die Datenbankverwaltung.
-%\item Der Admin kann Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
+\item Der Admin kann Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
+\item Der Admin kann Ressourcenbesitzer ändern. 
 \end{itemize}
-
-%\subsection*{Gruppe}(?)
-%\begin{itemize}[itemsep=0pt]
-%\end{itemize}
-
 
 \subsection{Wunschkriterien}
 Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
@@ -164,6 +160,10 @@ Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert we
 \item Benachrichtigung wenn eine Ressource gelöscht wird (nur an denen Benutzern, die Rechte darauf haben) 
 \item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden
 \item Verschiedene Möglichkeiten für Sortierung der Ressourcen
+\item Der Benutzer kann ein Request für Admin-Rechte dem Admin senden.
+\item Hilfeverweise für den Benutzer
+\item Implementierung von Tokens zur Verifizierung von Rechten
+\item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Admins
 \end{itemize}
 
 \subsection{Abgrenzungskriterien}
@@ -172,6 +172,9 @@ Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 \item Das Produkt dient nicht zur Authentifizierung.
 \item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
 \item Das Produkt unterstützt keine Mobile-Version.
+\item Die IDs von Benutzern sind nicht veränderbar.
+\item Die E-Mail-Adressen von Benutzern sind nicht veränderbar.
+\item Das Produkt steht nicht zur Verfügung für Benutzer ohne Account.
 \end{itemize}
 
 
@@ -198,7 +201,9 @@ Rechteverwaltung für diese Daten.
 
 \subsection{Betriebsbedingungen}
 \begin{itemize}[itemsep=0pt]
-\item Einsatz in einem Webportal mit einer Datenbank %TODO noch ergaenzen
+\item Einsatz in einem Webportal mit einer Datenbank.
+\item Das Produkt benötigt eine funktionierende Netzverbindung.
+\item Der Betriebsdauer ist täglich 24 Stunden.
 \end{itemize}
 
 
