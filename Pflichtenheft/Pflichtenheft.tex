@@ -127,7 +127,6 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 \subsection*{Benutzer}
 \begin{itemize}[itemsep=0pt]
-\item Der Benutzer kann nach Ressourcen suchen.
 \item Der Benutzer kann Ressourcen lesen, auf die er Lese-Rechte hat.
 \item Der Benutzer kann ein Request dem Ressourcenbesitzer senden, um Lese-Rechte zu erwerben.
 \item Der Benutzer bekommt Rückmeldung ob sein Request erfolgreich gesendet war.
@@ -254,9 +253,15 @@ Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Pro
 Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch Wunschkriterien erläutert. Die Nummern optionaler Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
 \subsection{Benutzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\item Profil[bersicht: Der Benutzer kann seine personenbezogene Daten (Name, E-Mail-Adresse, ID) sehen.
-\item Ressourcenerstelluung: Der Benutzer kann neue ressourcen hochladen.
-\item 
+\item \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
+\item \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
+\item \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
+\\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.
+
+\item \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
+\item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
+
+
 
 \end{enumerate}
 
@@ -352,43 +357,42 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
     \begin{tabularx}{\textwidth}{X c c c c}
       \hline
       
-      \textbf{{\large Produktivität}} & \textbf{{\large sehr gut}} & \textbf{{\large gut}} & \textbf{{\large normal} } &\textbf{{\large nicht relevant }}\\
+      \textbf{{\large Produktivität}} & \textbf{{\large sehr wichtig}} & \textbf{{\large wichtig}} & \textbf{{\large normal} } &\textbf{{\large nicht relevant }}\\
       
       \hline      
       \multicolumn{5}{l}{\textbf{Funktionalität}}\\      
       \hline      
-      Angemessenheit & x & x & x & x\\
-	  Richtigkeit & x & x & x & x\\
-	  Interoperabilität & x & x & x & x\\
-	  Ordnungsmäßigkeit & x & x & x & x\\	
-      Sicherheit & x & x & x & x\\	
+      Angemessenheit &   & x &   &  \\
+	  Richtigkeit & x &   &   &  \\
+	  Interoperabilität & x &   &   &  \\
+      Sicherheit &   & x &   &  \\	
 		    
 	  \hline	  
       \multicolumn{5}{l}{\textbf{Zuverlässigkeit}}\\     
       \hline
-      Reife & x & x & x & x\\
-	  Fehlertoleranz & x & x & x & x\\
-	  Wiederherstellbarkeit & x & x & x & x\\
+      Reife &   &   & x &  \\
+	  Fehlertoleranz &   &   &   & x\\
+	  Wiederherstellbarkeit &   &   &   & x\\
 		
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
       \hline
-      Verständlichkeit & x & x & x & x\\
-	  Erlernbarkeit & x & x & x & x\\
-	  Bedienbarkeit & x & x & x & x\\
+      Verständlichkeit & x &   &   &  \\
+	  Erlernbarkeit &   & x &   &  \\
+	  Bedienbarkeit & x &   &   &  \\
 	  
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Effizienz}}\\
       \hline
-      Zeitverhalten & x & x & x & x\\
-	  Verbrauchsverhalten & x & x & x & x\\	
+      Zeitverhalten &   &   & x &  \\
+	  Verbrauchsverhalten & x &   &   &  \\	
 	  
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Änderbarkeit}}\\
       \hline
-      Analysierbarkeit & x & x & x & x\\
-	  Modifizierbarkeit & x & x & x & x\\
-	  Stabilität & x & x & x & x\\
+      Analysierbarkeit &   &   &   & x\\
+	  Modifizierbarkeit & x &   &   &  \\
+	  Stabilität &   & x &   &  \\
 	  Prüfbarkeit & x & x & x & x\\
 	  
 	  \hline	  	
