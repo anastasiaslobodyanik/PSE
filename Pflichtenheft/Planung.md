@@ -1,13 +1,20 @@
 08.11.2017 bis 15.11.2017
 
-- Gruppe 1 [Alex,Houra,Sonya]
-  - [ ] Zielbestimmungen
-  - [ ] Produkteinsatz
-  - [ ] Benutzerschnittstelle
-  - [ ] Produktumgebung
-- Gruppe 2 [Anastasia,Atanas,Khalil]
-  - [ ] Produktdaten
-  - [ ] Nichtfunktionale Anforderungen
-  - [ ] Qualitaetsbestimmungen
-  - [ ] Globale Testfaelle
+
+  - [x] Zielbestimmungen
+  - [x] Produkteinsatz
+  - [ ] Benutzerschnittstelle [Sonya, Alex]
+  - [x] Produktumgebung
+  - [x] Produktdaten
+  - [ ] Nichtfunktionale Anforderungen [Anastasia, Houra, Atanas, Khalil]
+  - [ ] Systemmodelle (Szenarien, UML) [Sonya, Alex]
+  - [x] Qualitaetsbestimmungen
+  - [ ] Globale Testfaelle [Anastasia, Atanas, Khalil, Houra]
+ 
  - [ ] Funktionale Anforderungen --->Alle
+  - [ ] Benutzer [Anastasia]
+  - [ ] Admin [Atanas, Khalil]
+  - [ ] Besitzer [Houra]
+  - [ ]
+  
+ - [ ] Glossar[Khalil]
