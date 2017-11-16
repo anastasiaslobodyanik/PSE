@@ -55,14 +55,14 @@ description={definition} %todo
 	name={Löschen-Request},
 	description={definition} %todo
 }
-\newglossaryentry{Web-portal}
+\newglossaryentry{Web-Portal}
 {
-	name={Web-portal},
+	name={Web-Portal},
 	description={definition} %TODO bitte ergaenzen.
 }
 \def\threedigits#1{%
-  \ifnum#1<100 0\fi
   \ifnum#1<10 0\fi
+  \ifnum#1<1 0\fi
   \number#1}
 \begin{document}
 
@@ -124,16 +124,15 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} dem Admin senden.(?)
 \end{itemize}
 
-\subsection*{Gruppe}(?)
-\begin{itemize}[itemsep=0pt]
-\end{itemize}
+%\subsection*{Gruppe}(?)
+%\begin{itemize}[itemsep=0pt]
+%\end{itemize}
 
 
 \subsection{Wunschkriterien}
 Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
 Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert werden können.
 \begin{itemize}[itemsep=0pt]
-\item Der Benutzer kann ein Profilbild zu seinem Benutzeraccount hinzufügen.(?)
 \item Benachrichtigung wenn ein Ressource gelöscht wird
 \item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden
 \item Übersicht aller wissenschaftlichen Gruppen
@@ -141,6 +140,7 @@ Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert we
 \end{itemize}
 
 \subsection{Abgrenzungskriterien}
+Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 \begin{itemize}[itemsep=0pt]
 \item Das Produkt dient nicht zur Authentifizierung.
 \item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
@@ -191,18 +191,18 @@ Das Produkt läuft in einem Webportal %(Client-Server Architektur?)
 
 \section{Funktionale Anforderungen}
 \subsection{Benutzerkontofunktionen}
-\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}/}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \item \textit{bla}
 
 \end{enumerate}
 
 \subsubsection{Administratorfunktionen}
-\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}/}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
 \item \textit{bla}
 \end{enumerate}
 
 \section{Produktdaten}
-\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}/}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \subsubsection{Personendaten}
 \item \textit{Benutzerdaten:}
 \begin{itemize}
@@ -269,7 +269,7 @@ Das Produkt läuft in einem Webportal %(Client-Server Architektur?)
 
 \end{enumerate}
 \section{Nichtfunktionale Anforderungen}
-\begin{enumerate}[label={\textbf{/NF\protect\threedigits{\theenumi}}}, leftmargin=*]
+\begin{enumerate}[label={\textbf{/NF\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \item Eine Änderung von Rechten wird nach nächster Seitenaktualisierung sichtbar. Seitenaktualisierung geschieht automatisch alle X Sekunden.
 \item Zur Erstellung eines Requests sind maximal X Schritte nötig.
 \item Eine Änderung von Rechten führt nicht zur Veränderung von Ressourcen.
