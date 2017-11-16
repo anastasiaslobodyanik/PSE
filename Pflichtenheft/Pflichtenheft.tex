@@ -22,7 +22,7 @@
 \title{Pflichtenheft}
 \subtitle{Authorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
 \author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
-\date{26.11.17}
+\date{22.11.17}
 
 % define custom lists
 \usepackage{enumitem}
@@ -60,6 +60,30 @@ description={definition} %todo
 	name={Web-Portal},
 	description={definition} %TODO bitte ergaenzen.
 }
+\newglossaryentry{Lese-Rechte}
+{
+	name={Lese-Rechte},
+	description=
+	{
+		Rechte den Inhalt einer Ressource zu lesen.
+	}
+}
+\newglossaryentry{Besitz-Rechte}
+{
+	name={Besitz-Rechte},
+	description=
+	{
+		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitz-Rechte implizieren Lese-Rechte.
+	} 
+}
+\newglossaryentry{Admin-Rechte}
+{
+	name={Admin-Rechte},
+	description=
+	{
+		%TODO definition ergänzen
+	} 
+}
 \def\threedigits#1{%
   \ifnum#1<10 0\fi
   \ifnum#1<1 0\fi
@@ -94,34 +118,38 @@ description={definition} %todo
 \newpage
 %\section{Einleitung}
 \section{Zielbestimmung}
-Das Produkt dient zum Authorisierungsmanagement des \gls{V-FOR-WaTer} Web-Portals.Dadurch können die in dem \gls{Web-Portal} registrierten \gls{Benutzer} ihre Profils verwalten, Ressourcen bearbeiten und zugreifen.
+Das Produkt dient zum Authorisierungsmanagement des \gls{V-FOR-WaTer} Web-Portals. Dadurch können die in dem \gls{Web-Portal} registrierte \gls{Benutzer} Zugriffsanfragen für Ressourcen senden, Ressourcen nutzen und Ressourcen selbst erstellen. Dabei dient das Produkt auch zur Unterscheidung zwischen Benutzer, \gls{Ressourcenbesitzer} und \gls{Administrator}.
 
 \subsection{Musskriterien}
 Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 
 \subsection*{Benutzer}
 \begin{itemize}[itemsep=0pt]
-\item Unterscheidung zwischen \gls{Administrator} der Gruppe und Benutzer.
-\item Unterscheidung zwischen \gls{Ressourcenbesitzer} und Benutzer.
- 
-\item Der Benutzer kann seine E-Mail-Adresse zu seinem Benutzeraccount hinzufügen.(?)
+\item Der Benutzer kann seine E-Mail-Adresse zu seinem Benutzeraccount hinzufügen.
 \item Der Benutzer kann nach Ressourcen suchen.
-\item Der Benutzer kann zum Zugriff der Ressourcen ein Request dem Administrator senden.
-\item Der Benutzer kann seine eigene Ressourcen erstellen, besitzen und bearbeiten.
+\item Der Benutzer kann Ressourcen lesen, auf die er Lese-Rechte hat.
+\item Der Benutzer kann zum Zugriff der Ressourcen ein Request dem Ressourcenbesitzer senden.
+\item Der Benutzer bekommt Rückmeldung ob sein Request erfolgreich gesendet war.
 \item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
-\item Der Benutzer kann Ressourcen lesen, auf die er Rechte hat.
-\end{itemize}
-\subsection*{Administrator}
-\begin{itemize}[itemsep=0pt]
-\item Der Admin kann Ressourcen löschen (dafür braucht er kein Request zu senden).
-\item Der Admin kann Benutzer(vom Portal/von der Gruppe?) entfernen.
-\item Der Admin unterstützt die Datenbankverwaltung.
+\item Der Benutzer kann seine eigenen Ressourcen erstellen. Damit wird er den Ressourcenbesitzer dieser Ressourcen.
+\item Der Benutzer kann ein Request für Admin-Rechte dem Admin senden.
 \end{itemize}
  
 \subsection*{Ressourcenbesitzer}
 \begin{itemize}[itemsep=0pt]
-\item Der Ressourcenbesitzer kann Rechte auf seine eigene Ressourcen vergeben.(Rechteübergabe)
-\item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} dem Admin senden.(?)
+\item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen vergeben.
+\item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben. %Gruppe in Glossar definieren
+\item Der Ressourcenbesitzer kann freiwillig seine Besitz-Rechte mit anderen Benutzern teilen.
+\item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} für seine eigenen Ressourcen dem Admin senden.
+
+\end{itemize}
+
+\subsection*{Administrator}
+\begin{itemize}[itemsep=0pt]
+\item Der Admin kann Ressourcen löschen.
+\item Der Admin kann Benutzer(vom Portal) entfernen.
+\item Der Admin unterstützt die Datenbankverwaltung.
+%\item Der Admin kann Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
 \end{itemize}
 
 %\subsection*{Gruppe}(?)
@@ -133,9 +161,8 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
 Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert werden können.
 \begin{itemize}[itemsep=0pt]
-\item Benachrichtigung wenn ein Ressource gelöscht wird
+\item Benachrichtigung wenn eine Ressource gelöscht wird (nur an denen Benutzern, die Rechte darauf haben) 
 \item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden
-\item Übersicht aller wissenschaftlichen Gruppen
 \item Verschiedene Möglichkeiten für Sortierung der Ressourcen
 \end{itemize}
 
@@ -144,6 +171,7 @@ Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 \begin{itemize}[itemsep=0pt]
 \item Das Produkt dient nicht zur Authentifizierung.
 \item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
+\item Das Produkt unterstützt keine Mobile-Version.
 \end{itemize}
 
 
@@ -163,29 +191,30 @@ Rechteverwaltung für diese Daten.
 
 \subsection{Zielgruppen}
 \begin{itemize}[itemsep=0pt]
-\item Wissenschaftliche Mitarbeiter. %(von V-FOR-WaTer ?)
+\item Administrator(en) der Webseite %(Mitarbeiter von V-FOR-WaTer)
+\item Wissenschaftliche Mitarbeiter von V-FOR-WaTer
+\item Externe Benutzer des Portals
 \end{itemize}
 
 \subsection{Betriebsbedingungen}
 \begin{itemize}[itemsep=0pt]
-\item Einsatz in einem Webportal mit einer Datenbank.
+\item Einsatz in einem Webportal mit einer Datenbank %TODO noch ergaenzen
 \end{itemize}
 
 
 \section{Produktumgebung}
-Das Produkt läuft in einem Webportal %(Client-Server Architektur?)
+Das Produkt läuft auf einem Webportal.
 
 \subsection{Software}
 \begin{itemize}[itemsep=0pt]
 \item SQLite – Datenbank
-\item Webbrowser
+\item Moderne Webbrowser (Chrome, Safari, Edge, Firefox)
 \item Betriebssystemunabhängig
 \end{itemize}
 
 \subsection{Hardware}
 \begin{itemize}[itemsep=0pt]
 \item Standartrechner
-\item Smartphone
 \end{itemize}
 
 
