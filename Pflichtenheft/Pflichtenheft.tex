@@ -326,7 +326,25 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 
 \section{Systemmodelle}
 \subsection{Szenarien}
-\subsection{UML-Diagramme}
+\subsubsection*{Einfache Benutzer-Funktionen}
+Alice hat sich vor kurzem verheiratet und möchte darum ihren Familiennamen im Portal von V-FOR-WaTer ändern. Sie loggt sich im System ein und sieht ihr Profil. Dann klickt sie auf dem Knopf "Name editieren" und tippt ihren neuen Namen ein. \\
+Nun möchte sie eine neue Ressource erstellen, darum klickt sie auf dem Knopf "Ressource hinzufügen". Später entscheidet sich Alice ihre neue Ressource X zu überprüfen. Sie sucht im Portal nach der Ressource X und findet sie. Weil sie der Besitzer ist, hat sie das Recht X zuzugreifen.
+%Skizze kommt noch
+\subsubsection*{Zugriff-Request senden}
+Bob hat Interesse an einer Ressource X im Portal von V-FOR-WaTer. Er probiert den Inhalt von X zuzugreifen. Leider hat er keine Zugriffsrechte darauf. Um solche Rechte zu bekommen, soll er ein Request am Besitzer von X senden, in diesem Fall - Alice. Bob wählt die Option "Zugriffsrechte anfragen". \\
+Nach wenigen Sekunden bekommt Alice eine E-Mail-Benachrichtigung über das neue Request. Um zu entscheiden, ob sie die Zugriffsanfrage genehmigt, loggt sie sich im Portal ein. Dann sieht sie Bobs Anfrage und beschließt sie zu genehmigen. In kurzem bekommt Bob eine E-Mail mit der guten Neuigkeit. Nun kann er die Ressource zugreifen und ist glücklich.
+%Skizze kommt noch
+\subsubsection*{Besitz-Rechte teilen}
+Der Besitzer von Ressource Y, nämlich Bob, ist ein sehr beschäftigter Mann. Er hat keine Zeit und Lust jeden Tag die zahlreiche Zugriffsanfragen für Rechte auf Y zu beantworten. Deshalb hat er sich entschieden seine Besitz-Rechte mit drei Mitarbeitern von ihm zu teilen. \\
+Er findet die Ressource Y und wählt die Option "Besitz-Rechte teilen". Dann findet er die Personen durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.
+%Skizze kommt noch
+\subsubsection*{Ressource editieren}
+Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektion. Danach sendet sie ein Löschen-Request am Administrator, damit er die alte Version von X zerstört.
+%Skizze kommt noch
+\subsection{Diagramme}
+\subsection*{Funktionenübersichtsdiagramm}
+\subsection*{Kontrollflussdiagramm \glqq{Ressource zugreifen}\grqq}
+\subsection*{Zustandsdiagramm \glqq{Zugriff-Request}\grqq}
 \section{Qualitätsbestimmungen}
 
 \renewcommand{\arraystretch}{1.5}
@@ -377,9 +395,9 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
       \hline
       Anpassbarkeit & x &  &  & \\
-	  Installierbarkeit &   &   &   & x\\
-	  Konformität &   & x &   &  \\
-	  Austauschbarkeit &   & x  &   &  \\
+	  Installierbarkeit &   & x  &   & \\
+	  Konformität &   &  &   & x \\
+	  Austauschbarkeit &  x &   &   &  \\
 	  
 	  \hline      			
     \end{tabularx}
