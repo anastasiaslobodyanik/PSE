@@ -1,0 +1,445 @@
+\documentclass[parskip=full,11pt]{scrartcl}
+%\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[yyyymmdd]{datetime} 
+\usepackage{hyperref}
+\usepackage[toc, nonumberlist]{glossaries}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\definecolor{shadecolor}{RGB}{220,220,220}
+\hypersetup{
+		pdftitle={Pflichtenheft},
+		bookmarks=true,
+}
+\usepackage{fancyhdr}%<-------------to control headers and footers
+\usepackage{tabularx}%<------------- simpler table management
+\usepackage{float} 
+\usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
+\fancyhf{}
+\fancyfoot[C]{\thepage} %<----to get page number below text
+\pagestyle{fancy} %<-------the page style itself
+
+\title{Pflichtenheft}
+\subtitle{Authorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
+\author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
+\date{22.11.17}
+
+% define custom lists
+\usepackage{enumitem}
+
+% add glossary
+\usepackage{glossaries}
+\makeglossaries
+\newglossaryentry{V-FOR-WaTer}
+{
+	name=V-FOR-WaTer,
+	description={Die Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer)ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung}, 
+}
+\newglossaryentry{Benutzer}
+{
+	name=Benutzer,
+	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind} 
+}
+\newglossaryentry{Administrator}
+{
+	name={Administrator},
+description={Ein Administrator ist der Verwalter des Systems,er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann . Der Administrator ist ein Mitarbeiter von V-FOR-WaTer} 
+}
+\newglossaryentry{Ressourcenbesitzer}
+{
+	name={Ressourcenbesitzer},
+	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
+}
+\newglossaryentry{Loeschen-Request}
+{
+	name={Loeschen-Request},
+	description={Ein loeschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem wunsch, ein oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet  } 
+}
+\newglossaryentry{Web-Portal}
+{
+	name={Web-Portal},
+	description={Ein Web-Portal ist ein Anwendungssystem, das sich durch die Integration von Anwendungen, Prozessen und Diensten auszeichnet. Ein Portal stellt seinem Benutzer verschiedene Funktionen zur Verfügung, wie beispielsweise Navigation und Benutzerverwaltung. Außerdem koordiniert es die Suche und die Präsentation von Informationen und soll die Sicherheit gewährleisten.} 
+}
+\newglossaryentry{Zugriffsrechte}
+{
+	name={Zugriffsrechte},
+	description=
+	{
+		Rechte den Inhalt einer Ressource zu lesen und auszuführen.
+	}
+}
+\newglossaryentry{Besitz-Rechte}
+{
+	name={Besitz-Rechte},
+	description=
+	{
+		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitz-Rechte implizieren Lese-Rechte.
+	} 
+}
+\newglossaryentry{Admin-Rechte}
+{
+	name={Admin-Rechte},
+	description=
+	{
+		%TODO definition ergänzen
+	} 
+}
+\def\threedigits#1{%
+  \ifnum#1<10 0\fi
+  \ifnum#1<1 0\fi
+  \number#1}
+\begin{document}
+
+\begin{titlepage}
+	
+	\begin{center}
+	{\scshape\LARGE\bfseries Pflichtenheft \par}
+	\vspace{1cm}
+	{\scshape\Large Praxis der Softwareentwicklung\\}
+	\vspace{1cm}
+	{\scshape\Large Wintersemester 17/18\\}
+	\vspace{3cm}
+	{\huge\bfseries Authorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\par}
+	\vspace{2cm}
+	\vfill
+	{\bfseries {\Large Autoren}:\par}
+	{\Large Aleksandar Bachvarov}\\
+	{\Large Anastasia Slobodyanik}\\
+	{\Large Atanas Dimitrov}\\%TODO Nachname ergaenzen
+	{\Large Khalil Sakly}\\
+	{\Large Houraalsadat Mortazavi Moshkenan}\\
+	{\Large Sonya Voneva}\\
+	\vfill
+	{\large 22.11.17 \par}
+	\end{center}
+\end{titlepage}
+\tableofcontents
+
+\newpage
+%\section{Einleitung}
+\section{Zielbestimmung}
+Das Produkt dient zum Authorisierungsmanagement des \gls{V-FOR-WaTer} Web-Portals. Dadurch können die in dem \gls{Web-Portal} registrierte \gls{Benutzer} Zugriffsanfragen für Ressourcen senden, Ressourcen nutzen und Ressourcen selbst erstellen. Dabei dient das Produkt auch zur Unterscheidung zwischen Benutzer, \gls{Ressourcenbesitzer} und \gls{Administrator}.
+
+\subsection{Musskriterien}
+Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
+
+\subsection*{Benutzer}
+\begin{itemize}[itemsep=0pt]
+\item Der Benutzer kann Ressourcen lesen, auf die er Lese-Rechte hat.
+\item Der Benutzer kann ein Request dem Ressourcenbesitzer senden, um Lese-Rechte zu erwerben.
+\item Der Benutzer bekommt Rückmeldung ob sein Request erfolgreich gesendet war.
+\item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
+\item Der Benutzer kann seine eigenen Ressourcen erstellen. Damit wird er den Ressourcenbesitzer dieser Ressourcen.
+\item Der Benutzer kann seinen Namen ändern.
+\end{itemize}
+ 
+\subsection*{Ressourcenbesitzer}
+\begin{itemize}[itemsep=0pt]
+\item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen vergeben.
+\item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben. %Gruppe in Glossar definieren
+\item Der Ressourcenbesitzer kann freiwillig seine Besitz-Rechte mit anderen Benutzern teilen.
+\item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} für seine eigenen Ressourcen dem Admin senden.
+\item Der Ressourcenbesitzer kann die E-Mail und Name vom Requst-Absender beim Request sehen.
+
+\end{itemize}
+
+\subsection*{Administrator}
+\begin{itemize}[itemsep=0pt]
+\item Der Admin kann Ressourcen löschen.
+\item Der Admin kann Benutzer(vom Portal) entfernen.
+\item Der Admin unterstützt die Datenbankverwaltung.
+\item Der Admin kann Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
+\item Der Admin kann Ressourcenbesitzer ändern. 
+\end{itemize}
+
+\subsection{Wunschkriterien}
+Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
+Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert werden können.
+\begin{itemize}[itemsep=0pt]
+\item Benachrichtigung wenn eine Ressource gelöscht wird (nur an denen Benutzern, die Rechte darauf haben) 
+\item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden
+\item Verschiedene Möglichkeiten für Sortierung der Ressourcen
+\item Der Benutzer kann ein Request für Admin-Rechte dem Admin senden.
+\item Hilfeverweise für den Benutzer
+\item Implementierung von Tokens zur Verifizierung von Rechten
+\item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Admins
+\end{itemize}
+
+\subsection{Abgrenzungskriterien}
+Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
+\begin{itemize}[itemsep=0pt]
+\item Das Produkt dient nicht zur Authentifizierung.
+\item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
+\item Das Produkt unterstützt keine Mobile-Version.
+\item Die IDs von Benutzern sind nicht veränderbar.
+\item Die E-Mail-Adressen von Benutzern sind nicht veränderbar.
+\item Das Produkt steht nicht zur Verfügung für Benutzer ohne Account.
+\end{itemize}
+
+
+\section{Produkteinsatz}
+Das Produkt wird in die Virtuelle Forschungsumgebung (VFU) für die Wasser-
+und Terrestrische Umweltforschung (V-FOR-WaTer) im Rahmen des Netzwerks
+Wasserforschung Baden-Württemberg eingesetzt. Die VFU legt ihre Schwerpunkte
+auf die Datenhaltung und den Direkten Zugriff auf Analysewerkzeuge für Daten
+aus der Wasser- und Umweltforschung. Das Produkt bezieht sich auf die
+Rechteverwaltung für diese Daten.
+
+\subsection{Anwendungsbereiche}
+\begin{itemize}[itemsep=0pt]
+\item Umweltforschungsbereich
+\item Datenhaltung
+\end{itemize}
+
+\subsection{Zielgruppen}
+\begin{itemize}[itemsep=0pt]
+\item Administrator(en) der Webseite %(Mitarbeiter von V-FOR-WaTer)
+\item Wissenschaftliche Mitarbeiter von V-FOR-WaTer
+\item Externe Benutzer des Portals
+\end{itemize}
+
+\subsection{Betriebsbedingungen}
+\begin{itemize}[itemsep=0pt]
+\item Einsatz in einem Webportal mit einer Datenbank.
+\item Das Produkt benötigt eine funktionierende Netzverbindung.
+\item Der Betriebsdauer ist täglich 24 Stunden.
+\end{itemize}
+
+
+\section{Produktumgebung}
+Das Produkt wird in die virtuelle Forschungsumgebung für Wasser- und Terrestrische Umweltforschung "V-FOR-WaTer" integriert.\\
+Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Produktumgebung vorhanden ist
+
+\subsection{Software}
+\begin{itemize}[itemsep=0pt]
+\item Server Seite:
+	\begin{itemize}
+	\item WebServer Apache 
+	\item SQLite – Datenbank
+	\end{itemize}
+\item Client Seite:
+	\begin{itemize}
+	\item Moderne Webbrowser:
+		\begin{itemize}
+		\item Chrome
+		\item Firefox
+		\item Safari
+		\item Microsoft Edge
+		\end{itemize}
+	
+	\end{itemize}
+\end{itemize}
+
+\subsection{Hardware}
+\begin{itemize}[itemsep=0pt]
+
+	\item Server Seite:
+	\begin{itemize}
+	\item Netzwerkfähig
+	\item Rechner, der die Ansprüche der o.g. Server-Software erfüllt.
+	\end{itemize}
+	\item Client Seite:
+	\begin{itemize}
+	\item Standardrechner
+	\item Netzwerkfähig
+	\end{itemize}
+\end{itemize}
+\newpage
+
+
+\section{Funktionale Anforderungen}
+Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch Wunschkriterien erläutert. Die Nummern optionaler Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
+\subsection{Benutzerfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\item \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
+\item \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
+\item \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
+\\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.
+\item \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
+\item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
+\item \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
+\item \textbf{Requestsübersicht:}\\ Der angemeldete Benutzer kann seine abgesendete Requests auf seine Profilseite sehen.
+\item \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffs-Request für mehrere Ressourcen gleichzeitig senden.
+\item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
+\end{enumerate}
+
+\subsubsection{Administratorfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item \textit{bla}
+\end{enumerate}
+
+\subsubsection{Ressourcenbesitzerfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item \textbf{Übersicht der Requests:}\\
+Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
+\item \textbf {Übergabe der Zugriffsrechte:}\\ 
+Der Ressourcenbesitzer kann die gesendeteen Requests,die von anderen Benutzern zur Anforderung einer zugriffrechte gesendet wurden, entweder ablehnen oder annehmen.In beiden Fälle werden der entsprechenden Benutzern benachrichtigt.Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen. Darüber hinaus sind bei jedem Request  für den  Ressourcenbesitzer die Name und Email-Adresse von Absender sichtbar.
+\item \textbf{Übergabe der Besitz-Rechte:}\\
+Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat.
+\item \textbf{Löschen-Request senden:}\\
+Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
+\item \textbf{Ressourcen bearbeiten:}\\
+Der Ressourcenbesitzer müss zum Bearbeiten einer Ressource erstmal ein Löschen-Request dem Administrator senden, wird dieses Request von Admin akzeptiert, danach kann er seine neue Version von der Ressource hochladen.
+\item \colorbox{shadecolor} {\textbf{Löschen Benachrichtigungen:}}\\
+Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
+
+\end{enumerate}
+\section{Produktdaten}
+\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\subsubsection{Personendaten}
+\item \textit{Benutzerdaten:}
+\begin{itemize}
+   \item Benutzername
+   
+   \item Kennung:
+   \begin{itemize}
+     \item Benutzername
+     \item Passwort
+   \end{itemize}
+ 
+   \item Persönliche Daten:
+   \begin{itemize}
+     \item Vorname
+     \item Nachname
+     \item Alter
+     \item Geschlecht
+     \item ID
+     \item Institut 
+   \end{itemize}
+   
+    \item Kontaktinformationen:
+   \begin{itemize}
+     \item Straße und Hausnummer
+     \item Postleitzahl 
+     \item Ort
+     \item Land
+     \item Fax
+     \item Telefon
+     \item E-Mail Adresse  
+   \end{itemize}
+   
+    \item Sonstiges:
+   \begin{itemize}
+     \item Rechte
+     \item Status (Administrator, Benutzer) 
+     \item Letzte Anmeldung (Datum) 
+     \item Registrierungsdatum (Datum)    
+   \end{itemize}
+ 
+\end{itemize}
+
+\item \textit{Gruppendaten:}
+\begin{itemize}
+\item Administrator
+\item Institut
+\item Teilnehmer
+ \end{itemize}
+ 
+\subsubsection{Webportal Daten}
+\item \textit{Datenliste?:}
+\begin{itemize}
+\item ID
+\item Besitzer
+\item Leser
+ \end{itemize}
+ 
+ \item \textit{Tools-liste??:}
+\begin{itemize}
+\item ID
+\item Besitzer
+\item Benutzer
+ \end{itemize}
+
+\end{enumerate}
+\section{Nichtfunktionale Anforderungen}
+\begin{enumerate}[label={\textbf{/NF\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\item Eine Änderung von Rechten wird nach nächster Seitenaktualisierung sichtbar.
+\item Zur Erstellung eines Requests sind maximal 5 Schritte nötig.
+\item Zur Erstellung einer neuen Ressource sind maximal 5 Schritte nötig.
+\item Eine Änderung von Rechten führt nicht zur Veränderung von Ressourcen.
+\item Hilfeverweise %to do
+\item Zeitverhalten - angemessen %to do
+\end{enumerate}
+
+
+
+\section{Benutzerschnittstelle}
+
+\section{Qualitätsbestimmungen}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{X c c c c}
+      \hline
+      
+      \textbf{{\large Produktivität}} & \textbf{{\large sehr wichtig}} & \textbf{{\large wichtig}} & \textbf{{\large normal} } &\textbf{{\large nicht relevant }}\\
+      
+      \hline      
+      \multicolumn{5}{l}{\textbf{Funktionalität}}\\      
+      \hline      
+      Angemessenheit &   & x &   &  \\
+	  Richtigkeit & x &   &   &  \\
+	  Interoperabilität & x &   &   &  \\
+      Sicherheit &   & x &   &  \\	
+		    
+	  \hline	  
+      \multicolumn{5}{l}{\textbf{Zuverlässigkeit}}\\     
+      \hline
+      Reife &   &   & x &  \\
+	  Fehlertoleranz &   &   &   & x\\
+	  Wiederherstellbarkeit &   &   &   & x\\
+		
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
+      \hline
+      Verständlichkeit & x &   &   &  \\
+	  Erlernbarkeit &   & x &   &  \\
+	  Bedienbarkeit & x &   &   &  \\
+	  
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Effizienz}}\\
+      \hline
+      Zeitverhalten &   &   & x &  \\
+	  Verbrauchsverhalten & x &   &   &  \\	
+	  
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Änderbarkeit}}\\
+      \hline
+      Analysierbarkeit &   &   &   & x\\
+	  Modifizierbarkeit & x &   &   &  \\
+	  Stabilität &   & x &   &  \\
+	  Prüfbarkeit & x & x & x & x\\
+	  
+	  \hline	  	
+	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
+      \hline
+      Anpassbarkeit & x & x & x & x\\
+	  Installierbarkeit & x & x & x & x\\
+	  Konformität & x & x & x & x\\
+	  Austauschbarkeit & x & x & x & x\\
+	  
+	  \hline      			
+    \end{tabularx}
+  \end{center}
+  
+\end{table}
+\renewcommand{\arraystretch}{1}
+\section{Globale Testfälle und Testszenarien}
+\item Profilseite öffnen.
+\item Namen ändern
+\item Ressourcen öffnen
+\item Neue Ressource erstellen.
+\item Request senden.
+\item Benachrichtigungen lesen. 
+\item Requestliste ansehen.
+\item Multiple Request senden
+\item Administratorrechte anfragen
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\newpage
+\printglossary	
+\end{document}
+\grid
+\grid

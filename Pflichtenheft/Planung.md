@@ -5,16 +5,15 @@
   - [x] Produkteinsatz
   - [ ] Benutzerschnittstelle [Sonya, Alex]
   - [x] Produktumgebung
-  - [x] Produktdaten
-  - [ ] Nichtfunktionale Anforderungen [Anastasia, Houra, Atanas, Khalil]
+  - [x] Produktdaten [nach der pause]
+  - [ ] Nichtfunktionale Anforderungen [Anastasia]
   - [ ] Systemmodelle (Szenarien, UML) [Sonya, Alex]
   - [x] Qualitaetsbestimmungen
-  - [ ] Globale Testfaelle [Anastasia, Atanas, Khalil, Houra]
+  - [ ] Globale Testfaelle [nach der pause]
  
  - [ ] Funktionale Anforderungen --->Alle
   - [ ] Benutzer [Anastasia]
   - [ ] Admin [Atanas, Khalil]
-  - [ ] Besitzer [Houra]
-  - [ ]
+  - [ ] Besitzer [Houra, nach der pause]
   
  - [ ] Glossar[Khalil]
