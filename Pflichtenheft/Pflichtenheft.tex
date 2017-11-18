@@ -40,29 +40,29 @@
 \newglossaryentry{Benutzer}
 {
 	name=Benutzer,
-	description={definition} %todo
+	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind} 
 }
 \newglossaryentry{Administrator}
 {
 	name={Administrator},
-description={definition} %todo
+description={Ein Administrator ist der Verwalter des Systems,er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann . Der Administrator ist ein Mitarbeiter von V-FOR-WaTer} 
 }
 \newglossaryentry{Ressourcenbesitzer}
 {
 	name={Ressourcenbesitzer},
-	description={definition} %todo
+	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
 }
 \newglossaryentry{Löschen-Request}
 {
 	name={Löschen-Request},
-	description={definition} %todo
+	description={Ein löschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem wunsch, ein oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet  } 
 }
 \newglossaryentry{Web-Portal}
 {
 	name={Web-Portal},
-	description={definition} %TODO bitte ergaenzen.
+	description={Ein Web-Portal ist ein Anwendungssystem, das sich durch die Integration von Anwendungen, Prozessen und Diensten auszeichnet. Ein Portal stellt seinem Benutzer verschiedene Funktionen zur Verfügung, wie beispielsweise Navigation und Benutzerverwaltung. Außerdem koordiniert es die Suche und die Präsentation von Informationen und soll die Sicherheit gewährleisten.} 
 }
-	\newglossaryentry{Zugriffsrechte}
+\newglossaryentry{Zugriffsrechte}
 {
 	name={Zugriffsrechte},
 	description=
@@ -106,9 +106,9 @@ description={definition} %todo
 	\vfill
 	{\bfseries {\Large Autoren}:\par}
 	{\Large Aleksandar Bachvarov}\\
-	{\Large Anastasia}\\%TODO Nachname ergaenzen
-	{\Large Atanas Dimitrov}\\
-	{\Large Dannie}\\%TODO Nachname ergaenzen
+	{\Large Anastasia Slobodyanik}\\
+	{\Large Atanas Dimitrov}\\%TODO Nachname ergaenzen
+	{\Large Khalil Sakly}\\
 	{\Large Houraalsadat Mortazavi Moshkenan}\\
 	{\Large Sonya Voneva}\\
 	\vfill
@@ -257,22 +257,57 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
 \item \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
 \\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.
-
 \item \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
 \item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
-
-
-
+\item \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
+\item \textbf{Requestsübersicht:}\\ Der angemeldete Benutzer kann seine abgesendete Requests auf seine Profilseite sehen.
+\item \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffs-Request für mehrere Ressourcen gleichzeitig senden.
+\item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
 \end{enumerate}
 
-\subsubsection{Administratorfunktionen}
+
+\subsection{Administratorfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item \textit{bla}
+\item \textbf{Bekommen von Löschrequeste}\\ Der Admin bekommt Requeste von einem Ressourcenbesitzer zur RessourcenLöschen.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Nachdem der Ressourcenbesitzer ein Löschrequest gesendet hat, werden alle Admine darüber durch eine Email und durch eine Nachricht im Portal benachrichtigt.\\
+\item Die Nachricht enthält die Daten des Ressourcenbesitzers und den Namen der Ressource zum Löschen.\\ 
+\item Der Admin kann seine Entscheidung direkt von der Nachricht durch zwei Knöpfe ``Ja`` oder ``Nein`` treffen.
+ 
 \end{enumerate}
 
+
+\item \textbf{Löschen von Ressourcen}\\ Der Admin darf die Ressourcen im Portal löschen.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Die Löschen kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
+\item Nach der Löschen der Ressource werden alle Ressourcenbesitzer(eventuell auch alle Benutzer mit Leserechte, bei Publicressourcen problematisch) durch eine Email darüber informiert. \\ 
+\end{enumerate}
+
+\item \textbf{Bekommen von Adminrequeste}\\ Der Admin bekommt Requeste von einem Benutzer, der vom Admin verlangt, ein Admin zu werden.
+\item \textbf{Löschen von Ressourcen}\\ Der Admin darf Adminrechte einem anderen Benutzer geben.
+\end{enumerate}
+
+\subsection{Ressourcenbesitzerfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item \textbf{Übersicht der Requests:}\\
+Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
+\item \textbf {Übergabe der Zugriffsrechte:}\\ 
+Der Ressourcenbesitzer kann die gesendeteen Requests,die von anderen Benutzern zur Anforderung einer zugriffrechte gesendet wurden, entweder ablehnen oder annehmen.In beiden Fälle werden der entsprechenden Benutzern benachrichtigt.Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen. Darüber hinaus sind bei jedem Request  für den  Ressourcenbesitzer die Name und Email-Adresse von Absender sichtbar.
+\item \textbf{Übergabe der Besitz-Rechte:}\\
+Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat.
+\item \textbf{Löschen-Request senden:}\\
+Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
+\item \textbf{Ressourcen bearbeiten:}\\
+Der Ressourcenbesitzer müss zum Bearbeiten einer Ressource erstmal ein Löschen-Request dem Administrator senden, wird dieses Request von Admin akzeptiert, danach kann er seine neue Version von der Ressource hochladen.
+\item \colorbox{shadecolor} {\textbf{Löschen Benachrichtigungen:}}\\
+Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
+
+\end{enumerate}
 \section{Produktdaten}
 \begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\subsubsection{Personendaten}
+\subsection{Personendaten}
 \item \textit{Benutzerdaten:}
 \begin{itemize}
    \item Benutzername 
@@ -298,7 +333,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \end{itemize}
 
  
-\subsubsection{Webportal Daten}
+\subsection{Webportal Daten}
 \item \textit{Datenliste:}
 \begin{itemize}
 \item ID
@@ -316,10 +351,12 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \end{enumerate}
 \section{Nichtfunktionale Anforderungen}
 \begin{enumerate}[label={\textbf{/NF\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\item Eine Änderung von Rechten wird nach nächster Seitenaktualisierung sichtbar. Seitenaktualisierung geschieht automatisch alle X Sekunden.
-\item Zur Erstellung eines Requests sind maximal X Schritte nötig.
+\item Eine Änderung von Rechten wird nach nächster Seitenaktualisierung sichtbar.
+\item Zur Erstellung eines Requests sind maximal 5 Schritte nötig.
+\item Zur Erstellung einer neuen Ressource sind maximal 5 Schritte nötig.
 \item Eine Änderung von Rechten führt nicht zur Veränderung von Ressourcen.
-\item Eingabefelder, die Pflicht für den Benutzer sind, sollen mit einem Sternchen markiert werden.
+\item Hilfeverweise %to do
+\item Zeitverhalten - angemessen %to do
 \end{enumerate}
 
 
@@ -389,14 +426,15 @@ Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigie
       Analysierbarkeit &   &   &   & x\\
 	  Modifizierbarkeit & x &   &   &  \\
 	  Stabilität &   & x &   &  \\
-	  Prüfbarkeit &   &   & x &  \\
+	  Prüfbarkeit &  & x &  & \\
+
 	  
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
       \hline
       Anpassbarkeit & x &  &  & \\
-	  Installierbarkeit &  & x  &  & \\
-	  Konformität &  &  &  & x \\
+	  Installierbarkeit &  & x &  & \\
+	  Konformität &  &  &  & x\\
 	  Austauschbarkeit & x &  &  & \\
 	  
 	  \hline      			
@@ -405,8 +443,20 @@ Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigie
   
 \end{table}
 \renewcommand{\arraystretch}{1}
-\section{Globale Testfälle}
 
+\section{Globale Testfälle und Testszenarien}
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\item Profilseite öffnen.
+\item Namen ändern
+\item Ressourcen öffnen
+\item Neue Ressource erstellen.
+\item Request senden.
+\item Benachrichtigungen lesen. 
+\item Requestliste ansehen.
+\item Multiple Request senden
+\item Administratorrechte anfragen
+\end{enumerate}
+>>>>>>> 1695da4c031324e805338fe3e6eaa8bb2985535b
 \newpage
 \printglossary	
 \end{document}
