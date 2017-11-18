@@ -52,10 +52,10 @@ description={Ein Administrator ist der Verwalter des Systems,er unterstützt die
 	name={Ressourcenbesitzer},
 	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
 }
-\newglossaryentry{Loeschen-Request}
+\newglossaryentry{Löschen-Request}
 {
-	name={Loeschen-Request},
-	description={Ein loeschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem wunsch, ein oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet  } 
+	name={Löschen-Request},
+	description={Ein Löschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem wunsch, ein oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet  } 
 }
 \newglossaryentry{Web-Portal}
 {
@@ -78,9 +78,9 @@ description={Ein Administrator ist der Verwalter des Systems,er unterstützt die
 		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitz-Rechte implizieren Lese-Rechte.
 	} 
 }
-\newglossaryentry{Admin-Rechte}
+\newglossaryentry{Administratorrechte}
 {
-	name={Admin-Rechte},
+	name={Administratorrechte},
 	description=
 	{
 		%TODO definition ergänzen
@@ -138,33 +138,32 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \subsection*{Ressourcenbesitzer}
 \begin{itemize}[itemsep=0pt]
 \item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen vergeben.
-\item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben. %Gruppe in Glossar definieren
 \item Der Ressourcenbesitzer kann freiwillig seine Besitz-Rechte mit anderen Benutzern teilen.
-\item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} für seine eigenen Ressourcen dem Admin senden.
-\item Der Ressourcenbesitzer kann die E-Mail und Name vom Requst-Absender beim Request sehen.
+\item Der Ressourcenbesitzer kann ein \gls{Löschen-Request} für seine eigenen Ressourcen dem Administrator senden.
+\item Der Ressourcenbesitzer kann den Name vom Requst-Absender beim Request sehen.
 
 \end{itemize}
 
 \subsection*{Administrator}
 \begin{itemize}[itemsep=0pt]
-\item Der Admin kann Ressourcen löschen.
-\item Der Admin kann Benutzer(vom Portal) entfernen.
-\item Der Admin unterstützt die Datenbankverwaltung.
-\item Der Admin kann Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
-\item Der Admin kann Ressourcenbesitzer ändern. 
+\item Der Administrator kann Ressourcen löschen.
+\item Der Administrator kann Benutzer(vom Portal) entfernen.
+\item Der Administrator unterstützt die Datenbankverwaltung.
+\item Der Administrator kann Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
+\item Der Administrator kann Ressourcenbesitzer ändern. 
 \end{itemize}
 
 \subsection{Wunschkriterien}
 Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
 Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert werden können.
 \begin{itemize}[itemsep=0pt]
-\item Benachrichtigung wenn eine Ressource gelöscht wird (nur an denen Benutzern, die Rechte darauf haben) 
-\item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden
-\item Verschiedene Möglichkeiten für Sortierung der Ressourcen
-\item Der Benutzer kann ein Request für Admin-Rechte dem Admin senden.
-\item Hilfeverweise für den Benutzer
-\item Implementierung von Tokens zur Verifizierung von Rechten
-\item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Admins
+\item Benachrichtigung wenn eine Ressource gelöscht wird (nur an denen Benutzern, die Rechte darauf haben).
+\item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden.
+\item Der Benutzer kann ein Request für Administratorrechte dem Administrator senden.
+\item Hilfeverweise für den Benutzer.
+\item Implementierung von Tokens zur Verifizierung von Rechten.
+\item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Administrators.
+\item Der Ressourcenbesitzer kann Lese-Rechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben.
 \end{itemize}
 
 \subsection{Abgrenzungskriterien}
@@ -195,7 +194,7 @@ Rechteverwaltung für diese Daten.
 
 \subsection{Zielgruppen}
 \begin{itemize}[itemsep=0pt]
-\item Administrator(en) der Webseite %(Mitarbeiter von V-FOR-WaTer)
+\item Administratoristrator(en) der Webseite %(Mitarbeiter von V-FOR-WaTer)
 \item Wissenschaftliche Mitarbeiter von V-FOR-WaTer
 \item Externe Benutzer des Portals
 \end{itemize}
@@ -265,94 +264,51 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
 \end{enumerate}
 
-\subsubsection{Administratorfunktionen}
+\subsection{Administratorfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
 \item \textit{bla}
 \end{enumerate}
 
-\subsubsection{Ressourcenbesitzerfunktionen}
+\subsection{Ressourcenbesitzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
 \item \textbf{Übersicht der Requests:}\\
 Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
 \item \textbf {Übergabe der Zugriffsrechte:}\\ 
-Der Ressourcenbesitzer kann die gesendeteen Requests,die von anderen Benutzern zur Anforderung einer zugriffrechte gesendet wurden, entweder ablehnen oder annehmen.In beiden Fälle werden der entsprechenden Benutzern benachrichtigt.Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen. Darüber hinaus sind bei jedem Request  für den  Ressourcenbesitzer die Name und Email-Adresse von Absender sichtbar.
+Der Besitzer kann Zugriffsrechte an anderen Benutzer vergeben.
+\item \textbf {Request auf Zugriffsrechte ablehnen/genehmigen:}\\ 
+Der Ressourcenbesitzer kann die gesendeten Requests, die von anderen Benutzern zur Anforderung einer Zugriffsrechte gesendet wurden, entweder ablehnen oder annehmen. In beiden Fälle werden der entsprechenden Benutzern benachrichtigt. Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen.
 \item \textbf{Übergabe der Besitz-Rechte:}\\
-Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat.
+Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat. %todo
 \item \textbf{Löschen-Request senden:}\\
 Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
-\item \textbf{Ressourcen bearbeiten:}\\
-Der Ressourcenbesitzer müss zum Bearbeiten einer Ressource erstmal ein Löschen-Request dem Administrator senden, wird dieses Request von Admin akzeptiert, danach kann er seine neue Version von der Ressource hochladen.
-\item \colorbox{shadecolor} {\textbf{Löschen Benachrichtigungen:}}\\
+\item \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
 Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
-
 \end{enumerate}
+
+
 \section{Produktdaten}
+\subsection{Benutzerdaten}
 \begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\subsubsection{Personendaten}
-\item \textit{Benutzerdaten:}
-\begin{itemize}
-   \item Benutzername
-   
-   \item Kennung:
-   \begin{itemize}
-     \item Benutzername
-     \item Passwort
-   \end{itemize}
- 
-   \item Persönliche Daten:
-   \begin{itemize}
-     \item Vorname
-     \item Nachname
-     \item Alter
-     \item Geschlecht
-     \item ID
-     \item Institut 
-   \end{itemize}
-   
-    \item Kontaktinformationen:
-   \begin{itemize}
-     \item Straße und Hausnummer
-     \item Postleitzahl 
-     \item Ort
-     \item Land
-     \item Fax
-     \item Telefon
-     \item E-Mail Adresse  
-   \end{itemize}
-   
-    \item Sonstiges:
-   \begin{itemize}
-     \item Rechte
-     \item Status (Administrator, Benutzer) 
-     \item Letzte Anmeldung (Datum) 
-     \item Registrierungsdatum (Datum)    
-   \end{itemize}
- 
-\end{itemize}
-
-\item \textit{Gruppendaten:}
-\begin{itemize}
-\item Administrator
-\item Institut
-\item Teilnehmer
- \end{itemize}
- 
-\subsubsection{Webportal Daten}
-\item \textit{Datenliste?:}
-\begin{itemize}
-\item ID
-\item Besitzer
-\item Leser
- \end{itemize}
- 
- \item \textit{Tools-liste??:}
-\begin{itemize}
-\item ID
-\item Besitzer
-\item Benutzer
- \end{itemize}
-
+     		\item Vorname
+     		\item Nachname
+     		\item ID
+     		\item E-Mail Adresse 
 \end{enumerate}
+     		 
+\subsection{Sonstiges}
+\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+		\item Ressourcenliste, die der Benutzer besitzt
+        	\item Status (Administrator, Benutzer)     
+\end{enumerate}
+
+\subsubsection{Ressourcendaten}
+\begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+		\item Titel
+		\item Erstellungsdatum
+		\item Besitzer
+        	\item Leser     
+\end{enumerate}
+
 \section{Nichtfunktionale Anforderungen}
 \begin{enumerate}[label={\textbf{/NF\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \item Eine Änderung von Rechten wird nach nächster Seitenaktualisierung sichtbar.
@@ -411,15 +367,15 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
       Analysierbarkeit &   &   &   & x\\
 	  Modifizierbarkeit & x &   &   &  \\
 	  Stabilität &   & x &   &  \\
-	  Prüfbarkeit & x & x & x & x\\
+	  Prüfbarkeit &   & x &   &  \\
 	  
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
       \hline
-      Anpassbarkeit & x & x & x & x\\
-	  Installierbarkeit & x & x & x & x\\
-	  Konformität & x & x & x & x\\
-	  Austauschbarkeit & x & x & x & x\\
+      Anpassbarkeit & x &   &   &  \\
+	  Installierbarkeit &  & x &  & \\
+	  Konformität &   &   &   & x\\
+	  Austauschbarkeit & x &   &   &  \\
 	  
 	  \hline      			
     \end{tabularx}
@@ -428,16 +384,36 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
 \end{table}
 \renewcommand{\arraystretch}{1}
 \section{Globale Testfälle und Testszenarien}
-\item Profilseite öffnen.
-\item Namen ändern
-\item Ressourcen öffnen
-\item Neue Ressource erstellen.
-\item Request senden.
-\item Benachrichtigungen lesen. 
-\item Requestliste ansehen.
-\item Multiple Request senden
-\item Administratorrechte anfragen
+\subsection{Benutzertestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\item Profilseite öffnen. (/F010/)
+\item Namen ändern. (/F020/) 
+\item Ressourcen öffnen. (/F030/)
+\item Neue Ressource erstellen. (/F040/)
+\item Request senden. (/F050/)
+\item Benachrichtigungen kontrollieren. (/F060/) 
+\item Requestliste ansehen. (/F070/)
+\item Multiple Request senden. (/F080/)
+\item Administratorrechte anfragen. (/F090/)
+\end{enumerate}
+
+\subsection{Ressourcenbesitzertestfälle}
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item Liste von besessenen Ressourcen kontrollieren.  %todo
+\item Zugriffsrechte an anderen Benutzer vergeben.
+\item Requestsliste kontrollieren.
+\item Request auf Zugriffsrechte ablehnen.
+\item Request auf Zugriffsrechte genehmigen.
+\item Besitzrechte an anderen Benutzer vergeben.
+\item Request zum Löschen von Ressource absenden
+\item Löschbenachrichtigung kontrollieren.  
+\end{enumerate}
+
+\subsection{Administratortestfälle}
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item bu
+\end{enumerate}
+
 \newpage
 \printglossary	
 \end{document}
