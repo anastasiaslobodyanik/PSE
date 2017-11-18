@@ -270,6 +270,22 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \textit{bla}
 \end{enumerate}
 
+\subsubsection{Ressourcenbesitzerfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item \textbf{Übersicht der Requests:}\\
+Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
+\item \textbf {Übergabe der Zugriffsrechte:}\\ 
+Der Ressourcenbesitzer kann die gesendeteen Requests,die von anderen Benutzern zur Anforderung einer zugriffrechte gesendet wurden, entweder ablehnen oder annehmen.In beiden Fälle werden der entsprechenden Benutzern benachrichtigt.Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen. Darüber hinaus sind bei jedem Request  für den  Ressourcenbesitzer die Name und Email-Adresse von Absender sichtbar.
+\item \textbf{Übergabe der Besitz-Rechte:}\\
+Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat.
+\item \textbf{Löschen-Request senden:}\\
+Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
+\item \textbf{Ressourcen bearbeiten:}\\
+Der Ressourcenbesitzer müss zum Bearbeiten einer Ressource erstmal ein Löschen-Request dem Administrator senden, wird dieses Request von Admin akzeptiert, danach kann er seine neue Version von der Ressource hochladen.
+\item \colorbox{shadecolor} {\textbf{Löschen Benachrichtigungen:}}\\
+Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
+
+\end{enumerate}
 \section{Produktdaten}
 \begin{enumerate}[label={\textbf{/D\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \subsubsection{Personendaten}
