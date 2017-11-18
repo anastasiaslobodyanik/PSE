@@ -52,10 +52,10 @@ description={Ein Administrator ist der Verwalter des Systems,er unterstützt die
 	name={Ressourcenbesitzer},
 	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
 }
-\newglossaryentry{Loeschen-Request}
+\newglossaryentry{Löschen-Request}
 {
-	name={Loeschen-Request},
-	description={Ein loeschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem wunsch, ein oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet  } 
+	name={Löschen-Request},
+	description={Ein löschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem wunsch, ein oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet  } 
 }
 \newglossaryentry{Web-Portal}
 {
@@ -411,15 +411,15 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
       Analysierbarkeit &   &   &   & x\\
 	  Modifizierbarkeit & x &   &   &  \\
 	  Stabilität &   & x &   &  \\
-	  Prüfbarkeit & x & x & x & x\\
+	  Prüfbarkeit &  & x &  & \\
 	  
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
       \hline
-      Anpassbarkeit & x & x & x & x\\
-	  Installierbarkeit & x & x & x & x\\
-	  Konformität & x & x & x & x\\
-	  Austauschbarkeit & x & x & x & x\\
+      Anpassbarkeit & x &  &  & \\
+	  Installierbarkeit &  & x &  & \\
+	  Konformität &  &  &  & x\\
+	  Austauschbarkeit & x &  &  & \\
 	  
 	  \hline      			
     \end{tabularx}
@@ -428,6 +428,7 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
 \end{table}
 \renewcommand{\arraystretch}{1}
 \section{Globale Testfälle und Testszenarien}
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \item Profilseite öffnen.
 \item Namen ändern
 \item Ressourcen öffnen
@@ -437,7 +438,7 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
 \item Requestliste ansehen.
 \item Multiple Request senden
 \item Administratorrechte anfragen
-\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
+\end{enumerate}
 \newpage
 \printglossary	
 \end{document}
