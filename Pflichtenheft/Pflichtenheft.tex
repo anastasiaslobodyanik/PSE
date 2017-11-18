@@ -112,7 +112,7 @@ description={definition} %todo
 	{\Large Houraalsadat Mortazavi Moshkenan}\\
 	{\Large Sonya Voneva}\\
 	\vfill
-	{\large 26.11.17 \par}
+	{\large 22.11.17 \par}
 	\end{center}
 \end{titlepage}
 \tableofcontents
@@ -275,8 +275,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \subsubsection{Personendaten}
 \item \textit{Benutzerdaten:}
 \begin{itemize}
-   \item Benutzername
-   
+   \item Benutzername 
    \item Kennung:
    \begin{itemize}
      \item Benutzername
@@ -287,49 +286,27 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
    \begin{itemize}
      \item Vorname
      \item Nachname
-     \item Alter
-     \item Geschlecht
-     \item ID
-     \item Institut 
-   \end{itemize}
-   
-    \item Kontaktinformationen:
-   \begin{itemize}
-     \item Straße und Hausnummer
-     \item Postleitzahl 
-     \item Ort
-     \item Land
-     \item Fax
-     \item Telefon
-     \item E-Mail Adresse  
+     \item E-Mail-Adresse
    \end{itemize}
    
     \item Sonstiges:
    \begin{itemize}
      \item Rechte
-     \item Status (Administrator, Benutzer) 
-     \item Letzte Anmeldung (Datum) 
-     \item Registrierungsdatum (Datum)    
+     \item Status (Administrator, Benutzer)    
    \end{itemize}
  
 \end{itemize}
 
-\item \textit{Gruppendaten:}
-\begin{itemize}
-\item Administrator
-\item Institut
-\item Teilnehmer
- \end{itemize}
  
 \subsubsection{Webportal Daten}
-\item \textit{Datenliste?:}
+\item \textit{Datenliste:}
 \begin{itemize}
 \item ID
 \item Besitzer
 \item Leser
  \end{itemize}
  
- \item \textit{Tools-liste??:}
+ \item \textit{Tools-liste:}
 \begin{itemize}
 \item ID
 \item Besitzer
@@ -347,8 +324,9 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 
 
 
-\section{Benutzerschnittstelle}
-
+\section{Systemmodelle}
+\subsection{Szenarien}
+\subsection{UML-Diagramme}
 \section{Qualitätsbestimmungen}
 
 \renewcommand{\arraystretch}{1.5}
@@ -393,15 +371,15 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
       Analysierbarkeit &   &   &   & x\\
 	  Modifizierbarkeit & x &   &   &  \\
 	  Stabilität &   & x &   &  \\
-	  Prüfbarkeit & x & x & x & x\\
+	  Prüfbarkeit &   &   & x &  \\
 	  
 	  \hline	  	
 	  \multicolumn{5}{l}{\textbf{Benutzbarkeit}}\\
       \hline
-      Anpassbarkeit & x & x & x & x\\
-	  Installierbarkeit & x & x & x & x\\
-	  Konformität & x & x & x & x\\
-	  Austauschbarkeit & x & x & x & x\\
+      Anpassbarkeit & x &  &  & \\
+	  Installierbarkeit &   &   &   & x\\
+	  Konformität &   & x &   &  \\
+	  Austauschbarkeit &   & x  &   &  \\
 	  
 	  \hline      			
     \end{tabularx}
@@ -409,7 +387,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
   
 \end{table}
 \renewcommand{\arraystretch}{1}
-\section{Globale Testfälle und Testszenarien}
+\section{Globale Testfälle}
 
 \newpage
 \printglossary	
