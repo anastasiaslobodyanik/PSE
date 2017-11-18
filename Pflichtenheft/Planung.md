@@ -1,19 +1,19 @@
-08.11.2017 bis 15.11.2017
+bis 20.11.2017
 
 
   - [x] Zielbestimmungen
   - [x] Produkteinsatz
   - [ ] Benutzerschnittstelle [Sonya, Alex]
   - [x] Produktumgebung
-  - [x] Produktdaten [nach der pause]
+  - [x] Produktdaten
   - [ ] Nichtfunktionale Anforderungen [Anastasia]
   - [ ] Systemmodelle (Szenarien, UML) [Sonya, Alex]
   - [x] Qualitaetsbestimmungen
-  - [ ] Globale Testfaelle [nach der pause]
+  - [ ] Globale Testfaelle [Khalil]
  
  - [ ] Funktionale Anforderungen --->Alle
   - [ ] Benutzer [Anastasia]
   - [ ] Admin [Atanas, Khalil]
-  - [ ] Besitzer [Houra, nach der pause]
+  - [ ] Besitzer [Houra]
   
  - [ ] Glossar[Khalil]
