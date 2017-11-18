@@ -106,7 +106,7 @@ description={definition} %todo
 	\vfill
 	{\bfseries {\Large Autoren}:\par}
 	{\Large Aleksandar Bachvarov}\\
-	{\Large Anastasia}\\%TODO Nachname ergaenzen
+	{\Large Anastasia Slobodyanik}\\
 	{\Large Atanas Dimitrov}\\
 	{\Large Dannie}\\%TODO Nachname ergaenzen
 	{\Large Houraalsadat Mortazavi Moshkenan}\\
@@ -261,7 +261,8 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
 \item \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
 \item \textbf{Requestsübersicht:}\\ Der angemeldete Benutzer kann seine abgesendete Requests auf seine Profilseite sehen.
-
+\item \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffs-Request für mehrere Ressourcen gleichzeitig senden.
+\item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
 \end{enumerate}
 
 \subsubsection{Administratorfunktionen}
@@ -409,7 +410,16 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \end{table}
 \renewcommand{\arraystretch}{1}
 \section{Globale Testfälle und Testszenarien}
-
+\item Profilseite öffnen.
+\item Namen ändern
+\item Ressourcen öffnen
+\item Neue Ressource erstellen.
+\item Request senden.
+\item Benachrichtigungen lesen. 
+\item Requestliste ansehen.
+\item Multiple Request senden
+\item Administratorrechte anfragen
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \newpage
 \printglossary	
 \end{document}
