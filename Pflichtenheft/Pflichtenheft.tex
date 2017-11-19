@@ -508,6 +508,21 @@ Das Diagramm stellt die mögliche Zustände eines Zugriff-Requests dar, wenn ein
 \item Administratorrechte anfragen. (/F090/)
 \end{enumerate}
 
+\subsection{Administratortestfälle}
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item Request zum Löschen von einem Ressource zum Administrator senden. (/F100)
+\item Ressource löschen. (/F110/)
+\item Adminrequest zum Administrator senden. (/F120/)
+\item Zugriffsrechte zu einem Benutzer geben.(/F130/)
+\item Zugriffsrechte von einem Benutzer entziehen.(/F130/)
+\item Leserechte zu einem Benutzer geben.(/F130/)
+\item Leserechte zu einem Benutzer entziehen.(/F130/)
+\item Löschen von Account und Daten, die zu einem Benutzer gehören.(/F140/)
+\item suchen nach einem Benutzer und ihn Blockieren . (/F150/,/F160)
+
+
+\end{enumerate}
+
 \subsection{Ressourcenbesitzertestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
 \item Liste von besessenen Ressourcen kontrollieren.  %todo
@@ -518,11 +533,6 @@ Das Diagramm stellt die mögliche Zustände eines Zugriff-Requests dar, wenn ein
 \item Besitzrechte an anderen Benutzer vergeben.
 \item Request zum Löschen von Ressource absenden
 \item Löschbenachrichtigung kontrollieren.  
-\end{enumerate}
-
-\subsection{Administratortestfälle}
-\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item bu
 \end{enumerate}
 \newpage
 \printglossary	
