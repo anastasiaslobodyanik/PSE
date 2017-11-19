@@ -6,6 +6,7 @@
 \usepackage[yyyymmdd]{datetime} 
 \usepackage{hyperref}
 \usepackage[toc, nonumberlist, automake]{glossaries} %added automake option
+\usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{xcolor}
 \definecolor{shadecolor}{RGB}{220,220,220}
@@ -119,7 +120,7 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 \newpage
 %\section{Einleitung}
 \section{Zielbestimmung}
-Das Produkt dient zum Authorisierungsmanagement des \glqq{\gls{V-FOR-WaTer}}\grqq Web-Portals. Dadurch können die in dem \gls{Web-Portal} registrierte \gls{Benutzer} Zugriffsanfragen für Ressourcen senden, Ressourcen nutzen und Ressourcen selbst erstellen. Dabei dient das Produkt auch zur Unterscheidung zwischen Benutzer, \gls{Ressourcenbesitzer} und \gls{Administrator}.
+Das Produkt dient zum Authorisierungsmanagement des \grqq{\gls{V-FOR-WaTer}}\grqq Web-Portals. Dadurch können die in dem \gls{Web-Portal} registrierte \gls{Benutzer} Zugriffsanfragen für Ressourcen senden, Ressourcen nutzen und Ressourcen selbst erstellen. Dabei dient das Produkt auch zur Unterscheidung zwischen Benutzer, \gls{Ressourcenbesitzer} und \gls{Administrator}.
 
 \subsection{Musskriterien}
 Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
@@ -181,7 +182,7 @@ Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 
 \section{Produkteinsatz}
 Das Produkt wird in die Virtuelle Forschungsumgebung (VFU) für die Wasser-
-und Terrestrische Umweltforschung (\glqq{\gls{V-FOR-WaTer}}\grqq) im Rahmen des Netzwerks
+und Terrestrische Umweltforschung (\grqq{\gls{V-FOR-WaTer}}\grqq) im Rahmen des Netzwerks
 Wasserforschung Baden-Württemberg eingesetzt. Die VFU legt ihre Schwerpunkte
 auf die Datenhaltung und den Direkten Zugriff auf Analysewerkzeuge für Daten
 aus der Wasser- und Umweltforschung. Das Produkt bezieht sich auf die
@@ -196,7 +197,7 @@ Rechteverwaltung für diese Daten.
 \subsection{Zielgruppen}
 \begin{itemize}[itemsep=0pt]
 \item Administrator(en) der Webseite %(Mitarbeiter von V-FOR-WaTer)
-\item Wissenschaftliche Mitarbeiter von \glqq{\gls{V-FOR-WaTer}}\grqq
+\item Wissenschaftliche Mitarbeiter von \grqq{\gls{V-FOR-WaTer}}\grqq
 \item Externe Benutzer des Portals
 \end{itemize}
 
@@ -209,7 +210,7 @@ Rechteverwaltung für diese Daten.
 
 
 \section{Produktumgebung}
-Das Produkt wird in die virtuelle Forschungsumgebung für Wasser- und Terrestrische Umweltforschung \glqq{\gls{V-FOR-WaTer}}\grqq integriert.\\
+Das Produkt wird in die virtuelle Forschungsumgebung für Wasser- und Terrestrische Umweltforschung \grqq{\gls{V-FOR-WaTer}}\grqq integriert.\\
 Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Produktumgebung vorhanden ist:
 
 \subsection{Software}
@@ -273,7 +274,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Nachdem der Ressourcenbesitzer ein Löschen-Request gesendet hat, werden alle Administratoren darüber durch eine Email und durch eine Nachricht im Portal benachrichtigt.\\
 \item Die Nachricht enthält die Daten des Ressourcenbesitzers und den Namen der Ressource zum Löschen.\\ 
-\item Der Administrator kann seine Entscheidung direkt von der Nachricht durch zwei Knöpfe ``Ja`` oder ``Nein`` treffen.
+\item Der Administrator kann seine Entscheidung direkt von der Nachricht durch zwei Knöpfe \grqq{Ja}\grqq  oder \grqq{Nein}\grqq  treffen.
  
 \end{enumerate}
 
@@ -341,28 +342,67 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
 \end{enumerate}
 
 
-
 \section{Systemmodelle}
+
 \subsection{Szenarien}
 \subsubsection*{Einfache BenutzerFunktionen}
-Alice hat sich vor kurzem verheiratet und möchte darum ihren Familiennamen im Portal von \glqq{\gls{V-FOR-WaTer}}\grqq ändern. Sie loggt sich im System ein und sieht ihr Profil. Dann klickt sie auf dem Knopf "Name editieren" und tippt ihren neuen Namen ein. \\
-Nun möchte sie eine neue Ressource erstellen, darum klickt sie auf dem Knopf "Ressource hinzufügen". Später entscheidet sich Alice ihre neue Ressource X zu überprüfen. Sie sucht im Portal nach der Ressource X und findet sie. Weil sie der Besitzer ist, hat sie das Recht X zuzugreifen.
-%Skizze kommt noch
+Alice hat sich vor kurzem verheiratet und möchte darum ihren Familiennamen im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq ändern. Sie loggt sich im System ein und sieht ihr Profil. Dann klickt sie auf dem Knopf \grqq{Name editieren}\grqq und tippt ihren neuen Namen ein. 
+
+Nun möchte sie eine neue Ressource erstellen, darum klickt sie auf dem Knopf \grqq{Ressource  hinzufügen}\grqq. Später entscheidet sich Alice ihre neue Ressource X zu überprüfen. Sie sucht im Portal nach der Ressource X und findet sie. Weil sie der Besitzer ist, hat sie das Recht X zuzugreifen.\\
+
+	\begin{center}
+	\includegraphics[width=0.6\textwidth]{Szenario_1.png}
+	\end{center}
+
 \subsubsection*{Zugriff-Request senden}
-Bob hat Interesse an einer Ressource X im Portal von \glqq{\gls{V-FOR-WaTer}}\grqq. Er probiert den Inhalt von X zuzugreifen. Leider hat er keine Zugriffsrechte darauf. Um solche Rechte zu bekommen, soll er ein Request am Besitzer von X senden, in diesem Fall - Alice. Bob wählt die Option "Zugriffsrechte anfragen". \\
-Nach wenigen Sekunden bekommt Alice eine E-Mail-Benachrichtigung über das neue Request. Um zu entscheiden, ob sie die Zugriffsanfrage genehmigt, loggt sie sich im Portal ein. Dann sieht sie Bobs Anfrage und beschließt sie zu genehmigen. In kurzem bekommt Bob eine E-Mail mit der guten Neuigkeit. Nun kann er die Ressource zugreifen und ist glücklich.
-%Skizze kommt noch
+Bob hat Interesse an einer Ressource X im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq. Er probiert den Inhalt von X zuzugreifen. Leider hat er keine Zugriffsrechte darauf. Um solche Rechte zu bekommen, soll er ein Request am Besitzer von X senden, in diesem Fall - Alice. Bob wählt die Option \grqq{Zugriffsrechte anfragen}\grqq. 
+
+Nach wenigen Sekunden bekommt Alice eine E-Mail-Benachrichtigung über das neue Request. Um zu entscheiden, ob sie die Zugriffsanfrage genehmigt, loggt sie sich im Portal ein. Dann sieht sie Bobs Anfrage und beschließt sie zu genehmigen. In kurzem bekommt Bob eine E-Mail mit der guten Neuigkeit. Nun kann er die Ressource zugreifen und ist glücklich.\\
+	
+	\begin{center}
+	\includegraphics[width=1\textwidth]{Szenario_2.png}
+	\end{center}
+
+\newpage
 \subsubsection*{Besitz-Rechte teilen}
 Der Besitzer von Ressource Y, nämlich Bob, ist ein sehr beschäftigter Mann. Er hat keine Zeit und Lust jeden Tag die zahlreiche Zugriffsanfragen für Rechte auf Y zu beantworten. Deshalb hat er sich entschieden seine Besitz-Rechte mit drei Mitarbeitern von ihm zu teilen. \\
-Er findet die Ressource Y und wählt die Option "Besitz-Rechte teilen". Dann findet er die Personen durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.
-%Skizze kommt noch
+Er findet die Ressource Y und wählt die Option \grqq{Besitz-Rechte teilen}\grqq. Dann findet er die Personen durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.\\
+
+	\begin{center}
+	\includegraphics[width=0.7\textwidth]{Szenario_3bevor.png}
+	
+	\includegraphics[width=0.7\textwidth]{Szenario_3nach.png}
+	\end{center}
+
 \subsubsection*{Ressource editieren}
-Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektion. Danach sendet sie ein Löschen-Request am Administrator, damit er die alte Version von X zerstört.
-%Skizze kommt noch
+Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektion. Danach sendet sie ein Löschen-Request am Administrator, damit er die alte Version von X zerstört.\\
+	
+	\begin{center}
+	\includegraphics[width=1\textwidth]{Szenario_4.png}
+	\end{center}
+	
 \subsection{Diagramme}
+
 \subsection*{Funktionenübersichtsdiagramm}
-\subsection*{Kontrollflussdiagramm \glqq{Ressource zugreifen}\grqq}
-\subsection*{Zustandsdiagramm \glqq{Zugriff-Request}\grqq}
+
+	\begin{center}
+	\includegraphics[width=0.95\textwidth]{Funktionen_uebersicht.png}
+	\end{center}
+	
+\subsection*{Kontrollflussdiagramm \grqq{Ressource zugreifen}\grqq}
+
+	\begin{center}
+	\includegraphics[width=1\textwidth]{Kontrollfluss.png}
+	\end{center}
+	
+\subsection*{Zustandsdiagramm \grqq{Zugriff-Request}\grqq}
+Das Diagramm stellt die mögliche Zustände eines Zugriff-Requests dar, wenn ein Benutzer ohne Zugriffsrechte eine Ressource zugreifen will.
+\\
+
+\begin{center}
+	\includegraphics[width=0.9\textwidth]{Zustandsdiagramm.png}
+	\end{center}
+	
 \section{Qualitätsbestimmungen}
 
 \renewcommand{\arraystretch}{1.5}
@@ -425,7 +465,7 @@ Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigie
 \end{table}
 \renewcommand{\arraystretch}{1}
 
-\section{Globale Testfälle und Testszenarien}
+\section{Globale Testfälle}
 \subsection{Benutzertestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \item Profilseite öffnen. (/F010/)
