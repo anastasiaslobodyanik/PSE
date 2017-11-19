@@ -266,7 +266,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
 \end{enumerate}
 
-
+\newpage
 \subsection{Administratorfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
 \item \textbf{Bekommen von Löschen-Requeste}\\ Der Administrator bekommt Requeste von einem Ressourcenbesitzer zum Löschen von Ressourcen.\\\\
@@ -292,33 +292,32 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \textbf{Rechte gewähren}\\ Der Administrator kann einem Benutzer Zugriff- oder Leserechte einräumen und wieder entziehen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Die Vergabe von Rechte kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
-\item Nach der Vergabe von Rechte kann der Administrator sie wieder entziehen. \\ 
-\item Nach der Entnahme von Rechte kann der Administrator sie wieder vergeben. \\
-\end{enumerate}
+	\item Die Vergabe von Rechte kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
+	\item Nach der Vergabe von Rechte kann der Administrator sie wieder entziehen. \\ 
+	\item Nach der Entnahme von Rechte kann der Administrator sie wieder vergeben. \\
+	\end{enumerate}
 
 \item \textbf{Benutzer löschen}\\ Der Administrator kann einen Benutzer löschen. \\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Zusammen mit dem Account werden die personenbezogenen Daten von der Benutzer entfernt.\\
-\item Der Administrator kann der gelöschten Benutzers Account und Daten nicht wiederherstellen, sondern muss der Benutzer sich nochmal registrieren. \\ 
-\end{enumerate}
+	\item Zusammen mit dem Account werden die personenbezogenen Daten von der Benutzer entfernt.\\
+	\item Der Administrator kann der gelöschten Benutzers Account und Daten nicht wiederherstellen, sondern muss der Benutzer sich nochmal registrieren. \\ 
+	\end{enumerate}
 
 \item \colorbox{shadecolor} {\textbf{Benutzer blockieren}}\\ Der Administrator kann einen Benutzer blockieren, damit dieser sich nicht anmelden kann.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Wenn der Benutzer blockiert ist, sind seinem Account und Daten nicht gelöscht, sondern kann er sich nicht mehr anmelden.\\
-\item Der Administrator kann der blockierende Benutzer wieder zum anmelden zulassen. \\ 
-\end{enumerate}
+	\item Wenn der Benutzer blockiert ist, sind seinem Account und Daten nicht gelöscht, sondern kann er sich nicht mehr anmelden.\\
+	\item Der Administrator kann der blockierende Benutzer wieder zum anmelden zulassen. \\ 
+	\end{enumerate}
 
 
 \item \colorbox{shadecolor} {\textbf{Benutzer suchen}}\\  Es kann ein Benutzer anhand von Vorname, Nachname durch den Administrator gesucht werden.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Nach der Suche wird der gesuchte Benutzer dann angezeigt und er steht zur Verfügung.\\
+	\item Nach der Suche wird der gesuchte Benutzer dann angezeigt und er steht zur Verfügung.\\
+	\end{enumerate}
 \end{enumerate}
-\end{enumerate}
-
 
 \subsection{Ressourcenbesitzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
