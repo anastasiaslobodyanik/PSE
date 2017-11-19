@@ -251,7 +251,7 @@ Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Pro
 
 
 \section{Funktionale Anforderungen}
-Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch Wunschkriterien erläutert. Die Nummern optionaler Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
+Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch Wunschkriterien erläutert. Die optionale Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
 \subsection{Benutzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*]
 \item \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
@@ -322,17 +322,46 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \subsection{Ressourcenbesitzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
 \item \textbf{Übersicht der Requests:}\\
-Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
+Eine Liste von Requests ist auf Profilseite vorhanden.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
+\end{enumerate}
+\item \textbf{Übersicht der Ressourcen:}\\
+Es steht eine Liste von Ressourcen auf der Profilseite zur verfügung.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Ressourcen, die von ihm besessen sind, angezeigt.  
+\end{enumerate}
+
+
+
 \item \textbf {Übergabe der Zugriffsrechte:}\\ 
-Der Besitzer kann Zugriffsrechte an anderen Benutzer vergeben.
+Der Besitzer kann Zugriffsrechte ohne Request an anderen Benutzer vergeben.
 \item \textbf {Request auf Zugriffsrechte ablehnen/genehmigen:}\\ 
-Der Ressourcenbesitzer kann die gesendeten Requests, die von anderen Benutzern zur Anforderung einer Zugriffsrechte gesendet wurden, entweder ablehnen oder annehmen. In beiden Fälle werden der entsprechenden Benutzern benachrichtigt. Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen.
+Der Ressourcenbesitzer bekommt von anderen Benutzern Zugriff-Request. \\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der Ressourcenbesitzer kann die gesendeten Requests, die von anderen Benutzern zur Anforderung einer Zugriffsrechte gesendet wurden, entweder ablehnen oder annehmen.
+\item In beiden Fälle(Genehmigung/Ablehnung) werden der entsprechenden Benutzern benachrichtigt.
+\item Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen.
+\end{enumerate}
 \item \textbf{Übergabe der Besitz-Rechte:}\\
-Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat. %todo
+Der Ressourcenbesitzer kann freiwillig seine Besitz-Rechte mit anderen Benutzern teilen. 
 \item \textbf{Löschen-Request senden:}\\
 Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
 \item \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
 Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
+\item \colorbox{shadecolor} {\textbf{Zugriffsrechte einer Gruppe vergeben:}}\\
+Der Ressourcenbesitzer kann Zugriffsrechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Die Vergabe von Zugriffsrechte kann entweder durch die in /F190/ und /F200/ beschriebene Weise einzeln oder auch kumulativ passieren.
+\end{enumerate}
 \end{enumerate}
 
 
