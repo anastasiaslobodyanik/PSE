@@ -34,56 +34,68 @@
 \makeglossaries
 \newglossaryentry{V-FOR-WaTer}
 {
-	name=V-FOR-WaTer,
-	description={Die Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer) ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung.}, 
+	name=V-FOR-WaTer:,
+	description={ Die Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer) ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung}, 
 }
 \newglossaryentry{Benutzer}
 {
-	name=Benutzer,
-	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind.} 
+	name=Benutzer:,
+	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind} 
 }
 \newglossaryentry{Administrator}
 {
-	name={Administrator},
-description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann. Der Administrator ist ein Mitarbeiter von V-FOR-WaTer.} 
+	name={Administrator:},
+description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann. Der Administrator ist ein Mitarbeiter von V-FOR-WaTer} 
 }
 \newglossaryentry{Ressourcenbesitzer}
 {
-	name={Ressourcenbesitzer},
-	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat.} %todo
+	name={Ressourcenbesitzer:},
+	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
+}
+\newglossaryentry{Datenbank}
+{
+	name={Datenbank:},
+	description={Eine Datenbank ist eine eine große Menge von Daten, die in einem Computer nach bestimmten Kriterien organisiert sind und komplexe Abfragen zulassen} %todo
 }
 \newglossaryentry{Loeschen-Request}
 {
-	name={Loeschen-Request},
-	description={Ein Löschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, eine oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet.}  %Löschen muss so geschrieben werden, sonst -> Probleme 
+	name={Loeschen-Request:},
+	description={Ein Löschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, eine oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet}  %Löschen muss so geschrieben werden, sonst -> Probleme 
 }
 \newglossaryentry{Web-Portal}
 {
-	name={Web-Portal},
-	description={Ein Web-Portal ist ein Anwendungssystem, das sich durch die Integration von Anwendungen, Prozessen und Diensten auszeichnet. Ein Portal stellt seinem Benutzer verschiedene Funktionen zur Verfügung, wie beispielsweise Navigation und Benutzerverwaltung. Außerdem koordiniert es die Suche und die Präsentation von Informationen und soll die Sicherheit gewährleisten.} 
+	name={Web-Portal:},
+	description={Ein Web-Portal ist ein Anwendungssystem, das sich durch die Integration von Anwendungen, Prozessen und Diensten auszeichnet. Ein Portal stellt seinem Benutzer verschiedene Funktionen zur Verfügung, wie beispielsweise Navigation und Benutzerverwaltung. Außerdem koordiniert es die Suche und die Präsentation von Informationen und soll die Sicherheit gewährleisten} 
 }
 \newglossaryentry{Zugriffsrechte}
 {
-	name={Zugriffsrechte},
+	name={Zugriffsrechte:},
 	description=
 	{
-		Rechte den Inhalt einer Ressource zu lesen und auszuführen.
+		Rechte den Inhalt einer Ressource zu lesen und auszuführen
 	}
 }
 \newglossaryentry{Besitz-Rechte}
 {
-	name={Besitz-Rechte},
+	name={Besitz-Rechte:},
 	description=
 	{
-		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitz-Rechte implizieren Zugriffsrechte.
+		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitz-Rechte implizieren Zugriffsrechte
 	} 
 }
-\newglossaryentry{Administratorrechte}
+\newglossaryentry{IDs}
 {
-	name={Administratorrechte},
+	name={ID:},
 	description=
 	{
-		%TODO definition ergänzen
+		(Abkürzung für Identifikator). Ein Identifikator (auch Kennzeichen) ist ein mit einer bestimmten Identität verknüpftes Merkmal zur eindeutigen Identifizierung des tragenden Benutzer
+	} 
+}
+\newglossaryentry{Meta-daten}
+{
+	name={Meta-daten:},
+	description=
+	{Meta-daten oder Metainformationen sind strukturierte Daten, die Informationen über Merkmale anderer Daten enthalten
 	} 
 }
 \def\threedigits#1{%
@@ -174,7 +186,7 @@ Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 \item Das Produkt dient nicht zur Authentifizierung.
 \item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
 \item Das Produkt unterstützt keine Mobile-Version.
-\item Die IDs von Benutzern sind weder sichtbar, noch veränderbar.
+\item Die \glspl{IDs} von Benutzern sind weder sichtbar, noch veränderbar.
 \item Die E-Mail-Adressen von Benutzern sind nicht veränderbar.
 \item Das Produkt steht nicht zur Verfügung für Benutzer ohne Account.
 \end{itemize}
@@ -203,7 +215,7 @@ Rechteverwaltung für diese Daten.
 
 \subsection{Betriebsbedingungen}
 \begin{itemize}[itemsep=0pt]
-\item Einsatz in einem Webportal mit einer Datenbank.
+\item Einsatz in einem Webportal mit einer \gls{Datenbank}.
 \item Das Produkt benötigt eine funktionierende Netzverbindung.
 \item Der Betriebsdauer ist täglich 24 Stunden.
 \end{itemize}
@@ -257,7 +269,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 \item \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
 \item \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
 \item \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
-\\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.
+\\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die gls{Meta-Daten} sichtbar.
 \item \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
 \item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
 \item \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
