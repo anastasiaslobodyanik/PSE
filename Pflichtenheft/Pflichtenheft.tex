@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{xcolor}
+\usepackage{hyperref}
 \definecolor{shadecolor}{RGB}{220,220,220}
 \hypersetup{
 		pdftitle={Pflichtenheft},
@@ -98,6 +99,15 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 	{Meta-daten oder Metainformationen sind strukturierte Daten, die Informationen über Merkmale anderer Daten enthalten
 	} 
 }
+\newglossaryentry{Token}
+{
+	name={Token},
+	description=
+	{Das Token ist eine textuelle Datei bestehend aus einem Verifizierungsstring.Im String sind die ID der Nutzer, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens kodiert.
+	} 
+	plural={Tokens}
+}
+
 \def\threedigits#1{%
   \ifnum#1<10 0\fi
   \ifnum#1<1 0\fi
@@ -175,7 +185,7 @@ Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert we
 \item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden.
 \item Der Benutzer kann ein Request für Administratorrechte dem Administrator senden.
 \item Hilfeverweise für den Benutzer.
-\item Implementierung von Tokens zur Verifizierung von Rechten.
+\item Implementierung von \glspl{Token} zur Verifizierung von Rechten.
 \item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Administrators.
 \item Der Ressourcenbesitzer kann Zugriffsrechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben.
 \end{itemize}
@@ -266,57 +276,71 @@ Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Pro
 Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch Wunschkriterien erläutert. Die optionale Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
 \subsection{Benutzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\item \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
-\item \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
-\item \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
+\item \label{FAB1} \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
+\item \label{FAB2} \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
+\item \label{FAB3} \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
 \\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die gls{Meta-Daten} sichtbar.
-\item \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
-\item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
-\item \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
-\item \textbf{Requestsübersicht:}\\ Der angemeldete Benutzer kann seine abgesendete Requests auf seine Profilseite sehen.
-\item \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffs-Request für mehrere Ressourcen gleichzeitig senden.
-\item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
+\item \label{FAB4} \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
+\item \label{FAB5} \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
+\item \label{FAB6} \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
+\item \label{FAB7} \textbf{Requestsübersicht:}\\ Der angemeldete Benutzer kann seine abgesendete Requests auf seine Profilseite sehen.
+\item \label{FAB8} \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffs-Request für mehrere Ressourcen gleichzeitig senden.
+\item \label{FAB9} \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
+
+\item \label{FAB10} \colorbox{shadecolor}{\textbf{Erstellung von Tokens}}\\ Der Benutzer bekommt ein Token, mit dem er seine Rechte auf Ressourcen auf einem externen Webserver verifizieren kann.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Ein Token wird bei einer Veränderung der Benutzerrechte erstellt bzw. aktualiesiert und dem Benutzer gesendet. 
+\item Immer wenn der Benutzer eine externe Webseite besucht, die Ressourcen von V-FOR WaTer verwaltet, wird sein Token für eine leichtere Autorisierung benutzt. 
+
 \end{enumerate}
 
-\newpage
+\end{enumerate}
+
 \subsection{Administratorfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item \textbf{Bekommen von Löschen-Requeste}\\ Der Administrator bekommt Requeste von einem Ressourcenbesitzer zum Löschen von Ressourcen.\\\\
+\item \label{FAA1}\textbf{Bekommen von Löschen-Request}\\ Der Administrator bekommt Request von einem Ressourcenbesitzer zum Löschen von Ressourcen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Nachdem der Ressourcenbesitzer ein Löschen-Request gesendet hat, werden alle Administratoren darüber durch eine Email und durch eine Nachricht im Portal benachrichtigt.\\
 \item Die Nachricht enthält die Daten des Ressourcenbesitzers und den Namen der Ressource zum Löschen.\\ 
-\item Der Administrator kann seine Entscheidung direkt von der Nachricht durch zwei Knöpfe \grqq{Ja}\grqq  oder \grqq{Nein}\grqq  treffen.
+\item Der Administrator kann seine Entscheidung direkt durch eine Interface (zwei Knöpfe \grqq{Ja}\grqq  \: oder \grqq{Nein}\grqq  \:) am Nachrichtbildschirm treffen.
  
 \end{enumerate}
 
 
-\item \textbf{Löschen von Ressourcen}\\ Der Administrator darf die Ressourcen im Portal löschen.\\\\
+\item \label{FAA2} \textbf{Löschen von Ressourcen}\\ Der Administrator darf die Ressourcen im Portal löschen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Die Löschen kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
-\item Nach der Löschen der Ressource werden alle Ressourcenbesitzer(eventuell auch alle Benutzer mit Leserechte, bei Publicressourcen problematisch) durch eine Email darüber informiert. \\ 
+\item Die Löschen kann entweder durch die in \ref{FAA1} beschriebene Weise oder auch ohne Request passieren.\\
+\item Nach der Löschen der Ressource werden alle Ressourcenbesitzer durch eine Email darüber informiert. \\ 
 \end{enumerate}
 
-\item \textbf{Bekommen von Adminrequeste}\\ Der Administrator bekommt Requeste von einem Benutzer, der vom Admin verlangt, ein Admin zu werden.
 
-
-\item \textbf{Rechte gewähren}\\ Der Administrator kann einem Benutzer Zugriff- oder Leserechte einräumen und wieder entziehen.\\\\
+\item \label{FAA3} \textbf{Rechte gewähren}\\ Der Administrator kann einem Benutzer Zugriff- oder Leserechte einräumen und wieder entziehen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-	\item Die Vergabe von Rechte kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
+	\item Die Vergabe von Rechte kann entweder durch die in \ref{FAA1} beschriebene Weise oder auch ohne Request passieren.\\
 	\item Nach der Vergabe von Rechte kann der Administrator sie wieder entziehen. \\ 
 	\item Nach der Entnahme von Rechte kann der Administrator sie wieder vergeben. \\
 	\end{enumerate}
 
-\item \textbf{Benutzer löschen}\\ Der Administrator kann einen Benutzer löschen. \\\\
+\item \label{FAA4} \textbf{Benutzer löschen}\\ Der Administrator kann einen Benutzer löschen. \\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 	\item Zusammen mit dem Account werden die personenbezogenen Daten von der Benutzer entfernt.\\
 	\item Der Administrator kann der gelöschten Benutzers Account und Daten nicht wiederherstellen, sondern muss der Benutzer sich nochmal registrieren. \\ 
 	\end{enumerate}
 
-\item \colorbox{shadecolor} {\textbf{Benutzer blockieren}}\\ Der Administrator kann einen Benutzer blockieren, damit dieser sich nicht anmelden kann.\\\\
+\item \label{FAA5} \colorbox{shadecolor} {\textbf{Bekommen von Admin-Request}}\\ Der Administrator bekommt Request von einem Benutzer, der vom Administrator verlangt, ein Administrator zu werden.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+	\item Der Ablauf ist ähnlich zu dem in \ref{FAA1}. Unterschiedlich ist, dass jeder Benutzer dieses Request senden kann und natürlich die Sache(nämmlich die Adminrechte), die durch das Request angefragt wird.\\
+	\end{enumerate}
+
+
+
+\item \label{FAA6} \colorbox{shadecolor} {\textbf{Benutzer blockieren}}\\ Der Administrator kann einen Benutzer blockieren, damit dieser sich nicht anmelden kann.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 	\item Wenn der Benutzer blockiert ist, sind seinem Account und Daten nicht gelöscht, sondern kann er sich nicht mehr anmelden.\\
@@ -324,7 +348,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 	\end{enumerate}
 
 
-\item \colorbox{shadecolor} {\textbf{Benutzer suchen}}\\  Es kann ein Benutzer anhand von Vorname, Nachname durch den Administrator gesucht werden.\\\\
+\item \label{FAA7} \colorbox{shadecolor} {\textbf{Benutzer suchen}}\\  Es kann ein Benutzer anhand von Vorname, Nachname durch den Administrator gesucht werden.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 	\item Nach der Suche wird der gesuchte Benutzer dann angezeigt und er steht zur Verfügung.\\
@@ -333,14 +357,14 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 
 \subsection{Ressourcenbesitzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item \textbf{Übersicht der Requests:}\\
+\item \label{FARB1} \textbf{Übersicht der Requests:}\\
 Eine Liste von Requests ist auf Profilseite vorhanden.\\\
 
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
 \end{enumerate}
-\item \textbf{Übersicht der Ressourcen:}\\
+\item \label{FARB2} \textbf{Übersicht der Ressourcen:}\\
 Es steht eine Liste von Ressourcen auf der Profilseite zur verfügung.\\\
 
 \textbf{Beschreibung:}\\
@@ -348,12 +372,11 @@ Es steht eine Liste von Ressourcen auf der Profilseite zur verfügung.\\\
 \item Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Ressourcen, die von ihm besessen sind, angezeigt.  
 \end{enumerate}
 
-
-
-\item \textbf {Übergabe der Zugriffsrechte:}\\ 
+\item \label{FARB3} \textbf {Übergabe der Zugriffsrechte:}\\ 
 Der Besitzer kann Zugriffsrechte ohne Request an anderen Benutzer vergeben.
-\item \textbf {Request auf Zugriffsrechte ablehnen/genehmigen:}\\ 
-Der Ressourcenbesitzer bekommt von anderen Benutzern Zugriff-Request. \\\
+
+\item \label{FARB4} \textbf {Request auf Zugriffsrechte ablehnen/genehmigen:}\\ 
+Der Ressourcenbesitzer bekommt von anderen Benutzern Zugriff-Request. \\\\
 
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
@@ -361,18 +384,19 @@ Der Ressourcenbesitzer bekommt von anderen Benutzern Zugriff-Request. \\\
 \item In beiden Fälle(Genehmigung/Ablehnung) werden der entsprechenden Benutzern benachrichtigt.
 \item Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen.
 \end{enumerate}
-\item \textbf{Übergabe der Besitz-Rechte:}\\
+
+\item \label{FARB5} \textbf{Übergabe der Besitz-Rechte:}\\
 Der Ressourcenbesitzer kann freiwillig seine Besitz-Rechte mit anderen Benutzern teilen. 
-\item \textbf{Löschen-Request senden:}\\
+\item \label{FARB6} \textbf{Löschen-Request senden:}\\
 Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
-\item \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
+\item \label{FARB7} \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
 Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
-\item \colorbox{shadecolor} {\textbf{Zugriffsrechte einer Gruppe vergeben:}}\\
+\item \label{FARB8} \colorbox{shadecolor} {\textbf{Zugriffsrechte einer Gruppe vergeben:}}\\
 Der Ressourcenbesitzer kann Zugriffsrechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben.\\\
 
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Die Vergabe von Zugriffsrechte kann entweder durch die in /F190/ und /F200/ beschriebene Weise einzeln oder auch kumulativ passieren.
+\item Die Vergabe von Zugriffsrechte kann entweder durch die in \ref{FARB1} und \ref{FARB2} beschriebene Weise einzeln oder auch kumulativ passieren.
 \end{enumerate}
 \end{enumerate}
 
@@ -538,43 +562,44 @@ Das Diagramm stellt die mögliche Zustände eines Zugriff-Requests dar, wenn ein
 \section{Globale Testfälle}
 \subsection{Benutzertestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\item Profilseite öffnen. (/F010/)
-\item Namen ändern. (/F020/) 
-\item Ressourcen öffnen. (/F030/)
-\item Neue Ressource erstellen. (/F040/)
-\item Request senden. (/F050/)
-\item Benachrichtigungen kontrollieren. (/F060/) 
-\item Requestliste ansehen. (/F070/)
-\item Multiple Request senden. (/F080/)
-\item Administratorrechte anfragen. (/F090/)
+\item Profilseite öffnen. (\ref{FAB1})
+\item Namen ändern. (\ref{FAB2})
+\item Ressourcen öffnen. (\ref{FAB3})
+\item Neue Ressource erstellen. (\ref{FAB4})
+\item Request senden. (\ref{FAB5})
+\item Benachrichtigungen kontrollieren. (\ref{FAB6})
+\item Requestliste ansehen. (\ref{FAB7})
+\item Multiple Request senden. (\ref{FAB8})
+\item Administratorrechte anfragen. (\ref{FAB9})
+\item Token erstellen und validieren. (\ref{FAB10})
 \end{enumerate}
 
 \subsection{Administratortestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item Request zum Löschen von einem Ressource zum Administrator senden. (/F100)
-\item Ressource löschen. (/F110/)
-\item Adminrequest zum Administrator senden. (/F120/)
-\item Zugriffsrechte zu einem Benutzer geben.(/F130/)
-\item Zugriffsrechte von einem Benutzer entziehen.(/F130/)
-\item Leserechte zu einem Benutzer geben.(/F130/)
-\item Leserechte zu einem Benutzer entziehen.(/F130/)
-\item Löschen von Account und Daten, die zu einem Benutzer gehören.(/F140/)
-\item suchen nach einem Benutzer und ihn Blockieren . (/F150/,/F160)
+\item Request zum Löschen von einem Ressource zum Administrator senden. (\ref{FAA1})
+\item Ressource löschen. (\ref{FAA2})
+\item Zugriffsrechte zu einem Benutzer geben.(\ref{FAA3})
+\item Zugriffsrechte von einem Benutzer entziehen.(\ref{FAA3})
+\item Leserechte zu einem Benutzer geben.(\ref{FAA3})
+\item Leserechte von einem Benutzer entziehen.(\ref{FAA3})
+\item Löschen von Account und Daten, die zu einem Benutzer gehören.(\ref{FAA4})
+\item Adminrequest an den Administrator senden. (\ref{FAA5})
+\item Suchen nach einem Benutzer und ihn Blockieren . (\ref{FAA6},\ref{FAA7})
 
 
 \end{enumerate}
 
 \subsection{Ressourcenbesitzertestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item Requestsliste kontrollieren.(/F170/)
-\item Liste von besessenen Ressourcen kontrollieren.(/F180/)  %todo
-\item Zugriffsrechte an anderen Benutzer vergeben.(/F190/)
-\item Request auf Zugriffsrechte ablehnen.(/F200/)
-\item Request auf Zugriffsrechte genehmigen.(/F200/)
-\item Besitzrechte an anderen Benutzer vergeben.(/F210/)
-\item Request zum Löschen von Ressource absenden.(/F220/)
-\item Löschbenachrichtigung kontrollieren.(/F230/)
-\item Zugriffsrechte einer Gruppe von Benutzern vergeben.(/F240/) 
+\item Requestsliste kontrollieren.(\ref{FARB1})
+\item Liste von besessenen Ressourcen kontrollieren.(\ref{FARB2})  %todo
+\item Zugriffsrechte an anderen Benutzer vergeben.(\ref{FARB3})
+\item Request auf Zugriffsrechte ablehnen.(\ref{FARB4})
+\item Request auf Zugriffsrechte genehmigen.(\ref{FARB4})
+\item Besitzrechte an anderen Benutzer vergeben.(\ref{FARB5})
+\item Request zum Löschen von Ressource absenden.(\ref{FARB6})
+\item Löschbenachrichtigung kontrollieren.(\ref{FARB7})
+\item Zugriffsrechte einer Gruppe von Benutzern vergeben.(\ref{FARB8}) 
 \end{enumerate}
 \newpage
 \printglossary	
