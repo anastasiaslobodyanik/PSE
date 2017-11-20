@@ -99,9 +99,16 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 	{Meta-daten oder Metainformationen sind strukturierte Daten, die Informationen über Merkmale anderer Daten enthalten
 	} 
 }
+\newglossaryentry{Zugriff-Request}
+{
+	name={Zugriff-Request:},
+	description=
+	{Ein Zugriff-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, der Zugriff auf eine Ressource zu haben und wird negativ oder positiv beantwortet
+	} 
+}
 \newglossaryentry{Token}
 {
-	name={Token},
+	name={Token:},
 	description=
 	{Das Token ist eine textuelle Datei bestehend aus einem Verifizierungsstring.Im String sind die ID der Nutzer, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens kodiert.
 	} 
@@ -150,7 +157,7 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 \subsection*{Benutzer}
 \begin{itemize}[itemsep=0pt]
 \item Der Benutzer kann Ressourcen lesen, auf die er \gls{Zugriffsrechte} hat.
-\item Der Benutzer kann ein Zugriff-Request dem Ressourcenbesitzer senden, um Zugriffsrechte zu erwerben.
+\item Der Benutzer kann ein \gls{Zugriff-Request} dem Ressourcenbesitzer senden, um Zugriffsrechte zu erwerben.
 \item Der Benutzer bekommt Rückmeldung ob sein Request erfolgreich gesendet war.
 \item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
 \item Der Benutzer kann seine eigenen Ressourcen erstellen. Damit wird er den Ressourcenbesitzer dieser Ressourcen.
