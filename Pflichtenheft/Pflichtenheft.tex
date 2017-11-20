@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{xcolor}
+\usepackage{hyperref}
 \definecolor{shadecolor}{RGB}{220,220,220}
 \hypersetup{
 		pdftitle={Pflichtenheft},
@@ -34,58 +35,86 @@
 \makeglossaries
 \newglossaryentry{V-FOR-WaTer}
 {
-	name=V-FOR-WaTer,
-	description={Die Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer) ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung.}, 
+	name={V-FOR-WaTer},
+	description={ Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer) ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung}, 
 }
 \newglossaryentry{Benutzer}
 {
-	name=Benutzer,
-	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind.} 
+	name={Benutzer},
+	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind} 
 }
 \newglossaryentry{Administrator}
 {
 	name={Administrator},
-description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann. Der Administrator ist ein Mitarbeiter von V-FOR-WaTer.} 
+description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann. Der Administrator ist ein Mitarbeiter von V-FOR-WaTer} 
 }
 \newglossaryentry{Ressourcenbesitzer}
 {
 	name={Ressourcenbesitzer},
-	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat.} %todo
+	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
 }
-\newglossaryentry{Loeschen-Request}
+\newglossaryentry{Datenbank}
 {
-	name={Loeschen-Request},
-	description={Ein Löschen-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, eine oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet.}  %Löschen muss so geschrieben werden, sonst -> Probleme 
+	name={Datenbank:},
+	description={Eine Datenbank ist eine eine große Menge von Daten, die in einem Computer nach bestimmten Kriterien organisiert sind und komplexe Abfragen zulassen} %todo
+}
+\newglossaryentry{Loeschrequest}
+{
+	name={Loeschrequest},
+	description={Ein Loeschrequest ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, eine oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet}  %Löschen muss so geschrieben werden, sonst -> Probleme 
 }
 \newglossaryentry{Web-Portal}
 {
 	name={Web-Portal},
-	description={Ein Web-Portal ist ein Anwendungssystem, das sich durch die Integration von Anwendungen, Prozessen und Diensten auszeichnet. Ein Portal stellt seinem Benutzer verschiedene Funktionen zur Verfügung, wie beispielsweise Navigation und Benutzerverwaltung. Außerdem koordiniert es die Suche und die Präsentation von Informationen und soll die Sicherheit gewährleisten.} 
+	description={Ein Web-Portal ist ein Anwendungssystem, das sich durch die Integration von Anwendungen, Prozessen und Diensten auszeichnet. Ein Portal stellt seinem Benutzer verschiedene Funktionen zur Verfügung, wie beispielsweise Navigation und Benutzerverwaltung. Außerdem koordiniert es die Suche und die Präsentation von Informationen und soll die Sicherheit gewährleisten} 
 }
 \newglossaryentry{Zugriffsrechte}
 {
 	name={Zugriffsrechte},
 	description=
 	{
-		Rechte den Inhalt einer Ressource zu lesen und auszuführen.
+		Rechte den Inhalt einer Ressource zu lesen und auszuführen
 	}
 }
-\newglossaryentry{Besitz-Rechte}
+\newglossaryentry{Besitzerrechte}
 {
-	name={Besitz-Rechte},
+	name={Besitzerrechte},
 	description=
 	{
-		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitz-Rechte implizieren Zugriffsrechte.
+		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitzerrechte implizieren Zugriffsrechte
 	} 
 }
-\newglossaryentry{Administratorrechte}
+\newglossaryentry{IDs}
 {
-	name={Administratorrechte},
+	name={ID},
 	description=
 	{
-		%TODO definition ergänzen
+		(Abkürzung für Identifikator). Ein Identifikator (auch Kennzeichen) ist ein mit einer bestimmten Identität verknüpftes Merkmal zur eindeutigen Identifizierung des tragenden Benutzer
 	} 
 }
+\newglossaryentry{Meta-daten}
+{
+	name={Meta-daten},
+	description=
+	{Meta-daten oder Metainformationen sind strukturierte Daten, die Informationen über Merkmale anderer Daten enthalten
+	} 
+}
+\newglossaryentry{Zugriff-Request}
+{
+	name={Zugriff-Request},
+	description=
+	{Ein Zugriff-Request ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, der Zugriff auf eine Ressource zu haben und wird negativ oder positiv beantwortet
+	} 
+}
+\newglossaryentry{Token}
+{
+	name={Token},
+	description=
+	{Das Token ist eine textuelle Datei bestehend aus einem Verifizierungsstring.Im String sind die ID der Nutzer, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens kodiert.
+	} 
+	plural={Tokens}
+}
+
 \def\threedigits#1{%
   \ifnum#1<10 0\fi
   \ifnum#1<1 0\fi
@@ -120,38 +149,38 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 \newpage
 %\section{Einleitung}
 \section{Zielbestimmung}
-Das Produkt dient zum Authorisierungsmanagement des \grqq{\gls{V-FOR-WaTer}}\grqq Web-Portals. Dadurch können die in dem \gls{Web-Portal} registrierte \gls{Benutzer} Zugriffsanfragen für Ressourcen senden, Ressourcen nutzen und Ressourcen selbst erstellen. Dabei dient das Produkt auch zur Unterscheidung zwischen Benutzer, \gls{Ressourcenbesitzer} und \gls{Administrator}.
+Das Produkt dient zum Authorisierungsmanagement des \grqq{\gls{V-FOR-WaTer}}\grqq -Web-Portals. Dadurch können die in dem \gls{Web-Portal} registrierten \gls{Benutzer} Zugriffsanfragen für Ressourcen senden, Ressourcen nutzen und Ressourcen selbst erstellen. Dabei dient das Produkt auch zur Unterscheidung zwischen Benutzer, \gls{Ressourcenbesitzer} und \gls{Administrator}.
 
 \subsection{Musskriterien}
-Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
+Im Folgenden werden Kriterien aufgelistet, die für ein Funktionieren des Produktes unabdingbar sind.
 
 \subsection*{Benutzer}
 \begin{itemize}[itemsep=0pt]
-\item Der Benutzer kann Ressourcen lesen, auf die er \gls{Zugriffsrechte} hat.
-\item Der Benutzer kann ein Zugriff-Request dem Ressourcenbesitzer senden, um Zugriffsrechte zu erwerben.
-\item Der Benutzer bekommt Rückmeldung ob sein Request erfolgreich gesendet war.
-\item Der Benutzer bekommt eine E-Mail-Benachrichtigung wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
-\item Der Benutzer kann seine eigenen Ressourcen erstellen. Damit wird er den Ressourcenbesitzer dieser Ressourcen.
+\item Der Benutzer kann auf Ressourcen zugreifen, für die er \gls{Zugriffsrechte} hat.
+\item Der Benutzer kann dem Ressourcenbesitzer ein \gls{Zugriff-Request} senden, um Zugriffsrechte zu erlangen.
+\item Der Benutzer bekommt Rückmeldung, wenn sein Request erfolgreich gesendet wurde.
+\item Der Benutzer bekommt eine E-Mail-Benachrichtigung, wenn seine Zugriffsanfrage genehmigt/abgelehnt wurde.
+\item Der Benutzer kann seine eigenen Ressourcen erstellen. Somit wird er der Ressourcenbesitzer dieser Ressourcen.
 \item Der Benutzer kann seinen Namen im Portal ändern.
 \end{itemize}
  
 \subsection*{Ressourcenbesitzer}
 \begin{itemize}[itemsep=0pt]
 
-\item Der Ressourcenbesitzer kann Zugriffsrechte auf seine eigenen Ressourcen auf Request oder freiwillig vergeben.
-\item Der Ressourcenbesitzer kann freiwillig seine \gls{Besitz-Rechte} mit anderen Benutzern teilen.
-\item Der Ressourcenbesitzer kann ein \gls{Loeschen-Request} für seine eigenen Ressourcen dem Administrator senden.
-\item Der Ressourcenbesitzer kann den Name vom Requst-Absender beim Request sehen.
-
+\item Der Ressourcenbesitzer kann Zugriffsrechte für seine eigenen Ressourcen frei oder auf Request vergeben.
+\item Der Ressourcenbesitzer kann seine \gls{Besitzerrechte} mit anderen Benutzern teilen.
+\item Der Ressourcenbesitzer kann dem Administrator ein \gls{Loeschrequest} senden, um seine eigenen Ressourcen löschen zu lassen.
+\item Der Ressourcenbesitzer kann den Namen des Request-Absenders beim Request sehen.
 \end{itemize}
+\newpage
 
 \subsection*{Administrator}
 \begin{itemize}[itemsep=0pt]
 \item Der Administrator kann Ressourcen löschen.
-\item Der Administrator kann Benutzer(vom Portal) entfernen.
+\item Der Administrator kann Benutzer (vom Portal) entfernen.
 \item Der Administrator unterstützt die Datenbankverwaltung.
-\item Der Administrator kann Zugriffsrechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
-\item Der Administrator kann Besitz-Rechte auf Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein). 
+\item Der Administrator kann Zugriffsrechte für Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein).
+\item Der Administrator kann Besitzerrechte für Ressourcen beliebig vergeben (ohne selbst Ressourcenbesitzer zu sein). 
 
 \end{itemize}
 
@@ -159,22 +188,22 @@ Im Folgenden werden Kriterien aufgelistet, die auf jeden Fall umgesetzt werden.
 Im Folgenden werden Kriterien aufgelistet, die das Produkt umsetzen kann.
 Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert werden können.
 \begin{itemize}[itemsep=0pt]
-\item Benachrichtigung wenn eine Ressource gelöscht wird (nur an denen Benutzern, die Rechte darauf haben).
-\item Zugriffsanfrage für mehrere Ressourcen gleichzeitig senden.
-\item Der Benutzer kann ein Request für Administratorrechte dem Administrator senden.
-\item Hilfeverweise für den Benutzer.
-\item Implementierung von Tokens zur Verifizierung von Rechten.
+\item Wird eine Ressource gelöscht, so werden alle Besitzer per E-Mail benachrichtigt. 
+\item Eine Zugriffsanfrage kann für mehrere Ressourcen gleichzeitig gesendet werden.
+\item Der Benutzer kann dem Administrator ein Request für Administratorrechte senden.
+\item Dem Benutzer stehen Hilfeverweise zur Verfügung.
+\item Zur Verifizierung von Rechten werden \glspl{Token} implementiert.
 \item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Administrators.
-\item Der Ressourcenbesitzer kann Zugriffsrechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben.
+\item Der Ressourcenbesitzer kann Zugriffsrechte für seine eigenen Ressourcen an eine Gruppe von Benutzern vergeben.
 \end{itemize}
-
+\newpage
 \subsection{Abgrenzungskriterien}
 Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 \begin{itemize}[itemsep=0pt]
 \item Das Produkt dient nicht zur Authentifizierung.
 \item Das Produkt dient nicht zur Kommunikation zwischen Benutzern.
-\item Das Produkt unterstützt keine Mobile-Version.
-\item Die IDs von Benutzern sind weder sichtbar, noch veränderbar.
+\item Das Produkt unterstützt keine mobile Version.
+\item Die \glspl{IDs} von Benutzern sind weder sichtbar noch veränderbar.
 \item Die E-Mail-Adressen von Benutzern sind nicht veränderbar.
 \item Das Produkt steht nicht zur Verfügung für Benutzer ohne Account.
 \end{itemize}
@@ -184,28 +213,28 @@ Im Folgenden wird beschrieben, was das Produkt explizit nicht leisten soll.
 Das Produkt wird in die Virtuelle Forschungsumgebung (VFU) für die Wasser-
 und Terrestrische Umweltforschung (\grqq{\gls{V-FOR-WaTer}}\grqq) im Rahmen des Netzwerks
 Wasserforschung Baden-Württemberg eingesetzt. Die VFU legt ihre Schwerpunkte
-auf die Datenhaltung und den Direkten Zugriff auf Analysewerkzeuge für Daten
-aus der Wasser- und Umweltforschung. Das Produkt bezieht sich auf die
+auf die Datenhaltung und den direkten Zugriff auf Analysewerkzeuge für Daten
+aus der Wasser- und Umweltforschung. Das Produkt dient der
 Rechteverwaltung für diese Daten.
 
 \subsection{Anwendungsbereiche}
 \begin{itemize}[itemsep=0pt]
-\item Umweltforschungsbereich
+\item Umweltforschung
 \item Datenhaltung
 \end{itemize}
 
 \subsection{Zielgruppen}
 \begin{itemize}[itemsep=0pt]
-\item Administrator(en) der Webseite %(Mitarbeiter von V-FOR-WaTer)
+\item Administrator(en) des Portals %(Mitarbeiter von V-FOR-WaTer)
 \item Wissenschaftliche Mitarbeiter von \grqq{\gls{V-FOR-WaTer}}\grqq
 \item Externe Benutzer des Portals
 \end{itemize}
-
+\newpage
 \subsection{Betriebsbedingungen}
 \begin{itemize}[itemsep=0pt]
-\item Einsatz in einem Webportal mit einer Datenbank.
-\item Das Produkt benötigt eine funktionierende Netzverbindung.
-\item Der Betriebsdauer ist täglich 24 Stunden.
+\item Einsatz in einem Webportal mit einer \gls{Datenbank}.
+\item Das Produkt benötigt eine funktionierende Internetverbindung.
+\item Die Betriebsdauer ist täglich 24 Stunden.
 \end{itemize}
 
 
@@ -215,12 +244,12 @@ Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Pro
 
 \subsection{Software}
 \begin{itemize}[itemsep=0pt]
-\item Server Seite:
+\item Serverseite:
 	\begin{itemize}
 	\item WebServer Apache 
 	\item SQLite – Datenbank
 	\end{itemize}
-\item Client Seite:
+\item Clientseite:
 	\begin{itemize}
 	\item Moderne Webbrowser:
 		\begin{itemize}
@@ -232,79 +261,139 @@ Das Produkt ist weitergehend unabhängig vom Betriebssystem, sofern folgende Pro
 	
 	\end{itemize}
 \end{itemize}
-
+\newpage
 \subsection{Hardware}
 \begin{itemize}[itemsep=0pt]
 
-	\item Server Seite:
+	\item Serverseite:
 	\begin{itemize}
 	\item Netzwerkfähig
 	\item Rechner, der die Ansprüche der o.g. Server-Software erfüllt.
 	\end{itemize}
-	\item Client Seite:
+	\item Clientseite:
 	\begin{itemize}
 	\item Standardrechner
 	\item Netzwerkverbindung
 	\end{itemize}
 \end{itemize}
-\newpage
-
-
 \section{Funktionale Anforderungen}
-Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch Wunschkriterien erläutert. Die Nummern optionaler Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
+Im Folgenden werden die funktionalen Anforderungen (sowohl Musskriterien als auch Wunschkriterien) erläutert. Die optionalen Funktionalitäten, die sich aus den Wunschkriterien ergeben, sind \colorbox{shadecolor}{farblich gekennzeichnet}.
 \subsection{Benutzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\item \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogene Daten (Name, Vorname, E-Mail-Adresse, ID) auf seiner Profilseite sehen.
-\item \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern
-\item \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann Ressource zugreifen, auf die er Zugriffsrechte hat.
-\\ Von Ressourcen, auf die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.
-\item \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen, ihre Namen eingeben.
-\item \textbf{Rechte auf Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Rechte auf gewünschte Ressourcen zu erwerben.
-\item \textbf{Benachrichtigung:}\\ Der Benutzer wird benachrichtigt durch eine E-Mail, wenn sein Request abgelehnt/genehmigt wird. 
-\item \textbf{Requestsübersicht:}\\ Der angemeldete Benutzer kann seine abgesendete Requests auf seine Profilseite sehen.
-\item \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffs-Request für mehrere Ressourcen gleichzeitig senden.
-\item \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administratorrechte senden, um Administratorrechte zu erwerben.
-\end{enumerate}
-
-\newpage
-\subsection{Administratorfunktionen}
-\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item \textbf{Bekommen von Löschen-Requeste}\\ Der Administrator bekommt Requeste von einem Ressourcenbesitzer zum Löschen von Ressourcen.\\\\
+\item \label{FAB1} \textbf{Profilübersicht:} \\ Der angemeldete Benutzer kann seine personenbezogenen Daten (Name, Vorname, E-Mail-Adresse) auf seiner Profilseite sehen.\\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Nachdem der Ressourcenbesitzer ein Löschen-Request gesendet hat, werden alle Administratoren darüber durch eine Email und durch eine Nachricht im Portal benachrichtigt.\\
-\item Die Nachricht enthält die Daten des Ressourcenbesitzers und den Namen der Ressource zum Löschen.\\ 
-\item Der Administrator kann seine Entscheidung direkt von der Nachricht durch zwei Knöpfe \grqq{Ja}\grqq  oder \grqq{Nein}\grqq  treffen.
+\item Nach dem Anmelden kann der Benutzer seine Profilseite öffnen.
+\item Auf der Profilseite wird persönliche Information vom Benutzer angezeigt.
+\end{enumerate}
+\item \label{FAB2} \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Nach dem Öffnen seiner Profilseite kann der Benutzer den Edit-Button rechts von seinem Namen klicken.
+\item Der Benutzer kann im Eingabefeld seinen Namen ändern und durch Klicken des Save-Buttons das Ergebnis speichern.
+\item  Nach dem Speichern wird der geänderte Name auf der Profilseite angezeigt.
+\end{enumerate}
+\item \label{FAB3} \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann auf Ressourcen zugreifen, für die er Zugriffsrechte hat.
+\\ Von Ressourcen, für die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der angemeldete Benutzer kann eine Ressourcenliste auf Ressourcenübersichtseite sehen.
+\item Der Benutzer kann Inhalt der Ressourcen, für die er Zugriffsrechte hat, durch Klicken des Buttons \grqq{Zugreifen}\grqq ansehen.
+\item Der Benutzer kann von Ressourcen, für die er keine Zugriffsrechte hat, ausschließlich Metadaten sehen.
+\end{enumerate}
+\item \label{FAB4} \textbf{Ressourcenerstellung:}\\ Der Benutzer kann neue Ressourcen hochladen.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der angemeldete Benutzer kann auf seiner Profilseite im Abschnitt \grqq{Meine Ressourcen}\grqq den Button \grqq{Hinzufügen}\grqq klicken.
+\item Im geöffneten Dialog kann der Benutzer eine Datei zum Hochladen auswählen.
+\item Nach dem Hochladen der Datei kann der Benutzer den Namen der Ressource eingeben und die Ressource speichern.  
+\end{enumerate}
+\item \label{FAB5} \textbf{Zugriffsrechte für Ressourcen anfordern:}\\ Der Benutzer kann Requests an den Ressourcenbesitzer senden, um die Zugriffsrechte für gewünschte Ressourcen zu erlangen.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der angemeldete Benutzer kann Ressourcen auf der Ressourcenübersichtseite sehen.
+\item Der Benutzer kann durch Klicken des Buttons \grqq{Request}\grqq Zugriffsrechte für Ressourcen anfordern.
+\item Durch Klicken des "Request"-Buttons wird ein Request erstellt und der Ressourcenbesitzer per E-Mail benachrichtigt.
+\item Nach dem erfolgreichen Absenden des Zugriffsrequests wird "Request"-Button nicht mehr klickbar.
+\end{enumerate}
+\newpage
+\item \label{FAB6} \textbf{Benachrichtigung:}\\ Der Benutzer wird per E-Mail benachrichtigt, wenn sein Request abgelehnt/genehmigt wird.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Zugriffrequests vom Benutzer werden vom Ressourcenbesitzer bearbeitet.
+\item Nachdem Zugriffsrequest genehmigt oder abgelehnt wird, wird der Benutzer per E-Mail darüber benachrichtigt.
+\end{enumerate} 
+\item \label{FAB7} \colorbox{shadecolor} {\textbf{Requestsübersicht:}}\\ Der angemeldete Benutzer kann seine abgesendeten Requests auf seiner Profilseite sehen. \\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Abgesendete und noch nicht bearbeitete Requests des Benutzers werden auf seiner Profilseite im Abschnitt \grqq{Abgesendete Requests}\grqq aufgelistet.
+\item Nachdem Request bearbeitet wird, wird es aus Requestliste gelöscht.
+\end{enumerate}
+\item \label{FAB8} \colorbox{shadecolor} {\textbf{Multiple Request:}}\\ Der Benutzer kann Zugriffsrequest für mehrere Ressourcen gleichzeitig senden.
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der Benutzer kann mehrere Ressourcen auf der Ressourcenübersichtseite auswählen.
+\item Durch Klicken des \grqq{Request}\grqq -Buttons werden Requests an den Besitzer abgesendet.
+\end{enumerate}
+\item \label{FAB9} \colorbox{shadecolor} {\textbf{Administratorrechte anfordern:}}\\ Der Benutzer kann ein Request an Administrator senden, um Administratorrechte zu erlangen.
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der Benutzer kann durch Klicken des \grqq{Admin werden}\grqq -Buttons Administratorrechte anfordern.
+\item Die Administratoren werden per E-Mail darüber benachrichtigt.
+\end{enumerate}
+\newpage
+\item \label{FAB10} \colorbox{shadecolor}{\textbf{Erstellung von Tokens}}\\ Der Benutzer bekommt ein Token, mit dem er seine Rechte für Ressourcen auf einem externen Webserver verifizieren kann.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Ein Token wird bei einer Veränderung der Benutzerrechte erstellt bzw. aktualiesiert und dem Benutzer gesendet. 
+\item Immer wenn der Benutzer eine externe Webseite besucht, die Ressourcen von V-FOR WaTer verwaltet, wird sein Token für eine leichtere Autorisierung benutzt. 
+
+\end{enumerate}
+\end{enumerate}
+\subsection{Administratorfunktionen}
+\begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item \label{FAA1}\textbf{Bearbeiten von Loeschrequest}\\ Der Administrator erhält von einem Ressourcenbesitzer ein Request zum Löschen von Ressourcen.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Nachdem der Ressourcenbesitzer ein Loeschrequest gesendet hat, werden alle Administratoren durch eine E-Mail benachrichtigt.\\
+\item Die Nachricht enthält die Daten des Ressourcenbesitzers und den Namen der zu löschenden Ressource.\\ 
+\item Der Administrator kann seine Entscheidung direkt durch ein Interface (zwei Buttons \grqq{Ja}\grqq  \: oder \grqq{Nein}\grqq  \:) am Nachrichtbildschirm treffen.
  
 \end{enumerate}
 
 
-\item \textbf{Löschen von Ressourcen}\\ Der Administrator darf die Ressourcen im Portal löschen.\\\\
+\item \label{FAA2} \textbf{Löschen von Ressourcen}\\ Der Administrator kann die Ressourcen im Portal löschen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-\item Die Löschen kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
-\item Nach der Löschen der Ressource werden alle Ressourcenbesitzer(eventuell auch alle Benutzer mit Leserechte, bei Publicressourcen problematisch) durch eine Email darüber informiert. \\ 
+\item Das Löschen kann entweder auf die in \ref{FAA1} beschriebene Weise oder auch ohne Request geschehen.\\
+\item Nach dem Löschen der Ressource werden alle Ressourcenbesitzer durch eine E-Mail  informiert. \\ 
 \end{enumerate}
 
-\item \textbf{Bekommen von Adminrequeste}\\ Der Administrator bekommt Requeste von einem Benutzer, der vom Admin verlangt, ein Admin zu werden.
-
-
-\item \textbf{Rechte gewähren}\\ Der Administrator kann einem Benutzer Zugriff- oder Leserechte einräumen und wieder entziehen.\\\\
+\newpage
+\item \label{FAA3} \textbf{Rechte gewähren}\\ Der Administrator kann einem Benutzer Zugriff- oder Leserechte gewähren und wieder entziehen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-	\item Die Vergabe von Rechte kann entweder durch die in /F060/ beschriebene Weise oder auch ohne Request passieren.\\
-	\item Nach der Vergabe von Rechte kann der Administrator sie wieder entziehen. \\ 
-	\item Nach der Entnahme von Rechte kann der Administrator sie wieder vergeben. \\
+	\item Die Vergabe von Rechten kann entweder auf die in \ref{FAA1} beschriebene Weise oder auch ohne Request geschehen.\\
+	\item Nach der Vergabe von Rechten kann der Administrator sie wieder entziehen. \\ 
+	\item Nach dem Entziehen von Rechten kann der Administrator sie wieder vergeben. \\
 	\end{enumerate}
 
-\item \textbf{Benutzer löschen}\\ Der Administrator kann einen Benutzer löschen. \\\\
+\item \label{FAA4} \textbf{Benutzer löschen}\\ Der Administrator kann einen Benutzer löschen. \\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-	\item Zusammen mit dem Account werden die personenbezogenen Daten von der Benutzer entfernt.\\
-	\item Der Administrator kann der gelöschten Benutzers Account und Daten nicht wiederherstellen, sondern muss der Benutzer sich nochmal registrieren. \\ 
+	\item Zusammen mit dem Account werden die personenbezogenen Daten des Benutzers entfernt.\\
+	\item Der Administrator kann des gelöschten Benutzers Account und Daten nicht wiederherstellen. Der Benutzer muss sich erneut registrieren. \\ 
 	\end{enumerate}
 
-\item \colorbox{shadecolor} {\textbf{Benutzer blockieren}}\\ Der Administrator kann einen Benutzer blockieren, damit dieser sich nicht anmelden kann.\\\\
+\item \label{FAA5} \colorbox{shadecolor} {\textbf{Bearbeiten von Admin-Request}}\\ Der Administrator bekommt Request von einem Benutzer, der vom Administratorrechte verlangt.\\\\
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+	\item Der Ablauf ist ähnlich zu dem in \ref{FAA1} beschriebenen. Unterschied ist, dass jeder Benutzer dieses Request senden kann und natürlich die Sache(nämmlich die Adminrechte), die durch das Request angefragt wird.\\
+	\end{enumerate}
+
+
+
+\item \label{FAA6} \colorbox{shadecolor} {\textbf{Benutzer blockieren}}\\ Der Administrator kann einen Benutzer blockieren, damit dieser sich nicht anmelden kann.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 	\item Wenn der Benutzer blockiert ist, sind seinem Account und Daten nicht gelöscht, sondern kann er sich nicht mehr anmelden.\\
@@ -312,7 +401,7 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 	\end{enumerate}
 
 
-\item \colorbox{shadecolor} {\textbf{Benutzer suchen}}\\  Es kann ein Benutzer anhand von Vorname, Nachname durch den Administrator gesucht werden.\\\\
+\item \label{FAA7} \colorbox{shadecolor} {\textbf{Benutzer suchen}}\\  Es kann ein Benutzer anhand von Vorname, Nachname durch den Administrator gesucht werden.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 	\item Nach der Suche wird der gesuchte Benutzer dann angezeigt und er steht zur Verfügung.\\
@@ -321,18 +410,74 @@ Im Folgenden werden die funktionale Anforderungen: sowohl Musskriterien als auch
 
 \subsection{Ressourcenbesitzerfunktionen}
 \begin{enumerate}[label={\textbf{/F\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item \textbf{Übersicht der Requests:}\\
-Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
-\item \textbf {Übergabe der Zugriffsrechte:}\\ 
-Der Besitzer kann Zugriffsrechte an anderen Benutzer vergeben.
-\item \textbf {Request auf Zugriffsrechte ablehnen/genehmigen:}\\ 
-Der Ressourcenbesitzer kann die gesendeten Requests, die von anderen Benutzern zur Anforderung einer Zugriffsrechte gesendet wurden, entweder ablehnen oder annehmen. In beiden Fälle werden der entsprechenden Benutzern benachrichtigt. Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen.
-\item \textbf{Übergabe der Besitz-Rechte:}\\
-Der Ressourcenbesitzer kann seine Besitz-Rechte mit anderen Benutzern teilen.In diesem Fall haben die andere Benutzer dieselbe Rechte, die Ressourcenbesitzer hat. %todo
-\item \textbf{Löschen-Request senden:}\\
-Der Ressourcenbesitzer ist in der Lage zum Löschen seinen Ressourcen ein Request dem Administrator zu senden.
-\item \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
-Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
+\item \label{FARB1} \textbf{Übersicht der Requests:}\\
+Eine Liste von Requests ist auf Profilseite vorhanden.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Requests, die von anderen Benutzern gesendet sind, angezeigt.  
+\end{enumerate}
+\item \label{FARB2} \textbf{Übersicht der Ressourcen:}\\
+Es steht eine Liste von Ressourcen auf der Profilseite zur verfügung.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+
+\item Nach der Anmeldung wird dem Ressourcenbesitzer eine Liste von Ressourcen, die von ihm besessen sind, angezeigt.  
+\end{enumerate}
+
+
+\item \label{FARB3} \textbf {Vergabe der Zugriffsrechte:}\\ 
+Der Besitzer kann Zugriffsrechte ohne Request an anderen Benutzer vergeben.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+
+\item Der Ressourcenbesitzer kann in seiner Profilseite für eine bestimmte Ressource durch Klicken auf des \grqq{Zugriffsrechte vergeben}\grqq -Button Zugriffsrechte anderen Benutzern ohne Request vergeben.
+\end{enumerate}
+\item \label{FARB4} \textbf {Request auf Zugriffsrechte ablehnen/genehmigen:}\\ 
+Der Ressourcenbesitzer bekommt von anderen Benutzern Zugriff-Request. \\\\
+
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+
+\item Der Ressourcenbesitzer kann die gesendeten Requests, die von anderen Benutzern zur Anforderung einer Zugriffsrechte gesendet wurden, entweder ablehnen oder annehmen.
+\item In beiden Fälle(Genehmigung/Ablehnung) werden der entsprechenden Benutzern benachrichtigt.
+\item Im Fall Genehmigung bekommt der Benutzer Die Zugriffsrechte auf  gewünschte Ressourcen.
+\end{enumerate}
+
+\item \label{FARB5} \textbf{Vergabe der Besitzerrechte:}\\
+Der Ressourcenbesitzer kann freiwillig seine Besitzerrechte mit anderen Benutzern teilen.
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+
+\item Der Ressourcenbesitzer kann in seiner Profilseite für eine bestimmte Ressource durch Klicken auf des \grqq{Besitz-Rechte teilen}\grqq -Button seine Besitzerrechte mit anderen Benutzern teilen.
+\end{enumerate}
+\item \label{FARB6} \textbf{Loeschrequest senden:}\\
+Der Ressourcenbesitzer kann zum Löschen seiner eigenen Ressourcen dem Administrator ein Loeschrequest senden.
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Der Ressourcenbesitzer sendet dem Administrator ein Loeschrequest, um seine eigene Ressource löschen zu lassen.
+\item Wird diese Ressource gelöscht, bekommt der Ressourcenbesitzer eine Email-benachrichtigung.
+\end{enumerate}
+\item \label{FARB7} \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
+Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Wird eine Ressource von Administrator gelöscht, werden allen Ressourcenbesitzer per Email benachrichtigt.
+\end{enumerate}
+\item \label{FARB8} \colorbox{shadecolor} {\textbf{Zugriffsrechte einer Gruppe vergeben:}}\\
+Der Ressourcenbesitzer kann Zugriffsrechte auf seine eigenen Ressourcen einer Gruppe von Benutzern vergeben.\\\
+
+\textbf{Beschreibung:}\\
+\begin{enumerate}[label=(\arabic*), leftmargin=*]
+\item Die Vergabe von Zugriffsrechte kann entweder durch die in \ref{FARB3} und \ref{FARB4} beschriebene Weise einzeln oder auch kumulativ passieren.
+\end{enumerate}
+
 \end{enumerate}
 
 
@@ -366,11 +511,11 @@ Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrihtigt.
 \item Zur Erstellung eines Requests sind maximal 5 Schritte nötig.
 \item Zur Erstellung einer neuen Ressource sind maximal 5 Schritte nötig.
 \item Eine Änderung von Rechten führt nicht zur Veränderung von Ressourcen.
-\item Hilfeverweise %to do
-\item Zeitverhalten - angemessen %to do
+\item Verständlichkeit des Systems wird durch ausreichende Hilfeverweise gewährleistet.
+\item Effiziente Nutzung vom System soll durch angemessenes Zeitverhalten garantiert werden.  
 \end{enumerate}
 
-
+\newpage
 \section{Systemmodelle}
 
 \subsection{Szenarien}
@@ -382,7 +527,7 @@ Nun möchte sie eine neue Ressource erstellen, darum klickt sie auf dem Knopf \g
 	\begin{center}
 	\includegraphics[width=0.6\textwidth]{Szenario_1.png}
 	\end{center}
-
+\newpage
 \subsubsection*{Zugriff-Request senden}
 Bob hat Interesse an einer Ressource X im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq. Er probiert den Inhalt von X zuzugreifen. Leider hat er keine Zugriffsrechte darauf. Um solche Rechte zu bekommen, soll er ein Request am Besitzer von X senden, in diesem Fall - Alice. Bob wählt die Option \grqq{Zugriffsrechte anfragen}\grqq. 
 
@@ -393,9 +538,9 @@ Nach wenigen Sekunden bekommt Alice eine E-Mail-Benachrichtigung über das neue 
 	\end{center}
 
 \newpage
-\subsubsection*{Besitz-Rechte teilen}
-Der Besitzer von Ressource Y, nämlich Bob, ist ein sehr beschäftigter Mann. Er hat keine Zeit und Lust jeden Tag die zahlreiche Zugriffsanfragen für Rechte auf Y zu beantworten. Deshalb hat er sich entschieden seine Besitz-Rechte mit drei Mitarbeitern von ihm zu teilen. \\
-Er findet die Ressource Y und wählt die Option \grqq{Besitz-Rechte teilen}\grqq. Dann findet er die Personen durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.\\
+\subsubsection*{Besitzerrechte teilen}
+Der Besitzer von Ressource Y, nämlich Bob, ist ein sehr beschäftigter Mann. Er hat keine Zeit und Lust jeden Tag die zahlreiche Zugriffsanfragen für Rechte auf Y zu beantworten. Deshalb hat er sich entschieden seine Besitzerrechte mit drei Mitarbeitern von ihm zu teilen. \\
+Er findet die Ressource Y und wählt die Option \grqq{Besitzerrechte teilen}\grqq. Dann findet er die Personen durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.\\
 
 	\begin{center}
 	\includegraphics[width=0.7\textwidth]{Szenario_3bevor.png}
@@ -404,7 +549,7 @@ Er findet die Ressource Y und wählt die Option \grqq{Besitz-Rechte teilen}\grqq
 	\end{center}
 
 \subsubsection*{Ressource editieren}
-Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektion. Danach sendet sie ein Löschen-Request am Administrator, damit er die alte Version von X zerstört.\\
+Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektion. Danach sendet sie ein Loeschrequest am Administrator, damit er die alte Version von X zerstört.\\
 	
 	\begin{center}
 	\includegraphics[width=1\textwidth]{Szenario_4.png}
@@ -412,25 +557,79 @@ Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigie
 	
 \subsection{Diagramme}
 
-\subsection*{Funktionenübersichtsdiagramm}
+\subsubsection*{Funktionenübersichtsdiagramm}
 
 	\begin{center}
 	\includegraphics[width=0.95\textwidth]{Funktionen_uebersicht.png}
 	\end{center}
 	
-\subsection*{Kontrollflussdiagramm \grqq{Ressource zugreifen}\grqq}
+\subsubsection*{Kontrollflussdiagramm \grqq{Ressource zugreifen}\grqq}
 
 	\begin{center}
 	\includegraphics[width=1\textwidth]{Kontrollfluss.png}
 	\end{center}
 	
-\subsection*{Zustandsdiagramm \grqq{Zugriff-Request}\grqq}
+\subsubsection*{Zustandsdiagramm \grqq{Zugriff-Request}\grqq}
 Das Diagramm stellt die mögliche Zustände eines Zugriff-Requests dar, wenn ein Benutzer ohne Zugriffsrechte eine Ressource zugreifen will.
 \\
 
-\begin{center}
+	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Zustandsdiagramm.png}
 	\end{center}
+	\newpage
+\subsection{Benutzerschnittstelle}
+
+\subsubsection*{Profilseite von Benutzer}
+Links an seiner Profilseite sieht der Benutzer keine Zugriff-Requeste, denn er besitzt noch keine Ressourcen(der rechte Block ``Meine Ressourcen`` hat keine Einträge). Der Benutzer hat jedoch die Möglichkeit eigene Ressourcen hinzuzufügen.
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{Profilseite_Benutzer.png}
+	\end{center}
+	
+\subsubsection*{Profilseite von Ressourcenbesitzer}
+
+Links an seiner Profilseite sieht der Ressourcenbesitzer einen Block mit den offenen Requeste, die er bearbeiten soll/kann (durch Klicken auf einen der beiden Knöpfe mit den Symbolen für ``genehmigen`` und ``ablehnen``). Dabei stehen der Absender des Requests und die gewünschte Ressource. Alle Requeste sind vom Typ ``Zugriff-Request``. Im rechten Block hat der Ressourcenbesitzer die Möglichkeit neue Ressource zu erstellen. Als Optionen stehen vor dem Besitzer:
+\begin{itemize}
+	\item Eigene Ressource zuzugreifen 
+	\item Zugriff-/Besitz-Rechte freiwillig zu teilen 
+	\item Löschen-Request für seine Ressource dem Admin zu senden.
+\end{itemize} 
+
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{Profilseite_Besitzer.png}
+	\end{center}
+	
+\subsubsection*{Profilseite von Administrator}
+Die Profilseite eines Administrators ist eine Erweiterung der Profilseite des Ressourcenbesitzers. Der Unterschied besteht darin, dass der Administrator der einzige ist, der das Recht hat Ressourcen zu löschen. Deshalb bekommt er auch die o.g. ``Löschen-Requeste``. Er soll/kann die auch genehmigen oder ablehnen.
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{Profilseite_Admin.png}
+	\end{center}
+	
+\subsubsection*{Administratorseite}
+Der Administrator sieht einen zusätzlichen Knopf im obenstehenden Menu, und nämlich ``Admin``. Wenn er darauf klickt, geht er zur Administratorseite. Dort hat er die Möglichkeit die im Portal registrierten Benutzer, sowie alle Ressourcen zu verwalten. Bezüglich der Benutzer hat er folgende Rechte:
+\begin{itemize}
+	\item Zugriffsrechte korrigieren (umfasst vergeben und entziehen)
+	\item Besitz-Rechte korrigieren (umfasst vergeben und entziehen)
+	\item Benutzer blockieren
+	\item Benutzer löschen (die persönliche Daten des Benutzers werden vom System gelöscht, ausschließlich seiner Ressourcen)
+\end{itemize}  
+ Mithilfe von der Ressourcenübersicht kann der Administrator:
+ \begin{itemize}
+ 	\item Alle Ressourcen zugreifen, unabhängig davon, ob er der Besitzer ist
+ 	\item Einem Benutzer Zugriff-/Besitz-Rechte auf eine bestimmte Ressource vergeben
+ 	\item Einem Benutzer Zugriff-/Besitz-Rechte auf eine bestimmte Ressource entziehen
+ 	\item Eine beliebige Ressource löschen (auch ohne Löschen-Request)
+ \end{itemize}
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{Adminseite.png}
+	\end{center}
+	
+\subsubsection*{Ressourcensuche}
+Zum Fenster ``Ressourcensuche`` hat jeder im Portal registrierte Benutzer Zugang. Links spezifiziert man seine Kriterien bezüglich der gesuchten Ressource. Dann klickt man auf 
+``Zeige gewählte Datensätze`` und sieht das Ergebnis im zentralen Block unter “Ressourcenübersicht”. Für die ``public`` Ressourcen oder für diejenige, auf die der Benutzer Zugriffsrechte hat, sieht er einen Knopf ``zugreifen``. Für die ``geschlossene``(d.h. Zu denen er keinen Zugang hat) darf er ein Zugriff-Request dem Ressourcenbesitzer senden. Wichtig ist, dass nach einem gesendeten aber noch nicht bearbeiteten Request der Benutzer kein zweites senden darf. (Der Knopf wird nicht klickbar)
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{Ressourcensuche.png}
+	\end{center}
+	
 	
 \section{Qualitätsbestimmungen}
 
@@ -497,32 +696,44 @@ Das Diagramm stellt die mögliche Zustände eines Zugriff-Requests dar, wenn ein
 \section{Globale Testfälle}
 \subsection{Benutzertestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*]
-\item Profilseite öffnen. (/F010/)
-\item Namen ändern. (/F020/) 
-\item Ressourcen öffnen. (/F030/)
-\item Neue Ressource erstellen. (/F040/)
-\item Request senden. (/F050/)
-\item Benachrichtigungen kontrollieren. (/F060/) 
-\item Requestliste ansehen. (/F070/)
-\item Multiple Request senden. (/F080/)
-\item Administratorrechte anfragen. (/F090/)
-\end{enumerate}
-
-\subsection{Ressourcenbesitzertestfälle}
-\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item Liste von besessenen Ressourcen kontrollieren.  %todo
-\item Zugriffsrechte an anderen Benutzer vergeben.
-\item Requestsliste kontrollieren.
-\item Request auf Zugriffsrechte ablehnen.
-\item Request auf Zugriffsrechte genehmigen.
-\item Besitzrechte an anderen Benutzer vergeben.
-\item Request zum Löschen von Ressource absenden
-\item Löschbenachrichtigung kontrollieren.  
+\item Profilseite öffnen. (\ref{FAB1})
+\item Namen ändern. (\ref{FAB2})
+\item Ressourcen öffnen. (\ref{FAB3})
+\item Neue Ressource erstellen. (\ref{FAB4})
+\item Request senden. (\ref{FAB5})
+\item Benachrichtigungen kontrollieren. (\ref{FAB6})
+\item Requestliste ansehen. (\ref{FAB7})
+\item Multiple Request senden. (\ref{FAB8})
+\item Administratorrechte anfragen. (\ref{FAB9})
+\item Token erstellen und validieren. (\ref{FAB10})
 \end{enumerate}
 
 \subsection{Administratortestfälle}
 \begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
-\item bu
+\item Request zum Löschen von einem Ressource zum Administrator senden. (\ref{FAA1})
+\item Ressource löschen. (\ref{FAA2})
+\item Zugriffsrechte zu einem Benutzer geben.(\ref{FAA3})
+\item Zugriffsrechte von einem Benutzer entziehen.(\ref{FAA3})
+\item Leserechte zu einem Benutzer geben.(\ref{FAA3})
+\item Leserechte von einem Benutzer entziehen.(\ref{FAA3})
+\item Löschen von Account und Daten, die zu einem Benutzer gehören.(\ref{FAA4})
+\item Adminrequest an den Administrator senden. (\ref{FAA5})
+\item Suchen nach einem Benutzer und ihn Blockieren . (\ref{FAA6},\ref{FAA7})
+
+
+\end{enumerate}
+
+\subsection{Ressourcenbesitzertestfälle}
+\begin{enumerate}[label={\textbf{/T\protect\threedigits{\theenumi}0/}}, leftmargin=*, resume]
+\item Requestsliste kontrollieren.(\ref{FARB1})
+\item Liste von besessenen Ressourcen kontrollieren.(\ref{FARB2})  %todo
+\item Zugriffsrechte an anderen Benutzer vergeben.(\ref{FARB3})
+\item Request auf Zugriffsrechte ablehnen.(\ref{FARB4})
+\item Request auf Zugriffsrechte genehmigen.(\ref{FARB4})
+\item Besitzrechte an anderen Benutzer vergeben.(\ref{FARB5})
+\item Request zum Löschen von Ressource absenden.(\ref{FARB6})
+\item Löschbenachrichtigung kontrollieren.(\ref{FARB7})
+\item Zugriffsrechte einer Gruppe von Benutzern vergeben.(\ref{FARB8}) 
 \end{enumerate}
 \newpage
 \printglossary	

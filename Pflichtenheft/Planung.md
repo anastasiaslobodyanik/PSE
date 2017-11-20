@@ -9,11 +9,11 @@ bis 20.11.2017
   - [ ] Nichtfunktionale Anforderungen [Anastasia]
   - [ ] Systemmodelle (Szenarien, UML) [Sonya, Alex]
   - [x] Qualitaetsbestimmungen
-  - [ ] Globale Testfaelle [Khalil]
+  - [x] Globale Testfaelle
  
- - [ ] Funktionale Anforderungen --->Alle
+  - [x] Funktionale Anforderungen --->Alle
   - [ ] Benutzer [Anastasia]
-  - [ ] Admin [Atanas, Khalil]
+  - [x] Admin
   - [ ] Besitzer [Houra]
   
- - [ ] Glossar[Khalil]
+  - [ ] Glossar[Khalil]
