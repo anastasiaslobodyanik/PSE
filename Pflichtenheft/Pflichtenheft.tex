@@ -46,22 +46,22 @@
 \newglossaryentry{Administrator}
 {
 	name={Administrator},
-description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und hat erweiterte Rechte im Vergleich zu  Standardbenutzer. Der Administrator ist ein Mitarbeiter von ``V-FOR-WaTer``} 
+description={Ein Administrator ist ein Verwalter des Systems, er unterstützt die Datenbankverwaltung und hat erweiterte Rechte im Vergleich zu Standardbenutzer. Der Administrator ist ein Mitarbeiter von ``V-FOR-WaTer``} 
 }
 \newglossaryentry{Ressourcenbesitzer}
 {
 	name={Ressourcenbesitzer},
-	description={Ein Ressourcenbesitzer ist ein Benutzer, der eigene Ressourcen erstellt oder Besitzerrechte für Ressourcen anderer Benutzer bekommen hat.}
+	description={Ein Ressourcenbesitzer ist ein Benutzer, der eigene Ressourcen erstellt oder Besitzerrechte für Ressourcen von anderen Benutzern bekommen hat}
 }
 \newglossaryentry{Datenbank}
 {
 	name={Datenbank},
-	description={Eine Datenbank ist eine eine große Menge von Daten, die in einem Computer nach bestimmten Kriterien organisiert sind und komplexe Abfragen zulassen.} %todo
+	description={Eine Datenbank ist eine eine große Menge von Daten, die in einem Computer nach bestimmten Kriterien organisiert sind und komplexe Abfragen zulassen} %todo
 }
 \newglossaryentry{Loeschrequest}
 {
 	name={Loeschrequest},
-	description={Ein Loeschrequest ist ein Request, der vom Ressourcenbesitzer an Administrator gesendet wird, um Ressourcen aus dem Portal zu entfernen.}  %Löschen muss so geschrieben werden, sonst -> Probleme 
+	description={Ein Loeschrequest ist ein Request, der vom Ressourcenbesitzer an Administrator gesendet wird, um Ressourcen aus dem Portal entfernen zu lassen}  %Löschen muss so geschrieben werden, sonst -> Probleme 
 }
 \newglossaryentry{Web-Portal}
 {
@@ -72,46 +72,37 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 {
 	name={Zugriffsrechte},
 	description=
-	{
-		Zugriffsrechte sind ein Befugnis den Inhalt einer Ressource zu lesen und auszuführen
-	}
+	{Zugriffsrechte sind ein Befugnis den Inhalt einer Ressource zu lesen oder/und auszuführen}
 }
 \newglossaryentry{Besitzerrechte}
 {
 	name={Besitzerrechte},
 	description=
-	{
-		Besitzerrechte sind Rechte, die einem Benutzer Rechteverwaltung und Löschrequestserstellung für eine bestimmte Ressource ermöglichen.
-	} 
+	{Besitzerrechte sind Rechte, die einem Benutzer Rechteverwaltung und Löschrequestserstellung für eine bestimmte Ressource ermöglichen} 
 }
 \newglossaryentry{IDs}
 {
 	name={ID},
 	description=
-	{
-		Abkürzung für Identifikator. Ein Identifikator (auch Kennzeichen) ist ein mit einer bestimmten Identität verknüpftes Merkmal zur eindeutigen Identifizierung des tragenden Benutzers.
-	} 
+	{Abkürzung für Identifikator. Ein Identifikator (auch Kennzeichen) ist ein mit einer bestimmten Identität verknüpftes Merkmal zur eindeutigen Identifizierung des tragenden Benutzers} 
 }
 \newglossaryentry{Metadaten}
 {
 	name={Metadaten},
 	description=
-	{Metadaten sind Daten, die dazu dienen, Ressource zu beschreiben, ohne seine Inhalt zu veröffentlichen.
-	} 
+	{Metadaten sind Daten, die dazu dienen, Ressource zu beschreiben, ohne ihre Inhalt zu veröffentlichen.} 
 }
 \newglossaryentry{Zugriffsrequest}
 {
 	name={Zugriffsrequest},
 	description=
-	{Ein Zugriffsrequest ist ein Request, das vom Benutzer an den Ressourcenbesitzer gesendet wird, um Befugnis zu erlangen, den Inhalt der Ressource zuzugreifen.
-	} 
+	{Ein Zugriffsrequest ist ein Request, das vom Benutzer an den Ressourcenbesitzer gesendet wird, um Befugnis zu erlangen, auf den Inhalt der Ressource zuzugreifen} 
 }
 \newglossaryentry{Token}
 {
 	name={Token},
 	description=
-	{Das Token ist eine textuelle Datei, die eine Verifizierungsstring enthält. In diesem String sind die ID des Nutzers, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens verschlüsselt.
-	} 
+	{Das Token ist eine Textdatei, die einen Verifizierungsstring enthält. In diesem String sind die ID des Benutzers, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens verschlüsselt} 
 	plural={Tokens}
 }
 
@@ -196,7 +187,7 @@ Im Verlauf des Entwurfs wird entschieden, welche der Kriterien  implementiert we
 \item Mehrmaliges Versagen eines Requests führt zur Benachrichtigung des Administrators.
 \item Der Ressourcenbesitzer kann Zugriffsrechte für seine eigenen Ressourcen an eine Gruppe von Benutzern vergeben.
 \item Der Administrator kann einen Benutzer blockieren.
-\item Der Administrator kann Benutzer anhand von Vorname, Nachname suchen.
+\item Der Administrator kann Benutzer anhand von Vorname und/oder Nachname suchen.
 \end{itemize}
 \newpage
 
@@ -287,7 +278,7 @@ Im Folgenden werden die funktionalen Anforderungen (sowohl Musskriterien als auc
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Nach dem Anmelden kann der Benutzer seine Profilseite öffnen.
-\item Auf der Profilseite wird persönliche Information vom Benutzer angezeigt.
+\item Auf der Profilseite werden personenbezogenen Daten des Benutzers angezeigt.
 \end{enumerate}
 
 \item \label{FAB2} \textbf{Datenänderung:} \\ Der angemeldete Benutzer kann seinen Namen ändern.\\\\
@@ -320,7 +311,7 @@ Im Folgenden werden die funktionalen Anforderungen (sowohl Musskriterien als auc
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Der angemeldete Benutzer kann Ressourcen auf der Ressourcenübersichtseite sehen.
 \item Der Benutzer kann durch Klicken des Buttons \grqq{Request}\grqq \: Zugriffsrechte für Ressourcen anfordern.
-\item Durch Klicken des "Request"-Buttons wird ein Request erstellt und der Ressourcenbesitzer per E-Mail benachrichtigt.
+\item Durch Klicken des ``Request``-Buttons wird ein Request erstellt und der Ressourcenbesitzer per E-Mail benachrichtigt.
 \item Nach dem erfolgreichen Absenden des Zugriffsrequests wird  \grqq{Request}\grqq -Button nicht mehr klickbar.
 \end{enumerate}
 \newpage
@@ -383,7 +374,7 @@ Im Folgenden werden die funktionalen Anforderungen (sowohl Musskriterien als auc
 \item \label{FAA3} \textbf{Rechte gewähren}\\ Der Administrator kann einem Benutzer Zugriffs- oder Besitzerrechte gewähren und wieder entziehen.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
-	\item Der Administrator kann Zugriffs- oder Besitzerrechte für alle Ressourcen an andere Benutzer vergeben.
+	\item Der Administrator kann Zugriffs- oder Besitzerrechte für jede Ressource an andere Benutzer vergeben.
 	\item Alle Rechte können von dem Administrator entzogen werden.
 	\end{enumerate}
 
@@ -450,7 +441,7 @@ Der Ressourcenbesitzer bekommt von anderen Benutzern Zugriffsrequest. \\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Der Ressourcenbesitzer kann Requests, mit welchen andere Benutzer Zugriffsrechte anfordern, entweder ablehnen oder annehmen.
-\item In beiden Fälle(Genehmigung/Ablehnung) wird der entsprechende Benutzer benachrichtigt.
+\item In beiden Fälle (Genehmigung/Ablehnung) wird der entsprechende Benutzer benachrichtigt.
 \item Im Falle der Genehmigung bekommt der Benutzer die Zugriffsrechte auf  gewünschte Ressourcen.
 \end{enumerate}
 
@@ -467,7 +458,8 @@ Der Ressourcenbesitzer kann zum Löschen seiner eigenen Ressourcen dem Administr
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Der Ressourcenbesitzer kann dem Administrator ein Loeschrequest senden, um seine eigene Ressource löschen zu lassen, indem er den \grqq{Löschrequest senden}\grqq -Button der entsprechenden Ressource klickt.
-\item Wird diese Ressource gelöscht, bekommt der Ressourcenbesitzer eine E-Mail-Benachrichtigung.
+\item Wird diese Ressource gelöscht, bekommt der Ressourcenbesitzer eine E-Mail-Benach-
+richtigung.
 \end{enumerate}
 
 \item \label{FARB7} \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
@@ -519,14 +511,14 @@ Der Ressourcenbesitzer kann Zugriffsrechte für seine eigenen Ressourcen an eine
 \item Zur Erstellung eines Requests sind maximal 5 Schritte nötig.
 \item Zur Erstellung einer neuen Ressource sind maximal 5 Schritte nötig.
 \item Eine Änderung von Rechten führt nicht zur Veränderung von Ressourcen.
-\item Verständlichkeit des Systems wird durch ausreichende Hilfeverweise gewährleistet.
-\item Effiziente Nutzung vom System soll durch angemessenes Zeitverhalten garantiert werden.  
+\item Verständlichkeit des Produkts wird durch ausreichende Hilfeverweise gewährleistet.
+\item Effiziente Nutzung des Produkts soll durch angemessenes Zeitverhalten garantiert werden.  
 \end{enumerate}
 
 \section{Systemmodelle}
 
 \subsection{Szenarien}
-\subsubsection*{Einfache BenutzerFunktionen}
+\subsubsection*{Einfache Benutzerfunktionen}
 Alice ist seit kurzem verheiratet und möchte darum ihren Nachnamen im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq \: ändern. Sie loggt sich im System ein und sieht ihr Profil. Dann klickt sie den Button \grqq{Name editieren}\grqq \: und tippt ihren neuen Namen ein. 
 
 Nun möchte sie eine neue Ressource erstellen, darum klickt sie den Button \grqq{Ressource  hinzufügen}\grqq. Später entscheidet sich Alice ihre neue Ressource X zu überprüfen. Sie sucht im Portal nach der Ressource X und findet sie. Weil sie die Besitzerin ist, kann sie X zugreifen.\\
@@ -585,7 +577,7 @@ Das Diagramm stellt die mögliche Zustände eines Zugriffsrequests dar.
 	\end{center}
 	\newpage
 \subsection{Benutzerschnittstelle}
-
+Im Folgenden werden Benutzerschnittstelle-Skizzen abgebildet. Skizzen stellen ein mögliches Aussehen des Produkts dar. Weitere Änderungen während Entwicklung und nach Auftraggeberanfrage sind möglich.
 \subsubsection*{Profilseite von Benutzer}
 Der Benutzer sieht auf seiner Profilseite seinen Namen und hat die Möglichkeit ihn zu ändern. Außerdem sieht er Requests- und Ressourcenbereiche, die leer sind, solange er keine Ressourcen besitzt, bzw. keine Requests bekommen hat. Der Benutzer hat jedoch die Möglichkeit eigene Ressourcen hinzuzufügen.
 	\begin{center}
@@ -631,7 +623,7 @@ Der Administrator sieht einen zusätzlichen ``Admin``-Button im obenstehenden Me
 	\end{center}
 	
 \subsubsection*{Ressourcensuche}
-Die ``Ressourcensuche``-Seite ist für jeden im Portal registrierten Benutzer zugänglich. Im Menu auf linker Seite kann man Suchkrieterien ändern. Nach dem Klicken des ``Zeige gewählte Datensätze``-Buttons werden die Ergebnisse im zentralen Block unter “Ressourcenübersicht” aufgelistet. Für die ``public`` Ressourcen oder für diejenige, für die der Benutzer Zugriffsrechte hat, sieht er einen Button ``Zugreifen``. Für die ``geschlossene``(d.h. zu denen er keinen Zugang hat) kann der Benutzer ein Zugriffsrequest dem Ressourcenbesitzer senden, indem er den ``Request``-Button klickt. Wurde das Request abgesendet und noch nicht bearbeitet, so ist der ``Request``-Button nicht klickbar.
+Die ``Ressourcensuche``-Seite ist für jeden im Portal registrierten Benutzer zugänglich. Im Menu auf linker Seite kann man Suchkrieterien ändern. Nach dem Klicken des ``Zeige gewählte Datensätze``-Buttons werden die Ergebnisse im zentralen Block unter “Ressourcenübersicht” aufgelistet. Für die ``public`` Ressourcen oder für diejenige, für die der Benutzer Zugriffsrechte hat, sieht er einen Button ``Zugreifen``. Für die ``geschlossene`` (d.h. zu denen er keinen Zugang hat) kann der Benutzer ein Zugriffsrequest dem Ressourcenbesitzer senden, indem er den ``Request``-Button klickt. Wurde das Request abgesendet und noch nicht bearbeitet, so ist der ``Request``-Button nicht klickbar.
 	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Ressourcensuche.png}
 	\end{center}
