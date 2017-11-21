@@ -36,32 +36,32 @@
 \newglossaryentry{V-FOR-WaTer}
 {
 	name={V-FOR-WaTer},
-	description={ Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung (V-FOR-WaTer) ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung}, 
+	description={Virtuelle Forschungsumgebung für die Wasser- und Terrestrische Umweltforschung ist eine generische, virtuelle Forschungsumgebung für den gemeinsamen, systemischen Umgang mit Daten aus der Wasser- und Umweltforschung}, 
 }
 \newglossaryentry{Benutzer}
 {
 	name={Benutzer},
-	description={Eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind} 
+	description={Ein Benutzer ist eine Person, die das Portal benutzt. Somit verfügt sie unter anderem über Profilinformationen, die auf dem Datenbank gespeichert sind} 
 }
 \newglossaryentry{Administrator}
 {
 	name={Administrator},
-description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und er hat im Vergleich zu Standardbenutzer erweiterte Rechte. Er spielt auch die Rolle der Moderator, damit er die Rechte zum Benutzer einräumen und entziehen kann. Der Administrator ist ein Mitarbeiter von V-FOR-WaTer} 
+description={Ein Administrator ist der Verwalter des Systems, er unterstützt die Datenbankverwaltung und hat erweiterte Rechte im Vergleich zu  Standardbenutzer. Der Administrator ist ein Mitarbeiter von ``V-FOR-WaTer``} 
 }
 \newglossaryentry{Ressourcenbesitzer}
 {
 	name={Ressourcenbesitzer},
-	description={Ein Ressourcenbesitzer ist ein Benutzer der eigenen Ressourcen erstellt hat} %todo
+	description={Ein Ressourcenbesitzer ist ein Benutzer, der eigene Ressourcen erstellt oder Besitzerrechte für Ressourcen anderer Benutzer bekommen hat.}
 }
 \newglossaryentry{Datenbank}
 {
 	name={Datenbank},
-	description={Eine Datenbank ist eine eine große Menge von Daten, die in einem Computer nach bestimmten Kriterien organisiert sind und komplexe Abfragen zulassen} %todo
+	description={Eine Datenbank ist eine eine große Menge von Daten, die in einem Computer nach bestimmten Kriterien organisiert sind und komplexe Abfragen zulassen.} %todo
 }
 \newglossaryentry{Loeschrequest}
 {
 	name={Loeschrequest},
-	description={Ein Loeschrequest ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, eine oder mehrere Ressourcen zu löschen und wird negativ oder positiv beantwortet}  %Löschen muss so geschrieben werden, sonst -> Probleme 
+	description={Ein Loeschrequest ist ein Request, der vom Ressourcenbesitzer an Administrator gesendet wird, um Ressourcen aus dem Portal zu entfernen.}  %Löschen muss so geschrieben werden, sonst -> Probleme 
 }
 \newglossaryentry{Web-Portal}
 {
@@ -73,7 +73,7 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 	name={Zugriffsrechte},
 	description=
 	{
-		Rechte den Inhalt einer Ressource zu lesen und auszuführen
+		Zugriffsrechte sind ein Befugnis den Inhalt einer Ressource zu lesen und auszuführen
 	}
 }
 \newglossaryentry{Besitzerrechte}
@@ -81,7 +81,7 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 	name={Besitzerrechte},
 	description=
 	{
-		Alle Rechte über die ein Ressourcenbesitzer verfügt. Besitzerrechte implizieren Zugriffsrechte
+		Besitzerrechte sind Rechte, die einem Benutzer Rechteverwaltung und Löschrequestserstellung für eine bestimmte Ressource ermöglichen.
 	} 
 }
 \newglossaryentry{IDs}
@@ -89,28 +89,28 @@ description={Ein Administrator ist der Verwalter des Systems, er unterstützt di
 	name={ID},
 	description=
 	{
-		(Abkürzung für Identifikator). Ein Identifikator (auch Kennzeichen) ist ein mit einer bestimmten Identität verknüpftes Merkmal zur eindeutigen Identifizierung des tragenden Benutzer
+		Abkürzung für Identifikator. Ein Identifikator (auch Kennzeichen) ist ein mit einer bestimmten Identität verknüpftes Merkmal zur eindeutigen Identifizierung des tragenden Benutzers.
 	} 
 }
-\newglossaryentry{Meta-daten}
+\newglossaryentry{Metadaten}
 {
-	name={Meta-daten},
+	name={Metadaten},
 	description=
-	{Meta-daten oder Metainformationen sind strukturierte Daten, die Informationen über Merkmale anderer Daten enthalten
+	{Metadaten sind Daten, die dazu dienen, Ressource zu beschreiben, ohne seine Inhalt zu veröffentlichen.
 	} 
 }
 \newglossaryentry{Zugriffsrequest}
 {
 	name={Zugriffsrequest},
 	description=
-	{Ein Zugriffsrequest ist eine vom Ressourcenbesitzer zum Administrator gesendeter Request. Dieses Request entspricht dem Wunsch, der Zugriff auf eine Ressource zu haben und wird negativ oder positiv beantwortet
+	{Ein Zugriffsrequest ist ein Request, das vom Benutzer an den Ressourcenbesitzer gesendet wird, um Befugnis zu erlangen, den Inhalt der Ressource zuzugreifen.
 	} 
 }
 \newglossaryentry{Token}
 {
 	name={Token},
 	description=
-	{Das Token ist eine textuelle Datei bestehend aus einem Verifizierungsstring.Im String sind die ID der Nutzer, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens kodiert.
+	{Das Token ist eine textuelle Datei, die eine Verifizierungsstring enthält. In diesem String sind die ID des Nutzers, seine Rechte auf die Ressourcen im Portal und die Gültigkeitsdauer des Tokens verschlüsselt.
 	} 
 	plural={Tokens}
 }
@@ -299,7 +299,7 @@ Im Folgenden werden die funktionalen Anforderungen (sowohl Musskriterien als auc
 \end{enumerate}
 
 \item \label{FAB3} \textbf{Ressourcenzugriff:} \\Der angemeldete Benutzer kann auf Ressourcen zugreifen, für die er Zugriffsrechte hat.
-\\ Von Ressourcen, für die der Benutzer keine Rechte hat, sind nur die Meta-Daten sichtbar.\\\\
+\\ Von Ressourcen, für die der Benutzer keine Rechte hat, sind nur die Metadaten sichtbar.\\\\
 \textbf{Beschreibung:}\\
 \begin{enumerate}[label=(\arabic*), leftmargin=*]
 \item Der angemeldete Benutzer kann eine Ressourcenliste auf Ressourcenübersichtseite sehen.
@@ -471,10 +471,10 @@ Der Ressourcenbesitzer kann zum Löschen seiner eigenen Ressourcen dem Administr
 \end{enumerate}
 
 \item \label{FARB7} \colorbox{shadecolor} {\textbf{Löschbenachrichtigungen:}}\\
-Beim Löschen einer Ressource werden allen Ressourcenbesitzer benachrichtigt.\\\\
+Beim Löschen einer Ressource werden alle Ressourcenbesitzer benachrichtigt.\\\\
 \textbf{Beschreibung:}\\
 \begin{itemize}[itemsep=0pt, leftmargin=*]
-\item Wird eine Ressource vom Administrator gelöscht, werden allen Ressourcenbesitzer per E-Mail benachrichtigt.
+\item Wird eine Ressource vom Administrator gelöscht, werden alle Ressourcenbesitzer per E-Mail benachrichtigt.
 \end{itemize}
 
 \newpage
@@ -742,6 +742,7 @@ Die ``Ressourcensuche``-Seite ist für jeden im Portal registrierten Benutzer zu
 \item Zugriffsrechte an eine Gruppe von Benutzern vergeben.(\ref{FARB8}) 
 \end{enumerate}
 \newpage
+\setglossarystyle{altlist}
 \printglossary	
 \glsaddall
 \end{document}
