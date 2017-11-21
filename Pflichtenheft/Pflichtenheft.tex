@@ -523,21 +523,20 @@ Der Ressourcenbesitzer kann Zugriffsrechte für seine eigenen Ressourcen an eine
 \item Effiziente Nutzung vom System soll durch angemessenes Zeitverhalten garantiert werden.  
 \end{enumerate}
 
-\newpage
 \section{Systemmodelle}
 
 \subsection{Szenarien}
 \subsubsection*{Einfache BenutzerFunktionen}
-Alice hat sich vor kurzem verheiratet und möchte darum ihren Familiennamen im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq ändern. Sie loggt sich im System ein und sieht ihr Profil. Dann klickt sie auf dem Knopf \grqq{Name editieren}\grqq und tippt ihren neuen Namen ein. 
+Alice ist seit kurzem verheiratet und möchte darum ihren Nachnamen im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq \: ändern. Sie loggt sich im System ein und sieht ihr Profil. Dann klickt sie den Button \grqq{Name editieren}\grqq \: und tippt ihren neuen Namen ein. 
 
-Nun möchte sie eine neue Ressource erstellen, darum klickt sie auf dem Knopf \grqq{Ressource  hinzufügen}\grqq. Später entscheidet sich Alice ihre neue Ressource X zu überprüfen. Sie sucht im Portal nach der Ressource X und findet sie. Weil sie der Besitzer ist, hat sie das Recht X zuzugreifen.\\
+Nun möchte sie eine neue Ressource erstellen, darum klickt sie den Button \grqq{Ressource  hinzufügen}\grqq. Später entscheidet sich Alice ihre neue Ressource X zu überprüfen. Sie sucht im Portal nach der Ressource X und findet sie. Weil sie die Besitzerin ist, kann sie X zuzugreifen.\\
 
 	\begin{center}
 	\includegraphics[width=0.6\textwidth]{Szenario_1.png}
 	\end{center}
 \newpage
 \subsubsection*{Zugriffsrequest senden}
-Bob hat Interesse an einer Ressource X im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq. Er probiert den Inhalt von X zuzugreifen. Leider hat er keine Zugriffsrechte darauf. Um solche Rechte zu bekommen, soll er ein Request am Besitzer von X senden, in diesem Fall - Alice. Bob wählt die Option \grqq{Zugriffsrechte anfragen}\grqq. 
+Bob hat Interesse an einer Ressource X im Portal von \grqq{\gls{V-FOR-WaTer}}\grqq. Er probiert den Inhalt von X zuzugreifen. Leider hat er keine Zugriffsrechte dafür. Um solche Rechte zu bekommen, soll er ein Request am Besitzer von X senden, in diesem Fall - Alice. Bob wählt die Option \grqq{Zugriffsrechte anfragen}\grqq. 
 
 Nach wenigen Sekunden bekommt Alice eine E-Mail-Benachrichtigung über das neue Request. Um zu entscheiden, ob sie die Zugriffsanfrage genehmigt, loggt sie sich im Portal ein. Dann sieht sie Bobs Anfrage und beschließt sie zu genehmigen. In kurzem bekommt Bob eine E-Mail mit der guten Neuigkeit. Nun kann er die Ressource zugreifen und ist glücklich.\\
 	
@@ -547,8 +546,8 @@ Nach wenigen Sekunden bekommt Alice eine E-Mail-Benachrichtigung über das neue 
 
 \newpage
 \subsubsection*{Besitzerrechte teilen}
-Der Besitzer von Ressource Y, nämlich Bob, ist ein sehr beschäftigter Mann. Er hat keine Zeit und Lust jeden Tag die zahlreiche Zugriffsanfragen für Rechte auf Y zu beantworten. Deshalb hat er sich entschieden seine Besitzerrechte mit drei Mitarbeitern von ihm zu teilen. \\
-Er findet die Ressource Y und wählt die Option \grqq{Besitzerrechte teilen}\grqq. Dann findet er die Personen durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.\\
+Der Besitzer der Ressource Y, nämlich Bob, ist ein sehr beschäftigter Mann. Er hat keine Zeit und Lust jeden Tag die zahlreiche Zugriffsanfragen für Rechte auf Y zu beantworten. Deshalb hat er sich entschieden seine Besitzerrechte mit drei seinen Mitarbeitern zu teilen. \\
+Er findet die Ressource Y und wählt die Option \grqq{Besitzerrechte teilen}\grqq. Dann findet er seine Mitarbeiter durch ihre Namen. Auf diese Weise kann jeder von der neuentstandene Gruppe von Besitzern eine zukünftige Zugriffsanfrage genehmigen oder ablehnen.\\
 
 	\begin{center}
 	\includegraphics[width=0.7\textwidth]{Szenario_3bevor.png}
@@ -557,7 +556,7 @@ Er findet die Ressource Y und wählt die Option \grqq{Besitzerrechte teilen}\grq
 	\end{center}
 
 \subsubsection*{Ressource editieren}
-Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektion. Danach sendet sie ein Loeschrequest am Administrator, damit er die alte Version von X zerstört.\\
+Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigieren. Da das Portal diese Option nicht anbietet, muss sie zuerst erneut die Ressource X erstellen. Dieses mal beinhaltet X aber auch die gemachte Korrektur. Danach sendet sie ein Loeschrequest am Administrator, damit er die alte Version von X zerstört.\\
 	
 	\begin{center}
 	\includegraphics[width=1\textwidth]{Szenario_4.png}
@@ -578,7 +577,7 @@ Alice hat ihre Meinung geändert und möchte jetzt etwas in Ressource X korrigie
 	\end{center}
 	
 \subsubsection*{Zustandsdiagramm \grqq{Zugriffsrequest}\grqq}
-Das Diagramm stellt die mögliche Zustände eines Zugriffsrequests dar, wenn ein Benutzer ohne Zugriffsrechte eine Ressource zugreifen will.
+Das Diagramm stellt die mögliche Zustände eines Zugriffsrequests dar.
 \\
 
 	\begin{center}
@@ -588,52 +587,51 @@ Das Diagramm stellt die mögliche Zustände eines Zugriffsrequests dar, wenn ein
 \subsection{Benutzerschnittstelle}
 
 \subsubsection*{Profilseite von Benutzer}
-Links an seiner Profilseite sieht der Benutzer keine Zugriffsrequeste, denn er besitzt noch keine Ressourcen(der rechte Block ``Meine Ressourcen`` hat keine Einträge). Der Benutzer hat jedoch die Möglichkeit eigene Ressourcen hinzuzufügen.
+Der Benutzer sieht auf seiner Profilseite seinen Namen und hat die Möglichkeit ihn zu ändern. Außerdem sieht er Requests- und Ressourcenbereiche, die leer sind, solange er keine Ressourcen besitzt, bzw. keine Requests bekommen hat. Der Benutzer hat jedoch die Möglichkeit eigene Ressourcen hinzuzufügen.
 	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Profilseite_Benutzer.png}
 	\end{center}
-	
+\newpage
 \subsubsection*{Profilseite von Ressourcenbesitzer}
 
-Links an seiner Profilseite sieht der Ressourcenbesitzer einen Block mit den offenen Requeste, die er bearbeiten soll/kann (durch Klicken auf einen der beiden Knöpfe mit den Symbolen für ``genehmigen`` und ``ablehnen``). Dabei stehen der Absender des Requests und die gewünschte Ressource. Alle Requeste sind vom Typ ``Zugriffsrequest``. Im rechten Block hat der Ressourcenbesitzer die Möglichkeit neue Ressource zu erstellen. Als Optionen stehen vor dem Besitzer:
+Links auf seiner Profilseite sieht der Ressourcenbesitzer einen Block mit den offenen Requeste, die er bearbeiten soll/kann (durch Klicken eines der beiden Buttons mit den Symbolen für ``genehmigen`` und ``ablehnen``). Dabei sind die Absender des Requests und die gewünschte Ressource zu sehen. Alle Requeste sind vom Typ ``Zugriffsrequest``. Im rechten Block hat der Ressourcenbesitzer die Möglichkeit neue Ressource zu erstellen. Folgende Optionen stehen dem Besitzer zur Verfüging:
 \begin{itemize}
-	\item Eigene Ressource zuzugreifen 
-	\item Zugriff-/Besitz-Rechte freiwillig zu teilen 
-	\item Löschen-Request für seine Ressource dem Admin zu senden.
+	\item Zugriff auf eigene Ressource 
+	\item Änderung der Zugriffs-/Besitzerechte 
+	\item Erstellung des Löschrequests für seine Ressource
 \end{itemize} 
 
 	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Profilseite_Besitzer.png}
 	\end{center}
-	
+\newpage	
 \subsubsection*{Profilseite von Administrator}
-Die Profilseite eines Administrators ist eine Erweiterung der Profilseite des Ressourcenbesitzers. Der Unterschied besteht darin, dass der Administrator der einzige ist, der das Recht hat Ressourcen zu löschen. Deshalb bekommt er auch die o.g. ``Löschen-Requeste``. Er soll/kann die auch genehmigen oder ablehnen.
+Die Profilseite eines Administrators ist eine Erweiterung der Profilseite des Benutzers. Zusätzlich hat der Administrator die Option Ressourcen zu löschen. Im ``Requests``-Block werden die o.g. ``Löschrequeste`` aufgelistet. Der Administrator kann diese Requests bearbeiten, indem er einen der beiden Buttons für Genehmigen und Ablehnen klickt.
 	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Profilseite_Admin.png}
 	\end{center}
-	
+\newpage	
 \subsubsection*{Administratorseite}
-Der Administrator sieht einen zusätzlichen Knopf im obenstehenden Menu, und nämlich ``Admin``. Wenn er darauf klickt, geht er zur Administratorseite. Dort hat er die Möglichkeit die im Portal registrierten Benutzer, sowie alle Ressourcen zu verwalten. Bezüglich der Benutzer hat er folgende Rechte:
+Der Administrator sieht einen zusätzlichen ``Admin``-Button im obenstehenden Menu. Durch Klicken dieses Buttons wird die Administratorseite geöffnet. Auf Administratorseite hat der Administrator die Möglichkeit die im Portal registrierten Benutzer, sowie alle Ressourcen zu verwalten. Bezüglich der Benutzer hat er folgende Optionen:
 \begin{itemize}
 	\item Zugriffsrechte korrigieren (umfasst vergeben und entziehen)
-	\item Besitz-Rechte korrigieren (umfasst vergeben und entziehen)
+	\item Besitzerechte korrigieren (umfasst vergeben und entziehen)
 	\item Benutzer blockieren
 	\item Benutzer löschen (die persönliche Daten des Benutzers werden vom System gelöscht, ausschließlich seiner Ressourcen)
 \end{itemize}  
- Mithilfe von der Ressourcenübersicht kann der Administrator:
+ Im Block ``Ressourcenübersicht`` kann der Administrator:
  \begin{itemize}
  	\item Alle Ressourcen zugreifen, unabhängig davon, ob er der Besitzer ist
- 	\item Einem Benutzer Zugriff-/Besitz-Rechte auf eine bestimmte Ressource vergeben
- 	\item Einem Benutzer Zugriff-/Besitz-Rechte auf eine bestimmte Ressource entziehen
- 	\item Eine beliebige Ressource löschen (auch ohne Löschen-Request)
+ 	\item Einem Benutzer Zugriffs-/Besitzerrechte auf eine bestimmte Ressource vergeben
+ 	\item Einem Benutzer Zugriffs-/Besitzerrechte auf eine bestimmte Ressource entziehen
+ 	\item Eine beliebige Ressource löschen
  \end{itemize}
 	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Adminseite.png}
 	\end{center}
 	
 \subsubsection*{Ressourcensuche}
-Zum Fenster ``Ressourcensuche`` hat jeder im Portal registrierte Benutzer Zugang. Links spezifiziert man seine Kriterien bezüglich der gesuchten Ressource. Dann klickt man auf 
-``Zeige gewählte Datensätze`` und sieht das Ergebnis im zentralen Block unter “Ressourcenübersicht”. Für die ``public`` Ressourcen oder für diejenige, auf die der Benutzer Zugriffsrechte hat, sieht er einen Knopf ``zugreifen``. Für die ``geschlossene``(d.h. Zu denen er keinen Zugang hat) darf er ein Zugriffsrequest dem Ressourcenbesitzer senden. Wichtig ist, dass nach einem gesendeten aber noch nicht bearbeiteten Request der Benutzer kein zweites senden darf. (Der Knopf wird nicht klickbar)
+Die ``Ressourcensuche``-Seite ist für jeden im Portal registrierten Benutzer zugänglich. Im Menu auf linker Seite kann man Suchkrieterien ändern. Nach dem Klicken des ``Zeige gewählte Datensätze``-Buttons werden die Ergebnisse im zentralen Block unter “Ressourcenübersicht” aufgelistet. Für die ``public`` Ressourcen oder für diejenige, für die der Benutzer Zugriffsrechte hat, sieht er einen Button ``Zugreifen``. Für die ``geschlossene``(d.h. zu denen er keinen Zugang hat) kann der Benutzer ein Zugriffsrequest dem Ressourcenbesitzer senden, indem er den ``Request``-Button klickt. Wurde das Request abgesendet und noch nicht bearbeitet, so ist der ``Request``-Button nicht klickbar.
 	\begin{center}
 	\includegraphics[width=0.9\textwidth]{Ressourcensuche.png}
 	\end{center}
