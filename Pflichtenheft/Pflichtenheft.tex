@@ -6,10 +6,21 @@
 \usepackage[yyyymmdd]{datetime} 
 \usepackage{hyperref}
 \usepackage[toc, nonumberlist, automake]{glossaries} %added automake option
+\usepackage{array,multirow,makecell}
+
+\setcellgapes{1pt}
+\makegapedcells
+\usepackage[table]{xcolor}
+\newcolumntype{V}[1]{>{\centering\arraybackslash }b{#1}}
+\newcolumntype{D}[1]{>{\centering\arraybackslash }b{#1}}
+\newcolumntype{B}[1]{>{\centering\arraybackslash }b{#1}}
+\newcolumntype{A}[1]{>{\centering\arraybackslash }b{#1}}
 \usepackage{graphicx}
+
 \usepackage{csquotes}
 \usepackage{xcolor}
 \usepackage{hyperref}
+
 \definecolor{shadecolor}{RGB}{220,220,220}
 \hypersetup{
 		pdftitle={Pflichtenheft},
@@ -132,9 +143,21 @@ description={Ein Administrator ist ein Verwalter des Systems, er unterstützt di
 	{\Large Houraalsadat Mortazavi Moshkenan}\\
 	{\Large Sonya Voneva}\\
 	\vfill
+	
 	{\large 22.11.17 \par}
 	\end{center}
 \end{titlepage}
+\newpage
+\section*{Versionshistorie} 
+\begin{tabular}{|V{2cm}|D{3cm}|B{4cm}|A{4cm}}
+\hline \rowcolor{lightgray} Version & Datum &  Autor(en) &  Bemerkungen  \\
+\hline  1.0 & 8.11.2017 & Houraalsadat Mortazavi Moshkenan & Erstellen \\
+\hline  1.1  & 21.11.2017 & Aleksandar Bachvarov, Anastasia Slobodyanik, Atanas Dimitrov, Khalil Sakly, Houraalsadat Mortazavi Moshkenan, Sonya Voneva  & Alle Teile wurden implementiert und Pflichtenheft ist nun Fertig \\
+\hline 1.2 & 26.11.2017 & Aleksandar Bachvarov, Anastasia Slobodyanik, Khalil Sakly, Sonya Voneva  & Bemerkungen von der Präsentation hinzufügen  \\
+\hline 
+\end{tabular}
+
+\newpage
 \tableofcontents
 
 \newpage
