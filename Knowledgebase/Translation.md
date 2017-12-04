@@ -2,9 +2,9 @@
 - **Benutzer** / User
 - **RessourcenBesitzer** / Owner
 - **Administrator** / Admin
-- **Ressource** / Ressource
+- **Ressource** / Resource
 - **Request** / Request
 - **L?schrequest** / DeleteRequest (?)
 - **Zugriffrequest** / AccessRequest (?)
-- **Besitzerrechte** / OwnerPermission
-- **Zugriffsrechte** / AccessPermission
+- **Besitzerrechte** / OwnersRights
+- **Zugriffsrechte** / AccessRights
