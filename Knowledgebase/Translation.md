@@ -6,5 +6,5 @@
 - **Request** / Request
 - **L?schrequest** / DeleteRequest (?)
 - **Zugriffrequest** / AccessRequest (?)
-- **Besitzerrechte** / OwnersRights
+- **Besitzerrechte** / OwnerRights
 - **Zugriffsrechte** / AccessRights
