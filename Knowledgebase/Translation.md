@@ -1,10 +1,24 @@
-> Schreibt ducrch / eure Vorschl?ge
+> Schreibt ducrch / eure Vorschläge
 - **Benutzer** / User
 - **RessourcenBesitzer** / Owner
 - **Administrator** / Admin
 - **Ressource** / Resource
 - **Request** / Request
-- **L?schrequest** / DeleteRequest (?)
+- **Löschrequest** / DeleteRequest (?)
 - **Zugriffrequest** / AccessRequest (?)
-- **Besitzerrechte** / OwnerPermissions
-- **Zugriffsrechte** / AccessPermissions
+- **Besitzerrechte** / OwnerPermission
+- **Zugriffsrechte** / AccessPermission
+- **Benutzer suchen** / SearchUser (?)
+- **Ressource suchen** / SearchResource (?)
+- **Suchparameter eingeben** / EnterSearchParameters
+- **Ressotce erstellen** / CreateResource / AddNewResource
+- **Zugriffsrechte geben** / AllowAccessPermission
+- **Zugriffsrechte entziehen** / DenyAccessPermission
+- **Besitzrechte geben** / AllowOwnerPermission
+- **Besitzrechte entziehen** / DenyOwnerPermission
+- **Request bearbeiten** / Handle
+- **Benachrichtigung** / Notification
+- **Request stornieren** / CancelRequest
+- **Benutzer löschen** / DeleteUser
+- **Ressource löschen** / DeleteResource
+- **Benutzer blockieren** / BlockUser
