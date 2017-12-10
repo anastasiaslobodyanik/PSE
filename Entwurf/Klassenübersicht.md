@@ -5,8 +5,8 @@ Format jedes Klasse (im PDF):
     
 + Attribute
   - A:typ
-  Sichtbarkeit (private/public..)
-  Beschreibung vom Funktionalität
+     -Sichtbarkeit (private/public..)
+    - Beschreibung vom Funktionalität
   - b:typ
   Sichtbarkeit (private/public..)
   Beschreibung vom Funktionalität
