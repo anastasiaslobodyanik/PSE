@@ -1,3 +1,4 @@
+### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -10,7 +11,7 @@
 *.fot
 *.cb
 *.cb2
-
+*.pdf
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
