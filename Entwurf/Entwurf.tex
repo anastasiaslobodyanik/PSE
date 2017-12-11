@@ -112,7 +112,26 @@
  
  \section{Architektur}
  
- \subsection{Model View Template (MVT)}
+ \subsection{Model View Template (MVT)} 
+\begin{figure}[h]
+ \centering
+ Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
+zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template-Prinzip (MVT) realisiert diese Trennung und wird in der Webanwendung eingesetzt.
+  	\includegraphics[width=18cm, height=12cm]{res/MVT diagramm.png}\\
+  	    \caption{MVT Architektur}
+
+  	 \label{fig:abb1}
+
+ 	\vspace{2cm}
+ 	1-Der URL-Dispatcher (urls.py) ordnet die angeforderte URL einer View-Funktion zu und ruft sie auf.\\
+ 	2-Die View-Funktion (views.py) führt die angeforderte Aktion aus, bei der normalerweise in die Datenbank gelesen oder geschrieben wird. es kann auch andere Aufgaben beinhalten.\\
+ 	3-Das Model (models.py) definiert die Daten in Python und interagiert damit. Dies ist normalerweise in einer relationalen Datenbank (SQLite) enthalten.\\
+ 	4-Nach der Ausführung der angeforderten Aufgaben gibt die View ein HTTP-Antwortobjekt an den Webbrowser zurück, normalerweise nach dem Übergeben der Daten durch ein Template.\\
+ 	5-Template gibt normalerweise HTML-Seiten zurück. Die Django-Template-sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
+
+
+ 	\end{figure}
+
 
  \subsection{Paketstruktur}%oder Paketen?
  
