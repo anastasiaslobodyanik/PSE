@@ -113,24 +113,30 @@
  \section{Architektur}
  
  \subsection{Model View Template (MVT)} 
-\begin{figure}[h]
+ 	
+ 	
+ \begin{figure}[ht!]
  \centering
+ \begin{flushleft}
  Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
-zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template-Prinzip (MVT) realisiert diese Trennung und wird in der Webanwendung eingesetzt.
-  	\includegraphics[width=18cm, height=12cm]{res/MVT diagramm.png}\\
+zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template-Prinzip (MVT) realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
+ \end{flushleft}
+  	\includegraphics[width=18cm, height=12cm]{res/MVTdiagramm.png}\\
   	    \caption{MVT Architektur}
-
-  	 \label{fig:abb1}
-
  	\vspace{2cm}
- 	1-Der URL-Dispatcher (urls.py) ordnet die angeforderte URL einer View-Funktion zu und ruft sie auf.\\
- 	2-Die View-Funktion (views.py) führt die angeforderte Aktion aus, bei der normalerweise in die Datenbank gelesen oder geschrieben wird. es kann auch andere Aufgaben beinhalten.\\
- 	3-Das Model (models.py) definiert die Daten in Python und interagiert damit. Dies ist normalerweise in einer relationalen Datenbank (SQLite) enthalten.\\
- 	4-Nach der Ausführung der angeforderten Aufgaben gibt die View ein HTTP-Antwortobjekt an den Webbrowser zurück, normalerweise nach dem Übergeben der Daten durch ein Template.\\
- 	5-Template gibt normalerweise HTML-Seiten zurück. Die Django-Template-sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
-
-
  	\end{figure}
+ 	 \newpage
+
+ 	\begin{flushleft}
+ 	\textbf{A-} Der \textbf{URL-Dispatcher} \emph{(urls.py)} ordnet die angeforderte URL einer \textbf{View-Funktion} zu und ruft sie auf.\\
+ 	\textbf{B-} Die \textbf{View-Funktion} \emph{(views.py)} führt die angeforderte Aktion aus, bei der normalerweise in die Datenbank gelesen oder geschrieben wird. es kann auch andere Aufgaben beinhalten.\\
+ 	\textbf{C-} Das \textbf{Model} \emph{(models.py)} definiert die Daten in Python und interagiert damit. Dies ist normalerweise in einer relationalen Datenbank \emph{(SQLite)} enthalten.\\
+ 	\textbf{D-} Nach der Ausführung der angeforderten Aufgaben gibt die \textbf{View} ein HTTP-Antwortobjekt an den Webbrowser zurück, normalerweise nach dem Übergeben der Daten durch ein \textbf{Template}.\\
+ 	\textbf{E-} \textbf{Template} gibt normalerweise HTML-Seiten zurück. Die Django-Template-sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
+ 	\end{flushleft}
+
+
+ 	
 
 
  \subsection{Paketstruktur}%oder Paketen?
