@@ -143,6 +143,46 @@ zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von 
  
  \subsection{Entwurfsmuster}
  
+  \subsection{URL Verzeichnis}
+Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. GUI des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (Abbildung). %TODO bild
+\textbf{pse-authoritation.com} – Mockup-Seite, dient zum Einloggen in das Portal, enthält Autorisierungsformular und wird nach der Entwicklung durch Autorisierungsmanagement des Systems, in welches das Projekt integriert wird, ersetzt. 
+ 
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\bullet$}
+\begin{itemize}[itemsep=0pt]
+\item \textbf{{\textbackslash}profil} - Benutzerprofil-Seite, enthält persönliche Information des Benutzers und Übersicht der Requeste, die an den Benutzer adressiert sind.
+Benutzerprofil-Seite ist mit Subseiten versehen:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{{\textbackslash}handle{\_}request{\_}$<$requestID$>${\_}$<$userID$>$} - Dialog für Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
+\item \textbf{{\textbackslash}edit{\_}name} - Dialog mit Eingabefeld für Editieren des Namens des Benutzers, wird nach dem Klicken des ``Ändern``-Buttons sichtbar.
+\item \textbf{{\textbackslash}resources} - Seite mit Übersicht von Ressourcen, für die der Benutzer Besitzerrechte hat. Diese Seite enthält Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{{\textbackslash}add{\_}new{\_}resource} - Seite für Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog für Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
+\item \textbf{{\textbackslash}$<$resourceID$>${\_}edit{\_}permissions} - Seite für Vergabe und Entzug von Rechten für die Ressource.
+\item \textbf{{\textbackslash}$<$resourceID$>${\_}send{\_}deletion{\_}request{\_}} - Dialog für Absenden von Löschrequest für die Ressource.
+\end{itemize}
+\end{itemize}
+\item \textbf{{\textbackslash}manage{\_}users} - Administratorseite für Benutzerverwaltung, enthält Liste von Benutzern und Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{{\textbackslash}block{\_}user} - Dialog zum Blockieren des Users.
+\item \textbf{{\textbackslash}delete{\_}user} - Dialog zum Löschen des Users.
+\item \textbf{{\textbackslash}edit{\_}permissions} - Dialog zur Änderung von Rechten des Benutzers.
+\end{itemize}
+\item \textbf{{\textbackslash}manage{\_}resources} - Administratorseite für Ressourcenverwaltung, enthält Liste von Ressourcen und Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{{\textbackslash}edit{\_}permissions} - Dialog zur Änderung von Zugriffsrechten für die Ressource. 
+\item \textbf{{\textbackslash}delete{\_}resource} - Dialog zum Löschen der Ressource.
+\end{itemize}
+\item \textbf{{\textbackslash}resources{\_}owerview} - Übersicht von Ressourcen, enthält Liste aller Ressourcen und folgende Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{{\textbackslash}$<$resourceID$>${\_}info} - enthält Metadaten der Ressource.
+\item \textbf{{\textbackslash}$<$resourceID$>${\_}send{\_}request} - Dialog zum Absenden des Requests für die Ressource.
+\end{itemize}
+\item \textbf{{\textbackslash}<resourceID>} - Ressourcenseite, enthält Metadaten und Link für Zugriff auf die Ressource.
+\end{itemize} 
+
+ 
  
  \section{Datenhaltung}
  
@@ -153,10 +193,10 @@ zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von 
  	\includegraphics[width=0.75\textwidth]{res/database.png}
  	\caption{Datenbankschema}
  \end{figure}
- Die Tabelle ``Benutzer`` speichert einen eindeutigen Identifikator des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``ist\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\ Tabelle ``Request`` hat folgende Spalten: einen eindeutigen Identifikator, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), Identifikator der Ressource, für die der Request gesendet wird, und Identifikator des Absenders. \\
- Tabelle ``Resource`` speichert einen eindeutigen Identifikator zu jeder Ressource, ihren Namen, Typ, kurze Beschreibung und Erstellungsdatum.\\
+ Die Tabelle ``Admin`` speichert eine einzigartige Identifikation des Administrators, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat.\\ Tabelle ``User`` enthält dieselbe Information für einen Benutzer.\\ Tabelle ``Request`` hat folgende Spalten: eine einzigartibe Identifikation, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), Identifikation der Ressource, für die der Request gesendet wird, und Identifikation des Absenders. \\
+ Tabelle ``Resource`` speichert eine einzigartige Identifikation zu jeder Ressource, ihren Namen, Typ, kurze Beschreibung und Erstellungsdatum.\\
  Tabelle ``Permission`` beinhaltet Einträge der Form: Benutzer-Ressource-Rechte (Zugriffs- oder Besitzerrechte). \\
- Die Funktion der Tabelle ``ReceivedRequest`` ist die gesendeten Requests ihre Empfänger, sowie ihren Typ zu speichern. Darum hat sie als Spalten Identifikator eines Benutzers und eines Requests und einen Typ des Requests
+ Die Funktion der Tabelle ``ReceivedRequest`` ist die gesendeten Requests sowie ihre Empfänger zu speichern. Darum hat sie als Spalten Identifikation eines Benutzers und eines Requests.
  
  %\subsection{Log Datei}
  
