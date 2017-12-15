@@ -1,6 +1,7 @@
 \documentclass[parskip=full,11pt]{scrartcl}
 %\usepackage{pdfpages}
 \usepackage[utf8]{inputenc}
+\usepackage{amssymb}
 \usepackage[T1]{fontenc}
 \usepackage[german]{babel}
 \usepackage[yyyymmdd]{datetime} 
@@ -31,6 +32,11 @@
 {
 	name={GUI},
 	description={Abk. GUI von englisch \textbf{G}raphical \textbf{U}ser \textbf{I}nterface,ist Grafische Benutzeroberfläche oder auch grafische Benutzerschnittstelle, über die eine Person eine Software kontrollieren kann.  Im Idealfall ist sie benutzerfreundlich, so dass die Interaktion auf natürliche und intuitive Weise geschehen kannIm Idealfall ist sie benutzerfreundlich, so dass die Interaktion auf natürliche und intuitive Weise geschehen kann}, 
+}
+\newglossaryentry{ORM}
+{
+	name={ORM},
+	description={blabla}, 
 }
 
 
@@ -125,28 +131,47 @@ Administratoren des Portals sollen in der Lage sein andere Benutzer zu blockiere
  \section{Architektur}
  
  \subsection{Model View Template (MVT)} 
+
  	
- 	
- \begin{figure}[ht!]
+ 
  \centering
  \begin{flushleft}
  Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
-zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template-Prinzip (MVT) realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
+zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template Prinzip (MVT),Das in Abbildung 1 gezeichnet ist, realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
+Das Model-View-Template ist eine Ableitung des Architektur-Pattern-View-Presenter (MVP) -Musters und wird hauptsächlich zum Erstellen von Benutzerschnittstellen verwendet.\\
  \end{flushleft}
-  	\includegraphics[width=18cm, height=12cm]{res/MVTdiagramm.png}\\
+ 
+ \begin{figure}[ht!]
+ \includegraphics[width=1.1\textwidth]{res/MVTdiagramm.png}
+  	 	\centering
   	    \caption{MVT Architektur}
- 	\vspace{2cm}
- 	\end{figure}
- 	 \newpage
+ \end{figure}
+  \newpage
 
  	\begin{flushleft}
- 	\textbf{A-} Der \textbf{URL-Dispatcher} \emph{(urls.py)} ordnet die angeforderte URL einer \textbf{View-Funktion} zu und ruft sie auf.\\
- 	\textbf{B-} Die \textbf{View-Funktion} \emph{(views.py)} führt die angeforderte Aktion aus, bei der normalerweise in die Datenbank gelesen oder geschrieben wird. es kann auch andere Aufgaben beinhalten.\\
- 	\textbf{C-} Das \textbf{Model} \emph{(models.py)} definiert die Daten in Python und interagiert damit. Dies ist normalerweise in einer relationalen Datenbank \emph{(SQLite)} enthalten.\\
- 	\textbf{D-} Nach der Ausführung der angeforderten Aufgaben gibt die \textbf{View} ein HTTP-Antwortobjekt an den Webbrowser zurück, normalerweise nach dem Übergeben der Daten durch ein \textbf{Template}.\\
- 	\textbf{E-} \textbf{Template} gibt normalerweise HTML-Seiten zurück. Die Django-Template-sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
+ 	\textbf{•} Der \textbf{URL-Dispatcher} \emph{(urls.py)} ordnet die angeforderte URL einer \textbf{View-Funktion} zu und ruft sie auf.\\
+ 	\textbf{•} Die \textbf{View-Funktion} \emph{(views.py)} führt die angeforderte Aktion aus, bei der normalerweise in die Datenbank gelesen oder geschrieben wird. es kann auch andere Aufgaben beinhalten.\\
+ 	\textbf{•} Das \textbf{Model} \emph{(models.py)} definiert die Daten in Python und interagiert damit. Dies ist normalerweise in einer relationalen Datenbank \emph{(SQLite)} enthalten.\\
+ 	\textbf{•} Nach der Ausführung der angeforderten Aufgaben gibt die \textbf{View} ein HTTP-Antwortobjekt an den Webbrowser zurück, normalerweise nach dem Übergeben der Daten durch ein \textbf{Template}.\\
+ 	\textbf{•} \textbf{Template} gibt normalerweise HTML-Seiten zurück. Die Django-Template-sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
  	\end{flushleft}
 
+ \subsection{Betrieb des Django ORM} 
+ \begin{flushleft}
+ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, das Beispielweise folgendermaßen funktioniert :\\
+ • Erstellt Django SQL-Tabellen aus der Modellen (klassen) mit alle klassen-Attributen als Tabellenfelder, z.b SQL-Tabelle "Request" aus dem Modell "Request". All dies geschieht wiederum ohne eine SQL-Abfrage zu schreiben.\\
+ • Später werden diesen SQL-Tabellen durch Python-code und Instanzen mit die Methode save() ausgefüllt.\\
+ • Auf die gleiche Weise ist es möglich, alle Einträge der Tabelle zu erhalten ,Daher werden Instanzen von dem gewünschten Objekt zurückgegeben, einen für jeden Eintrag in der Tabelle, ein Beispiel für alle Request-Objekte zu haben wird in der Abbildung 2 gezeigt:\\
+ \end{flushleft}
+  	\vspace{2cm}
+
+
+
+\begin{figure}[ht!]
+  	\includegraphics[width=1.05\textwidth]{res/MVTpart2.png}
+  	 	\centering
+  	    \caption{MVT mit Django}
+ \end{figure}
 
  	
 
