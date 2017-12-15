@@ -196,12 +196,14 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  	\includegraphics[width=0.75\textwidth]{res/database.png}
  	\caption{Datenbankschema}
  \end{figure}
+ \newpage
  Die Tabelle ``Benutzer`` speichert einen eindeutigen Identifikator des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``ist\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\ Tabelle ``Request`` hat folgende Spalten: einen eindeutigen Identifikator, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), Identifikator der Ressource, für die der Request gesendet wird, und Identifikator des Absenders. \\
  Tabelle ``Resource`` speichert einen eindeutigen Identifikator zu jeder Ressource, ihren Namen, Typ, kurze Beschreibung und Erstellungsdatum.\\
  Tabelle ``Permission`` beinhaltet Einträge der Form: Benutzer-Ressource-Rechte (Zugriffs- oder Besitzerrechte). \\
- Die Funktion der Tabelle ``ReceivedRequest`` ist die gesendeten Requests ihre Empfänger, sowie ihren Typ zu speichern. Darum hat sie als Spalten Identifikator eines Benutzers und eines Requests und einen Typ des Requests
+ Die Funktion der Tabelle ``ReceivedRequest`` ist die gesendeten Requests, ihre Empfänger, sowie ihren Typ zu speichern. Darum hat sie als Spalten Identifikator eines Benutzers und eines Requests und einen Typ des Requests
  
  \subsection{Logging}
+ Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
  
  
  \section{Paketenübersicht}
