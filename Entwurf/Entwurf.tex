@@ -289,6 +289,34 @@ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID
  
  Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Besitzer \enquote{a}  aufgerufen. Danach wird der Request von der Datenbank geholt in in der Variable \enquote{req} gespeichert. Danach wird auf \enquote{req} getSender aufgerufen und das Ergebnis(der Benutzer, der das Request geschickt hat) wird dann in \enquote{u} gespeichet. Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \enquote{getResource()}. Auf \enquote{u} wird dann \enquote{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{u} in der Liste \enquote{accessPermission} von Ressource hinzufügt. Eine Lognachricht wird in der Logdatei gespeichert. Die Methode \enquote{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diegramm ähnlich bis gleich zum Ende des Diegramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
  
+  \newpage
+ \subsection{Ressource erstellen}
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{res/Add_resourceDiagram.png}
+ 	\caption{Zugriffsrequest genehmigen}
+ \end{figure}
+ 
+ \begin{flushleft}
+ Von irgeneiner Viewklasse wird die Methode \enquote{addResource()} auf dem Benutzer \enquote{a}  aufgerufen.\\ Erstens wird eine Resource Instanz \enquote{r} erstellt und in der Datenbank gespeichert.\\ Dann wird das Benutzer \enquote{a} zuerst als einer des Besitzers diese Resource \enquote{r} hinzugefügt durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addOwner(a.getUserID)}, danach als einer des Lesers diese Resource \enquote{r} durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addReader(a.getUserID)} .\\Am Ende wird eine Lognachricht über diesen ganzen Prozess  in der Logdatei gespeichert.
+ \end{flushleft}
+ 
+ 
+  \newpage
+ \subsection{Ressource loeschen}
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{res/remove_resourceDiagram.png}
+ 	\caption{Zugriffsrequest genehmigen}
+ \end{figure}
+ 
+ \begin{flushleft}
+ Von der Viewklasse Manage-Resource wird die Methode \enquote{deleteResource()} auf dem Admin \enquote{a}  aufgerufen.\\ Erstens wird die Liste der \enquote{Owner} dieser Ressource vom Datenbank gelöscht, mit Aufruf der Methode \enquote{removeOwnerPermission.all()}, danach die Liste des Lesers diese Resource \ mit Aufruf der Methode \enquote{removeReaderPermission.all()}.\\
+ Wenn die zwei Listen vom datenbank gelöscht sind dann wird die Ressource \enquote{r} auch gelöscht , mit hilfe der Methode \enquote{delete()}.\\ Am Ende wird eine Lognachricht über diesen ganzen Prozess  in der Logdatei gespeichert.\\
+ \end{flushleft}
+ 
+ 
+ 
  \newpage
 \setglossarystyle{altlist}
 \printglossary	
