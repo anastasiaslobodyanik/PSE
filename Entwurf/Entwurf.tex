@@ -5,7 +5,7 @@
 \usepackage[german]{babel}
 \usepackage[yyyymmdd]{datetime} 
 \usepackage{hyperref}
-\usepackage[toc, nonumberlist]{glossaries}
+\usepackage[toc, nonumberlist, automake]{glossaries} %added automake option
 \usepackage{csquotes}
 \usepackage{graphicx}
 \hypersetup{
@@ -24,6 +24,15 @@
 \date{11.01.18}
  % define custom lists
 \usepackage{enumitem}
+
+% add glossary
+\makeglossaries
+\newglossaryentry{GUI}
+{
+	name={GUI},
+	description={Abk. GUI von englisch \textbf{G}raphical \textbf{U}ser \textbf{I}nterface,ist Grafische Benutzeroberfläche oder auch grafische Benutzerschnittstelle, über die eine Person eine Software kontrollieren kann.  Im Idealfall ist sie benutzerfreundlich, so dass die Interaktion auf natürliche und intuitive Weise geschehen kannIm Idealfall ist sie benutzerfreundlich, so dass die Interaktion auf natürliche und intuitive Weise geschehen kann}, 
+}
+
 
 
 
@@ -147,7 +156,7 @@ zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von 
  \subsection{Entwurfsmuster}
  
   \subsection{URL Verzeichnis}
-Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. GUI des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (Abbildung). %TODO bild
+Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (Abbildung). %TODO bild
 \textbf{pse-authoritation.com} – Mockup-Seite, dient zum Einloggen in das Portal, enthält Autorisierungsformular und wird nach der Entwicklung durch Autorisierungsmanagement des Systems, in welches das Projekt integriert wird, ersetzt. 
  
 \renewcommand{\labelitemi}{$\bullet$}
@@ -256,6 +265,8 @@ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID
  Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Besitzer \enquote{a}  aufgerufen. Danach wird der Request von der Datenbank geholt in in der Variable \enquote{req} gespeichert. Danach wird auf \enquote{req} getSender aufgerufen und das Ergebnis(der Benutzer, der das Request geschickt hat) wird dann in \enquote{u} gespeichet. Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \enquote{getResource()}. Auf \enquote{u} wird dann \enquote{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{u} in der Liste \enquote{accessPermission} von Ressource hinzufügt. Eine Lognachricht wird in der Logdatei gespeichert. Die Methode \enquote{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diegramm ähnlich bis gleich zum Ende des Diegramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
  
  \newpage
+\setglossarystyle{altlist}
+\printglossary	
 	
  \end{document}
  \grid
