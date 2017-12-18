@@ -121,7 +121,7 @@
  \newpage
  \section{Einleitung}
  
- Während der Entwurfsphase wurde das Konzept für das zu erstellende Produkt formuliert. Die in diesem Dokument definierte Softwarearchitektur legt die Struktur und das Verhalten des Produkts fest. Durch Bestimmung grundlegender Entwurfsentscheidungen haben sich einige sinnvolle Änderungen zum Pflichtenheft ergeben. \\
+Während der Entwurfsphase wurde das Konzept für das zu erstellende Produkt formuliert. Die in diesem Dokument definierte Softwarearchitektur legt die Struktur und das Verhalten des Produkts fest. Durch Bestimmung grundlegender Entwurfsentscheidungen haben sich einige sinnvolle Änderungen zum Pflichtenheft ergeben. \\
 Für die Funktion „Benutzer suchen“ wurden Suchparameter erweitert: die Suche soll anhand von Name, Email sowie Domain des Benutzers möglich sein. 
 Nach dem Löschen einer Ressource werden alle Benutzer, die Besitzerrechte für diese Ressource hatten, benachrichtigt. 
 Als Ressourcendaten werden auch Typ und kurze Beschreibung der Ressourcen gespeichert. 
@@ -131,8 +131,6 @@ Administratoren des Portals sollen in der Lage sein andere Benutzer zu blockiere
  \section{Architektur}
  
  \subsection{Model View Template (MVT)} 
-
- 	
 Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
 zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template Prinzip (MVT),Das in Abbildung 1 gezeichnet ist, realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
 Das Model-View-Template ist eine Ableitung des Architektur-Pattern-View-Presenter (MVP) -Musters und wird hauptsächlich zum Erstellen von Benutzerschnittstellen verwendet.\\
@@ -220,7 +218,8 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  
  \section{Datenhaltung}
  
- Die Benutzer des Web-Portals, ihre Ressourcen und die von ihnen gesendeten Requests werden als Tabellen in einer Datenbank gespeichert. Als Syntax wird SQLite3 verwendet.
+Relevante Daten über die Benutzer, Ressourcen, deren Beziehungen (Rechte) und Interaktionen (Requests) werden in einer Datenbank gespeichert. Das in diesem Projekt benutzte Framework Django bietet integrierte  objektrelationale Abbildung für die Datenbanksysteme MySQL, Oracle, PostgreSQL und SQLite.\\
+Da SQLite-Bibliotheken sich direkt in Anwendungen integrieren lassen, sodass keine weitere Server-Software benötigt wird, wurde entschieden, SQLite3-Syntax zu verwenden. Im Projekt wird das eingebettete Datenbanksystem (für Frontend nicht sichtbar) entworfen, sodass auf erweiterte Funktionalitäten von komplizierteren Datenbanksysteme verzichtet werden kann. Dabei entstehen auch einige Vorteile: die SQLite-Bibliothek ist nur wenige hundert Kilobyte groß und durch das Einbinden der Bibliothek wird die Anwendung um Datenbankfunktionen erweitert, ohne auf externe Softwarepakete angewiesen zu sein.
  \subsection{Datenbank}
  \begin{figure}[ht!]
  	\centering
@@ -228,10 +227,18 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  	\caption{Datenbankschema}
  \end{figure}
  \newpage
- Die Tabelle ``Benutzer`` speichert einen eindeutigen Identifikator des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``ist\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\ Tabelle ``Request`` hat folgende Spalten: einen eindeutigen Identifikator, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), Identifikator der Ressource, für die der Request gesendet wird, und Identifikator des Absenders. \\
- Tabelle ``Resource`` speichert einen eindeutigen Identifikator zu jeder Ressource, ihren Namen, Typ, kurze Beschreibung und Erstellungsdatum.\\
- Tabelle ``Permission`` beinhaltet Einträge der Form: Benutzer-Ressource-Rechte (Zugriffs- oder Besitzerrechte). \\
- Die Funktion der Tabelle ``ReceivedRequest`` ist die gesendeten Requests, ihre Empfänger, sowie ihren Typ zu speichern. Darum hat sie als Spalten Identifikator eines Benutzers und eines Requests und einen Typ des Requests
+ 
+    \begin{center}
+    \textit{``A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table.``}
+    \end{center}
+    —Models | Django documentation\\\\
+    
+Die Tabelle ``User`` speichert einen eindeutigen Identifikator (\textit{ID}) des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``is\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\
+Metadaten über die Ressourcen werden in der Tabelle ``Resource`` gespeichert: ID, Name, generischer Typ, kurze Beschreibung und Erstellungsdatum.\\
+In der Tabelle "Request" werden relevante Daten über die Requests gespeichert: ID, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), ID der Ressource, für die der Request gesendet wird und ID des Absenders. Requests werden sofort nach der Erstellung gespeichert und nach der Bearbeitung wieder gelöscht.\\
+Abgesendete, noch nicht bearbeitete Requests werden in der Tabelle ``ReceivedRequest`` dupliziert, dabei wird ein Eintrag pro Empfänger erstellt. Diese Tabelle enthält folgende Spalten: ID und Typ des Requests und ID des Empfängers.\\
+Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Tabelle präsentiert entweder ein Zugriffs- oder Besitzerrechte, dabei werden folgende Attribute gespeichert: ID des Benutzers, ID der Ressource und Typ des Eintrags (Zugriffs- oder Besitzerrechte).
+   \\
  
  \subsection{Logging}
  Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
@@ -241,7 +248,21 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  
  
  \section{Klassenübersicht}
- 
+ \subsection{Model}
+ \paragraph*{Klasse User}
+ User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Abstraktion des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
+\paragraph*{Attribute} % skip this if there are no attribute
+\begin{itemize}
+	\item \atr{name}{String}{private}{
+	bla 
+	}
+\end{itemize}
+\subparagraph*{Methoden}  % skip this if there are no methods
+\begin{itemize}
+	\item \mtd{foo}{String}{a:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+\end{itemize}
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
  bla bla
@@ -264,7 +285,7 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
 	bla  \inlinecode{USER_ID}
 	}
 \end{itemize}
- 
+\subsection{View} 
  \section{Sonstige Diagrammen}
  \subsection{Zugriffsrequest schicken}
  \begin{figure}[ht!]
