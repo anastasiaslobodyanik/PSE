@@ -291,7 +291,7 @@ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/Add_resourceDiagram.png}
- 	\caption{Zugriffsrequest genehmigen}
+ 	\caption{Ressource erstellen}
  \end{figure}
  
 Von irgeneiner Viewklasse wird die Methode \enquote{addResource()} auf dem Benutzer \enquote{a}  aufgerufen.\\ Erstens wird eine Resource Instanz \enquote{r} erstellt und in der Datenbank gespeichert.\\ Dann wird das Benutzer \enquote{a} zuerst als einer des Besitzers diese Resource \enquote{r} hinzugefügt durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addOwner(a.getUserID)}, danach als einer des Lesers diese Resource \enquote{r} durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addReader(a.getUserID)} .\\Am Ende wird eine Lognachricht über diesen ganzen Prozess  in der Logdatei gespeichert.
@@ -303,7 +303,7 @@ Von irgeneiner Viewklasse wird die Methode \enquote{addResource()} auf dem Benut
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/remove_resourceDiagram.png}
- 	\caption{Zugriffsrequest genehmigen}
+ 	\caption{Ressource loeschen}
  \end{figure}
  
  
