@@ -121,7 +121,7 @@
  \newpage
  \section{Einleitung}
  
- Während der Entwurfsphase wurde das Konzept für das zu erstellende Produkt formuliert. Die in diesem Dokument definierte Softwarearchitektur legt die Struktur und das Verhalten des Produkts fest. Durch Bestimmung grundlegender Entwurfsentscheidungen haben sich einige sinnvolle Änderungen zum Pflichtenheft ergeben. \\
+Während der Entwurfsphase wurde das Konzept für das zu erstellende Produkt formuliert. Die in diesem Dokument definierte Softwarearchitektur legt die Struktur und das Verhalten des Produkts fest. Durch Bestimmung grundlegender Entwurfsentscheidungen haben sich einige sinnvolle Änderungen zum Pflichtenheft ergeben. \\
 Für die Funktion „Benutzer suchen“ wurden Suchparameter erweitert: die Suche soll anhand von Name, Email sowie Domain des Benutzers möglich sein. 
 Nach dem Löschen einer Ressource werden alle Benutzer, die Besitzerrechte für diese Ressource hatten, benachrichtigt. 
 Als Ressourcendaten werden auch Typ und kurze Beschreibung der Ressourcen gespeichert. 
@@ -131,15 +131,9 @@ Administratoren des Portals sollen in der Lage sein andere Benutzer zu blockiere
  \section{Architektur}
  
  \subsection{Model View Template (MVT)} 
-
- 	
- 
- \centering
- \begin{flushleft}
- Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
+Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
 zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template Prinzip (MVT),Das in Abbildung 1 gezeichnet ist, realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
 Das Model-View-Template ist eine Ableitung des Architektur-Pattern-View-Presenter (MVP) -Musters und wird hauptsächlich zum Erstellen von Benutzerschnittstellen verwendet.\\
- \end{flushleft}
  
  \begin{figure}[ht!]
  \includegraphics[width=1.1\textwidth]{res/MVTdiagramm.png}
@@ -231,10 +225,16 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  	\caption{Datenbankschema}
  \end{figure}
  \newpage
+
+    ``A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table.``
+
+    —Models | Django documentation\\
  Die Tabelle ``Benutzer`` speichert einen eindeutigen Identifikator des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``ist\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\ Tabelle ``Request`` hat folgende Spalten: einen eindeutigen Identifikator, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), Identifikator der Ressource, für die der Request gesendet wird, und Identifikator des Absenders. \\
  Tabelle ``Resource`` speichert einen eindeutigen Identifikator zu jeder Ressource, ihren Namen, Typ, kurze Beschreibung und Erstellungsdatum.\\
- Tabelle ``Permission`` beinhaltet Einträge der Form: Benutzer-Ressource-Rechte (Zugriffs- oder Besitzerrechte). \\
- Die Funktion der Tabelle ``ReceivedRequest`` ist die gesendeten Requests, ihre Empfänger, sowie ihren Typ zu speichern. Darum hat sie als Spalten Identifikator eines Benutzers und eines Requests und einen Typ des Requests
+  Tabelle ``ReceivedRequest`` ist die gesendeten Requests, ihre Empfänger, sowie ihren Typ zu speichern. Darum hat sie als Spalten Identifikator eines Benutzers und eines Requests und einen Typ des Requests
+  
+Eine Assoziation der Rechte wird in der Tabelle ``Permission`` gespeichert. Jeder Eintrag dieser Tabelle präsentiert entweder ein Zugriffs- oder Besitzerrecht, dabei werden folgende Attribute gespeichert: Identifikator des Benutzers, Identifikator der Ressource und Typ des Eintrags (Zugriffs- oder Besitzerrechte).
+   \\
  
  \subsection{Logging}
  Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
@@ -244,7 +244,22 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  
  
  \section{Klassenübersicht}
- 
+ \subsection{Model}
+ \paragraph*{Klasse User}
+ User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Abstraktion des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
+\paragraph*{Attribute} % skip this if there are no attribute
+\begin{itemize}
+	\item \atr{name}{String}{private}{
+	bla 
+	}
+\end{itemize}
+\subparagraph*{Methoden}  % skip this if there are no methods
+\begin{itemize}
+	\item \mtd{foo}{String}{a:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+\end{itemize}
+
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
  bla bla
@@ -267,7 +282,7 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
 	bla  \inlinecode{USER_ID}
 	}
 \end{itemize}
- 
+ \subsection{View}
  \section{Sonstige Diagrammen}
  \subsection{Zugriffsrequest schicken}
  \begin{figure}[ht!]
