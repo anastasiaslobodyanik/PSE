@@ -187,10 +187,21 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  \subsubsection*{MVT-Muster} 
  Bei diesem Entwurf wird das Model-View-Template \hyperref[MVT]{MVT} Architekturmuster verwendet.
  \subsubsection*{Strategie-Muster}
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{res/strategie.png}
+ 	\caption{Sterategie-Muster}
+ \end{figure}
  Das Strategy-Muster kommt in den Klassen ``\textit{Reauest}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
  
  \subsubsection*{Befehlsmuster}
- Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Reauest}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der Abbildung 4 angezeigt ist, getrennt.\\
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{res/Befehl.png}
+ 	\caption{Befehlsmuster}
+ 	\label{Befehl}
+ \end{figure}
+ Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Reauest}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 4} angezeigt ist, getrennt.\\
 Das Befehlsmusters ermöglicht es, ein bestimmtes Ereignis in einem dafür vorgesehenen Handler
 zu bearbeiten und dieses damit in einem Objekt zu kapseln. Jeder Handler lässt sich eindeutig einer Aufgabe
 und einem Ereignis zuordnen, sodass keine Verschränkung zwischen zwei verschiedenen Handlern auftritt.
