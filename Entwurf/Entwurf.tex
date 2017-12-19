@@ -325,12 +325,12 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
 \begin{itemize}
 	\item \mtd{searchResource}{List<Resource>}{searchParameters: String} {public}{Funktion liefert  \inlinecode{List<Resource>}, die alle Ressourcen enthält, dessen Metadaten den \inlinecode{searchParameters} entsprechen.}
 	
-	\item \mtd{addResource}{Resource}{ }{public}{Funktion erstellt eine Instanz von Klasse \inlinecode{Resource}, Metadaten werden dabei in Datenbank gespeichert, wobei User als Besitzer dieser Ressource definiert wird}
+	\item \mtd{addResource}{Resource}{ }{public}{Funktion erstellt eine Instanz von Klasse \inlinecode{Resource}, Metadaten werden dabei in Datenbank gespeichert, wobei \inlinecode{User} als Besitzer dieser Ressource definiert wird}
 	
-	\item \mtd{accessResource}{void}{resourceID: String} {public}{Falls Instanz von der User-Klasse, die diese Funktion aufruft, entsprechende Rechte hat, werden Metadaten der Ressource, deren \inlinecode{resourceID}} als Parameter übergeben wird, von Datenbank abgerufen.
+	\item \mtd{accessResource}{void}{resourceID: String} {public}{Falls Instanz von der Klasse \inlinecode{User}, die diese Funktion aufruft, entsprechende Rechte hat, werden Metadaten der Ressource, deren \inlinecode{resourceID}} als Parameter übergeben wird, von Datenbank abgerufen.
 	
 	\item \mtd{sendAccessRequest}{void}{resourceID: String} {public}
-	{An alle Besitzer der Ressource, deren \inlinecode{resourceID} als Parameter übergeben wird, wird AccessRequest gesendet.}
+	{An alle Besitzer der Ressource, deren \inlinecode{resourceID} als Parameter übergeben wird, wird /inlinecode{AccessRequest} gesendet.}
 	
 	\item \mtd{cancelRequest}{void}{requestID: String} {public}{Der Request, dessen \inlinecode{requestID}} als Parameter übergeben wird, wird aus der Datenbank gelöscht.
 \end{itemize}
@@ -338,33 +338,33 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
 \newpage
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
- bla bla
-\paragraph*{Attribute} % skip this if there are no attribute
+Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlinecode{User} Klasse Besitzerrechte für eine oder mehrere Ressourcen bekommt, wird ein neuer Eintrag in der Datenbank-Tabelle ``Owner``, beziehungsweise eine neue Instanz von Klasse \inlinecode{Owner} erstellt. 
+\paragraph*{Attribute} 
 
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{allowAccessPermission}{void}{resourceID:String, userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Instanz der Klasse \inlinecode{User} bekommt \inlinecode{AccessPermission} für Instanz der Klasse \inlinecode{Resource}. \inlinecode{userID} des Benutzers und \inlinecode{resourceID} der Ressource werden als Parameter übergeben. 
 	}
 	\item \mtd{allowAccessPermission}{void}{requestID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion ladet vorherige Funktion über, dabei wird als Parameter \inlinecode{requestID} eines Requests übergeben. Absender dieses Requests bekommt \inlinecode{AccesPermission} für die Ressource, deren  \inlinecode{Request.RESORCE_ID} gehört.
 	}
 	\item \mtd{deleteAccessPermission}{void}{resourceID:String, userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Der Instanz der Klasse \inlinecode{User}, die übergebenes Parameter \inlinecode{userID} besitzt, wird \inlinecode{AccessPermission} für die Ressource, deren \inlinecode{resourceID} jeweil als Parameter übergeben wird, entzogen.
 	}
 	\item \mtd{denyAccessPermission}{void}{requestID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	\inlinecode{AccessRequest} wird abgelehnt: Instanz, der \inlinecode{requestID} entspricht, wird gelöscht.
 	}
-	\item \mtd{denyAccessPermission}{void}{resourceID:String, userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	\item \mtd{allowOwnerPermission}{void}{resourceID:String, userID:String}{public}{
+	Instanz der Klasse \inlinecode{User} bekommt \inlinecode{OwnerPermission} für Instanz der Klasse \inlinecode{Resource}. \inlinecode{userID} und \inlinecode{resourceID} diesen Instanzen werden als Parameter übergeben.
 	}
 	\item \mtd{sendDeletionRequest}{void}{resourceID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion erstellt eine Instanz der Klasse  \inlinecode{DeletionRequest}. Das übergebene Parameter \inlinecode{resourceID} wird als \inlinecode{Request.REQUEST_ID} und \inlinecode{userID} des \inlinecode{Owner} als \inlinecode{Request.SENDER_ID} gespeichert.
 	}
 \end{itemize}
-
+\newpage
   \paragraph*{Klasse Admin}
- \class{Owner extends Owner}
+ \class{Admin extends Owner}
  bla bla
  
 \paragraph*{Attribute} % skip this if there are no attribute
