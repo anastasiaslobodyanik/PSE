@@ -213,42 +213,53 @@ Außerdem lässt sich leichter ein weiterer Handler hinzufügen oder ein bestehe
 genutzter Parameterkombinationen in zusätzlichen Funktionen
 (Überladen).
   \subsection{URL Verzeichnis}
-Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (Abbildung). %TODO bild
+Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 5}}). 
+
+\begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{res/urls_Diagram.png}
+ 	\caption{URL Struktur}
+ 	\label{URL-Struktur}
+ \end{figure}
+ 
 \textbf{pse-authoritation.com} – Mockup-Seite, dient zum Einloggen in das Portal, enthält Autorisierungsformular und wird nach der Entwicklung durch Autorisierungsmanagement des Systems, in welches das Projekt integriert wird, ersetzt. 
  
 \renewcommand{\labelitemi}{$\bullet$}
 \renewcommand{\labelitemii}{$\bullet$}
 \renewcommand{\labelitemiii}{$\bullet$}
 \begin{itemize}[itemsep=0pt]
-\item \textbf{{\textbackslash}profil} - Benutzerprofil-Seite, enthält persönliche Information des Benutzers und Übersicht der Requeste, die an den Benutzer adressiert sind.
+\item \textbf{/profil} - Benutzerprofil-Seite, enthält persönliche Information des Benutzers und Übersicht der Requeste, die an den Benutzer adressiert sind.\\
+
 Benutzerprofil-Seite ist mit Subseiten versehen:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{{\textbackslash}handle{\_}request{\_}$<$requestID$>${\_}$<$userID$>$} - Dialog für Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
-\item \textbf{{\textbackslash}edit{\_}name} - Dialog mit Eingabefeld für Editieren des Namens des Benutzers, wird nach dem Klicken des ``Ändern``-Buttons sichtbar.
-\item \textbf{{\textbackslash}resources} - Seite mit Übersicht von Ressourcen, für die der Benutzer Besitzerrechte hat. Diese Seite enthält Subseiten:
+\item \textbf{/handle{\_}request{\_}$<$requestID$>$} - Dialog für Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
+\item \textbf{/resources} - Seite mit Übersicht von Ressourcen, für die der Benutzer Besitzerrechte hat. Diese Seite enthält Subseiten:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{{\textbackslash}add{\_}new{\_}resource} - Seite für Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog für Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
-\item \textbf{{\textbackslash}$<$resourceID$>${\_}edit{\_}permissions} - Seite für Vergabe und Entzug von Rechten für die Ressource.
-\item \textbf{{\textbackslash}$<$resourceID$>${\_}send{\_}deletion{\_}request{\_}} - Dialog für Absenden von Löschrequest für die Ressource.
+\item \textbf{/add{\_}new{\_}resource} - Seite für Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog für Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
+\item \textbf{/$<$resourceID$>${\_}edit{\_}users{\_}permissions} - Seite für Vergabe und Entzug von Rechten für die Ressource.
+\item \textbf{/$<$resourceID$>${\_}send{\_}deletion{\_}request} - Dialog für Absenden von Löschrequest für die Ressource.
 \end{itemize}
 \end{itemize}
-\item \textbf{{\textbackslash}manage{\_}users} - Administratorseite für Benutzerverwaltung, enthält Liste von Benutzern und Subseiten:
+
+
+\item \textbf{/manage{\_}users} - Administratorseite für Benutzerverwaltung, enthält Liste von Benutzern und Subseiten:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{{\textbackslash}block{\_}user} - Dialog zum Blockieren des Users.
-\item \textbf{{\textbackslash}delete{\_}user} - Dialog zum Löschen des Users.
-\item \textbf{{\textbackslash}edit{\_}permissions} - Dialog zur Änderung von Rechten des Benutzers.
+\item \textbf{/block{\_}user} - Dialog zum Blockieren des Users.
+\item \textbf{/delete{\_}user} - Dialog zum Löschen des Users.
+\item \textbf{/$<$userID$>${\_}permissions{\_}for{\_}resources} - Dialog zur Änderung von Rechten des Benutzers.
 \end{itemize}
-\item \textbf{{\textbackslash}manage{\_}resources} - Administratorseite für Ressourcenverwaltung, enthält Liste von Ressourcen und Subseiten:
+
+\item \textbf{/manage{\_}resources} - Administratorseite für Ressourcenverwaltung, enthält Liste von Ressourcen und Subseiten:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{{\textbackslash}edit{\_}permissions} - Dialog zur Änderung von Zugriffsrechten für die Ressource. 
-\item \textbf{{\textbackslash}delete{\_}resource} - Dialog zum Löschen der Ressource.
+\item \textbf{/$<$resourceID$>${\_}permissions{\_}for{\_}users} - Dialog zur Änderung von Zugriffsrechten für die Ressource. 
+\item \textbf{/delete{\_}resource} - Dialog zum Löschen der Ressource.
 \end{itemize}
-\item \textbf{{\textbackslash}resources{\_}owerview} - Übersicht von Ressourcen, enthält Liste aller Ressourcen und folgende Subseiten:
+\item \textbf{/resources{\_}owerview} - Übersicht von Ressourcen, enthält Liste aller Ressourcen und folgende Subseiten:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{{\textbackslash}$<$resourceID$>${\_}info} - enthält Metadaten der Ressource.
-\item \textbf{{\textbackslash}$<$resourceID$>${\_}send{\_}request} - Dialog zum Absenden des Requests für die Ressource.
+\item \textbf{/$<$resourceID$>${\_}info} - enthält Metadaten der Ressource.
+\item \textbf{/$<$resourceID$>${\_}send{\_}request} - Dialog zum Absenden des Requests für die Ressource.
 \end{itemize}
-\item \textbf{{\textbackslash}<resourceID>} - Ressourcenseite, enthält Metadaten und Link für Zugriff auf die Ressource.
+\item \textbf{/<resourceID>} - Ressourcenseite, enthält Metadaten und Link für Zugriff auf die Ressource.
 \end{itemize} 
 
  
