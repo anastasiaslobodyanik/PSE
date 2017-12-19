@@ -223,7 +223,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
 genutzter Parameterkombinationen in zusätzlichen Funktionen
 (Überladen).
   \subsection{URL Verzeichnis}
-Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 5}}). 
+Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 6}}). 
 
 \begin{figure}[ht!]
  	\centering
@@ -308,41 +308,201 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  \section{Klassenübersicht}
  \subsection{Model}
  \paragraph*{Klasse User}
- User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Abstraktion des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
+ \class{User}
+ User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Darstellung des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
 \paragraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
-	\item \atr{name}{String}{private}{
-	bla 
-	}
+	\item \atr{USER_ID}{String}{public} {bla}
+	\item \atr{name}{String}{private}{bla}	
+	\item \atr{email}{String}{private}{bla}
 \end{itemize}
+
 \subparagraph*{Methoden}  % skip this if there are no methods
 \begin{itemize}
-	\item \mtd{foo}{String}{a:String}{public}{
-	bla  \inlinecode{USER_ID}
-	}
+	\item \mtd{searchResource}{List<Resource>}{searchParameters: String} {public}{bla  \inlinecode{USER_ID}}
+	
+	\item \mtd{addResource}{Resource}{ }{public}{bla  \inlinecode{USER_ID}}
+	
+	\item \mtd{accessResource}{void}{searchParameters: String} {public}{bla  \inlinecode{USER_ID}}
+	
+	\item \mtd{sendAccessRequest}{void}{resourceID: String} {public}{bla  \inlinecode{USER_ID}}
+	
+	\item \mtd{cancelRequest}{void}{requestID: String} {public}{bla  \inlinecode{USER_ID}}
 \end{itemize}
+
+
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
  bla bla
- 
- \subparagraph*{Konstruktoren} % skip this if there are no constructors
+\paragraph*{Attribute} % skip this if there are no attribute
+
+\subparagraph*{Methoden}  % skip this if there are no methods
 \begin{itemize}
-	\item \ctr{User}{a:String}{public}{
-	bla
+	\item \mtd{allowAccessPermission}{void}{resourceID:String, userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{allowAccessPermission}{void}{requestID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{deleteAccessPermission}{void}{resourceID:String, userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{denyAccessPermission}{void}{requestID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{denyAccessPermission}{void}{resourceID:String, userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{sendDeletionRequest}{void}{resourceID:String}{public}{
+	bla  \inlinecode{USER_ID}
 	}
 \end{itemize}
+
+  \paragraph*{Klasse Admin}
+ \class{Owner extends Owner}
+ bla bla
+ 
+\paragraph*{Attribute} % skip this if there are no attribute
+
+\subparagraph*{Methoden}  % skip this if there are no methods
+\begin{itemize}
+	\item \mtd{searchUser}{List<User>}{searchParameters:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	
+	\item \mtd{blockUser}{void}{userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{deleteUser}{void}{userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{deleteResource}{void}{resourceID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{acceptDeletionRequest}{void}{requestID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{denyDeletionRequest}{void}{requestID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{deleteOwnerPermission}{void}{resourceID:String, userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+\end{itemize}
+
+  \paragraph*{Klasse Resource}
+  \class{Resource}
+ bla bla
+
 \paragraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
-	\item \atr{name}{String}{private}{
+	\item \atr{RESOURCE_ID}{String}{public}{
+	bla 
+	}
+		\item \atr{type}{ResourceType}{private}{
+	bla 
+	}
+		\item \atr{name}{String}{private}{
+	bla 
+	}
+		\item \atr{description}{String}{private}{
+	bla 
+	}
+		\item \atr{CREATION_DATE}{String}{private}{
 	bla 
 	}
 \end{itemize}
 \subparagraph*{Methoden}  % skip this if there are no methods
 \begin{itemize}
-	\item \mtd{foo}{String}{a:String}{public}{
+	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
 	bla  \inlinecode{USER_ID}
 	}
 \end{itemize}
+
+  \paragraph*{Klasse ResourceType}
+ \class{<<enumeration>> ResourceType}
+ bla bla
+ 
+\begin{itemize}
+	\item{Data}
+	\item{Tool}
+	\item{Workflow}
+	
+\end{itemize}
+
+
+  \paragraph*{Klasse Request}
+ \class{<<abstract>> Request}
+ bla bla
+ 
+\paragraph*{Attribute} % skip this if there are no attribute
+\begin{itemize}
+	\item \atr{REQUEST_ID}{String}{public}{
+	bla 
+	}
+		\item \atr{SENDER_ID}{String}{public}{
+	bla 
+	}
+		\item \atr{CREATION_DATE}{String}{public}{
+	bla 
+	}
+		\item \atr{RESOURCE_ID}{String}{public}{
+	bla 
+	}
+\end{itemize}
+\subparagraph*{Methoden}  % skip this if there are no methods
+\begin{itemize}
+	\item \mtd{deny}{void}{}{abstract}{
+	bla  \inlinecode{USER_ID}
+	}
+	
+	\item \mtd{accept}{void}{}{abstract}{
+	bla  \inlinecode{USER_ID}
+	}
+\end{itemize}
+
+  \paragraph*{Klasse AccessRequest}
+ \class{AccessRequest extends Request}
+ bla bla
+ 
+\subparagraph*{Methoden}  % skip this if there are no methods
+\begin{itemize}
+	\item \mtd{deny}{void}{}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	
+	\item \mtd{accept}{void}{}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+\end{itemize}
+
+  \paragraph*{Klasse DeletionRequest}
+ \class{DeletionRequest extends Request}
+ bla bla
+ 
+\subparagraph*{Methoden}  % skip this if there are no methods
+\begin{itemize}
+	\item \mtd{deny}{void}{}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+	
+	\item \mtd{accept}{void}{}{public}{
+	bla  \inlinecode{USER_ID}
+	}
+\end{itemize}
+
+  \paragraph*{Klasse Logging}
+ \class{<<external>> Logging}
+ bla bla
+ 
+ 
+  \paragraph*{Klasse EmailMessage}
+ \class{<<external>> EmailMessage}
+ bla bla
+ 
 \subsection{View} 
  \section{Sonstige Diagrammen}
  \subsection{Zugriffsrequest schicken}
