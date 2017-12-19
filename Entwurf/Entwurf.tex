@@ -194,7 +194,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  	\label{packages}
  \end{figure}
  
- 
+
  \subsection{Entwurfsmuster}
  Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das \gls{Geheimnisprinzip} zu unterstützen. 
  \subsubsection*{MVT-Muster} 
@@ -509,7 +509,8 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
  bla bla
  
 \subsection{View} 
- \section{Sonstige Diagrammen}
+\newpage 
+ \section{Sequenzdiagramme}
  \subsection{Zugriffsrequest schicken}
  \begin{figure}[ht!]
  	\centering
@@ -543,18 +544,19 @@ Von irgeneiner Viewklasse wird die Methode \enquote{addResource()} auf dem Benut
  
  
   \newpage
- \subsection{Ressource loeschen}
+ \subsection{Ressource löschen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/remove_resourceDiagram.png}
- 	\caption{Ressource loeschen}
+ 	\caption{Ressource löschen}
  \end{figure}
  
  
  Von der Viewklasse Manage-Resource wird die Methode \enquote{deleteResource()} auf dem Admin \enquote{a}  aufgerufen.\\ Erstens wird die Liste der \enquote{Owner} dieser Ressource vom Datenbank gelöscht, mit Aufruf der Methode \enquote{removeOwnerPermission.all()}, danach die Liste des Lesers diese Resource \ mit Aufruf der Methode \enquote{removeReaderPermission.all()}.\\
  Wenn die zwei Listen vom datenbank gelöscht sind dann wird die Ressource \enquote{r} auch gelöscht , mit hilfe der Methode \enquote{delete()}.\\ Am Ende wird eine Lognachricht über diesen ganzen Prozess  in der Logdatei gespeichert.\\
  
- 
+ \newpage
+ \section{Anhang}
  \newpage
 \setglossarystyle{altlist}
 \printglossary	
