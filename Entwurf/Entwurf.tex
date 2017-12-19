@@ -48,7 +48,11 @@
 	name={URL},
 	description={Abk. URL von englisch \textbf{U}niform \textbf{R}esource \textbf{L}ocator, wird häufig als Webadresse bezeichnet. Diese Adresse wird verwendet, um eine im Web vorhandene Ressource durch eine ASCII-Zeichenfolge zu bezeichnen. Ressourcen können variiert werden (Webseite, Video, Ton, Bild, Animation, E-Mail-Adresse ...)}, 
 }
-
+\newglossaryentry{Geheimnisprinzip}
+{
+	name={Geheimnisprinzip},
+	description={Vom Innenleben einer Klasse soll der Verwender – gemeint sind sowohl die Algorithmen, die mit der Klasse arbeiten, als auch der Programmierer, der diese entwickelt – möglichst wenig wissen müssen },
+}
 
 
 \usepackage{linegoal,listings}
@@ -192,7 +196,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  
  
  \subsection{Entwurfsmuster}
- Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das Geheimnisprinzip zu unterstützen. 
+ Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das \gls{Geheimnisprinzip} zu unterstützen. 
  \subsubsection*{MVT-Muster} 
  Bei diesem Entwurf wird das  \hyperref[MVT]{Model-View-Template} Architekturmuster verwendet.
  \subsubsection*{Strategie-Muster}
@@ -211,7 +215,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  	\label{Befehl}
  \end{figure}
 
- Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Request}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 4} angezeigt ist, getrennt.\\
+ Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Request}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 5} angezeigt ist, getrennt.\\
  Das Befehlsmusters ermöglicht es, ein bestimmtes Ereignis in einem dafür vorgesehenen Handler
  zu bearbeiten und dieses damit in einem Objekt zu kapseln. Jeder Handler lässt sich eindeutig einer Aufgabe
  und einem Ereignis zuordnen, sodass keine Verschränkung zwischen zwei verschiedenen Handlern auftritt.
