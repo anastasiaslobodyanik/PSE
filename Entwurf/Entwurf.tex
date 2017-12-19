@@ -139,7 +139,7 @@ Administratoren des Portals sollen in der Lage sein andere Benutzer zu blockiere
  
  \section{Architektur}
  
- \subsection{Model View Template (MVT)} 
+ \subsection{Model View Template (MVT)} \label{MVT}
 Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
 zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template Prinzip (MVT),Das in Abbildung 1 gezeichnet ist, realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
 Das Model-View-Template ist eine Ableitung des Architektur-Pattern-View-Presenter (MVP) -Musters und wird hauptsächlich zum Erstellen von Benutzerschnittstellen verwendet.\\
@@ -183,7 +183,24 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  \subsection{Paketstruktur}%oder Paketen?
  
  \subsection{Entwurfsmuster}
+ Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das Geheimnisprinzip zu unterstützen. 
+ \subsubsection*{MVT-Muster} 
+ Bei diesem Entwurf wird das Model-View-Template \hyperref[MVT]{MVT} Architekturmuster verwendet.
+ \subsubsection*{Strategie-Muster}
+ Das Strategy-Muster kommt in den Klassen ``\textit{Reauest}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
  
+ \subsubsection*{Befehlsmuster}
+ Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Reauest}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der Abbildung 4 angezeigt ist, getrennt.\\
+Das Befehlsmusters ermöglicht es, ein bestimmtes Ereignis in einem dafür vorgesehenen Handler
+zu bearbeiten und dieses damit in einem Objekt zu kapseln. Jeder Handler lässt sich eindeutig einer Aufgabe
+und einem Ereignis zuordnen, sodass keine Verschränkung zwischen zwei verschiedenen Handlern auftritt.
+Außerdem lässt sich leichter ein weiterer Handler hinzufügen oder ein bestehender Handler austauschen.
+ 
+ \subsubsection*{Bequemlichkeitsmethode-Muster}
+ Das Bequemlichkeitsmethode-Muster ist in der Klasse ``\textit{Owner}``
+ bei den Funktionen ``\textit{allowAccessPermission(reqestID)}`` und ``\textit{allowAccessPermission(resourceID, userID)}`` verwendet.Dieses Muster dient zum Vereinfachen des Funktionenaufrufs durch die Bereitstellung häufig
+genutzter Parameterkombinationen in zusätzlichen Funktionen
+(Überladen).
   \subsection{URL Verzeichnis}
 Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (Abbildung). %TODO bild
 \textbf{pse-authoritation.com} – Mockup-Seite, dient zum Einloggen in das Portal, enthält Autorisierungsformular und wird nach der Entwicklung durch Autorisierungsmanagement des Systems, in welches das Projekt integriert wird, ersetzt. 
