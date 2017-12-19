@@ -308,39 +308,40 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  
  \section{Paketenübersicht}
  
- 
+ \newpage
  \section{Klassenübersicht}
  \subsection{Model}
  \paragraph*{Klasse User}
  \class{User}
  User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Darstellung des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
-\paragraph*{Attribute} % skip this if there are no attribute
+\subparagraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
-	\item \atr{USER_ID}{String}{public} {bla}
-	\item \atr{name}{String}{private}{bla}	
-	\item \atr{email}{String}{private}{bla}
+	\item \atr{USER_ID}{String}{final} {Eindeutiger Identifikator des Benutzers}
+	\item \atr{name}{String}{private}{Name und Vorname des Benutzers}	
+	\item \atr{email}{String}{private}{Email des Benutzers}
 \end{itemize}
 
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
-	\item \mtd{searchResource}{List<Resource>}{searchParameters: String} {public}{bla  \inlinecode{USER_ID}}
+	\item \mtd{searchResource}{List<Resource>}{searchParameters: String} {public}{Funktion liefert  \inlinecode{List<Resource>}, die alle Ressourcen enthält, dessen Metadaten den \inlinecode{searchParameters} entsprechen.}
 	
-	\item \mtd{addResource}{Resource}{ }{public}{bla  \inlinecode{USER_ID}}
+	\item \mtd{addResource}{Resource}{ }{public}{Funktion erstellt eine Instanz von Klasse \inlinecode{Resource}, Metadaten werden dabei in Datenbank gespeichert, wobei User als Besitzer dieser Ressource definiert wird}
 	
-	\item \mtd{accessResource}{void}{searchParameters: String} {public}{bla  \inlinecode{USER_ID}}
+	\item \mtd{accessResource}{void}{resourceID: String} {public}{Falls Instanz von der User-Klasse, die diese Funktion aufruft, entsprechende Rechte hat, werden Metadaten der Ressource, deren \inlinecode{resourceID}} als Parameter übergeben wird, von Datenbank abgerufen.
 	
-	\item \mtd{sendAccessRequest}{void}{resourceID: String} {public}{bla  \inlinecode{USER_ID}}
+	\item \mtd{sendAccessRequest}{void}{resourceID: String} {public}
+	{An alle Besitzer der Ressource, deren \inlinecode{resourceID} als Parameter übergeben wird, wird AccessRequest gesendet.}
 	
-	\item \mtd{cancelRequest}{void}{requestID: String} {public}{bla  \inlinecode{USER_ID}}
+	\item \mtd{cancelRequest}{void}{requestID: String} {public}{Der Request, dessen \inlinecode{requestID}} als Parameter übergeben wird, wird aus der Datenbank gelöscht.
 \end{itemize}
 
-
+\newpage
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
  bla bla
 \paragraph*{Attribute} % skip this if there are no attribute
 
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{allowAccessPermission}{void}{resourceID:String, userID:String}{public}{
 	bla  \inlinecode{USER_ID}
@@ -368,7 +369,7 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  
 \paragraph*{Attribute} % skip this if there are no attribute
 
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{searchUser}{List<User>}{searchParameters:String}{public}{
 	bla  \inlinecode{USER_ID}
@@ -416,7 +417,7 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
 	bla 
 	}
 \end{itemize}
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
 	bla  \inlinecode{USER_ID}
@@ -457,7 +458,7 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
 	bla 
 	}
 \end{itemize}
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{deny}{void}{}{abstract}{
 	bla  \inlinecode{USER_ID}
@@ -472,7 +473,7 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  \class{AccessRequest extends Request}
  bla bla
  
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{deny}{void}{}{public}{
 	bla  \inlinecode{USER_ID}
@@ -487,7 +488,7 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  \class{DeletionRequest extends Request}
  bla bla
  
-\subparagraph*{Methoden}  % skip this if there are no methods
+\subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{deny}{void}{}{public}{
 	bla  \inlinecode{USER_ID}
