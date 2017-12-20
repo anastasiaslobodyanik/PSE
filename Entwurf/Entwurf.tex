@@ -185,7 +185,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
 
 \newpage
  \subsection{Paketenstruktur}
- Das folgende \hyperref[packages]{Paketendiagramm} stellt die verschiedenen Paketen, die in der Entwurfsphase gestaltet werden, und ihre Beziehungen zueinander dar. Diese Paketen werden ausführlich in Abschnitt ``Paketenübersicht`` beschrieben.\\
+ Das folgende \hyperref[packages]{Paketendiagramm} stellt die verschiedenen Paketen, die in der Entwurfsphase gestaltet werden(inkl. Paketen die von Django vordefiniert sind - ``Extern``), und ihre Beziehungen zueinander dar. Den Inhalt dieser Paketen wird im Abschnitt ``Paketenübersicht`` beschrieben.\\
  %beschreibung der beziehungen kommen bald
  \begin{figure}[h]
  	\includegraphics[width = 1.0\textwidth]{res/packages}
@@ -315,14 +315,20 @@ Da Django ein Web Framework ist, ist es notwendig HTML-Dateien dynamisch zu gene
 Ein Model enthält Informationen über die unerlässliche Felder und Verhalten von den Daten, die gespeichert sind.
 Das Paket ``Model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Resource``, ``Request``, ``AccessRequest`` und ``DeletionRequest``. Normalerweise wird jede Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Atribut einer Klasse wird dann eine Spalte in der entsprechenden Tabelle.
  \subsection{Views}
+ View ist eine Funktion, die als Eingabe ein Web Request bekommt und gibt  eine Web Response aus. Diese Response kann prinzipiell alles beinhalten - zum Beispiel HTML Inhalt einer Webseite, ein Bild, eine 404 Error Seite, Weiterleitung zu anderer Webseite. Die View Funktion definiert was genau angezeigt wird, nachdem eine URL angefragt wird.\\
+ Zum Paket ``Views`` gehören alle Klassen, die eine solche Funktion spezifizieren.
  \subsubsection{Generic}
+ Da bei der Entwicklung einer Webseite bestimmte Muster öfter vorkommen,  bietet Django eine Sammlung von solchen Views an. Diese Views haben eine abstrakte Form, damit sie mehrmals wiederverwendet werden können. Auf diese Weise spart man Zeit und Codezeilen.
  \subsubsection{Details}
- \subsection{Test}
+ \subsection{Test} %todo Atanas
  \subsubsection{Test{\_}views}
  \subsubsection{Test{\_}model}
  \subsection{Extern}
  \subsubsection{Logging}
+ Django benutzt ein Logging Modul, das von Python vordefiniert ist.
+ Dieses Paket beinhaltet Klassen und Funktionen, die das Logging von Systemereignisse ermöglichen. 
  \subsubsection{EmailMessages}
+ 
  
  
  
