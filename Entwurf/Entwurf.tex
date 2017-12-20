@@ -536,99 +536,99 @@ Unsere View Klassen bestehen aus kleineren generischen Klassen die schon in Djan
 
 \paragraph*{Klasse ProfilView}
  Diese Klasse bezeichnet die Profilseite des Benutzers.
-\class{ProfilView imports DetailsView} 
+\class{from django.views.generic import DetailsView} 
  Zeigt die Namen des Benutzers.
-\class{ProfilView imports UpdateView}
+\class{from django.views.generic import UpdateView}
  Zeigt ein Feld für Änderung von Namen.
-\class{ProfilView imports ListView}
+\class{from django.views.generic import ListView}
  Zeigt eine Liste von Requests.
-\class{ProfilView imports SingleObjectMixin}
+\class{from django.views.generic.detail import SingleObjectMixin}
  Benutzt mit ListView um Requests von einem spezifischen Benutzer zu zeigen.
  
 \paragraph*{Klasse ChosenRequestsView}
  Diese Klasse bezeichnet den Dialog wo der Benutzer etscheidet einen Request entweder abzulehnen oder zu genehmigen. 
-\class{ChosenRequestsView imports FormView} 
+\class{from django.views.generic import FormView} 
  Zeigt ein Feld für Beschreibung der Entscheidung.
-\class{ChosenRequestsView imports HandleRequestView}
+\class{from django.views import HandleRequestView}
  Zeigt zwei Optionen - ''genehmigen'' und ''ablehnen''.
  
 \paragraph*{Klasse MyResourcesView}
  Diese Klasse bezeichnet die Subeite wo der Benutzer seine eigene Ressourcen sieht.
 \class{MyResourcesView extends ProfilView}
  Alle genersiche View Klassen aus ProfilView sind auch in MyResourcesView benutzt mit der Unterschied, dass ListView und SingleObjectMixin zeigen eine Liste von Ressourcen spezifisch für einen Benutzer.
-\class{MyResourcesView imports CreateView}
+\class{from django.views.generic import CreateView}
 Dient zur Erstellung von neuen Ressourcen.
 
-\paragraph*{Klasse DeleteResource}
+\paragraph*{Klasse DeleteResourceView}
  Diese Klasse bezeichnet den Dialog wo der Benutzer einen Löschrequest sendet.
- \class{DeleteResource imports method_decorator}
+ \class{from django.utils.decorators import method_decorator}
  Dient zur Prüfung für Adminrechte. 
- \class{DeleteResource imports DeleteView}
+ \class{from django.views.generic import DeleteView}
  Wenn der Benutzer Adminrechte hat, dann kann er die Ressource löschen.
- \class{DeleteResource imports FormView}
+ \class{from django.views.generic import FormView}
  Zeigt ein Feld für Beschreibung des Grunds des Löschrequests, wenn der Benutzer keine Adminrechte hat.
  
 \paragraph*{Klasse PermissionForChosenResourceView}
  Diese Klasse bezeichnet die Subseite wo der Benutzer die Rechte von anderen Benutzer auf seine Ressourcen editieren kann.
 \class{PermissionForChosenResourceView extends MyResourcesView}
  Alle genersiche View Klassen aus MyResourcesView sind auch in PermissionForChosenResourceView benutzt mit der Unterschied, dass ListView und SingleObjectMixin zeigen eine Liste von Benutzer spezifisch für eine Ressource.
-\class{PermissionForChosenResourceView imports PermissionsEditingView}
+\class{from django.views import PermissionsEditingView}
 Zeigt zwei Optionen(Checkboxes) - "Zugriffsrechte" und "Besitzerrechte".
-\class{PermissionForChosenResourceView imports CreateView}
+\class{from django.views.generic import CreateView}
 Dient zur Hinzufügung von Benutzer in dieser Liste(von Benutzer spezifisch für eine Ressource), welche Rechte mit Hilfe von die Klasse PermissionsEditingView editiert werden können.
-\class{PermissionForChosenResourceView imports DeleteView}
+\class{from django.views.generic import DeleteView}
 Dient zum Löschen von Benutzer aus diese Liste(von Benutzer spezifisch für eine Ressource). So kann man Rechte entziehen, nur aber von Benutzer die keine Besitzerrechte haben.
 
 \paragraph*{Klasse ManageUsersView}
 Diese Klasse bezeichnet die Seite wo der Administrator alle Benutzer des Systems verwalten kann.
-\class{ManageUsersView imports DeleteView}
+\class{from django.views.generic import DeleteView}
 Dient zum Löschen von Benutzer.
-\class{ManageUsersView imports BlockView}
+\class{from django.views import BlockView}
 Dient zum Blockieren von Benutzer. Besteht aus ein Feld für Beschreibung des Grunds des Blockierens und Dropdown für wählen des Zeitraums.
-\class{ManageUsersView imports ListView}
+\class{from django.views.generic import ListView}
 Zeigt eine Liste von allen Benutzer des Systems.
 
 \paragraph*{Klasse PermissionsForResourceView}
  Diese Klasse bezeichnet die Subseite wo der Administrator die Rechte von bestimmten Benutzer editieren kann.
  \class{PermissionForResourcesView extends ManageUsersView}
  Alle genersiche View Klassen aus ManageUsersView sind auch in PermissionForResourceView benutzt mit der Unterschied, dass ListView zeigt eine Liste von allen Ressourcen.
- \class{PermissionForResourcesView imports PermissionsEditingView}
+ \class{from django.views import PermissionsEditingView}
  Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
  
 \paragraph*{Klasse ManageResourcesView}
 Diese Klasse bezeichnet die Subseite wo der Administrator Rechte für bestimmte Ressource editieren kann.
-\class{ManageResourcesView imports ListView}
+\class{from django.views.generic import ListView}
 Zeigt eine Liste von allen Ressourcen im System.
-\class{ManageResourcesView imports DeleteView}
+\class{from django.views.generic import DeleteView}
 Dient zum Löschen einer Ressource. Mit oder ohne Beschreibung.
 
 \paragraph*{Klasse PermissionsForUsersView}
  Diese Klasse bezeichnet die Subseite wo der Administrator die Rechte für bestimmte Ressource editieren kann.
  \class{PermissionForUsersView extends ManageResourcesView}
  Alle genersiche View Klassen aus ManageResourcesView sind auch in PermissionForUsersView benutzt mit der Unterschied, dass ListView zeigt eine Liste von Benutzer.
- \class{PermissionForChosenUsersView imports PermissionsEditingView}
+ \class{from django.views import PermissionsEditingView}
  Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
 
 \paragraph*{Klasse ResourcesOverview}
 Diese Klasse bezeichnet die Subseite wo der Benutzer nach Ressourcen suchen kann, dann zugreifen, Beschreibung lesen, oder Request senden.
-\class{ResourcesOverview imports ListView}
+\class{from django.views.generic import ListView}
 Zeigt eine Liste von Ressourcen.
 
 \paragraph*{Klasse OpenResourceView}
 Diese Klasse bezeichnet die Subseite wo die Ressource sich befindet.
-\class{OpenResourceView imports method_decorator}
+\class{from django.utils.decorators import method_decorator}
 Dient zur Prüfung für Zugriffsrechte.
-\class{OpenResourceView imports ListView}
+\class{from django.views.generic import ListView}
 Zeigt eine Liste von Ressourcen sortiert nach Wahl(alphabetisch, neu, enthält ''a-z'', usw.).
 
 \paragraph*{Klasse RequestView}
 Diese Klasse bezeichnet den Dialog wo der Benutzer einen Request mit Beschreibung für eine Ressource sendet.
-\class{RequestView imports FormView}
+\class{from django.views.generic import FormView}
 Zeigt ein Feld für Beschreibung des Grundes des Zugriffsrequests.
 
 \paragraph*{Klasse ResourceInfoView}
 Diese Klasse bezeichnet den Dialog wo der Benutzer wichtige Information über bestimmte Ressource sehen kann.
-\class{ResourceInfoView imports DetailsView}
+\class{from django.views.generic import DetailsView}
 Zeigt wichtige Information über bestimmte Ressource (Beschreibung, Erstellungsdatum, Name, Typ, usw.).
 
  \section{Sequenzdiagramme}
