@@ -533,7 +533,7 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
  
 \subsection{View} 
 \newpage 
-Unsere View Klassen bestehen aus kleinere generische Klassen die schon in Django zur Verfügung stehen (django.views.generic; django.view.generic.details; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView und BlockView.
+Unsere View Klassen bestehen aus kleinere generische Klassen die schon in Django zur Verfügung stehen (django.views.generic; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView und BlockView.
 
 \paragraph*{Klasse ProfilView}
  Diese Klasse bezeichnet die Profilseite des Benutzers.
@@ -547,7 +547,7 @@ Unsere View Klassen bestehen aus kleinere generische Klassen die schon in Django
  Benutzt mit ListView um Requests von einem spezifischen Benutzer zu zeigen.
  
 \paragraph*{Klasse ChosenRequestsView}
- Diese Klasse bezeichnet die Subseite wo der Benutzer etscheidet einen Request entweder abzulehnen oder zu genehmigen. 
+ Diese Klasse bezeichnet den Dialog wo der Benutzer etscheidet einen Request entweder abzulehnen oder zu genehmigen. 
 \class{ChosenRequestsView imports FormView} 
  Zeigt ein Feld für Beschreibung der Entscheidung.
 \class{ChosenRequestsView imports HandleRequestView}
@@ -561,7 +561,7 @@ Unsere View Klassen bestehen aus kleinere generische Klassen die schon in Django
 Dient zur Erstellung von neuen Ressourcen.
 
 \paragraph*{Klasse DeleteResource}
- Diese Klasse bezeichnet die Subseite wo der Benutzer einen Löschrequest sendet.
+ Diese Klasse bezeichnet den Dialog wo der Benutzer einen Löschrequest sendet.
  \class{DeleteResource imports method_decorator}
  Dient zur Prüfung für Adminrechte. 
  \class{DeleteResource imports DeleteView}
@@ -586,8 +586,51 @@ Diese Klasse bezeichnet die Seite wo der Administrator alle Benutzer des Systems
 Dient zum Löschen von Benutzer.
 \class{ManageUsersView imports BlockView}
 Dient zum Blockieren von Benutzer. Besteht aus ein Feld für Beschreibung des Grunds des Blockierens und Dropdown für wählen des Zeitraums.
-\class{ManageUsersView imports ManageUsersView}
+\class{ManageUsersView imports ListView}
 Zeigt eine Liste von allen Benutzer des Systems.
+
+\paragraph*{Klasse PermissionsForResourceView}
+ Diese Klasse bezeichnet die Subseite wo der Administrator die Rechte von bestimmten Benutzer editieren kann.
+ \class{PermissionForResourcesView extends ManageUsersView}
+ Alle genersiche View Klassen aus ManageUsersView sind auch in PermissionForResourceView benutzt mit der Unterschied, dass ListView zeigt eine Liste von allen Ressourcen.
+ \class{PermissionForResourcesView imports PermissionsEditingView}
+ Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
+ 
+\paragraph*{Klasse ManageResourcesView}
+Diese Klasse bezeichnet die Subseite wo der Administrator Rechte für bestimmte Ressource editieren kann.
+\class{ManageResourcesView imports ListView}
+Zeigt eine Liste von allen Ressourcen im System.
+\class{ManageResourcesView imports DeleteView}
+Dient zum Löschen einer Ressource. Mit oder ohne Beschreibung.
+
+\paragraph*{Klasse PermissionsForUsersView}
+ Diese Klasse bezeichnet die Subseite wo der Administrator die Rechte für bestimmte Ressource editieren kann.
+ \class{PermissionForUsersView extends ManageResourcesView}
+ Alle genersiche View Klassen aus ManageResourcesView sind auch in PermissionForUsersView benutzt mit der Unterschied, dass ListView zeigt eine Liste von Benutzer.
+ \class{PermissionForChosenUsersView imports PermissionsEditingView}
+ Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
+
+\paragraph*{Klasse ResourcesOverview}
+Diese Klasse bezeichnet die Subseite wo der Benutzer nach Ressourcen suchen kann, dann zugreifen, Beschreibung lesen, oder Request senden.
+\class{ResourcesOverview imports ListView}
+Zeigt eine Liste von Ressourcen.
+
+\paragraph*{Klasse OpenResourceView}
+Diese Klasse bezeichnet die Subseite wo die Ressource sich befindet.
+\class{OpenResourceView imports method_decorator}
+Dient zur Prüfung für Zugriffsrechte.
+\class{OpenResourceView imports ListView}
+Zeigt eine Liste von Ressourcen sortiert nach Wahl(alphabetisch, neu, enthält ''a-z'', usw.).
+
+\paragraph*{Klasse RequestView}
+Diese Klasse bezeichnet den Dialog wo der Benutzer einen Request mit Beschreibung für eine Ressource sendet.
+\class{RequestView imports FormView}
+Zeigt ein Feld für Beschreibung des Grundes des Zugriffsrequests.
+
+\paragraph*{Klasse ResourceInfoView}
+Diese Klasse bezeichnet den Dialog wo der Benutzer wichtige Information über bestimmte Ressource sehen kann.
+\class{ResourceInfoView imports DetailsView}
+Zeigt wichtige Information über bestimmte Ressource (Beschreibung, Erstellungsdatum, Name, Typ, usw.).
 
  \section{Sequenzdiagramme}
  \subsection{Zugriffsrequest schicken}
