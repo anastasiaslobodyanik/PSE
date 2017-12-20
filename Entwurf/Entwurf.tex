@@ -246,7 +246,7 @@ Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine grap
 
 Benutzerprofil-Seite ist mit Subseiten versehen:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{/handle{\_}request{\_}$<$requestID$>$} - Dialog für Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
+\item \textbf{/handle{\_}$<$requestID$>$} - Dialog für Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
 \item \textbf{/resources} - Seite mit Übersicht von Ressourcen, für die der Benutzer Besitzerrechte hat. Diese Seite enthält Subseiten:
 \begin{itemize}[itemsep=0pt]
 \item \textbf{/add{\_}new{\_}resource} - Seite für Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog für Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
@@ -285,7 +285,7 @@ Da SQLite-Bibliotheken sich direkt in Anwendungen integrieren lassen, sodass kei
  \subsection{Datenbank}
  \begin{figure}[ht!]
  	\centering
- 	\includegraphics[width=0.75\textwidth]{res/database.png}
+ 	\includegraphics[width=\textwidth]{res/database.png}
  	\caption{Datenbankschema}
  \end{figure}
  \newpage
@@ -307,6 +307,24 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  
  
  \section{Paketenübersicht}
+ \subsection{Templates}
+Da Django ein Web Framework ist, ist es notwendig HTML-Dateien dynamisch zu generieren. Ein typisches Konzept dafür ist der Einsatz von Vorlagen (Templates). Eine Vorlage beinhaltet statische Teile vom gewünschten HTML Output, sowie Syntax, die beschreibt wie dynamischen Inhalt eingefügt wird.
+ \subsection{Static}
+ Für die Webseite sollen zusätzliche Dateien wie Abbildungen, CSS- oder JavaScript-Dateien gespeichert werden. In Django sind diese Dateien als ``Static Files`` bezeichnet. %todo noch erweitern
+ \subsection{Model}
+Ein Model enthält Informationen über die unerlässliche Felder und Verhalten von den Daten, die gespeichert sind.
+Das Paket ``Model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Resource``, ``Request``, ``AccessRequest`` und ``DeletionRequest``. Normalerweise wird jede Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Atribut einer Klasse wird dann eine Spalte in der entsprechenden Tabelle.
+ \subsection{Views}
+ \subsubsection{Generic}
+ \subsubsection{Details}
+ \subsection{Test}
+ \subsubsection{Test{\_}views}
+ \subsubsection{Test{\_}model}
+ \subsection{Extern}
+ \subsubsection{Logging}
+ \subsubsection{EmailMessages}
+ 
+ 
  
  \newpage
  \section{Klassenübersicht}
