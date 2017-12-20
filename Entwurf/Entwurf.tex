@@ -533,6 +533,62 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
  
 \subsection{View} 
 \newpage 
+Unsere View Klassen bestehen aus kleinere generische Klassen die schon in Django zur Verfügung stehen (django.views.generic; django.view.generic.details; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView und BlockView.
+
+\paragraph*{Klasse ProfilView}
+ Diese Klasse bezeichnet die Profilseite des Benutzers.
+\class{ProfilView imports DetailsView} 
+ Zeigt die Namen des Benutzers.
+\class{ProfilView imports UpdateView}
+ Zeigt ein Feld für Änderung von Namen.
+\class{ProfilView imports ListView}
+ Zeigt eine Liste von Requests.
+\class{ProfilView imports SingleObjectMixin}
+ Benutzt mit ListView um Requests von einem spezifischen Benutzer zu zeigen.
+ 
+\paragraph*{Klasse ChosenRequestsView}
+ Diese Klasse bezeichnet die Subseite wo der Benutzer etscheidet einen Request entweder abzulehnen oder zu genehmigen. 
+\class{ChosenRequestsView imports FormView} 
+ Zeigt ein Feld für Beschreibung der Entscheidung.
+\class{ChosenRequestsView imports HandleRequestView}
+ Zeigt zwei Optionen - ''genehmigen'' und ''ablehnen''.
+ 
+\paragraph*{Klasse MyResourcesView}
+ Diese Klasse bezeichnet die Subeite wo der Benutzer seine eigene Ressourcen sieht.
+\class{MyResourcesView extends ProfilView}
+ Alle genersiche View Klassen aus ProfilView sind auch in MyResourcesView benutzt mit der Unterschied, dass ListView und SingleObjectMixin zeigen eine Liste von Ressourcen spezifisch für einen Benutzer.
+\class{MyResourcesView imports CreateView}
+Dient zur Erstellung von neuen Ressourcen.
+
+\paragraph*{Klasse DeleteResource}
+ Diese Klasse bezeichnet die Subseite wo der Benutzer einen Löschrequest sendet.
+ \class{DeleteResource imports method_decorator}
+ Dient zur Prüfung für Adminrechte. 
+ \class{DeleteResource imports DeleteView}
+ Wenn der Benutzer Adminrechte hat, dann kann er die Ressource löschen.
+ \class{DeleteResource imports FormView}
+ Zeigt ein Feld für Beschreibung des Grunds des Löschrequests, wenn der Benutzer keine Adminrechte hat.
+ 
+\paragraph*{Klasse PermissionForChosenResourceView}
+ Diese Klasse bezeichnet die Subseite wo der Benutzer die Rechte von anderen Benutzer auf seine Ressourcen editieren kann.
+\class{PermissionForChosenResourceView extends MyResourcesView}
+ Alle genersiche View Klassen aus MyResourcesView sind auch in PermissionForChosenResourceView benutzt mit der Unterschied, dass ListView und SingleObjectMixin zeigen eine Liste von Benutzer spezifisch für eine Ressource.
+\class{PermissionForChosenResourceView imports PermissionsEditingView}
+Zeigt zwei Optionen(Checkboxes) - "Zugriffsrechte" und "Besitzerrechte".
+\class{PermissionForChosenResourceView imports CreateView}
+Dient zur Hinzufügung von Benutzer in dieser Liste(von Benutzer spezifisch für eine Ressource), welche Rechte mit Hilfe von die Klasse PermissionsEditingView editiert werden können.
+\class{PermissionForChosenResourceView imports DeleteView}
+Dient zum Löschen von Benutzer aus diese Liste(von Benutzer spezifisch für eine Ressource). So kann man Rechte entziehen, nur aber von Benutzer die keine Besitzerrechte haben.
+
+\paragraph*{Klasse ManageUsersView}
+Diese Klasse bezeichnet die Seite wo der Administrator alle Benutzer des Systems verwalten kann.
+\class{ManageUsersView imports DeleteView}
+Dient zum Löschen von Benutzer.
+\class{ManageUsersView imports BlockView}
+Dient zum Blockieren von Benutzer. Besteht aus ein Feld für Beschreibung des Grunds des Blockierens und Dropdown für wählen des Zeitraums.
+\class{ManageUsersView imports ManageUsersView}
+Zeigt eine Liste von allen Benutzer des Systems.
+
  \section{Sequenzdiagramme}
  \subsection{Zugriffsrequest schicken}
  \begin{figure}[ht!]
