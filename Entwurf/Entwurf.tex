@@ -277,7 +277,7 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
 \end{itemize} 
 
  
- 
+ \newpage
  \section{Datenhaltung}
  
 Relevante Daten über die Benutzer, Ressourcen, deren Beziehungen (Rechte) und Interaktionen (Requests) werden in einer Datenbank gespeichert. Das in diesem Projekt benutzte Framework Django bietet integrierte  objektrelationale Abbildung für die Datenbanksysteme MySQL, Oracle, PostgreSQL und SQLite.\\
@@ -309,26 +309,26 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
  \subsection{Templates}
 Da Django ein Web Framework ist, ist es notwendig HTML-Dateien dynamisch zu generieren. Ein typisches Konzept dafür ist der Einsatz von Vorlagen (Templates). Eine Vorlage beinhaltet statische Teile vom gewünschten HTML Output, sowie Syntax, die beschreibt wie dynamischen Inhalt eingefügt wird.
  \subsection{Static}
- Für die Webseite sollen zusätzliche Dateien wie Abbildungen, CSS- oder JavaScript-Dateien gespeichert werden. In Django sind diese Dateien als ``Static Files`` bezeichnet. %todo noch erweitern
+ Für die Webseite sollen zusätzliche Dateien wie Abbildungen, CSS- oder JavaScript-Dateien gespeichert werden. In Django sind diese Dateien als ``Static Files`` bezeichnet.
  \subsection{Model}
 Ein Model enthält Informationen über die unerlässliche Felder und Verhalten von den Daten, die gespeichert sind.
-Das Paket ``Model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Resource``, ``Request``, ``AccessRequest`` und ``DeletionRequest``. Normalerweise wird jede Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Atribut einer Klasse wird dann eine Spalte in der entsprechenden Tabelle.
+Das Paket ``model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Resource``, ``Request``, ``AccessRequest`` und ``DeletionRequest``. Normalerweise wird jede Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Attribut einer Klasse wird dann eine Spalte in der entsprechenden Tabelle.
  \subsection{Views}
  View ist eine Funktion, die als Eingabe ein Web Request bekommt und gibt  eine Web Response aus. Diese Response kann prinzipiell alles beinhalten - zum Beispiel HTML Inhalt einer Webseite, ein Bild, eine 404 Error Seite, Weiterleitung zu anderer Webseite. Die View Funktion definiert was genau angezeigt wird, nachdem eine URL angefragt wird.\\
- Zum Paket ``Views`` gehören alle Klassen, die eine solche Funktion spezifizieren.
+ Zum Paket ``views`` gehören alle Klassen, die eine solche Funktion spezifizieren.
  \subsubsection{Generic}
  Da bei der Entwicklung einer Webseite bestimmte Muster öfter vorkommen,  bietet Django eine Sammlung von solchen Views an. Diese Views haben eine abstrakte Form, damit sie mehrmals wiederverwendet werden können. Auf diese Weise spart man Zeit und Codezeilen.
- \subsubsection{Details}
- \subsection{Test} %todo Atanas
- \subsubsection{Test{\_}views}
- \subsubsection{Test{\_}model}
+
+ 
+ \subsection{Test}
+ Dieses Paket beinhaltet zwei Unterpaketen - test{\_}models und test{\_}views entsprechend für die Model- und die Viewklassen. Jedes Unterpaket enthält eine Testklasse spezifisch für jede Model- oder Viewklasse. Jede Testklasse hat eine setUp() Methode, die die entsprechende Objekte zum Testen erstellt und eine oder mehrere Modultestsmethoden für jede öffentliche Methode der getesteten Klassen.
+ 
  \subsection{Extern}
  \subsubsection{Logging}
- Django benutzt ein Logging Modul, das von Python vordefiniert ist.
+ Django bietet ein Logging Modul an, das von Python vordefiniert ist.
  Dieses Paket beinhaltet Klassen und Funktionen, die das Logging von Systemereignisse ermöglichen. 
  \subsubsection{EmailMessages}
- 
- 
+ Wie bei der Logging Funktionalität, wird für das Senden von E-Mail-Benachrichtigungen auch ein externes Paket von Django verwendet. Die Struktur dieses Pakets wird während der Implementierungsphase klar sein. 
  
  
  \newpage
