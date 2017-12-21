@@ -190,7 +190,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  \begin{figure}[h]
  	\includegraphics[width = 1.0\textwidth]{res/packages}
  	\centering
- 	\caption{Paketendiaramm}
+ 	\caption{Paketendiagramm}
  	\label{packages}
  \end{figure}
  
@@ -658,7 +658,7 @@ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID
  	 	\label{fig:allowAccPerm}
  \end{figure}
  
- Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Besitzer \enquote{o}  aufgerufen. Danach wird der Request von der Datenbank geholt in in der Variable \enquote{req} gespeichert. Danach wird auf \enquote{req} getSender aufgerufen und das Ergebnis(der Benutzer, der das Request geschickt hat) wird dann in \enquote{u} gespeichet. Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \enquote{getResource()}. Auf \enquote{u} wird dann \enquote{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{u} in der Liste \enquote{accessPermission} von Ressource hinzufügt. Eine Lognachricht wird in der Logdatei gespeichert. Die Methode \enquote{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diegramm ähnlich bis gleich zum Ende des Diegramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
+ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Besitzer \enquote{o}  aufgerufen. Danach wird der Request von der Datenbank geholt in in der Variable \enquote{req} gespeichert. Danach wird auf \enquote{req} getSender aufgerufen und das Ergebnis(der Benutzer, der das Request geschickt hat) wird dann in \enquote{u} gespeichet. Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \enquote{getResource()}. Auf \enquote{u} wird dann \enquote{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{u} in der Liste \enquote{accessPermission} von Ressource hinzufügt. Eine Lognachricht wird in der Logdatei gespeichert. Die Methode \enquote{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diagramm ähnlich bis gleich zum Ende des Diagramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
  
   \newpage
  \subsection{Ressource erstellen}
