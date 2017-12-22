@@ -458,6 +458,12 @@ Die Klasse \inlinecode{Resource} repräsentiert Ressourcen und kapselt dabei ihr
 \newpage
 
   \paragraph*{Klasse Request}
+  
+      \begin{center}
+    \textit{``Abstract classes are classes that contain one or more abstract methods. An abstract method is a method that is declared, but contains no implementation. Abstract classes may not be instantiated, and require subclasses to provide implementations for the abstract methods. Subclasses of an abstract class in Python are not required to implement abstract methods of the parent class.``}
+    \end{center}
+    —Abstract Classes | Python Course\\\\
+    
  \class{<<abstract>> Request}
 Abstrakte Klasse \inlinecode{Request} definiert alle gemeinsame Attribute und Methoden für alle mögliche Requesttypen. Sie selbst kann jedoch keine eigenständige Instanzen erzeugen. Diese Klasse dient vor allem zu Erweiterbarkeit des Produkts. 
  
@@ -486,7 +492,7 @@ Abstrakte Klasse \inlinecode{Request} definiert alle gemeinsame Attribute und Me
 Signatur der Methode, die diesen Request annimmt.
 	}
 \end{itemize}
-
+\newpage
   \paragraph*{Klasse AccessRequest}
  \class{AccessRequest extends Request}
 Repräsentation des Zugriffsrequests. Wird in der Datenbank mit von der \inlinecode{Request}-Klasse vordefinierten Attributen gespeichert. 
@@ -503,6 +509,8 @@ Repräsentation des Zugriffsrequests. Wird in der Datenbank mit von der \inlinec
 \end{itemize}
 
   \paragraph*{Klasse DeletionRequest}
+  
+ \class{DeletionRequest extends Request}
 Repräsentation des Löschrequests. Wird in der Datenbank mit von der \inlinecode{Request}-Klasse vordefinierten Attributen gespeichert.
  bla bla
  
@@ -516,16 +524,31 @@ Repräsentation des Löschrequests. Wird in der Datenbank mit von der \inlinecod
 	Request wird genehmigt: die Ressource mit \inlinecode{this.resourceID} wird aus der Datenbank gelöscht, sowie alle Rechte und Requests für sie. Die Besitzer werden benachrichtigt.
 	}
 \end{itemize}
-
+\newpage
   \paragraph*{Klasse Logging}
  \class{<<external>> Logging}
- bla bla
+Vorimplemetiertes API vom Python, dient zum Protokollieren von Systemereignissen:
+\begin{itemize}
+	\item Erstellung und Löschung einer Ressource
+	\item Absenden und Stornieren eines Requests
+	\item Absenden einer Benachrichtigung
+	\item Genehmigung und Ablehnung eines Requests
+	\item Änderung der Rechte
+	\item Löschung eines Benutzers 
+\end{itemize}
+ 
  
  
   \paragraph*{Klasse EmailMessage}
  \class{<<external>> EmailMessage}
- bla bla
- 
+ Vorimplentierte Phyton-Klasse, wird für Benachrichtigungen der Benutzer des Portals benutzt. Benutzer werden über einige Systemereignisse benachrichtigt:
+ \begin{itemize}
+	\item Erhaltung eines Requests
+	\item Genehmigung und Ablehnung abgesendeten Requests
+	\item Änderung der Rechte
+	\item Löschung einer Ressource, für die der Benutzer Besitzerrechte hatte.
+\end{itemize}
+\newpage 
 \subsection{View}
 \begin{figure}[ht!]
 	\centering
