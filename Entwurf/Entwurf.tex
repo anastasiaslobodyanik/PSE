@@ -201,15 +201,15 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/strategie.png}
- 	\caption{Sterategie-Muster}
+ 	\caption{Strategie-Muster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von unseren Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster. }
  \end{figure}
- Das Strategy-Muster kommt in den Klassen ``\textit{Reauest}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
+ Das Strategy-Muster kommt in den Klassen ``\textit{Request}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
  
  \subsubsection*{Befehlsmuster}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=0.85\textwidth]{res/Befehl.png}
- 	\caption{Befehlsmuster}
+ 	\caption{Befehlsmuster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von unseren Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster.}
  	\label{Befehl}
  \end{figure}
 
@@ -221,7 +221,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  
  \subsubsection*{Bequemlichkeitsmethode-Muster}
  Das Bequemlichkeitsmethode-Muster ist in der Klasse ``\textit{Owner}``
- bei den Funktionen ``\textit{allowAccessPermission(reqestID)}`` und ``\textit{allowAccessPermission(resourceID, userID)}`` verwendet. Dieses Muster dient zum Vereinfachen des Funktionenaufrufs durch die Bereitstellung häufig
+ bei den Funktionen ``\textit{allowAccessPermission(requestID)}`` und ``\textit{allowAccessPermission(resourceID, userID)}`` verwendet. Dieses Muster dient zum Vereinfachen des Funktionenaufrufs durch die Bereitstellung häufig
 genutzter Parameterkombinationen in zusätzlichen Funktionen
 (Überladen).
   \subsection{URL Verzeichnis}
