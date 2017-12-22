@@ -227,7 +227,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
 genutzter Parameterkombinationen in zusätzlichen Funktionen
 (Überladen).
   \subsection{URL Verzeichnis}
-Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 6}}). 
+Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 6}}). Ein URL lokalisier ein oder mehrere Views, die entweder als ein Main-Fenster oder ein Dialog präsentiert werden.  
 
 \begin{figure}[ht!]
  	\centering
@@ -250,7 +250,7 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
 \item \textbf{/resources} - Seite mit Übersicht von Ressourcen, für die der Benutzer Besitzerrechte hat. Diese Seite enthält Subseiten:
 \begin{itemize}[itemsep=0pt]
 \item \textbf{/add{\_}new{\_}resource} - Seite für Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog für Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
-\item \textbf{/$<$resourceID$>${\_}edit{\_}users{\_}permissions} - Seite für Vergabe und Entzug von Rechten für die Ressource.
+\item \textbf{/$<$resourceID$>${\_}edit{\_}users{\_}permissions} - Dialog für Vergabe und Entzug von Rechten für die Ressource.
 \item \textbf{/$<$resourceID$>${\_}send{\_}deletion{\_}request} - Dialog für Absenden von Löschrequest für die Ressource.
 \end{itemize}
 \end{itemize}
@@ -302,7 +302,7 @@ Abgesendete, noch nicht bearbeitete Requests werden in der Tabelle ``ReceivedReq
 Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Tabelle präsentiert entweder Zugriffs- oder Besitzerrechte, dabei werden folgende Attribute gespeichert: ID des Benutzers, ID der Ressource und Typ des Eintrags (Zugriffs- oder Besitzerrechte). Die erste zwei sind Schlüssel aus den Tabellen ``User``, bzw. ``Resource`` (Pfeile 3 und 5). Alle Attribute zusammen formieren den Primary Key dieser Tabelle. \\
  
  \subsection{Logging}
- Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
+Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
  
  
  \section{Paketenübersicht}
@@ -314,29 +314,29 @@ Da Django ein Web Framework ist, ist es notwendig HTML-Dateien dynamisch zu gene
 Ein Model enthält Informationen über die unerlässliche Felder und Verhalten von den Daten, die gespeichert sind.
 Das Paket ``model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Resource``, ``Request``, ``AccessRequest`` und ``DeletionRequest``. Normalerweise wird jede Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Attribut einer Klasse wird dann eine Spalte in der entsprechenden Tabelle.
  \subsection{Views}
- View ist eine Funktion, die als Eingabe ein Web Request bekommt und gibt  eine Web Response aus. Diese Response kann prinzipiell alles beinhalten - zum Beispiel HTML Inhalt einer Webseite, ein Bild, eine 404 Error Seite, Weiterleitung zu anderer Webseite. Die View Funktion definiert was genau angezeigt wird, nachdem eine URL angefragt wird.\\
+View ist eine Funktion, die als Eingabe ein Web Request bekommt und gibt  eine Web Response aus. Diese Response kann prinzipiell alles beinhalten - zum Beispiel HTML Inhalt einer Webseite, ein Bild, eine 404 Error Seite, Weiterleitung zu anderer Webseite. Die View Funktion definiert was genau angezeigt wird, nachdem eine URL angefragt wird.\\
  Zum Paket ``views`` gehören alle Klassen, die eine solche Funktion spezifizieren.
  \subsubsection{Generic}
- Da bei der Entwicklung einer Webseite bestimmte Muster öfter vorkommen,  bietet Django eine Sammlung von solchen Views an. Diese Views haben eine abstrakte Form, damit sie mehrmals wiederverwendet werden können. Auf diese Weise spart man Zeit und Codezeilen.
+Da bei der Entwicklung einer Webseite bestimmte Muster öfter vorkommen,  bietet Django eine Sammlung von solchen Views an. Diese Views haben eine abstrakte Form, damit sie mehrmals wiederverwendet werden können. Auf diese Weise spart man Zeit und Codezeilen.
 
  
  \subsection{Test}
- Dieses Paket beinhaltet zwei Unterpaketen - test{\_}models und test{\_}views entsprechend für die Model- und die Viewklassen. Jedes Unterpaket enthält eine Testklasse spezifisch für jede Model- oder Viewklasse. Jede Testklasse hat eine setUp() Methode, die die entsprechende Objekte zum Testen erstellt und eine oder mehrere Modultestsmethoden für jede öffentliche Methode der getesteten Klassen.
+Dieses Paket beinhaltet zwei Unterpaketen - test{\_}models und test{\_}views entsprechend für die Model- und die Viewklassen. Jedes Unterpaket enthält eine Testklasse spezifisch für jede Model- oder Viewklasse. Jede Testklasse hat eine setUp() Methode, die die entsprechende Objekte zum Testen erstellt und eine oder mehrere Modultestsmethoden für jede öffentliche Methode der getesteten Klassen.
  
  \subsection{Extern}
  \subsubsection{Logging}
- Django bietet ein Logging Modul an, das von Python vordefiniert ist.
- Dieses Paket beinhaltet Klassen und Funktionen, die das Logging von Systemereignisse ermöglichen. 
+Django bietet ein Logging Modul an, das von Python vordefiniert ist.
+Dieses Paket beinhaltet Klassen und Funktionen, die das Logging von Systemereignisse ermöglichen. 
  \subsubsection{EmailMessages}
- Wie bei der Logging Funktionalität, wird für das Senden von E-Mail-Benachrichtigungen auch ein externes Paket von Django verwendet. Die Struktur dieses Pakets wird während der Implementierungsphase klar sein. 
+Wie bei der Logging Funktionalität, wird für das Senden von E-Mail-Benachrichtigungen auch ein externes Paket von Django verwendet. Die Struktur dieses Pakets wird während der Implementierungsphase klar sein. 
  
  
  \newpage
  \section{Klassenübersicht}
  \subsection{Model}
  \paragraph*{Klasse User}
- \class{User}
- User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Darstellung des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
+ \class{User extends Model}
+User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attribute fest, die für Darstellung des Benutzers notwendig sind, und beschreibt Aktivitäten, die von allen Benutzertypen ausgeführt werden können.
 \subparagraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
 	\item \atr{USER_ID}{String}{final} {Eindeutiger Identifikator des Benutzers}
@@ -362,7 +362,6 @@ Das Paket ``model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Res
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
 Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlinecode{User} Klasse Besitzerrechte für eine oder mehrere Ressourcen bekommt, wird ein neuer Eintrag in der Datenbank-Tabelle ``Owner``, beziehungsweise eine neue Instanz von Klasse \inlinecode{Owner} erstellt. 
-\paragraph*{Attribute} 
 
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
@@ -388,71 +387,69 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
 \newpage
   \paragraph*{Klasse Admin}
  \class{Admin extends Owner}
- bla bla
+\inlinecode{Admin} erweitert \inlinecode{Owner}-Klasse. Falls ein Benutzer Administratorrechte besitzt, wird ein Eintrag in der Tabelle ``Admin`` der Datenbank gespeichert und eine Instanz der Klasse \inlinecode{Admin} erstellt. 
  
-\paragraph*{Attribute} % skip this if there are no attribute
-
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{searchUser}{List<User>}{searchParameters:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Funktion liefert \inlinecode{List<User>} zurück, die alle Benutzer enthält, deren Daten (Name, Email, Domain) den \inlinecode{searchParameters} entsprechen.
 	}
 	
 	\item \mtd{blockUser}{void}{userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Nach Ausführung dieser Funktion wird der Benutzer, wem die   \inlinecode{userID} entspticht, sich nicht mehr ins Portal anmelden können.
 	}
 	\item \mtd{deleteUser}{void}{userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion löscht die mit \inlinecode{userID} Einträge aus allen Tabellen aus der Datenbank: \inlinecode{user}, alle seine Rechte und Requests. Resourcen, für die er Rechte hat, werden nicht gelöscht.
 	}
 	\item \mtd{deleteResource}{void}{resourceID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion löscht die mit \inlinecode{resourceID} Einträge aus allen Tabellen aus der Datenbank: Metadaten von der Ressource, alle Rechte für sie und alle für sie erstellte Requests. Alle Benutzer, die Besitzerrechte für diese Ressource hatten, werden benachrichtigt.
 	}
 	\item \mtd{acceptDeletionRequest}{void}{requestID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	\inlinecode{acceptRequest}, dem die \inlinecode{requestID} entspricht, wird genehmigt: Instanz der \inlinecode{Resource}-Klasse wird gelöscht, sowie alle entsprechende Einträge in der Datenbank: Metadaten von der Ressource, alle Rechte für sie und alle für sie erstellte Requests. Alle Benutzer, die Besitzerrechte für diese Ressource hatten, werden benachrichtigt.
 	}
 	\item \mtd{denyDeletionRequest}{void}{requestID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion lehnt den Request mit \inlinecode{requestID} ab: entsprechende \inlinecode{DeletionRequest}-Instanz wird gelöscht und der Absender wird benachrichtigt. 
 	}
 	\item \mtd{deleteOwnerPermission}{void}{resourceID:String, userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	 Diese Funktion löscht den Eintrag mit \inlinecode{resourceID} und \inlinecode{userID} und Typ ``Òwner`` aus der Tabelle ``Permission`` gelöscht.
 	}
 \end{itemize}
-
+\newpage
   \paragraph*{Klasse Resource}
-  \class{Resource}
- bla bla
+  \class{Resource extends Model}
+Die Klasse \inlinecode{Resource} repräsentiert Ressourcen und kapselt dabei ihre Metadaten als Attribute. 
 
 \paragraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
 	\item \atr{RESOURCE_ID}{String}{public}{
-	bla 
+	Eindeutiger Identifikator des entsprechenden Eintrags in Datenbank. 
 	}
 		\item \atr{type}{ResourceType}{private}{
-	bla 
+	Type der Ressource.
 	}
 		\item \atr{name}{String}{private}{
-	bla 
+	Name der Ressource, wird vom Ersteller eingegeben. 
 	}
 		\item \atr{description}{String}{private}{
-	bla 
+	Beschreibung des Inhalts der Ressource, wird bei der Erstellung eingegeben.
 	}
 		\item \atr{CREATION_DATE}{String}{private}{
-	bla 
+	Datum der Erstellung, kann nicht geändert werden.
 	}
 \end{itemize}
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Liefert \inlinecode{true} zurück, falls der Besitzer mit  \inlinecode{uesrID} Zugriffsrechte für diese Ressource hat, und \inlinecode{false} sonst.
 	}
 	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
-	bla  \inlinecode{USER_ID}
+	Liefert \inlinecode{true} zurück, falls der Besitzer mit  \inlinecode{uesrID} Besitzerrechte für diese Ressource hat, und \inlinecode{false} sonst.
 	}
 \end{itemize}
 
   \paragraph*{Klasse ResourceType}
- \class{<<enumeration>> ResourceType}
- bla bla
+   \class{<<enumeration>> ResourceType}
+    Diese ist eine Aufzählungstyp-Klasse, die zur Unterscheidung von Ressourcen unterschiedlichen Typen dient. Enthält beispielsweise folgende Typen: 
  
 \begin{itemize}
 	\item{Data}
@@ -460,65 +457,65 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
 	\item{Workflow}
 	
 \end{itemize}
-
+\newpage
 
   \paragraph*{Klasse Request}
  \class{<<abstract>> Request}
- bla bla
+Abstrakte Klasse \inlinecode{Request} definiert alle gemeinsame Attribute und Methoden für alle mögliche Requesttypen. Sie selbst kann jedoch keine eigenständige Instanzen erzeugen. Diese Klasse dient vor allem zu Erweiterbarkeit des Produkts. 
  
 \paragraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
-	\item \atr{REQUEST_ID}{String}{public}{
-	bla 
+	\item \atr{REQUEST_ID}{String}{final}{
+	Eindeutiger Identifikator des entsprechenden Eintrags in der Datenbank. 
 	}
-		\item \atr{SENDER_ID}{String}{public}{
-	bla 
+		\item \atr{SENDER_ID}{String}{final}{
+	ID des Absenders (\inlinecode{User}) 
 	}
-		\item \atr{CREATION_DATE}{String}{public}{
-	bla 
+		\item \atr{CREATION_DATE}{String}{final}{
+	Datum der Erstellung. 
 	}
-		\item \atr{RESOURCE_ID}{String}{public}{
-	bla 
+		\item \atr{RESOURCE_ID}{String}{final}{
+	ID der Ressource. 
 	}
 \end{itemize}
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{deny}{void}{}{abstract}{
-	bla  \inlinecode{USER_ID}
+	Signatur der Methode, die diesen Request ablehnt.
 	}
 	
 	\item \mtd{accept}{void}{}{abstract}{
-	bla  \inlinecode{USER_ID}
+Signatur der Methode, die diesen Request annimmt.
 	}
 \end{itemize}
 
   \paragraph*{Klasse AccessRequest}
  \class{AccessRequest extends Request}
- bla bla
+Repräsentation des Zugriffsrequests. Wird in der Datenbank mit von der \inlinecode{Request}-Klasse vordefinierten Attributen gespeichert. 
  
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{deny}{void}{}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion lehnt den Zugriffsrequest ab: Instanz der \inlinecode{AccessRequest}-Klasse wird gelöscht und der Absender benachrichtigt.
 	}
 	
 	\item \mtd{accept}{void}{}{public}{
-	bla  \inlinecode{USER_ID}
+	Request wird genehmigt: in der Tabelle "Permission" wir neuen Eintrag erstellt mit \inlinecode{this.resourceID}, \inlinecode{this.userID} und Type ``Access``.
 	}
 \end{itemize}
 
   \paragraph*{Klasse DeletionRequest}
- \class{DeletionRequest extends Request}
+Repräsentation des Löschrequests. Wird in der Datenbank mit von der \inlinecode{Request}-Klasse vordefinierten Attributen gespeichert.
  bla bla
  
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{deny}{void}{}{public}{
-	bla  \inlinecode{USER_ID}
+	Diese Funktion lehnt den Löschrequest ab: Instanz der \inlinecode{DeletionRequest}-Klasse wird gelöscht und der Absender benachrichtigt.
 	}
 	
 	\item \mtd{accept}{void}{}{public}{
-	bla  \inlinecode{USER_ID}
+	Request wird genehmigt: die Ressource mit \inlinecode{this.resourceID} wird aus der Datenbank gelöscht, sowie alle Rechte und Requests für sie. Die Besitzer werden benachrichtigt.
 	}
 \end{itemize}
 
