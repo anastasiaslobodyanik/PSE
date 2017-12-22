@@ -190,28 +190,26 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  \begin{figure}[h]
  	\includegraphics[width = 1.0\textwidth]{res/packages}
  	\centering
- 	\caption{Paketendiaramm}
+ 	\caption{Paketendiagramm}
  	\label{packages}
  \end{figure}
  
 
  \subsection{Entwurfsmuster}
  Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das \gls{Geheimnisprinzip} zu unterstützen. 
- \subsubsection*{MVT-Muster} 
- Bei diesem Entwurf wird das  \hyperref[MVT]{Model-View-Template} Architekturmuster verwendet.
  \subsubsection*{Strategie-Muster}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/strategie.png}
- 	\caption{Sterategie-Muster}
+ 	\caption{Strategie-Muster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von unseren Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster. }
  \end{figure}
- Das Strategy-Muster kommt in den Klassen ``\textit{Reauest}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
+ Das Strategy-Muster kommt in den Klassen ``\textit{Request}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
  
  \subsubsection*{Befehlsmuster}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=0.85\textwidth]{res/Befehl.png}
- 	\caption{Befehlsmuster}
+ 	\caption{Befehlsmuster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von unseren Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster.}
  	\label{Befehl}
  \end{figure}
 
@@ -223,7 +221,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  
  \subsubsection*{Bequemlichkeitsmethode-Muster}
  Das Bequemlichkeitsmethode-Muster ist in der Klasse ``\textit{Owner}``
- bei den Funktionen ``\textit{allowAccessPermission(reqestID)}`` und ``\textit{allowAccessPermission(resourceID, userID)}`` verwendet. Dieses Muster dient zum Vereinfachen des Funktionenaufrufs durch die Bereitstellung häufig
+ bei den Funktionen ``\textit{allowAccessPermission(requestID)}`` und ``\textit{allowAccessPermission(resourceID, userID)}`` verwendet. Dieses Muster dient zum Vereinfachen des Funktionenaufrufs durch die Bereitstellung häufig
 genutzter Parameterkombinationen in zusätzlichen Funktionen
 (Überladen).
   \subsection{URL Verzeichnis}
@@ -636,17 +634,17 @@ Zeigt ein Feld für Beschreibung des Grundes des Zugriffsrequests.
 Diese Klasse bezeichnet den Dialog wo der Benutzer wichtige Information über bestimmte Ressource sehen kann.
 \class{from django.views.generic import DetailsView}
 Zeigt wichtige Information über bestimmte Ressource (Beschreibung, Erstellungsdatum, Name, Typ, usw.).
-
+\newpage
  \section{Sequenzdiagramme}
  \subsection{Zugriffsrequest schicken}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/sendAccessRequest.png}
- 	\caption{Zugriggsrequest schicken}
+ 	\caption{Zugriffsrequest schicken}
  	\label{fig:sendAccReq}
  \end{figure}
  
-Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Benutzer \enquote{a}  aufgerufen. Erstens wird eine AccesRequest Instanz \enquote{b} erstellt und in der Datenbank gespeichert. Danach wird die Ressource, für den das Request geschickt wurde, von der Datenbank geholt und in der Variable \enquote{r} gespeichert. Auf der Ressourceninstanz \enquote{r} wird dann getOwners() aufgerufen, was alle Besitzer des Ressource liefert. Auf allen Instanzen von diesen Besitzer(auf dem Diagramm als die Variable \enquote{list} bezeichnet) wird die Methode  \enquote{addAccessRequest(request)} aufgerufen. Das fügt den Request in der Liste der bekommenen, aber noch nicht bearbeiteten Requesten, hinzu. Eine passende Lognachricht (die in dem Diagramm gegebene ist nur als Beispiel gegeben, die echte Nachricht wird anders sein) wird in der Logdatei durch die Methode \enquote{info()} gespeichert. Danach wird eine Instanz der Djangoklasse \enquote{Emailmessage} erstellt. Als Parameter ist die Variable \enquote{list} gegeben. Damit ist gemeint, dass die Klasse alle Emails von den Besitzern in List nimmt. Der Konstruktor der Klasse nimmt auch andere Parameter als Emailnachricht, Sender usw, die im Diagramm nicht bezeichnet sind. Nach dem erfolgreichten Schicken der Emails mit der Methode  \enquote{send()} wird eine Lognachricht dafür in der Logdatei gespeichert. 
+Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Benutzer \enquote{u}  aufgerufen. Erstens wird eine AccesRequest Instanz \enquote{a} erstellt und in der Datenbank gespeichert. Danach wird die Ressource, für den das Request geschickt wurde, von der Datenbank geholt und in der Variable \enquote{r} gespeichert. Auf der Ressourceninstanz \enquote{r} wird dann getOwners() aufgerufen, was alle Besitzer des Ressource liefert. Auf allen Instanzen von diesen Besitzer(auf dem Diagramm als die Variable \enquote{list} bezeichnet) wird die Methode  \enquote{addAccessRequest(request)} aufgerufen. Das fügt den Request in der Liste der bekommenen, aber noch nicht bearbeiteten Requesten, hinzu. Eine passende Lognachricht (die in dem Diagramm gegebene ist nur als Beispiel gegeben, die echte Nachricht wird anders sein) wird in der Logdatei durch die Methode \enquote{info()} gespeichert. Danach wird eine Instanz der Djangoklasse \enquote{Emailmessage} erstellt. Als Parameter ist die Variable \enquote{list} gegeben. Damit ist gemeint, dass die Klasse alle Emails von den Besitzern in List nimmt. Der Konstruktor der Klasse nimmt auch andere Parameter als Emailnachricht, Sender usw, die im Diagramm nicht bezeichnet sind. Nach dem erfolgreichten Schicken der Emails mit der Methode  \enquote{send()} wird eine Lognachricht dafür in der Logdatei gespeichert. 
  
   \newpage
  \subsection{Zugriffsrequest genehmigen}
@@ -654,9 +652,10 @@ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID
  	\centering
  	\includegraphics[width=\textwidth]{res/allowAccessPermission.png}
  	\caption{Zugriffsrequest genehmigen}
+ 	 	\label{fig:allowAccPerm}
  \end{figure}
  
- Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Besitzer \enquote{a}  aufgerufen. Danach wird der Request von der Datenbank geholt in in der Variable \enquote{req} gespeichert. Danach wird auf \enquote{req} getSender aufgerufen und das Ergebnis(der Benutzer, der das Request geschickt hat) wird dann in \enquote{u} gespeichet. Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \enquote{getResource()}. Auf \enquote{u} wird dann \enquote{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{u} in der Liste \enquote{accessPermission} von Ressource hinzufügt. Eine Lognachricht wird in der Logdatei gespeichert. Die Methode \enquote{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diegramm ähnlich bis gleich zum Ende des Diegramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
+ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID )} auf dem Besitzer \enquote{o}  aufgerufen. Danach wird der Request von der Datenbank geholt in in der Variable \enquote{req} gespeichert. Danach wird auf \enquote{req} getSender aufgerufen und das Ergebnis(der Benutzer, der das Request geschickt hat) wird dann in \enquote{u} gespeichet. Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \enquote{getResource()}. Auf \enquote{u} wird dann \enquote{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{u} in der Liste \enquote{accessPermission} von Ressource hinzufügt. Eine Lognachricht wird in der Logdatei gespeichert. Die Methode \enquote{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diagramm ähnlich bis gleich zum Ende des Diagramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
  
   \newpage
  \subsection{Ressource erstellen}
@@ -666,24 +665,22 @@ Von irgeneiner Viewklasse wird die Methode \enquote{sendAccessRequest(resourceID
  	\caption{Ressource erstellen}
  \end{figure}
  
-Von irgeneiner Viewklasse wird die Methode \enquote{addResource()} auf dem Benutzer \enquote{a}  aufgerufen.\\ Erstens wird eine Resource Instanz \enquote{r} erstellt und in der Datenbank gespeichert.\\ Dann wird das Benutzer \enquote{a} zuerst als einer des Besitzers diese Resource \enquote{r} hinzugefügt durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addOwner(a.getUserID)}, danach als einer des Lesers diese Resource \enquote{r} durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addReader(a.getUserID)} .\\Am Ende wird eine Lognachricht über diesen ganzen Prozess  in der Logdatei gespeichert.
+Von irgeneiner Viewklasse wird die Methode \enquote{addResource()} auf dem Benutzer \enquote{u}  aufgerufen.\\ Erstens wird eine Resource Instanz \enquote{r} erstellt und in der Datenbank gespeichert.\\ Dann wird das Benutzer \enquote{u} zuerst als einer des Besitzers diese Resource \enquote{r} hinzugefügt durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addOwner(ua.getUserID)}, danach als einer des Lesers diese Resource \enquote{r} durch seinen \enquote{UserID} mit Aufruf der Methode \enquote{addReader(u.getUserID)} .\\Am Ende wird eine Lognachricht über diesen ganzen Prozess in der Logdatei gespeichert.
 
- 
- 
-  \newpage
     \newpage
  \subsection{Ressource zugreifen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/AccessResource.png}
- 	\caption{Ressource löschen}
+ 	\caption{Ressource zugreifen}
  \end{figure}
+ \newpage
  
  \subsection{Ressource löschen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/remove_resourceDiagram.png}
- 	\caption{Ressource zugreifen}
+ 	\caption{Ressource löschen}
  \end{figure}
  
  
