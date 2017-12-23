@@ -241,24 +241,21 @@ Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten vone
 
  \subsubsection*{Strategie-Muster}
  
-Strategie-Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen. Dises Muster wird verwendet, wenn sich mehrere verwandte Klassen nur in ihrem Verhalten unterscheiden. Strategieobjekte ermöglichen, ein Objekt mit einer von mehreren möglichen Verhaltensalgorithmen zu konfigurieren. Dies bietet die Möglichkeit die notwendigen Funktionalitäten zu variieren.\\
-Das Strategie-Muster kommt in den Klassen ``\textit{Request}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz (Abbildung 4). Die vordefinierte Funktion der abstrakten Klasse wird abhängig von benötigter Funktionalität von erbenden Klassen  implementiert. \\\\ 
+Strategiemuster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen. Dises Muster wird verwendet, wenn sich mehrere verwandte Klassen nur in ihrem Verhalten unterscheiden. Strategieobjekte ermöglichen, ein Objekt mit einem von mehreren möglichen Verhaltensalgorithmen zu konfigurieren. Dies bietet die Möglichkeit die notwendigen Funktionalitäten zu variieren.\\
+Das Strategiemuster kommt in den Klassen ``\textit{Request}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz (Abbildung 4). Die vordefinierte Funktion der abstrakten Klasse wird abhängig von benötigter Funktionalität von erbenden Klassen  implementiert. \\\\ 
   
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/strategie.png}
- 	\caption{Strategie-Muster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von zu implementierenden Klassen und ihren Funktionen der Klassen bzw. Funktionen vom Strategie-Muster entsprechen. }
+ 	\caption{Strategiemuster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von zu implementierenden Klassen und ihren Funktionen der Klassen bzw. Funktionen vom Strategiemuster entsprechen. }
  \end{figure}
  
  \newpage
  \subsubsection*{Befehlsmuster}
 
 
-Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Request}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 5} angezeigt ist, getrennt.\\
- Das Befehlsmusters ermöglicht es, ein bestimmtes Ereignis in einem dafür vorgesehenen Handler
- zu bearbeiten und dieses damit in einem Objekt zu kapseln. Jeder Handler lässt sich eindeutig einer Aufgabe
- und einem Ereignis zuordnen, sodass keine Verschränkung zwischen zwei verschiedenen Handlern auftritt.
- Außerdem lässt sich leichter ein weiterer Handler hinzufügen oder ein bestehender Handler austauschen. \\\\
+Das Befehlsmuster wird zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Request}``) verwendet. Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 5} angezeigt ist, getrennt.\\
+ Das Befehlsmusters ermöglicht es, ein bestimmtes Ereignis in einem dafür vorgesehenen Handler zu bearbeiten und dieses damit in einem Objekt zu kapseln. Jeder Handler lässt sich eindeutig einer Aufgabe und einem Ereignis zuordnen, sodass keine Verschränkung zwischen zwei verschiedenen Handlern auftritt. Außerdem lässt sich leichter ein weiterer Handler hinzufügen oder ein bestehender Handler austauschen. \\\\
  
   \begin{figure}[ht!]
  	\centering
@@ -321,7 +318,7 @@ Benutzerprofil-Seite ist mit Subseiten versehen:
  
  \newpage
  \section{Datenhaltung}
- 
+
 Relevante Daten über die Benutzer, Ressourcen, deren Beziehungen (Rechte) und Interaktionen (Requests) werden in einer Datenbank gespeichert. Das in diesem Projekt benutzte Framework Django bietet integrierte  objektrelationale Abbildung für die Datenbanksysteme MySQL, Oracle, PostgreSQL und SQLite.\\
 Da SQLite-Bibliotheken sich direkt in Anwendungen integrieren lassen, sodass keine weitere Server-Software benötigt wird, wurde entschieden, SQLite3-Syntax zu verwenden. Im Projekt wird das eingebettete Datenbanksystem (für Frontend nicht sichtbar) entworfen, sodass auf erweiterte Funktionalitäten von komplizierteren Datenbanksysteme verzichtet werden kann. Dabei entstehen auch einige Vorteile: die SQLite-Bibliothek ist nur wenige hundert Kilobyte groß und durch das Einbinden der Bibliothek wird die Anwendung um Datenbankfunktionen erweitert, ohne auf externe Softwarepakete angewiesen zu sein.
  \subsection{Datenbank}
@@ -336,7 +333,7 @@ Da SQLite-Bibliotheken sich direkt in Anwendungen integrieren lassen, sodass kei
     \textit{``A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table.``}
     \end{center}
     —Models | Django documentation\\\\
-    
+Die in diesem Projekt zu entwerfende Datenbank hat die auf Abbildung 7 dargestellte Struktur.    
 Die Tabelle ``User`` speichert einen eindeutigen Identifikator (\textit{ID}) des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``is\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\
 Metadaten über die Ressourcen werden in der Tabelle ``Resource`` gespeichert: ID, Name, generischer Typ, kurze Beschreibung und Erstellungsdatum. Zusätzlich hat jeder Eintrag in der Tabelle eine Link zur ``echten`` Resource.\\
 In der Tabelle ``Request`` werden relevante Daten über die Requests gespeichert: ID, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), ID der Ressource, für die der Request gesendet wird und ID des Absenders. Die letzte zwei sind Foreign Keys aus den Tabellen ``Resource``, bzw. ``User`` (Pfeile 2 und 6). Auf diese Weise werden Redundanzen vermieden und die Datenbank bleibt konsistent. Requests werden sofort nach der Erstellung gespeichert und nach der Bearbeitung wieder gelöscht.\\
@@ -573,107 +570,107 @@ Vorimplentierte Phyton-Klasse, wird zur Benachrichtigungen der Benutzer des Port
 	\caption{Views-Klassendiagramm}
 \end{figure}
 
-Unsere View Klassen bestehen aus kleineren generischen Klassen die schon in Django zur Verfügung stehen (django.views.generic; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView, BlockView und HomeView.
+Unsere View-Klassen bestehen aus kleineren generischen Klassen, die schon in Django zur Verfügung stehen (django.views.generic; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView, BlockView und HomeView.
 
 \paragraph*{HomeView}
-Diese Klasse bezeichnet die Homepage wo der Benutzer zwischen zwei Subseiten auswählen kann - ''Profil'' und ''Resources Overview''.
+Diese Klasse bezeichnet die Homepage, auf der der Benutzer zwischen zwei Subseiten auswählen kann - ''Profil'' und ''Resources Overview''.
 
 \paragraph*{Klasse ProfilView}
  Diese Klasse bezeichnet die Profilseite des Benutzers.
 \class{from django.views.generic import DetailsView} 
- Zeigt die Namen des Benutzers.
+ Zeigt den Namen des Benutzers.
 \class{from django.views.generic import UpdateView}
- Zeigt ein Feld für Änderung von Namen.
+ Zeigt ein Feld zur Änderung vom Name.
 \class{from django.views.generic import ListView}
  Zeigt eine Liste von Requests.
 \class{from django.views.generic.detail import SingleObjectMixin}
- Benutzt mit ListView um Requests von einem spezifischen Benutzer zu zeigen.
+ Benutzt mit ListView um Requests eines spezifischen Benutzers zu zeigen.
  
 \paragraph*{Klasse ChosenRequestsView}
- Diese Klasse bezeichnet den Dialog wo der Benutzer etscheidet einen Request entweder abzulehnen oder zu genehmigen. 
+ Diese Klasse bezeichnet den Dialog, in dem der Benutzer etscheidet einen Request entweder abzulehnen oder zu genehmigen. 
 \class{from django.views.generic import FormView} 
- Zeigt ein Feld für Beschreibung der Entscheidung.
+ Zeigt ein Feld zur Beschreibung der Entscheidung.
 \class{from django.views import HandleRequestView}
  Zeigt zwei Optionen - ''genehmigen'' und ''ablehnen''.
  
 \paragraph*{Klasse MyResourcesView}
- Diese Klasse bezeichnet die Subeite wo der Benutzer seine eigene Ressourcen sieht.
+ Diese Klasse bezeichnet die Subeite, auf der der Benutzer seine eigene Ressourcen sieht.
 \class{MyResourcesView extends ProfilView}
- Alle genersiche View Klassen aus ProfilView sind auch in MyResourcesView benutzt mit der Unterschied, dass ListView und SingleObjectMixin zeigen eine Liste von Ressourcen spezifisch für einen Benutzer.
+ Alle genersiche View-Klassen aus ProfilView werden auch in MyResourcesView benutzt mit dem Unterschied, dass ListView und SingleObjectMixin eine Liste der Ressourcen spezifisch für einen Benutzer zeigen.
 \class{from django.views.generic import CreateView}
 Dient zur Erstellung von neuen Ressourcen.
 
 \paragraph*{Klasse DeleteResourceView}
- Diese Klasse bezeichnet den Dialog wo der Benutzer einen Löschrequest sendet.
+ Diese Klasse bezeichnet den Dialog, in dem der Benutzer einen Löschrequest sendet.
  \class{from django.utils.decorators import method_decorator}
- Dient zur Prüfung für Adminrechte. 
+ Dient zur Prüfung der Adminrechte. 
  \class{from django.views.generic import DeleteView}
  Wenn der Benutzer Adminrechte hat, dann kann er die Ressource löschen.
  \class{from django.views.generic import FormView}
- Zeigt ein Feld für Beschreibung des Grunds des Löschrequests, wenn der Benutzer keine Adminrechte hat.
+ Zeigt ein Feld zur Beschreibung des Grunds des Löschrequests, wenn der Benutzer keine Adminrechte hat.
  
 \paragraph*{Klasse PermissionForChosenResourceView}
- Diese Klasse bezeichnet die Subseite wo der Benutzer die Rechte von anderen Benutzer auf seine Ressourcen editieren kann.
+ Diese Klasse bezeichnet die Subseite, auf der der Benutzer die Rechte anderer Benutzer für seine eigene Ressourcen editieren kann.
 \class{PermissionForChosenResourceView extends MyResourcesView}
- Alle genersiche View Klassen aus MyResourcesView sind auch in PermissionForChosenResourceView benutzt mit der Unterschied, dass ListView und SingleObjectMixin zeigen eine Liste von Benutzer spezifisch für eine Ressource.
+ Alle genersiche View-Klassen aus MyResourcesView werden auch in PermissionForChosenResourceView benutzt mit dem Unterschied, dass ListView und SingleObjectMixin eine Liste der Benutzer spezifisch für eine Ressource zeigen.
 \class{from django.views import PermissionsEditingView}
 Zeigt zwei Optionen(Checkboxes) - "Zugriffsrechte" und "Besitzerrechte".
 \class{from django.views.generic import CreateView}
-Dient zur Hinzufügung von Benutzer in dieser Liste(von Benutzer spezifisch für eine Ressource), welche Rechte mit Hilfe von die Klasse PermissionsEditingView editiert werden können.
+Dient zur Hinzufügung von Benutzer in dieser Liste(von Benutzer spezifisch für eine Ressource), deren Rechte mit Hilfe von die Klasse PermissionsEditingView editiert werden können.
 \class{from django.views.generic import DeleteView}
-Dient zum Löschen von Benutzer aus diese Liste(von Benutzer spezifisch für eine Ressource). So kann man Rechte entziehen, nur aber von Benutzer die keine Besitzerrechte haben.
+Dient zum Löschen von Benutzer aus diese Liste(von Benutzer spezifisch für eine Ressource). So kann man Rechte entziehen (nur  von Benutzer die keine Besitzerrechte haben).
 
 \paragraph*{Klasse ManageUsersView}
-Diese Klasse bezeichnet die Seite wo der Administrator alle Benutzer des Systems verwalten kann.
+Diese Klasse bezeichnet die Seite, auf der der Administrator alle Benutzer des Systems verwalten kann.
 \class{from django.views.generic import DeleteView}
-Dient zum Löschen von Benutzer.
+Dient zum Löschen des Benutzers.
 \class{from django.views import BlockView}
-Dient zum Blockieren von Benutzer. Besteht aus ein Feld für Beschreibung des Grunds des Blockierens und Dropdown für wählen des Zeitraums.
+Dient zum Blockieren des Benutzers. Besteht aus einem Feld zur Beschreibung des Grunds des Blockierens und Dropdown zur Eingabe des Zeitraums.
 \class{from django.views.generic import ListView}
-Zeigt eine Liste von allen Benutzer des Systems.
+Zeigt eine Liste aller Benutzer des Systems.
 
 \paragraph*{Klasse PermissionsForResourceView}
- Diese Klasse bezeichnet die Subseite wo der Administrator die Rechte von bestimmten Benutzer editieren kann.
+ Diese Klasse bezeichnet die Subseite, auf der der Administrator die Rechte von bestimmten Benutzer editieren kann.
  \class{PermissionForResourcesView extends ManageUsersView}
- Alle genersiche View Klassen aus ManageUsersView sind auch in PermissionForResourceView benutzt mit der Unterschied, dass ListView zeigt eine Liste von allen Ressourcen.
+ Alle genersiche View-Klassen aus ManageUsersView werden auch in PermissionForResourceView benutzt mit demm Unterschied, dass ListView eine Liste aller Ressourcen zeigt.
  \class{from django.views import PermissionsEditingView}
  Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
  
 \paragraph*{Klasse ManageResourcesView}
-Diese Klasse bezeichnet die Subseite wo der Administrator Rechte für bestimmte Ressource editieren kann.
+Diese Klasse bezeichnet die Subseite, auf der der Administrator Rechte für bestimmte Ressource editieren kann.
 \class{from django.views.generic import ListView}
-Zeigt eine Liste von allen Ressourcen im System.
+Zeigt eine Liste aller Ressourcen im System.
 \class{from django.views.generic import DeleteView}
 Dient zum Löschen einer Ressource. Mit oder ohne Beschreibung.
 
 \paragraph*{Klasse PermissionsForUsersView}
- Diese Klasse bezeichnet die Subseite wo der Administrator die Rechte für bestimmte Ressource editieren kann.
+ Diese Klasse bezeichnet die Subseite, auf der der Administrator die Rechte für bestimmte Ressource editieren kann.
  \class{PermissionForUsersView extends ManageResourcesView}
- Alle genersiche View Klassen aus ManageResourcesView sind auch in PermissionForUsersView benutzt mit der Unterschied, dass ListView zeigt eine Liste von Benutzer.
+ Alle genersiche View Klassen aus ManageResourcesView werden auch in PermissionForUsersView benutzt mit dem Unterschied, dass ListView eine Liste der Benutzer zeigt.
  \class{from django.views import PermissionsEditingView}
  Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
 
 \paragraph*{Klasse ResourcesOverview}
-Diese Klasse bezeichnet die Subseite wo der Benutzer nach Ressourcen suchen kann, dann zugreifen, Beschreibung lesen, oder Request senden.
+Diese Klasse bezeichnet die Subseite, auf der der Benutzer nach Ressourcen suchen kann, die Ressourcen zugreifen, deren Beschreibung lesen, oder Requests senden.
 \class{from django.views.generic import ListView}
-Zeigt eine Liste von Ressourcen.
+Zeigt eine Liste der Ressourcen.
 
 \paragraph*{Klasse OpenResourceView}
-Diese Klasse bezeichnet die Subseite wo die Ressource sich befindet.
+Diese Klasse bezeichnet die Subseite, auf der die Ressource sich befindet.
 \class{from django.utils.decorators import method_decorator}
-Dient zur Prüfung für Zugriffsrechte.
+Dient zur Prüfung der Zugriffsrechte.
 \class{from django.views.generic import ListView}
-Zeigt eine Liste von Ressourcen sortiert nach Wahl(alphabetisch, neu, enthält ''a-z'', usw.).
+Zeigt eine Liste der Ressourcen nach Wahl(alphabetisch, neu, enthält ''a-z'', usw.) sortiert.
 
 \paragraph*{Klasse RequestView}
-Diese Klasse bezeichnet den Dialog wo der Benutzer einen Request mit Beschreibung für eine Ressource sendet.
+Diese Klasse bezeichnet den Dialog, in dem der Benutzer einen Request mit Beschreibung für eine Ressource sendet.
 \class{from django.views.generic import FormView}
-Zeigt ein Feld für Beschreibung des Grundes des Zugriffsrequests.
+Zeigt ein Feld zur Beschreibung des Grundes des Zugriffsrequests.
 
 \paragraph*{Klasse ResourceInfoView}
-Diese Klasse bezeichnet den Dialog wo der Benutzer wichtige Information über bestimmte Ressource sehen kann.
+Diese Klasse bezeichnet den Dialog, in dem der Benutzer wichtige Information über bestimmte Ressource sehen kann.
 \class{from django.views.generic import DetailsView}
-Zeigt wichtige Information über bestimmte Ressource (Beschreibung, Erstellungsdatum, Name, Typ, usw.).
+Zeigt relevante Information über bestimmte Ressource (Beschreibung, Erstellungsdatum, Name, Typ, usw.).
 \newpage
  \section{Sequenzdiagramme}
  \subsection{Zugriffsrequest schicken}
