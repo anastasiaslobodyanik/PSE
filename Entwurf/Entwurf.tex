@@ -186,7 +186,7 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
 \newpage
  \subsection{Paketenstruktur}
  Das folgende \hyperref[packages]{Paketendiagramm} stellt die verschiedenen Paketen, die in der Entwurfsphase gestaltet werden(inkl. Paketen die von Django vordefiniert sind - ``Extern``), und ihre Beziehungen zueinander dar. Den Inhalt dieser Paketen wird im Abschnitt ``Paketenübersicht`` beschrieben.\\
- %beschreibung der beziehungen kommen bald
+ 
  \begin{figure}[h]
  	\includegraphics[width = 1.0\textwidth]{res/packages}
  	\centering
@@ -533,7 +533,7 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=\textwidth]{res/views}
-	\label{Views-Klassendiagramm}
+	\caption{Views-Klassendiagramm}
 \end{figure}
 
 Unsere View Klassen bestehen aus kleineren generischen Klassen die schon in Django zur Verfügung stehen (django.views.generic; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView, BlockView und HomeView.
