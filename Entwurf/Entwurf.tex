@@ -36,7 +36,7 @@
 \newglossaryentry{ORM}
 {
 	name={ORM},
-	description={Abk. ORM von englisch \textbf{O}bject-\textbf{R}elational \textbf{M}apping, ist eine Programmiertechnik zum Konvertieren von Daten zwischen inkompatiblen Systemen mit objektorientierten Programmiersprachen. Dies erzeugt in Wirklichkeit eine "virtuelle Objektdatenbank", die innerhalb der Programmiersprache verwendet werden kann}, 
+	description={Abk. ORM von englisch \textbf{O}bject-\textbf{R}elational \textbf{M}apping, ist eine Programmiertechnik zum Konvertieren von Daten zwischen inkompatiblen Systemen mit objektorientierten Programmiersprachen. Dies erzeugt in Wirklichkeit eine ``virtuelle Objektdatenbank``, die innerhalb der Programmiersprache verwendet werden kann}, 
 }
 \newglossaryentry{HTML}
 {
@@ -334,14 +334,15 @@ Da SQLite-Bibliotheken sich direkt in Anwendungen integrieren lassen, sodass kei
     \end{center}
     —Models | Django documentation\\\\
 Die in diesem Projekt zu entwerfende Datenbank hat die auf Abbildung 7 dargestellte Struktur.    
-Die Tabelle ``User`` speichert einen eindeutigen Identifikator (\textit{ID}) des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``is\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient.\\
+Die Tabelle ``User`` speichert einen eindeutigen Identifikator (\textit{ID}) des Benutzers, seinen Vor- und Nachnamen, sowie das Datum, an dem er sich registriert hat. Zusätzlich hat die Tabelle eine Spalte ``is\char`_admin``, die zur Unterscheidung zwischen ``normalem`` Benutzer und Administrator dient. In der Spalte ``allowed`` wird Status des Benutzers gespeichert: ``true``, falls der Benutzer das Portal benutzen darf, und ``fakse``, falls er von einem Administrator blockiert wurde.\\
 Metadaten über die Ressourcen werden in der Tabelle ``Resource`` gespeichert: ID, Name, generischer Typ, kurze Beschreibung und Erstellungsdatum. Zusätzlich hat jeder Eintrag in der Tabelle eine Link zur ``echten`` Resource.\\
 In der Tabelle ``Request`` werden relevante Daten über die Requests gespeichert: ID, Erstellungsdatum, Typ des Requests (Zugriffs- oder Löschrequest), ID der Ressource, für die der Request gesendet wird und ID des Absenders. Die letzte zwei sind Foreign Keys aus den Tabellen ``Resource``, bzw. ``User`` (Pfeile 2 und 6). Auf diese Weise werden Redundanzen vermieden und die Datenbank bleibt konsistent. Requests werden sofort nach der Erstellung gespeichert und nach der Bearbeitung wieder gelöscht.\\
 Abgesendete, noch nicht bearbeitete Requests werden in der Tabelle ``ReceivedRequest`` dupliziert, dabei wird ein Eintrag pro Empfänger erstellt. Diese Tabelle enthält folgende Spalten: ID und Typ des Requests und ID des Empfängers. ID des Requests und ID des Empfängers sind Schlüssel aus den Tabellen ``Request``, bzw. ``User`` (Pfeile 1 und 4).  Der Primary Key besteht aus dem Tupel $\{user{\_}ID, request{\_}ID, type\}$.\\
 Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Tabelle präsentiert entweder Zugriffs- oder Besitzerrechte, dabei werden folgende Attribute gespeichert: ID des Benutzers, ID der Ressource und Typ des Eintrags (Zugriffs- oder Besitzerrechte). Die erste zwei sind Schlüssel aus den Tabellen ``User``, bzw. ``Resource`` (Pfeile 3 und 5). Alle Attribute zusammen formieren den Primary Key dieser Tabelle. \\
  
  \subsection{Logging}
-Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
+Logging dient der Aufzeichnung und Nachvollziehbarkeit von Daten- und Systemänderungen, sowie Fehlerzuständen des Produkts. Mithilfe eines externen Django-Moduls (``Logging``) wird eine Log-Datei geführt. Auswertung dieser Datei ist durch Administratoren vorgesehen. \\
+Diese Datei beinhaltet zeitlich geordnete Ereignisse des Systems. Aktivitäten wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren der Rechte können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt und Systemzustand gespeichert.
  
  
  \newpage
@@ -409,7 +410,7 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz der \inlin
 	}
 	
 	\item \mtd{blockUser}{void}{userID:String}{public}{
-	Nach Ausführung dieser Funktion wird sich der Benutzer, dem die   \inlinecode{userID} entspricht, nicht mehr beim Portal anmelden können.
+	Nach Ausführung dieser Funktion wird sich der Benutzer, dem die   \inlinecode{userID} entspricht, nicht mehr beim Portal anmelden können: ``allowed``-Flag des entsprechenden Eintrags der ``User``-Tabelle wird auf \inlinecode{false} umgestellt.
 	}
 	\item \mtd{deleteUser}{void}{userID:String}{public}{
 	Diese Funktion löscht die \inlinecode{userID} enthaltenden Einträge aus allen Tabellen der Datenbank: \inlinecode{user}, alle seine Rechte und Requests. Ressourcen, für die er Rechte hat, werden nicht gelöscht.
@@ -519,7 +520,7 @@ Repräsentation des Zugriffsrequests. Wird in der Datenbank mit von der \inlinec
 	}
 	
 	\item \mtd{accept}{void}{}{public}{
-	Request wird genehmigt: in der Tabelle "Permission" wir neuer Eintrag erstellt mit \inlinecode{this.resourceID}, \inlinecode{this.userID} und Typ ``Access``.
+	Request wird genehmigt: in der Tabelle ``Permission`` wir neuer Eintrag erstellt mit \inlinecode{this.resourceID}, \inlinecode{this.userID} und Typ ``Access``.
 	}
 \end{itemize}
 
@@ -573,9 +574,9 @@ Vorimplentierte Phyton-Klasse, wird zur Benachrichtigungen der Benutzer des Port
 Unsere View-Klassen bestehen aus kleineren generischen Klassen, die schon in Django zur Verfügung stehen (django.views.generic; django.utils.decorators). Ausnahmen sind die Klassen HandleRequestView, PermissionsEditingView, BlockView und HomeView.
 
 \paragraph*{HomeView}
-Diese Klasse bezeichnet die Homepage, auf der der Benutzer zwischen zwei Subseiten auswählen kann - ''Profil'' und ''Resources Overview''.
+Diese Klasse bezeichnet die Homepage, auf der der Benutzer zwischen zwei Subseiten auswählen kann - ''Profile'' und ''Resources Overview''.
 
-\paragraph*{Klasse ProfilView}
+\paragraph*{Klasse ProfileView}
  Diese Klasse bezeichnet die Profilseite des Benutzers.
 \class{from django.views.generic import DetailsView} 
  Zeigt den Namen des Benutzers.
@@ -594,9 +595,9 @@ Diese Klasse bezeichnet die Homepage, auf der der Benutzer zwischen zwei Subseit
  Zeigt zwei Optionen - ''genehmigen'' und ''ablehnen''.
  
 \paragraph*{Klasse MyResourcesView}
- Diese Klasse bezeichnet die Subeite, auf der der Benutzer seine eigene Ressourcen sieht.
-\class{MyResourcesView extends ProfilView}
- Alle genersiche View-Klassen aus ProfilView werden auch in MyResourcesView benutzt mit dem Unterschied, dass ListView und SingleObjectMixin eine Liste der Ressourcen spezifisch für einen Benutzer zeigen.
+ Diese Klasse bezeichnet die Subeite, auf der der Benutzer seine eigenen Ressourcen sieht.
+\class{MyResourcesView extends ProfileView}
+ Alle genersiche View-Klassen aus ProfileView werden auch in MyResourcesView benutzt mit dem Unterschied, dass ListView und SingleObjectMixin eine Liste der Ressourcen spezifisch für einen Benutzer zeigen.
 \class{from django.views.generic import CreateView}
 Dient zur Erstellung von neuen Ressourcen.
 
@@ -607,32 +608,32 @@ Dient zur Erstellung von neuen Ressourcen.
  \class{from django.views.generic import DeleteView}
  Wenn der Benutzer Adminrechte hat, dann kann er die Ressource löschen.
  \class{from django.views.generic import FormView}
- Zeigt ein Feld zur Beschreibung des Grunds des Löschrequests, wenn der Benutzer keine Adminrechte hat.
+ Zeigt ein Feld zur Beschreibung des Grundes des Löschrequests, wenn der Benutzer keine Adminrechte hat.
  
 \paragraph*{Klasse PermissionForChosenResourceView}
  Diese Klasse bezeichnet die Subseite, auf der der Benutzer die Rechte anderer Benutzer für seine eigene Ressourcen editieren kann.
 \class{PermissionForChosenResourceView extends MyResourcesView}
  Alle genersiche View-Klassen aus MyResourcesView werden auch in PermissionForChosenResourceView benutzt mit dem Unterschied, dass ListView und SingleObjectMixin eine Liste der Benutzer spezifisch für eine Ressource zeigen.
 \class{from django.views import PermissionsEditingView}
-Zeigt zwei Optionen(Checkboxes) - "Zugriffsrechte" und "Besitzerrechte".
+Zeigt zwei Optionen(Checkboxes) - ``Zugriffsrechte`` und ``Besitzerrechte``.
 \class{from django.views.generic import CreateView}
-Dient zur Hinzufügung von Benutzer in dieser Liste(von Benutzer spezifisch für eine Ressource), deren Rechte mit Hilfe von die Klasse PermissionsEditingView editiert werden können.
+Dient dem Hinzufügen der Benutzern in dieser Liste(von Benutzer spezifisch für eine Ressource), deren Rechte mit Hilfe von die Klasse PermissionsEditingView editiert werden können.
 \class{from django.views.generic import DeleteView}
-Dient zum Löschen von Benutzer aus diese Liste(von Benutzer spezifisch für eine Ressource). So kann man Rechte entziehen (nur  von Benutzer die keine Besitzerrechte haben).
+Dient dem Löschen von Benutzern aus diese Liste(nur von Benutzern spezifisch für eine Ressource). So kann man Rechte entziehen (nur  von Benutzer die keine Besitzerrechte haben).
 
 \paragraph*{Klasse ManageUsersView}
 Diese Klasse bezeichnet die Seite, auf der der Administrator alle Benutzer des Systems verwalten kann.
 \class{from django.views.generic import DeleteView}
-Dient zum Löschen des Benutzers.
+Dient dem Löschen des Benutzers.
 \class{from django.views import BlockView}
-Dient zum Blockieren des Benutzers. Besteht aus einem Feld zur Beschreibung des Grunds des Blockierens und Dropdown zur Eingabe des Zeitraums.
+Dient dem Blockieren des Benutzers. Besteht aus einem Feld zur Beschreibung des Grundes des Blockierens und Dropdown zur Eingabe des Zeitraums.
 \class{from django.views.generic import ListView}
 Zeigt eine Liste aller Benutzer des Systems.
 
 \paragraph*{Klasse PermissionsForResourceView}
- Diese Klasse bezeichnet die Subseite, auf der der Administrator die Rechte von bestimmten Benutzer editieren kann.
+ Diese Klasse bezeichnet die Subseite, auf der der Administrator die Rechte von bestimmten Benutzern editieren kann.
  \class{PermissionForResourcesView extends ManageUsersView}
- Alle genersiche View-Klassen aus ManageUsersView werden auch in PermissionForResourceView benutzt mit demm Unterschied, dass ListView eine Liste aller Ressourcen zeigt.
+ Alle generischen View-Klassen aus ManageUsersView werden auch in PermissionForResourceView benutzt mit demm Unterschied, dass ListView eine Liste aller Ressourcen zeigt.
  \class{from django.views import PermissionsEditingView}
  Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
  
@@ -646,7 +647,7 @@ Dient zum Löschen einer Ressource. Mit oder ohne Beschreibung.
 \paragraph*{Klasse PermissionsForUsersView}
  Diese Klasse bezeichnet die Subseite, auf der der Administrator die Rechte für bestimmte Ressource editieren kann.
  \class{PermissionForUsersView extends ManageResourcesView}
- Alle genersiche View Klassen aus ManageResourcesView werden auch in PermissionForUsersView benutzt mit dem Unterschied, dass ListView eine Liste der Benutzer zeigt.
+ Alle generischen View Klassen aus ManageResourcesView werden auch in PermissionForUsersView benutzt mit dem Unterschied, dass ListView eine Liste der Benutzer zeigt.
  \class{from django.views import PermissionsEditingView}
  Zeigt drei Optionen - ''Zugriffsrechte'', ''Bestizerrechte'', ''Keine''.
 
@@ -660,7 +661,7 @@ Diese Klasse bezeichnet die Subseite, auf der die Ressource sich befindet.
 \class{from django.utils.decorators import method_decorator}
 Dient zur Prüfung der Zugriffsrechte.
 \class{from django.views.generic import ListView}
-Zeigt eine Liste der Ressourcen nach Wahl(alphabetisch, neu, enthält ''a-z'', usw.) sortiert.
+Zeigt eine Liste der Ressourcen, nach Wahl(alphabetisch, neu, enthält ''a-z'', usw.) sortiert.
 
 \paragraph*{Klasse RequestView}
 Diese Klasse bezeichnet den Dialog, in dem der Benutzer einen Request mit Beschreibung für eine Ressource sendet.
@@ -668,12 +669,12 @@ Diese Klasse bezeichnet den Dialog, in dem der Benutzer einen Request mit Beschr
 Zeigt ein Feld zur Beschreibung des Grundes des Zugriffsrequests.
 
 \paragraph*{Klasse ResourceInfoView}
-Diese Klasse bezeichnet den Dialog, in dem der Benutzer wichtige Information über bestimmte Ressource sehen kann.
+Diese Klasse bezeichnet den Dialog, in dem der Benutzer relevante Information über eine bestimmte Ressource sehen kann.
 \class{from django.views.generic import DetailsView}
 Zeigt relevante Information über bestimmte Ressource (Beschreibung, Erstellungsdatum, Name, Typ, usw.).
 \newpage
  \section{Sequenzdiagramme}
- \subsection{Zugriffsrequest schicken}
+ \subsection{Zugriffsrequest absenden}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/sendAccessRequest.png}
