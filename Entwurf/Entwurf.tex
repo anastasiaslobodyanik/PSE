@@ -281,7 +281,7 @@ Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine grap
 \renewcommand{\labelitemii}{$\bullet$}
 \renewcommand{\labelitemiii}{$\bullet$}
 \begin{itemize}[itemsep=0pt]
-\item \textbf{/profil} - Benutzerprofil-Seite, enthält persönliche Information des Benutzers und Übersicht der Requeste, die an den Benutzer adressiert sind.\\
+\item \textbf{/profile} - Benutzerprofil-Seite, enthält persönliche Information des Benutzers und Übersicht der Requeste, die an den Benutzer adressiert sind.\\
 
 Benutzerprofil-Seite ist mit Subseiten versehen:
 \begin{itemize}[itemsep=0pt]
@@ -678,53 +678,59 @@ Zeigt relevante Information über bestimmte Ressource (Beschreibung, Erstellungs
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/sendAccessRequest.png}
- 	\caption{Zugriffsrequest schicken}
+ 	\caption{Zugriffsrequest absenden. Mit blauer Farbe sind vorimplementierte Methoden von Django markiert.}
  	\label{fig:sendAccReq}
  \end{figure}
  
-Von irgeneiner Viewklasse wird die Methode \textbf{sendAccessRequest(resourceID)} auf dem Benutzer \enquote{\textbf{u}}  aufgerufen. Erstens wird eine AccesRequest Instanz \enquote{\textbf{a}} erstellt mit \textbf{create(resourceID, senderID)} Methode und in der Datenbank gespeichert durch \textbf{save()} Methode. \\Danach wird die Ressource, für den der Request geschickt wurde, von der Datenbank geholt und in der Variable \enquote{\textbf{r}} gespeichert.\\Auf der Ressourceninstanz \enquote{\textbf{r}} wird dann \textbf{getOwners()} aufgerufen, was alle Besitzer des Ressource liefert. Auf allen Instanzen von diesen Besitzer(auf dem Diagramm als die Variable \enquote{\textbf{list}} bezeichnet) wird die Methode \textbf{addAccessRequest(AccessRequest)} aufgerufen. Das fügt den Request in der Liste der bekommenen, aber noch nicht bearbeiteten Requests, hinzu.\\Eine passende Lognachricht (die in dem Diagramm gegebene ist nur als Beispiel gegeben, die echte Nachricht wird anders sein) wird in der Logdatei durch die Methode \textbf{info()} gespeichert.\\Danach wird eine Instanz der Djangoklasse \enquote{\textbf{Emailmessage}} erstellt. Als Parameter ist die Variable \enquote{\textbf{list}} gegeben. Damit ist gemeint, dass die Klasse alle Emails von den Besitzern in List nimmt.\\Der Konstruktor der Klasse nimmt auch andere Parameter als Emailnachricht, Sender usw, die im Diagramm nicht bezeichnet sind. Nach dem erfolgreichten Schicken der Emails mit der Methode \textbf{send()} wird eine Lognachricht dafür in der Logdatei gespeichert. 
+Von einer View-Klasse wird die Methode \textbf{sendAccessRequest(resourceID)} des Benutzers \enquote{\textbf{u}}  aufgerufen. Erstens wird eine AccesRequest-Instanz \enquote{\textbf{a}} erstellt mit \textbf{create(resourceID, senderID)}-Methode und durch \textbf{save()}-Methode in der Datenbank gespeichert. \\Danach wird die Ressource, für der der Request erstellt wurde, von der Datenbank geholt und in der Variable \enquote{\textbf{r}} gespeichert.\\Von der Ressourceninstanz \enquote{\textbf{r}} wird dann \textbf{getOwners()}-Methode aufgerufen, die alle Besitzer des Ressource liefert. Von allen Instanzen der Besitzer dieser Ressource (auf dem Diagramm als die Variable \enquote{\textbf{list}} bezeichnet) wird die Methode \textbf{addAccessRequest(AccessRequest)} aufgerufen. Das fügt den Request in der Liste der abgesendeten, aber noch nicht bearbeiteten Requests, hinzu.\\Eine passende Log-Nachricht wird in der Log-Datei durch die Methode \textbf{info()} gespeichert.\\Danach wird eine Instanz der Django-Klasse \enquote{\textbf{Emailmessage}} erstellt. Als Parameter wir die Variable \enquote{\textbf{list}} übergeben. Damit ist gemeint, dass die Klasse alle Emails von den Besitzern in die Liste kapselt.\\Der Konstruktor der Klasse erfordert auch andere Parameter wie E-Mail Nachricht, Sender usw., die im Diagramm nicht bezeichnet sind. Nach dem erfolgreichen Absenden der Emails mit der Methode \textbf{send()} wird eine Log-Nachricht in der Log-Datei gespeichert. 
  
   \newpage
  \subsection{Zugriffsrequest genehmigen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/allowAccessPermission.png}
- 	\caption{Zugriffsrequest genehmigen}
+ 	\caption{Zugriffsrequest genehmigen. Mit blauer Farbe sind vorimplementierte Methoden von Django markiert.}
  	 	\label{fig:allowAccPerm}
  \end{figure}
  
- Von irgeneiner Viewklasse wird die Methode \textbf{allowAccessPermission(requestID)} auf dem Besitzer \enquote{\textbf{o}}  aufgerufen. Danach wird der Request von der Datenbank geholt und die Variable \enquote{\textbf{req}} gespeichert.\\ Danach wird auf \enquote{\textbf{req}} getSender aufgerufen und das Ergebnis(der Benutzer, der der Request geschickt hat) wird dann in \enquote{\textbf{u}} gespeichet.\\ Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \textbf{getResource()}. Auf \enquote{\textbf{u}} wird dann \textbf{addAccessPermission(resource)} aufgerufen, was intern der Benutzer \enquote{\textbf{u}} in der Liste \enquote{\textbf{accessPermission}} von Ressource hinzufügt.\\
-Eine Lognachricht wird in der Logdatei gespeichert.\\ Die Methode \textbf{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diagramm ähnlich bis gleich zum Ende des Diagramms \hyperref[fig:sendAccReq]{Zugriffsrequest schicken}. 
+ Von einer View-Klasse wird die Methode \textbf{allowAccessPermission(requestID)} des Besitzers \enquote{\textbf{o}}  aufgerufen. Danach wird der Request von der Datenbank geholt und die Variable \enquote{\textbf{req}} gespeichert.\\ Danach wird von \enquote{\textbf{req}} die Methode \textbf{getSender()} aufgerufen und das Ergebnis(der Benutzer, der den Request geschickt hat) wird dann in \enquote{\textbf{u}} gespeichet.\\ Das Gleiche passiert für das durch den Request angefragte Ressource durch die Methode \textbf{getResource()}. Von \enquote{\textbf{u}} wird dann \textbf{addAccessPermission(resource)} aufgerufen, was intern den Benutzer \enquote{\textbf{u}} in die Liste \enquote{\textbf{accessPermission}} von der Ressource hinzufügt.\\
+Eine Log-Nachricht wird in der Log-Datei gespeichert.\\ Die Methode \textbf{delete(requestID)} löscht den Request von der Datenbank. Von hier an ist das Diagramm ähnlich dem Diagramm \hyperref[fig:sendAccReq]{Zugriffsrequest absenden}. 
  
   \newpage
  \subsection{Ressource erstellen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/Add_resourceDiagram.png}
- 	\caption{Ressource erstellen}
+ 	\caption{Ressource erstellen. Mit blauer Farbe sind vorimplementierte Methoden von Django markiert.}
  \end{figure}
  
-Von irgeneiner Viewklasse wird die Methode \textbf{addResource()} auf dem Benutzer \enquote{\textbf{u}}  aufgerufen.\\ Erstens wird eine Ressource Instanz \enquote{\textbf{r}} erstellt mit \textbf{create(resourceID)} Methode und in der Datenbank gespeichert durch \textbf{save()} Methode.\\ Dann wird das Benutzer \enquote{\textbf{u}} zuerst als einer des Besitzers diese Resource \enquote{\textbf{r}} hinzugefügt durch seinen \enquote{\textbf{UserID}} mit Aufruf der Methode \textbf{addOwner(userID)}, danach als einer des Lesers diese Resource \enquote{\textbf{r}} durch seinen \enquote{\textbf{userID}} mit Aufruf der Methode \textbf{addReader(userID)} .\\Am Ende wird eine Lognachricht über diesen ganzen Prozess in der Logdatei gespeichert.
+Von einer View-Klasse wird die Methode \textbf{addResource()} des Benutzers \enquote{\textbf{u}}  aufgerufen.\\ Erstens wird eine Instanz der Ressource \enquote{\textbf{r}} mit \textbf{create(resourceID)}-Methode  erstellt und in der Datenbank  durch \textbf{save()}-Methode gespeichert.\\ Dann wird das Benutzer \enquote{\textbf{u}} zuerst als Besitzer dieser Ressource \enquote{\textbf{r}} durch seinen \enquote{\textbf{UserID}} mit Aufruf der Methode \textbf{addOwner(userID)} hinzugefügt, danach als Leser dieser Ressource \enquote{\textbf{r}} durch seinen \enquote{\textbf{userID}} mit Aufruf der Methode \textbf{addReader(userID)}.\\Am Ende wird eine Log-Nachricht über diese Ereignis in der Log-Datei gespeichert.
 
     \newpage
  \subsection{Ressource zugreifen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/AccessResource.png}
- 	\caption{Ressource zugreifen}
+ 	\caption{Ressource zugreifen. Mit blauer Farbe sind vorimplementierte Methoden von Django markiert.}
  \end{figure}
+ 
+Als Ergebnis einer Benutzeraktion wird von einer View-Klasse die a\textbf{ccessRequest(resourceID)}-Methode des Benutzers \textbf{u} aufgerufen.\\
+Aufruf der Methode \textbf{Resource.objects.get(resourceID)}, die von Django vorimplementiert ist, wird entsprechende Instanz der \textbf{Resource}-Klasse \textbf{r} liefern.\\
+Mit der Methode\textbf{ hasAccessPermission(u.getID())} wird überprüft, ob der Besitzer Zugriffsrechte für diese Ressource hat. ID des Benutzers wird dabei als Parameter übergeben. Negative Ergebnis wird ein \textit{Exception} aufrufen (Ressourcenzugriff soll von View versehen werden, nur wenn eingelogter Benutzer Zugriffsrechte für die Ressource hat).
+ 
+ 
  \newpage
  
  \subsection{Ressource löschen}
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/remove_resourceDiagram.png}
- 	\caption{Ressource löschen}
+ 	\caption{Ressource löschen. Mit blauer Farbe sind vorimplementierte Methoden von Django markiert.}
  \end{figure}
  
  
- Von der Viewklasse Manage-Resource wird die Methode \textbf{deleteResource(ressourceID)} auf dem Admin \enquote{\textbf{a}}  aufgerufen.\\ Erstens wird die Liste aller \enquote{\textbf{Owner}} dieser Ressource vom Datenbank gelöscht, mit Aufruf der Methode \textbf{removeOwnerPermission.all()}, danach die Liste aller Lesers diese Resource \ mit Aufruf der Methode \textbf{removeReaderPermission.all()}.\\
- Wenn die zwei Listen vom Datenbank gelöscht sind dann wird die Ressource \enquote{\textbf{r}} auch gelöscht , mit hilfe der Methode \textbf{delete()}.\\ Am Ende wird eine Lognachricht über diesen ganzen Prozess  in der Logdatei gespeichert.\\
+Von der View-Klasse Manage-Resource wird die Methode \textbf{deleteResource(ressourceID)} des Admins \enquote{\textbf{a}}  aufgerufen.\\ Erstens wird die Liste aller \enquote{\textbf{Owner}} dieser Ressource vom Datenbank gelöscht, mit Aufruf der Methode \textbf{removeOwnerPermission.all()}, danach die Liste aller Leser diese Resource \ mit Aufruf der Methode \textbf{removeReaderPermission.all()}.\\
+Wenn die zwei Listen von der Datenbank gelöscht sind, dann wird die Ressource \enquote{\textbf{r}} auch gelöscht , mit Hilfe der Methode \textbf{delete()}.\\ Am Ende wird eine Log-Nachricht über diese Ereignis  in der Log-Datei gespeichert.\\
  
  \newpage
  \section{Anhang}
