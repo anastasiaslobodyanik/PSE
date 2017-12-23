@@ -144,9 +144,8 @@ Administratoren des Portals sollen in der Lage sein andere Benutzer zu blockiere
  \section{Architektur}
  
  \subsection{Model View Template (MVT)} \label{MVT}
-Beim Design des Autorisierungsmanagement Web-Portal wird schnell deutlich, dass eine strikte Trennung
-zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (view) von Vorteil ist. Das Model-View-Template Prinzip (MVT),Das in Abbildung 1 gezeichnet ist, realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
-Das Model-View-Template ist eine Ableitung des Architektur-Pattern-View-Presenter (MVP) -Musters und wird hauptsächlich zum Erstellen von Benutzerschnittstellen verwendet.\\
+Beim Design des Autorisierungsmanagements wird schnell deutlich, dass eine strikte Trennung zwischen Datenbank, Applikationslogik (Code) und Benutzeroberfläche (View) von Vorteil ist. Das Model-View-Template Prinzip (MVT), das in Abbildung 1 dargestellt ist, realisiert diese Trennung und wird in der Webanwendung eingesetzt.\\
+MVT ist eine Ableitung des Architektur-Patterns ``Model-View-Presenter`` (MVP) und wird hauptsächlich zum Erstellen von Benutzerschnittstellen verwendet.\\
  
  
  \begin{figure}[ht!]
@@ -158,18 +157,18 @@ Das Model-View-Template ist eine Ableitung des Architektur-Pattern-View-Presente
 
 
  	\textbf{•} Der \textbf{URL-Dispatcher} \emph{(urls.py)} ordnet die angeforderte \gls{URL} einer \textbf{View-Funktion} zu und ruft sie auf.\\
- 	\textbf{•} Die \textbf{View-Funktion} \emph{(views.py)} führt die angeforderte Aktion aus, bei der normalerweise in die Datenbank gelesen oder geschrieben wird. es kann auch andere Aufgaben beinhalten.\\
- 	\textbf{•} Das \textbf{Model} \emph{(models.py)} definiert die Daten in Python und interagiert damit. Dies ist normalerweise in einer relationalen Datenbank \emph{(SQLite)} enthalten.\\
- 	\textbf{•} Nach der Ausführung der angeforderten Aufgaben gibt die \textbf{View} ein HTTP-Antwortobjekt an den Webbrowser zurück, normalerweise nach dem Übergeben der Daten durch ein \textbf{Template}.\\
- 	\textbf{•} \textbf{Template} gibt normalerweise \gls{HTML}-Seiten zurück. Die Django-Template-sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
+ 	\textbf{•} Die \textbf{View-Funktion} \emph{(views.py)} führt die angeforderte Aktion aus, bei der meistens mit Daten aus der Datenbank gehandelt wird. Sie kann auch andere Aufgaben beinhalten, zum Beispiel Logik der Anwendung.\\
+ 	\textbf{•} Das \textbf{Model} \emph{(models.py)} ordnet die Daten den Tabellen der Datenbank zu und ermöglicht Interaktionen zwischen Daten und System.\\
+ 	\textbf{•} Nach der Ausführung der angeforderten Aufgaben gibt \textbf{View} ein HTTP-Antwortobjekt an den Webbrowser zurück, meistens nach der Übergabe der Daten durch ein \textbf{Template}.\\
+ 	\textbf{•} \textbf{Template} gibt üblicherweise \gls{HTML}-Seiten zurück. Die Django-Template-Sprache bietet HTML-Autoren eine einfach zu erlernende Syntax und bietet gleichzeitig die gesamte für die Präsentationslogik erforderliche Leistung. \\
  	
 
  \subsection{Betrieb des Django ORM} 
  
-Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, das Beispielweise folgendermaßen funktioniert :\\
- • Erstellt Django SQL-Tabellen aus der Modellen (klassen) mit alle klassen-Attributen als Tabellenspalten, z.b SQL-Tabelle 'Request' aus dem Modell 'Request'. All dies geschieht wiederum ohne eine SQL-Abfrage zu schreiben.\\
- • Um die Tabellen auszufüllen wird die Methode save() benutzt.\\
- • Auf die gleiche Weise ist es möglich, alle Einträge der Tabelle zu erhalten ,Daher werden Instanzen von dem gewünschten Objekt zurückgegeben, einen für jeden Eintrag in der Tabelle, ein Beispiel für alle Request-Objekte zu haben wird in der Abbildung 2 gezeigt:\\
+Object-Relational Mapping (\gls{ORM}) Django ist ein in Python geschriebenes quelloffenes Webframework, das beispielweise folgendermaßen funktioniert:\\
+ • Django erstellt SQL-Tabellen aus den Modellen (Klassen) mit allen Klassenattributen als Tabellenspalten. Dies benötigt keine zusätzliche Implementierung der SQL-Abfragen.\\
+ • Um die Tabellen auszufüllen wird die Methode Model.save() benutzt.\\
+ • Auf die gleiche Weise ist es möglich, alle Einträge der Tabelle abzurufen. Dabei wird pro Tabelleneintrag eine Instanz von dem gewünschten Objekt zurückgegeben. Ein Beispiel für den Abruf aller Request-Objekte wird in Abbildung 2 gezeigt:\\
 
   	\vspace{2cm}
 
@@ -178,64 +177,108 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
 \begin{figure}[ht!]
   	\includegraphics[width=1.05\textwidth]{res/MVTpart2.png}
   	 	\centering
-  	    \caption{MVT mit Django}
+  	    \caption{Ablauf des Transfers der Daten in MVT mit Django}
  \end{figure}
 
  	
 
 \newpage
- \subsection{Paketenstruktur} %todo erweitern/korrigieren wenn möglich
- Das folgende \hyperref[packages]{Paketendiagramm} stellt die verschiedenen Paketen, die in der Entwurfsphase gestaltet werden(inkl. Paketen die von Django vordefiniert sind - ``Extern``), und ihre Beziehungen zueinander dar. Den Inhalt dieser Paketen wird im Abschnitt ``Paketenübersicht`` beschrieben.\\ \\
- Design-Elemente, nötig für die HTML-Vorlagen, gehören zum Paket ``static``. In diesem Sinn benutzt ``templates`` das Paket ``static`` um die Vorlagen graphisch zu gestalten.\\
- Paket ``views`` enthält die so genannten Funktionen - Views, die als Ausgabe Aussicht der gewünschten Webadresse liefern. Diese Aussicht ist in der Form von einer HTML-Vorlage. Deshalb hängt ``views`` vom ``templates`` direkt ab.\\
- ``views`` braucht Informationen über den Datenbankzustand (z.B. Listen von Ressourcen darzustellen). Diese Informationen entnimmt ``views`` aus dem Paket ``models``. \\Das Paket ``views`` hat noch eine Abhängigkeit, nämlich von einem externen Paket mit zwei Unterpaketen - ``logging`` und ``eMailMessages``. ``logging`` ist notwendig um Ereignisse die eventuell während der Ausführung der View-Funktion passieren, zu protokollieren. ``eMailMessages`` unterstützt das Senden und Empfangen von E-Mail Benachrichtigungen. Dieses Paket definiert auch zahlreiche Vorlagen für die Nachrichten, die möglicherweise in einer View-Funktion benutzt werden.  \\
- Das Paket ``models`` ist auch dafür verantwortlich, das ``logging`` Modul über Änderungen in der Datenbank zu informieren, damit sie in der Log-Datei eingefügt werden. Das begründet die Nutzung von ``logging`` im Model.\\
- Die zwei Unterpakete - ``test{\_}views`` und ``test{\_}models`` benutzen entsprechend ``views`` und ``models``, um die Funktionen und Objekte von diesen Paketen zu testen. 
- 
+ \subsection{Paketstruktur} %todo erweitern/korrigieren wenn möglich
+ Das folgende \hyperref[packages]{Paketdiagramm} (Abbildung 3) stellt die verschiedenen Pakete, die in der Entwurfsphase gestaltet werden(inkl. Pakete die von Django vordefiniert sind - ``Extern``), und ihre Beziehungen zueinander dar.\\
+  
  \begin{figure}[h]
  	\includegraphics[width = 1.0\textwidth]{res/packages}
  	\centering
- 	\caption{Paketendiagramm}
+ 	\caption{Paketdiagramm: die im Projekt zu implementierenden Pakete und Verwendungsbeziehung (Usage) zwischen denen.}
  	\label{packages}
  \end{figure}
  
+ \subsubsection*{Models}
+Ein Model enthält Informationen über Objekte und Verhalten von den Daten, die in der Datenbank gespeichert werden.
+Das Paket ``Models`` besteht aus den Model-Klassen ``User``, ``Owner``, ``Admin``, ``Resource``, ``Request``, ``AccessRequest``, ``DeletionRequest`` und einer Enumeration-Klasse ``ResourceType``. Üblicherweise wird jede Model-Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Attribut der Klasse wird dabei als eine Spalte in der entsprechenden Tabelle repräsentiert. Systemereignisse, die im ``Models``-Paket implementiert werden, werden durch Funktionalität des Pakets ```Logging`` protokolliert.  
 
+ \subsubsection*{Views}
+Im Paket ```Views`` wird Anwendungslogik implementiert: Klassen aus dem ``Models``-Paket werden hier in ein Zusammenspiel gesetzt. View ist eine Funktion, die als Eingabe ein Web-Request erfordert und eine Web-Response ausgibt. Diese Response kann prinzipiell alles beinhalten - zum Beispiel den HTML-Inhalt einer Webseite, ein Bild, eine 404 Error-Seite oder eine Weiterleitung zu einer anderen Webseite. Die View-Funktion definiert was genau angezeigt wird, nachdem eine URL angefragt wird. Zum Paket ``Views`` gehören alle Klassen, die eine solche Funktion spezifizieren. Dabei wird die äußere Form dieser Anzeige mit Hilfe der Pakete ```Templates`` und ``Static`` definiert.\\
+Das ``Views``-Paket benutzt die externen Pakete ``Logging`` (zum Protokollieren der relevanten Systemereignissen) und ``EMailMessages`` (zum Senden und Empfangen von E-Mail Benachrichtigungen).
+Das Paket beinhaltet ein Subpaket:
+
+\begin{itemize}
+\item{\textbf{Generic}}\\
+Da bei der Entwicklung einer Webseite bestimmte Muster häfiger vorkommen, bietet Django eine Sammlung von solcher Views an. Diese Views haben eine abstrakte Form, damit sie mehrmals wiederverwendet werden können. Auf diese Weise spart man Zeit und Codezeilen.
+\end{itemize}
+ 
+
+ \subsubsection*{Templates}
+ \begin{center}
+    \textit{``Django’s template language is designed to strike a balance between power and ease. It’s designed to feel comfortable to those used to working with HTML.``}
+    \end{center}
+    -The Django template language | Django documentation\\\\
+Da Django ein Web Framework ist, ist es notwendig HTML-Dateien dynamisch zu generieren. Ein typisches Konzept dafür ist der Einsatz von Vorlagen (Templates). Eine Vorlage beinhaltet statische Teile vom gewünschten HTML Output, sowie Syntax, die beschreibt wie dynamischen Inhalt eingefügt wird. Um die Vorlagen graphisch zu gestalten benutzt ```Templates`` das Paket ```Static``.
+
+ \subsubsection*{Static}
+  \begin{center}
+    \textit{``CSS enables developers to separate content and visual elements for greater page control and flexibility. ``}
+    \end{center}
+    -CSS | Techopedia\\\\
+Für die Webseite sollen zusätzliche Dateien wie Abbildungen, CSS- oder JavaScript-Dateien gespeichert werden. In Django sind diese Dateien als ``Static Files`` bezeichnet. Diese Dateien definieren das Aussehen des Portals. Ein vordefiniertes API von Django ``django.contrib.staticfiles`` hilft dabei diese Dateien zu organisieren.
+ 
+ \subsubsection*{Test}
+Das ``Test``-Paket dient zum Testen des Produkts, um Qualität in jeder Phase der Entwicklung zu gewährleisten. Dieses Paket beinhaltet zwei Unterpaketen - ``Test{\_}models`` und ``Test{\_}views`` entsprechend für die Model- und die Viewklassen. Jedes Unterpaket enthält eine Testklasse spezifisch für jede Model- oder Viewklasse. Jede Testklasse hat eine setUp() Methode, die die entsprechende Objekte zum Testen erstellt und eine oder mehrere Modultestsmethoden für jede öffentliche Methode der getesteten Klassen.
+``Test{\_}views`` und ``Test{\_}models`` benutzen entsprechend ``Views`` und ``Models``, um die Funktionen und Objekte von diesen Paketen zu testen. 
+ 
+ \subsubsection*{Extern}
+ \begin{itemize}
+ \item{\textbf{Logging}}\\
+Für Protokollieren der Systemereignissen bietet Django ein Logging-Modul an, das von Python vordefiniert ist. Dieses Paket beinhaltet Klassen und Funktionen, die Information über alle relevanten System- und Datenänderungen dokumentieren. 
+ \item{\textbf{EmailMessages}}\\
+Wie bei der ``Logging``-Funktionalität, wird für das Senden von E-Mail Benachrichtigungen auch ein externes Paket von Django verwendet. Das Paket bietet API für automatisierte Erstatten und Absenden der E-Mail Benachrichtigungen, wobei alle Einzelheiten entsprechen dem System konfiguriert werden können.
+ \end{itemize}
+ 
+\newpage
  \subsection{Entwurfsmuster}
- Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das \gls{Geheimnisprinzip} zu unterstützen. 
+In objektorientierten Programmiersprachen werden Entwurfsmuster (englisch Design Patterns) verwendet, um ein ganz bestimmtes Software-Entwurfsproblem zu lösen. Das Entwurfsmuster dient dabei als eine Art ``Rezept``, mit dessen Hilfe die gegebene Programmieraufgabe gelöst wird. 
+Bei diesem Entwurf werden Entwurfsmuster verwendet, um einzelne Komponenten voneinander zu entkoppeln und das \gls{Geheimnisprinzip} zu unterstützen. 
+
  \subsubsection*{Strategie-Muster}
+ 
+Strategie-Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen. Dises Muster wird verwendet, wenn sich mehrere verwandte Klassen nur in ihrem Verhalten unterscheiden. Strategieobjekte ermöglichen, ein Objekt mit einer von mehreren möglichen Verhaltensalgorithmen zu konfigurieren. Dies bietet die Möglichkeit die notwendigen Funktionalitäten zu variieren.\\
+Das Strategie-Muster kommt in den Klassen ``\textit{Request}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz (Abbildung 4). Die vordefinierte Funktion der abstrakten Klasse wird abhängig von benötigter Funktionalität von erbenden Klassen  implementiert. \\\\ 
+  
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/strategie.png}
- 	\caption{Strategie-Muster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von unseren Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster. }
+ 	\caption{Strategie-Muster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von zu implementierenden Klassen und ihren Funktionen der Klassen bzw. Funktionen vom Strategie-Muster entsprechen. }
  \end{figure}
- Das Strategy-Muster kommt in den Klassen ``\textit{Request}``, ``\textit{AccessRequest}`` und ``\textit{DeletionRequest}`` bei der Funktion ``\textit{accept()}`` zum Einsatz. Dieses Muster hat das Ziel, eine Familie von Algorithmen zu definieren, zu kapseln und austauschbar zu machen.
  
+ \newpage
  \subsubsection*{Befehlsmuster}
- \begin{figure}[ht!]
- 	\centering
- 	\includegraphics[width=0.85\textwidth]{res/Befehl.png}
- 	\caption{Befehlsmuster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von unseren Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster.}
- 	\label{Befehl}
- \end{figure}
 
- Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Request}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 5} angezeigt ist, getrennt.\\
+
+Das Befehlsmuster ist zur Bearbeitung von den Requests (Funktionen ``\textit{deny()}`` und ``\textit{accept()}`` in Klasse ``\textit{Request}``) verwendet.Mit Hilfe dieses Musters wird die Bearbeitung der Requests von den Requests selbst, wie in der   \hyperref[Befehl]{Abbildung 5} angezeigt ist, getrennt.\\
  Das Befehlsmusters ermöglicht es, ein bestimmtes Ereignis in einem dafür vorgesehenen Handler
  zu bearbeiten und dieses damit in einem Objekt zu kapseln. Jeder Handler lässt sich eindeutig einer Aufgabe
  und einem Ereignis zuordnen, sodass keine Verschränkung zwischen zwei verschiedenen Handlern auftritt.
- Außerdem lässt sich leichter ein weiterer Handler hinzufügen oder ein bestehender Handler austauschen.
+ Außerdem lässt sich leichter ein weiterer Handler hinzufügen oder ein bestehender Handler austauschen. \\\\
  
- \newpage
+  \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=0.85\textwidth]{res/Befehl.png}
+ 	\caption{Befehlsmuster Klassendiagramm. Durch die angehängten Notizen ist angezeigt, welche von zu implementierenden Klassen und ihren Funktionen entsprechen der Klassen bzw. Funktionen von diesem Muster.}
+ 	\label{Befehl}
+ \end{figure}
+
+\newpage
   \subsection{URL Verzeichnis}
-Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 6}}). Ein URL lokalisier ein oder mehrere Views, die entweder als ein Main-Fenster oder ein Dialog präsentiert werden.  
+Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine graphische Benutzeroberfläche (GUI) unterstützt. Die \gls{GUI} des Produkts wird als eine Webseite dargestellt, wobei sämtlicher Inhalt und Funktionalität unter URL Verzeichnis abgelegt werden (\hyperref[URL Struktur]{\mbox{Abbildung 6}}). Eine URL lokalisiert ein oder mehrere Views, die entweder als ein Main-Fenster oder ein Dialog präsentiert werden.  
 
 \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=\textwidth]{res/urls_Diagram.png}
- 	\caption{URL Struktur des Portals. Jedes URL korrespondiert entsprechendem View. Schwarz beschriftete URLs weisen zu Views, die in Main-Fenster angezeigt werden, blaue - zu Dialogfenster. }
+ 	\caption{URL Struktur des Portals. Jedes URL korrespondiert mit entsprechendem View. Schwarz beschriftete URLs weisen zu Views, die im Main-Fenster angezeigt werden, blaue zu solchen, die im Dialogfenster angezeigt werden.}
  	\label{URL-Struktur}
  \end{figure}
  
-\textbf{pse-authoritation.com} – Mockup-Seite, dient zum Einloggen in das Portal, enthält Autorisierungsformular und wird nach der Entwicklung durch Autorisierungsmanagement des Systems, in welches das Projekt integriert wird, ersetzt. 
+\textbf{pse-authoritation.com} – Mockup-Seite, dient zum Einloggen in das Portal, enthält Autorisierungsformular und wird nach der Entwicklung durch das Autorisierungsmanagement jenes Systems, in welches das Projekt integriert wird, ersetzt. 
  
 \renewcommand{\labelitemi}{$\bullet$}
 \renewcommand{\labelitemii}{$\bullet$}
@@ -245,17 +288,17 @@ Alle Interaktionen zwischen den Benutzern und dem Produkt werden durch eine grap
 
 Benutzerprofil-Seite ist mit Subseiten versehen:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{/handle{\_}$<$requestID$>$} - Dialog für Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
+\item \textbf{/handle{\_}$<$requestID$>$} - Dialog zur Bearbeitung des Requests, enthält ``Annehmen''- und ``Ablehnen``-Buttons, sowie ein Eingabefeld für kurze Begründung.
 \item \textbf{/resources} - Seite mit Übersicht von Ressourcen, für die der Benutzer Besitzerrechte hat. Diese Seite enthält Subseiten:
 \begin{itemize}[itemsep=0pt]
-\item \textbf{/add{\_}new{\_}resource} - Seite für Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog für Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
-\item \textbf{/$<$resourceID$>${\_}edit{\_}users{\_}permissions} - Dialog für Vergabe und Entzug von Rechten für die Ressource.
-\item \textbf{/$<$resourceID$>${\_}send{\_}deletion{\_}request} - Dialog für Absenden von Löschrequest für die Ressource.
+\item \textbf{/add{\_}new{\_}resource} - Seite zum Erstellen neuer Ressourcen. Enthält Upload-Dialog, Dialog zur Vergabe von Rechten und Eingabefelder für Namen und Beschreibung der Ressourcen.
+\item \textbf{/$<$resourceID$>${\_}edit{\_}users{\_}permissions} - Dialog zu Vergabe und Entzug von Rechten für die Ressource.
+\item \textbf{/$<$resourceID$>${\_}send{\_}deletion{\_}request} - Dialog zum Absenden von Löschrequest für die Ressource.
 \end{itemize}
 \end{itemize}
 
 
-\item \textbf{/manage{\_}users} - Administratorseite für Benutzerverwaltung, enthält Liste von Benutzern und Subseiten:
+\item \textbf{/manage{\_}users} - Administratorseite zur Benutzerverwaltung, enthält Liste von Benutzern und Subseiten:
 \begin{itemize}[itemsep=0pt]
 \item \textbf{/block{\_}user} - Dialog zum Blockieren des Users.
 \item \textbf{/delete{\_}user} - Dialog zum Löschen des Users.
@@ -304,32 +347,6 @@ Rechte werden in der Tabelle ``Permission`` dargestellt. Jeder Eintrag dieser Ta
 Mithilfe von einem externen Django Module (``Logging``) wird eine Log-Datei geführt. Diese Datei beinhaltet zeitlichgeordnete Ereignisse vom System. Informationen wie Senden eines Requests, Bearbeitung eines Requests, Erstellen/Löschen einer Ressource und Editieren von Rechten können der Log-Datei entnommen werden. Zu jedem Ereignis wird auch den genauen Zeitpunkt gespeichert.
  
  
- \section{Paketenübersicht}
- \subsection{Templates}
-Da Django ein Web Framework ist, ist es notwendig HTML-Dateien dynamisch zu generieren. Ein typisches Konzept dafür ist der Einsatz von Vorlagen (Templates). Eine Vorlage beinhaltet statische Teile vom gewünschten HTML Output, sowie Syntax, die beschreibt wie dynamischen Inhalt eingefügt wird.
- \subsection{Static}
- Für die Webseite sollen zusätzliche Dateien wie Abbildungen, CSS- oder JavaScript-Dateien gespeichert werden. In Django sind diese Dateien als ``Static Files`` bezeichnet.
- \subsection{Model}
-Ein Model enthält Informationen über die unerlässliche Felder und Verhalten von den Daten, die gespeichert sind.
-Das Paket ``model`` besteht aus den Klassen ``User``, ``Owner``, ``Admin`` ``Resource``, ``Request``, ``AccessRequest`` und ``DeletionRequest``. Normalerweise wird jede Klasse zu einer Tabelle in der Datenbank übersetzt. Jedes Attribut einer Klasse wird dann eine Spalte in der entsprechenden Tabelle.
- \subsection{Views}
-View ist eine Funktion, die als Eingabe ein Web Request bekommt und gibt  eine Web Response aus. Diese Response kann prinzipiell alles beinhalten - zum Beispiel HTML Inhalt einer Webseite, ein Bild, eine 404 Error Seite, Weiterleitung zu anderer Webseite. Die View Funktion definiert was genau angezeigt wird, nachdem eine URL angefragt wird.\\
- Zum Paket ``views`` gehören alle Klassen, die eine solche Funktion spezifizieren.
- \subsubsection{Generic}
-Da bei der Entwicklung einer Webseite bestimmte Muster öfter vorkommen,  bietet Django eine Sammlung von solchen Views an. Diese Views haben eine abstrakte Form, damit sie mehrmals wiederverwendet werden können. Auf diese Weise spart man Zeit und Codezeilen.
-
- 
- \subsection{Test}
-Dieses Paket beinhaltet zwei Unterpaketen - test{\_}models und test{\_}views entsprechend für die Model- und die Viewklassen. Jedes Unterpaket enthält eine Testklasse spezifisch für jede Model- oder Viewklasse. Jede Testklasse hat eine setUp() Methode, die die entsprechende Objekte zum Testen erstellt und eine oder mehrere Modultestsmethoden für jede öffentliche Methode der getesteten Klassen.
- 
- \subsection{Extern}
- \subsubsection{Logging}
-Django bietet ein Logging Modul an, das von Python vordefiniert ist.
-Dieses Paket beinhaltet Klassen und Funktionen, die das Logging von Systemereignisse ermöglichen. 
- \subsubsection{EmailMessages}
-Wie bei der Logging Funktionalität, wird für das Senden von E-Mail-Benachrichtigungen auch ein externes Paket von Django verwendet. Die Struktur dieses Pakets wird während der Implementierungsphase klar sein. 
- 
- 
  \newpage
  \section{Klassenübersicht}
  \subsection{Model}
@@ -345,11 +362,11 @@ User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attrib
 
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
-	\item \mtd{searchResource}{List<Resource>}{searchParameters: String} {public}{Funktion liefert  \inlinecode{List<Resource>}, die alle Ressourcen enthält, dessen Metadaten den \inlinecode{searchParameters} entsprechen.}
+	\item \mtd{searchResource}{List<Resource>}{searchParameters: String} {public}{Funktion liefert  \inlinecode{List<Resource>}, die alle Ressourcen enthält, deren Metadaten den \inlinecode{searchParameters} entsprechen.}
 	
-	\item \mtd{addResource}{Resource}{ }{public}{Funktion erstellt eine Instanz von Klasse \inlinecode{Resource}, Metadaten werden dabei in Datenbank gespeichert, wobei \inlinecode{User} als Besitzer dieser Ressource definiert wird}
+	\item \mtd{addResource}{Resource}{ }{public}{Funktion erstellt eine Instanz der Klasse \inlinecode{Resource}, Metadaten werden dabei in Datenbank gespeichert, wobei \inlinecode{User} als Besitzer dieser Ressource definiert wird.}
 	
-	\item \mtd{accessResource}{void}{resourceID: String} {public}{Falls Instanz von der Klasse \inlinecode{User}, die diese Funktion aufruft, entsprechende Rechte hat, werden Metadaten der Ressource, deren \inlinecode{resourceID}} als Parameter übergeben wird, von Datenbank abgerufen.
+	\item \mtd{accessResource}{void}{resourceID: String} {public}{Falls Instanz der Klasse \inlinecode{User}, die diese Funktion aufruft, entsprechende Rechte hat, werden Metadaten der Ressource, deren \inlinecode{resourceID} als Parameter übergeben wird, von Datenbank abgerufen.}
 	
 	\item \mtd{sendAccessRequest}{void}{resourceID: String} {public}
 	{An alle Besitzer der Ressource, deren \inlinecode{resourceID} als Parameter übergeben wird, wird /inlinecode{AccessRequest} gesendet.}
@@ -360,7 +377,7 @@ User-Klasse bildet eine Elternklasse aller Benutzertypen. Sie stellt alle Attrib
 \newpage
   \paragraph*{Klasse Owner}
  \class{Owner extends User}
-Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlinecode{User} Klasse Besitzerrechte für eine oder mehrere Ressourcen bekommt, wird ein neuer Eintrag in der Datenbank-Tabelle ``Owner``, beziehungsweise eine neue Instanz von Klasse \inlinecode{Owner} erstellt. 
+Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz der \inlinecode{User} Klasse Besitzerrechte für eine oder mehrere Ressourcen bekommt, wird ein neuer Eintrag in der Datenbank-Tabelle ``Owner``, beziehungsweise eine neue Instanz der Klasse \inlinecode{Owner} erstellt. 
 
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
@@ -368,7 +385,7 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
 	Instanz der Klasse \inlinecode{User} bekommt \inlinecode{AccessPermission} für Instanz der Klasse \inlinecode{Resource}. \inlinecode{userID} des Benutzers und \inlinecode{resourceID} der Ressource werden als Parameter übergeben. 
 	}
 	\item \mtd{allowAccessPermission}{void}{requestID:String}{public}{
-	Diese Funktion ladet vorherige Funktion über, dabei wird als Parameter \inlinecode{requestID} eines Requests übergeben. Absender dieses Requests bekommt \inlinecode{AccesPermission} für die Ressource, deren  \inlinecode{Request.RESORCE_ID} gehört.
+	Diese Funktion lädt vorherige Funktion über, dabei wird als Parameter \inlinecode{requestID} eines Requests übergeben. Der Absender dieses Requests bekommt \inlinecode{AccesPermission} für die Ressource, der \inlinecode{Request.RESORCE_ID} gehört.
 	}
 	\item \mtd{deleteAccessPermission}{void}{resourceID:String, userID:String}{public}{
 	Der Instanz der Klasse \inlinecode{User}, die übergebenes Parameter \inlinecode{userID} besitzt, wird \inlinecode{AccessPermission} für die Ressource, deren \inlinecode{resourceID} jeweil als Parameter übergeben wird, entzogen.
@@ -377,7 +394,7 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
 	\inlinecode{AccessRequest} wird abgelehnt: Instanz, der \inlinecode{requestID} entspricht, wird gelöscht.
 	}
 	\item \mtd{allowOwnerPermission}{void}{resourceID:String, userID:String}{public}{
-	Instanz der Klasse \inlinecode{User} bekommt \inlinecode{OwnerPermission} für Instanz der Klasse \inlinecode{Resource}. \inlinecode{userID} und \inlinecode{resourceID} diesen Instanzen werden als Parameter übergeben.
+	Instanz der Klasse \inlinecode{User} bekommt \inlinecode{OwnerPermission} für Instanz der Klasse \inlinecode{Resource}. \inlinecode{userID} und \inlinecode{resourceID} dieser Instanzen werden als Parameter übergeben.
 	}
 	\item \mtd{sendDeletionRequest}{void}{resourceID:String}{public}{
 	Diese Funktion erstellt eine Instanz der Klasse  \inlinecode{DeletionRequest}. Das übergebene Parameter \inlinecode{resourceID} wird als \inlinecode{Request.REQUEST_ID} und \inlinecode{userID} des \inlinecode{Owner} als \inlinecode{Request.SENDER_ID} gespeichert.
@@ -391,26 +408,26 @@ Diese Klasse erweitert Klasse \inlinecode{User}. Nachdem eine Instanz von \inlin
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{searchUser}{List<User>}{searchParameters:String}{public}{
-	Funktion liefert \inlinecode{List<User>} zurück, die alle Benutzer enthält, deren Daten (Name, Email, Domain) den \inlinecode{searchParameters} entsprechen.
+	Funktion liefert die Liste \inlinecode{List<User>} zurück, die alle Benutzer enthält, deren Daten (Name, Email, Domain) den \inlinecode{searchParameters} entsprechen.
 	}
 	
 	\item \mtd{blockUser}{void}{userID:String}{public}{
-	Nach Ausführung dieser Funktion wird der Benutzer, wem die   \inlinecode{userID} entspticht, sich nicht mehr ins Portal anmelden können.
+	Nach Ausführung dieser Funktion wird sich der Benutzer, dem die   \inlinecode{userID} entspricht, nicht mehr beim Portal anmelden können.
 	}
 	\item \mtd{deleteUser}{void}{userID:String}{public}{
-	Diese Funktion löscht die mit \inlinecode{userID} Einträge aus allen Tabellen aus der Datenbank: \inlinecode{user}, alle seine Rechte und Requests. Resourcen, für die er Rechte hat, werden nicht gelöscht.
+	Diese Funktion löscht die \inlinecode{userID} enthaltenden Einträge aus allen Tabellen der Datenbank: \inlinecode{user}, alle seine Rechte und Requests. Ressourcen, für die er Rechte hat, werden nicht gelöscht.
 	}
 	\item \mtd{deleteResource}{void}{resourceID:String}{public}{
-	Diese Funktion löscht die mit \inlinecode{resourceID} Einträge aus allen Tabellen aus der Datenbank: Metadaten von der Ressource, alle Rechte für sie und alle für sie erstellte Requests. Alle Benutzer, die Besitzerrechte für diese Ressource hatten, werden benachrichtigt.
+	Diese Funktion löscht die mit \inlinecode{resourceID} Einträge aus allen Tabellen der Datenbank: Metadaten der Ressource, alle Rechte für sie und alle für sie erstellten Requests. Alle Benutzer, die Besitzerrechte für diese Ressource hatten, werden benachrichtigt.
 	}
 	\item \mtd{acceptDeletionRequest}{void}{requestID:String}{public}{
-	\inlinecode{acceptRequest}, dem die \inlinecode{requestID} entspricht, wird genehmigt: Instanz der \inlinecode{Resource}-Klasse wird gelöscht, sowie alle entsprechende Einträge in der Datenbank: Metadaten von der Ressource, alle Rechte für sie und alle für sie erstellte Requests. Alle Benutzer, die Besitzerrechte für diese Ressource hatten, werden benachrichtigt.
+	\inlinecode{DeletionRequest}, dem die \inlinecode{requestID} entspricht, wird genehmigt: Instanz der \inlinecode{Resource}-Klasse wird gelöscht, sowie alle entsprechenden Einträge in der Datenbank: Metadaten der Ressource, alle Rechte für sie und alle für sie erstellten Requests. Alle Benutzer, die Besitzerrechte für diese Ressource hatten, werden benachrichtigt.
 	}
 	\item \mtd{denyDeletionRequest}{void}{requestID:String}{public}{
 	Diese Funktion lehnt den Request mit \inlinecode{requestID} ab: entsprechende \inlinecode{DeletionRequest}-Instanz wird gelöscht und der Absender wird benachrichtigt. 
 	}
 	\item \mtd{deleteOwnerPermission}{void}{resourceID:String, userID:String}{public}{
-	 Diese Funktion löscht den Eintrag mit \inlinecode{resourceID} und \inlinecode{userID} und Typ ``Òwner`` aus der Tabelle ``Permission`` gelöscht.
+	 Diese Funktion löscht den Eintrag mit \inlinecode{resourceID}, \inlinecode{userID} und Typ ``Òwner`` aus der Tabelle ``Permission``.
 	}
 \end{itemize}
 \newpage
@@ -424,7 +441,7 @@ Die Klasse \inlinecode{Resource} repräsentiert Ressourcen und kapselt dabei ihr
 	Eindeutiger Identifikator des entsprechenden Eintrags in Datenbank. 
 	}
 		\item \atr{type}{ResourceType}{private}{
-	Type der Ressource.
+	Typ der Ressource.
 	}
 		\item \atr{name}{String}{private}{
 	Name der Ressource, wird vom Ersteller eingegeben. 
@@ -439,16 +456,16 @@ Die Klasse \inlinecode{Resource} repräsentiert Ressourcen und kapselt dabei ihr
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
 	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
-	Liefert \inlinecode{true} zurück, falls der Besitzer mit  \inlinecode{uesrID} Zugriffsrechte für diese Ressource hat, und \inlinecode{false} sonst.
+	Liefert \inlinecode{true} zurück, falls der Besitzer mit  \inlinecode{uesrID} Zugriffsrechte für diese Ressource hat, und \inlinecode{false} wenn nicht.
 	}
 	\item \mtd{hasAccessPermission}{boolean}{userID:String}{public}{
-	Liefert \inlinecode{true} zurück, falls der Besitzer mit  \inlinecode{uesrID} Besitzerrechte für diese Ressource hat, und \inlinecode{false} sonst.
+	Liefert \inlinecode{true} zurück, falls der Besitzer mit  \inlinecode{uesrID} Besitzerrechte für diese Ressource hat, und \inlinecode{false} wenn nicht.
 	}
 \end{itemize}
 
   \paragraph*{Klasse ResourceType}
    \class{<<enumeration>> ResourceType}
-    Diese ist eine Aufzählungstyp-Klasse, die zur Unterscheidung von Ressourcen unterschiedlichen Typen dient. Enthält beispielsweise folgende Typen: 
+    Diese ist eine Aufzählungstyp-Klasse, die zur Unterscheidung von Ressourcen unterschiedlicher Typen dient. Enthält beispielsweise folgende Typen: 
  
 \begin{itemize}
 	\item{Data}
@@ -466,7 +483,7 @@ Die Klasse \inlinecode{Resource} repräsentiert Ressourcen und kapselt dabei ihr
     —Abstract Classes | Python Course\\\\
     
  \class{<<abstract>> Request}
-Abstrakte Klasse \inlinecode{Request} definiert alle gemeinsame Attribute und Methoden für alle mögliche Requesttypen. Sie selbst kann jedoch keine eigenständige Instanzen erzeugen. Diese Klasse dient vor allem zu Erweiterbarkeit des Produkts. 
+Abstrakte Klasse \inlinecode{Request} definiert alle gemeinsamen Attribute und Methoden für alle mögliche Requesttypen. Sie selbst kann jedoch keine eigenständigen Instanzen erzeugen. Diese Klasse dient vor allem zur Erweiterbarkeit des Produkts. 
  
 \paragraph*{Attribute} % skip this if there are no attribute
 \begin{itemize}
@@ -505,7 +522,7 @@ Repräsentation des Zugriffsrequests. Wird in der Datenbank mit von der \inlinec
 	}
 	
 	\item \mtd{accept}{void}{}{public}{
-	Request wird genehmigt: in der Tabelle "Permission" wir neuen Eintrag erstellt mit \inlinecode{this.resourceID}, \inlinecode{this.userID} und Type ``Access``.
+	Request wird genehmigt: in der Tabelle "Permission" wir neuer Eintrag erstellt mit \inlinecode{this.resourceID}, \inlinecode{this.userID} und Typ ``Access``.
 	}
 \end{itemize}
 
@@ -513,7 +530,6 @@ Repräsentation des Zugriffsrequests. Wird in der Datenbank mit von der \inlinec
   
  \class{DeletionRequest extends Request}
 Repräsentation des Löschrequests. Wird in der Datenbank mit von der \inlinecode{Request}-Klasse vordefinierten Attributen gespeichert.
- bla bla
  
 \subparagraph*{Funktionen}  % skip this if there are no methods
 \begin{itemize}
@@ -528,7 +544,7 @@ Repräsentation des Löschrequests. Wird in der Datenbank mit von der \inlinecod
 \newpage
   \paragraph*{Klasse Logging}
  \class{<<external>> Logging}
-Vorimplemetiertes API vom Python, dient zum Protokollieren von Systemereignissen:
+Vorimplemetiertes API von Python, dient zum Protokollieren von Systemereignissen:
 \begin{itemize}
 	\item Erstellung und Löschung einer Ressource
 	\item Absenden und Stornieren eines Requests
@@ -542,10 +558,10 @@ Vorimplemetiertes API vom Python, dient zum Protokollieren von Systemereignissen
  
   \paragraph*{Klasse EmailMessage}
  \class{<<external>> EmailMessage}
- Vorimplentierte Phyton-Klasse, wird für Benachrichtigungen der Benutzer des Portals benutzt. Benutzer werden über einige Systemereignisse benachrichtigt:
+Vorimplentierte Phyton-Klasse, wird zur Benachrichtigungen der Benutzer des Portals benutzt. Benutzer werden über einige Systemereignisse benachrichtigt:
  \begin{itemize}
-	\item Erhaltung eines Requests
-	\item Genehmigung und Ablehnung abgesendeten Requests
+	\item Erhalten eines Requests
+	\item Genehmigung und Ablehnung abgesendeter Requests
 	\item Änderung der Rechte
 	\item Löschung einer Ressource, für die der Benutzer Besitzerrechte hatte.
 \end{itemize}
