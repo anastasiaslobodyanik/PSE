@@ -716,7 +716,7 @@ Von einer View-Klasse wird die Methode \textbf{addResource()} des Benutzers \enq
  
 Als Ergebnis einer Benutzeraktion wird von einer View-Klasse die a\textbf{ccessRequest(resourceID)}-Methode des Benutzers \textbf{u} aufgerufen.\\
 Aufruf der Methode \textbf{Resource.objects.get(resourceID)}, die von Django vorimplementiert ist, wird entsprechende Instanz der \textbf{Resource}-Klasse \textbf{r} liefern.\\
-Mit der Methode\textbf{ hasAccessPermission(u.getID())} wird überprüft, ob der Besitzer Zugriffsrechte für diese Ressource hat. ID des Benutzers wird dabei als Parameter übergeben. Negative Ergebnis wird ein \textit{Exception} aufrufen (Ressourcenzugriff soll von View versehen werden, nur wenn eingelogter Benutzer Zugriffsrechte für die Ressource hat).
+Mit der Methode\textbf{ hasAccessPermission(u.getID())} wird überprüft, ob der Besitzer Zugriffsrechte für diese Ressource hat. ID des Benutzers wird dabei als Parameter übergeben. Negatives Ergebnis wird eine \textit{Exception} aufrufen (Ressourcenzugriff soll von View versehen werden, nur wenn eingelogter Benutzer Zugriffsrechte für die Ressource hat).
  
  
  \newpage
@@ -737,7 +737,7 @@ Wenn die zwei Listen von der Datenbank gelöscht sind, dann wird die Ressource \
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=0.7\textwidth]{res/models+views.png}
- 	\caption{Gesamtes Klassendiagramm. Das zeigt gesammte Struktur von dem Projekt.}
+ 	\caption{Klassendiagramm: Abbildung der Klassen-Struktur des Projekts.}
  \end{figure}
  \newpage
 \setglossarystyle{altlist}
