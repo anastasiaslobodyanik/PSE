@@ -184,8 +184,13 @@ Das \gls{ORM} Django ist ein in Python geschriebenes quelloffenes Webframework, 
  	
 
 \newpage
- \subsection{Paketenstruktur}
- Das folgende \hyperref[packages]{Paketendiagramm} stellt die verschiedenen Paketen, die in der Entwurfsphase gestaltet werden(inkl. Paketen die von Django vordefiniert sind - ``Extern``), und ihre Beziehungen zueinander dar. Den Inhalt dieser Paketen wird im Abschnitt ``Paketenübersicht`` beschrieben.\\
+ \subsection{Paketenstruktur} %todo erweitern/korrigieren wenn möglich
+ Das folgende \hyperref[packages]{Paketendiagramm} stellt die verschiedenen Paketen, die in der Entwurfsphase gestaltet werden(inkl. Paketen die von Django vordefiniert sind - ``Extern``), und ihre Beziehungen zueinander dar. Den Inhalt dieser Paketen wird im Abschnitt ``Paketenübersicht`` beschrieben.\\ \\
+ Design-Elemente, nötig für die HTML-Vorlagen, gehören zum Paket ``static``. In diesem Sinn benutzt ``templates`` das Paket ``static`` um die Vorlagen graphisch zu gestalten.\\
+ Paket ``views`` enthält die so genannten Funktionen - Views, die als Ausgabe Aussicht der gewünschten Webadresse liefern. Diese Aussicht ist in der Form von einer HTML-Vorlage. Deshalb hängt ``views`` vom ``templates`` direkt ab.\\
+ ``views`` braucht Informationen über den Datenbankzustand (z.B. Listen von Ressourcen darzustellen). Diese Informationen entnimmt ``views`` aus dem Paket ``models``. \\Das Paket ``views`` hat noch eine Abhängigkeit, nämlich von einem externen Paket mit zwei Unterpaketen - ``logging`` und ``eMailMessages``. ``logging`` ist notwendig um Ereignisse die eventuell während der Ausführung der View-Funktion passieren, zu protokollieren. ``eMailMessages`` unterstützt das Senden und Empfangen von E-Mail Benachrichtigungen. Dieses Paket definiert auch zahlreiche Vorlagen für die Nachrichten, die möglicherweise in einer View-Funktion benutzt werden.  \\
+ Das Paket ``models`` ist auch dafür verantwortlich, das ``logging`` Modul über Änderungen in der Datenbank zu informieren, damit sie in der Log-Datei eingefügt werden. Das begründet die Nutzung von ``logging`` im Model.\\
+ Die zwei Unterpakete - ``test{\_}views`` und ``test{\_}models`` benutzen entsprechend ``views`` und ``models``, um die Funktionen und Objekte von diesen Paketen zu testen. 
  
  \begin{figure}[h]
  	\includegraphics[width = 1.0\textwidth]{res/packages}
