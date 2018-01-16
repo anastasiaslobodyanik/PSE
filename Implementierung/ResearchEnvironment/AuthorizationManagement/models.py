@@ -20,6 +20,8 @@ class CustomUser(User):
         
 class Owner(CustomUser):
     
+    class Meta:
+        proxy = True
     def giveAccessPermission(self, Resource, CustomUser):
         pass
     def allowAccessPermission(self, Request):
@@ -36,6 +38,8 @@ class Owner(CustomUser):
     
 class Admin(Owner):
     
+    class Meta:
+        proxy = True
     def searchUser(self,CustomUser):
         pass
     def blockUser(self,CustomUser):
@@ -56,7 +60,8 @@ class Resource(models.Model):
     name = models.CharField(max_length=150, default = 'default_name')
     description = models.CharField(max_length=250, default = 'default_description')
     creationDate = models.DateTimeField
-    readers = models.ManyToManyField(CustomUser)
+    readers = models.ManyToManyField(CustomUser, related_name= 'reader')
+    owner = models.ManyToManyField(Owner, related_name= 'owner')
     
     def hasAccessPermission(self,CustomUser):
         pass
