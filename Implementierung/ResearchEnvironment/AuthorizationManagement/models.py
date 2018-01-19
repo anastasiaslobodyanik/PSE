@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime 
 
 # Create your models here.
 
@@ -40,28 +41,20 @@ class Admin(Owner):
     
     class Meta:
         proxy = True
-    def searchUser(self,CustomUser):
-        pass
-    def blockUser(self,CustomUser):
-        pass
-    def deleteUser(self,CustomUser):
-        pass
-    def deleteResource(self,Resource):
-        pass
+    
     def acceptDeletionRequest(self,Request):
         pass
     def denyDeletionRequest(self,Request):
-        pass
-    def deleteOwnerPermission(self,Resource,CustomUser):
         pass
     
 class Resource(models.Model):
     type = models.CharField(max_length=50, default = 'default_type')
     name = models.CharField(max_length=150, default = 'default_name')
     description = models.CharField(max_length=250, default = 'default_description')
-    creationDate = models.DateTimeField
+    creationDate = models.DateTimeField(default=datetime.now, blank=True)
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owner = models.ManyToManyField(Owner, related_name= 'owner')
+    link = models.FileField(null=True)
     
     def hasAccessPermission(self,CustomUser):
         pass
@@ -70,7 +63,7 @@ class Resource(models.Model):
     
 class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
-    creationDate = models.DateTimeField
+    creationDate = models.DateTimeField(default=datetime.now, blank=True)
     resource = models.ForeignKey(Resource, on_delete = models.CASCADE)
     
     class Meta:
