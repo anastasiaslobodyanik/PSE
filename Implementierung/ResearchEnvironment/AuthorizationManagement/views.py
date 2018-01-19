@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index(request):
@@ -11,3 +12,5 @@ def foo(request, requestID=None, resourceID=None, userID=None):
     else:
         html = "<html><body>Test!resourceID = %s .</body></html>" % resourceID 
     return HttpResponse(html)
+def homeview(request):
+    return render(request, 'homeView.html')

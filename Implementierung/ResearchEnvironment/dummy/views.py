@@ -20,7 +20,6 @@ def home(request):
 class UserFormView(View):
     form_class = UserForm
     template_name = 'registration.html'
-   # template_name = 'registration_form.html'
     
     #blank form
     def get (self,request):
