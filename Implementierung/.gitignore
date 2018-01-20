@@ -5,6 +5,9 @@
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
+/ResearchEnvironment/AuthorizationManagement/__pycache__/
+/ResearchEnvironment/dummy/__pycache__/
+/ResearchEnvironment/__pycache__/
 *.py[cod]
 *$py.class
 
