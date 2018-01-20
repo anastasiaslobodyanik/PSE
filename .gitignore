@@ -337,6 +337,6 @@ TSWLatexianTemp*
 # expex forward references with \gathertags
 *-tags.tex
 Pflichtenheft/Pflichtenheft.pdf
-/Implementierung/ResearchEnvironment/ResearchEnvironment/__pycache__/
-/Implementierung/ResearchEnvironment/dummy/__pycache__/
-/Implementierung/ResearchEnvironment/dummy/migrations/
+Implementierung/ResearchEnvironment/ResearchEnvironment/__pycache__/
+Implementierung/ResearchEnvironment/dummy/__pycache__/
+Implementierung/ResearchEnvironment/dummy/migrations/
