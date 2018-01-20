@@ -1,0 +1,26 @@
+<html>     
+    <head>         
+    <title>Resource Search</title>     
+    </head>     
+    <body>      
+
+		<h3> Which resource do you need? </h3>
+		<form action="/search/" method="get">
+			<input type="text" name="q">
+			<input type="submit" value="Search">
+		</form>
+	
+        <p>You searched for: <strong>{{ query }}</strong></p>
+   
+        {% if resource %}           
+            <p>Found {{ resource|length }} Resource{{ resource|pluralize }}.</p>
+            <ul>             
+                {% for Resource in resource %}   
+				<li><a href="1_info"> {{ Resource.name }}</a></li>				            
+                {% endfor %}           
+            </ul>       
+        {% else %}           
+            <p>No Resources matched your search criteria.</p>       
+        {% endif %}     
+    </body>
+</html>
