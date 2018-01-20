@@ -6,7 +6,7 @@ from django.urls.conf import re_path
 
 urlpatterns = [
     path('', views.index, name='index'),
-    url(r'^home/$', views.homeview, name = 'home'),
+    url(r'^home/$', views.homeView, name = 'home'),
     
     
     #this section should be commented for now, so that we can work with the /admin interface from django; 
