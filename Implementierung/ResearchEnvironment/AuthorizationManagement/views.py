@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from .models import Resource
+from django.conf.global_settings import LOGIN_URL
 
 
 
@@ -57,7 +58,9 @@ def search(request):
 #    .
 #
 # - Alex
-
+def bar3(request):
+    html= "<html><body><form action=/dummy/logout/><input type=submit value=logout/></form></body></html>"
+    return HttpResponse(html)
 def profileView(request):
     return
 def chosenRequestsView(request):

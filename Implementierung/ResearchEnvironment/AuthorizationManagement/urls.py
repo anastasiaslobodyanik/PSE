@@ -5,8 +5,8 @@ from AuthorizationManagement import views
 from django.urls.conf import re_path
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    url(r'^home/$', views.homeView, name = 'home'),
+    path('', views.homeView, name='home'),
+
     
     
     #this section should be commented for now, so that we can work with the /admin interface from django; 
@@ -14,7 +14,7 @@ urlpatterns = [
     
     
     
-#     re_path(r'^profile/$', views.index),
+    re_path(r'^profile/$', views.bar3),
 #     re_path(r'^profile/handle_(?P<requestID>\w+)/$', views.foo),
 #     re_path(r'^profile/resources/$', views.index),
 #     re_path(r'^profile/resources/add_new_resource/$', views.index),
@@ -35,7 +35,7 @@ urlpatterns = [
 #     re_path(r'^manage_resources/(?P<resourceID>\w+)_permissions_for_users/$', views.foo),
 #     re_path(r'^manage_resources/(?P<resourceID>\w+)_permissions_for_users/reason_for_change/$', views.foo),
 #        
-      re_path(r'^search-resources/$', views.search_form, name='search-resources'),
+      path(r'^search-resources/$', views.search_form, name='search-resources'),
       re_path(r'^search/$', views.search, name='search'),
       
       
