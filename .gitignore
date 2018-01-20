@@ -337,3 +337,4 @@ TSWLatexianTemp*
 # expex forward references with \gathertags
 *-tags.tex
 Pflichtenheft/Pflichtenheft.pdf
+*.pyc
