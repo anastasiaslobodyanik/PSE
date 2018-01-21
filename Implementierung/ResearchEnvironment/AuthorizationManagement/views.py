@@ -7,8 +7,8 @@ from django.conf.global_settings import LOGIN_URL
 
 
 
-def index(request):
-    return HttpResponse("Test home page rendering using def. Later on it must be rewritten with view class.")
+# def index(request):
+#    return HttpResponse("Test home page rendering using def. Later on it must be rewritten with view class.")
 def foo(request, requestID=None, resourceID=None, userID=None):
     if requestID is not None:
         html = "<html><body>Test!requestID = %s .</body></html>" % requestID
@@ -17,9 +17,10 @@ def foo(request, requestID=None, resourceID=None, userID=None):
     else:
         html = "<html><body>Test!resourceID = %s .</body></html>" % resourceID 
     return HttpResponse(html)
-@login_required(login_url='dummy/login')
+
+@login_required()
 def homeView(request):
-    return render(request, 'homeView.html')
+    return render(request, 'AuthorizationManagement/homeView.html')
 
 #details for resource, not yet finished
 class Details(View):
@@ -27,12 +28,12 @@ class Details(View):
     template_name = 'AuthorizationManagement/details.html'
 
 #shows a search field
-@login_required(login_url='dummy/login')
+@login_required()
 def search_form(request):
     return render(request, 'AuthorizationManagement/search-resources.html')
   
 #shows results of the search  
-@login_required(login_url='dummy/login')
+@login_required()
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         query = request.GET['q']
@@ -58,32 +59,45 @@ def search(request):
 #    .
 #
 # - Alex
+
 def bar3(request):
-    html= "<html><body><form action=/dummy/logout/><input type=submit value=logout/></form></body></html>"
+    html= "<html><body><form action=/authentification/logout/><input type=submit value=logout/></form></body></html>"
     return HttpResponse(html)
+
 def profileView(request):
     return
+
 def chosenRequestsView(request):
     return
+
 def myResourcesView(request):
     return
 def deleteResourceView():
     return
+
 def permissionForChosenResourceView():
     return
+
 def manageUsersView():
     return
+
 def permissionsForResourceView():
     return
+
 def manageResourcesView():
     return
+
 def permissionsForUsersView():
     return
+
 def resourcesOverview():
     return
+
 def openResourceView():
     return
+
 def requestView():
     return
+
 def resourceInfoView():
     return

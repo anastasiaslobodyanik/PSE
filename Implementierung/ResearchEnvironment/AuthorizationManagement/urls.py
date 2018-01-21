@@ -35,7 +35,7 @@ urlpatterns = [
 #     re_path(r'^manage_resources/(?P<resourceID>\w+)_permissions_for_users/$', views.foo),
 #     re_path(r'^manage_resources/(?P<resourceID>\w+)_permissions_for_users/reason_for_change/$', views.foo),
 #        
-      path(r'^search-resources/$', views.search_form, name='search-resources'),
+      re_path(r'^search-resources/$', views.search_form, name='search-resources'),
       re_path(r'^search/$', views.search, name='search'),
       
       

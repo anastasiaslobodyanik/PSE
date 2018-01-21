@@ -1,10 +1,10 @@
-from django.shortcuts import render, HttpResponse
-from django import forms
+#from django.shortcuts import render, HttpResponse
+#from django import forms
 from django.shortcuts import render , redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
-from django.views import generic
+#from django.views import generic
 
 from django.template import RequestContext
 
@@ -13,13 +13,13 @@ from django.template import RequestContext
 
 # Create your views here.
 
-#function based view for home (there is also a class based view which is more complicated to be made
+#This view could be deleted (khalil)
 def home(request):
-    return HttpResponse('Dummy Home Page')
+    return render(request, 'AuthorizationManagement/homeView.html')
 
 class UserFormView(View):
     form_class = UserForm
-    template_name = 'registration.html'
+    template_name = 'authentification/registration.html'
     
     #blank form
     def get (self,request):
@@ -43,7 +43,7 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('dummy:index')
+                    return redirect('authentification:index')
         return render(request, self.template_name, {'form' : form},RequestContext(request))
 
 
