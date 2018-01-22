@@ -16,7 +16,7 @@
             <p>Found {{ resource|length }} Resource{{ resource|pluralize }}.</p>
             <ul>             
                 {% for Resource in resource %}   
-				<li><a href="1_info"> {{ Resource.name }}</a></li>				            
+				<li><a href= "{{ Resource.pk }}"> {{ Resource.name }}</a></li>				            
                 {% endfor %}           
             </ul>       
         {% else %}           
