@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['pseautmanagement.scc.kit.edu','127.0.0.1',]
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
