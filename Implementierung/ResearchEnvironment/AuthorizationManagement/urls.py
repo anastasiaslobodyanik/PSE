@@ -39,8 +39,6 @@ urlpatterns = [
       re_path(r'^search/$', views.search, name='search'),
       re_path(r'^search/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info')
       
-      
-#     path(r'^?P<pk>\w+)_info/$', views.Details.as_view(), name='details'), *in process*
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        
 #     re_path(r'^(?P<resourceID>\w+)/$', views.foo),
