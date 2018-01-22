@@ -1,0 +1,15 @@
+{% block body %}
+<div class="container">
+    <h1>Welcome</h1>
+    <p>
+        You can Login here!
+    </p>
+    <h2>Login</h2>
+    <form method="post" class="form-signin">
+    <h3 class="form-signin-heading">please sign in</h3>{% csrf_token %}
+     {{ form.as_p }}
+        <button class ="btn btn-lg btn-primary btn-block" type='submit'>sign in</button>
+    </form>
+</div>
+{% endblock %}
+

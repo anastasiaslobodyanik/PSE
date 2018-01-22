@@ -1,0 +1,15 @@
+
+{% block body %}
+<div class="container">
+    <h1>Welcome</h1>
+    <p>
+        You can register here!
+    </p>
+    <h2>Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">submit</button>
+    </form>
+</div>
+{% endblock %}
