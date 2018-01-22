@@ -26,7 +26,7 @@ class ResourceDetailView(generic.DetailView):
     model = Resource
     template_name = 'AuthorizationManagement/resource-details.html'
 
-class ProfilView(generic.DetailView):
+class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
 
@@ -63,9 +63,6 @@ def search(request):
 #
 # - Alex
 
-def bar3(request):
-    html= "<html><body><form action=/authentification/logout/><input type=submit value=logout/></form></body></html>"
-    return HttpResponse(html)
 
 def profileView(request):
     return
