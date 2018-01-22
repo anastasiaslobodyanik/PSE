@@ -3,10 +3,15 @@
     <title>Search</title>
 </head>
 <body>
+
+{% block content%}
 	<h3> Which resource do you need? </h3>
     <form action="/search/" method="get">
         <input type="text" name="q">
         <input type="submit" value="Search">
     </form>
+	
+{% endblock %}
 </body>
 </html>
+

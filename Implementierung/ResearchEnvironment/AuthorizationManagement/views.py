@@ -1,10 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import View
+from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Resource
-from django.conf.global_settings import LOGIN_URL
-
+from .models import User
 
 
 # def index(request):
@@ -20,12 +19,16 @@ def foo(request, requestID=None, resourceID=None, userID=None):
 
 @login_required()
 def homeView(request):
-    return render(request, 'AuthorizationManagement/homeView.html')
+    return render(request, 'AuthorizationManagement/home.html')
 
 #details for resource, not yet finished
-class Details(View):
+class ResourceDetailView(generic.DetailView):
     model = Resource
-    template_name = 'AuthorizationManagement/details.html'
+    template_name = 'AuthorizationManagement/resource-details.html'
+
+class ProfilView(generic.DetailView, generic.ListView):
+    model = User
+    template_name = 'AuthorizationManagement/profile.html'
 
 #shows a search field
 @login_required()
@@ -38,10 +41,10 @@ def search(request):
     if 'q' in request.GET and request.GET['q']:
         query = request.GET['q']
         resource = Resource.objects.filter(name__icontains=query)
-        return render(request, 'AuthorizationManagement/resources_overview.html',
+        return render(request, 'AuthorizationManagement/resources-overview.html',
                       {'resource': resource, 'query': query})
     else:
-        return render(request, 'AuthorizationManagement/try_searching_again.html')  
+        return render(request, 'AuthorizationManagement/try-searching-again.html')  
     
 
 

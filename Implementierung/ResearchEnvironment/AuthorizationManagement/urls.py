@@ -14,7 +14,7 @@ urlpatterns = [
     
     
     
-    re_path(r'^profile/$', views.bar3),
+    re_path(r'^profile/(?P<pk>\d+)$', views.ProfilView.as_view(), name = 'profile'),
 #     re_path(r'^profile/handle_(?P<requestID>\w+)/$', views.foo),
 #     re_path(r'^profile/resources/$', views.index),
 #     re_path(r'^profile/resources/add_new_resource/$', views.index),
@@ -37,6 +37,7 @@ urlpatterns = [
 #        
       re_path(r'^search-resources/$', views.search_form, name='search-resources'),
       re_path(r'^search/$', views.search, name='search'),
+      re_path(r'^search/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info')
       
       
 #     path(r'^?P<pk>\w+)_info/$', views.Details.as_view(), name='details'), *in process*
