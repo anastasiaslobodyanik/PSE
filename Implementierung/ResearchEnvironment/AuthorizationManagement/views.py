@@ -4,6 +4,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Resource
 from .models import User
+from .models import Owner
 
 
 # def index(request):
@@ -29,6 +30,14 @@ class ResourceDetailView(generic.DetailView):
 class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
+    
+class MyResourcesView(generic.ListView):
+    model = Owner
+    template_name = 'AuthorizationManagement/my-resources.html'
+    
+class MyRequestsView(generic.ListView):
+    model = Owner
+    template_name = 'AuthorizationManagement/my-requests.html'
 
 #shows a search field
 @login_required()

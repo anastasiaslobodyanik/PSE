@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-	<div id="logo">
-		<h1>PSE Authorization Management</h1>
-	</div>		
-		
-	<div id="nav">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/profile/">Profile</a></li>
-			<li><a href="/search-resources">Ressources Overview</a></li>
-		</ul>			
-	</div>
-		
-	<div id="content">
+{% extends "AuthorizationManagement/base.html" %}
+
+	{%block body%}
 		<h2>Home</h2>
 		<p>Welcome to our project</p>			
-	</div>
-</body>
-</html>
+	{% endblock %}
+	
