@@ -26,7 +26,7 @@ class ResourceDetailView(generic.DetailView):
     model = Resource
     template_name = 'AuthorizationManagement/resource-details.html'
 
-class ProfilView(generic.DetailView, generic.ListView):
+class ProfilView(generic.DetailView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
 
