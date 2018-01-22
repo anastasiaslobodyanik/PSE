@@ -36,7 +36,6 @@ class Owner(CustomUser):
     def sendDeletionRequest(self,Resource):
         pass
     
-    
 class Admin(Owner):
     
     class Meta:
@@ -46,7 +45,7 @@ class Admin(Owner):
         pass
     def denyDeletionRequest(self,Request):
         pass
-    
+
 class Resource(models.Model):
     type = models.CharField(max_length=50, default = 'default_type')
     name = models.CharField(max_length=150, default = 'default_name')
@@ -76,18 +75,9 @@ class Request(models.Model):
     
 class AccessRequest(Request):
     
-    def accessR(self):
-        print("giving access...")
+    pass
     
 class DeletionRequest(Request):
-    
-    def deletionR(self):
-        print("deleting...")
-    
-    
-    
-    
-    
-    
-    
+
+    pass 
     

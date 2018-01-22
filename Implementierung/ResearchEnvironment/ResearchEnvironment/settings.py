@@ -26,7 +26,7 @@ SECRET_KEY = 'op!+9+5)6zlywwem+j4+yifwneg*7l^bwmyad+=25f2jwyf64m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pseautmanagement.scc.kit.edu',]
 
 
 # Application definition
