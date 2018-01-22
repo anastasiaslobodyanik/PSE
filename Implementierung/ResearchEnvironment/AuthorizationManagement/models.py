@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.migrations import 0008_alter_user_username_max_length
 
 # Create your models here.
 
@@ -11,11 +10,15 @@ class CustomUser(User):
         
 class Owner(CustomUser):
     
+    class Meta:
+        proxy = True
     def test(self):
         print("I am an owner.")
     
 class Admin(Owner):
     
+    class Meta:
+        proxy = True
     def test(self):
         Owner.test(self)
         print("I am also an admin.")
@@ -26,6 +29,7 @@ class Resource(models.Model):
     description = models.CharField
     creationDate = models.DateTimeField
     readers = models.ManyToManyField(CustomUser)
+    owners = models.ManyToManyField(Owner)
     
 class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
@@ -37,13 +41,11 @@ class Request(models.Model):
         
 class AccessRequest(Request):
     
-    def accessR(self):
-        print("giving access...")
+    pass
     
 class DeletionRequest(Request):
-    
-    def deletionR(self):
-        print("deleting...")
+
+    pass
     
     
     
