@@ -1,12 +1,13 @@
-{% block content %}
-  <h1>Hello: {{ user.username }}</h1>
+{% extends "AuthorizationManagement/base.html" %}
 
-  <form action=/authentification/logout/>
-  <input type=submit value=logout/>
-  </form>
+{% block body %}
+		<h2>Profile ({{user.username}})</h1>
+
+		<form action=/authentification/logout/>
+			<input type=submit value="Logout">
+		</form>
   
-  <p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
-  <p><strong>E-mail:</strong> {{ user.email }}</p>
-  <p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
-
-{% endblock %}
+		<p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
+		<p><strong>E-mail:</strong> {{ user.email }}</p>
+		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
+{% endblock %}	

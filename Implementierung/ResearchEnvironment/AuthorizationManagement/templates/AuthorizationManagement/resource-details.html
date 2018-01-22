@@ -1,9 +1,13 @@
-{% block content %}
-  <h1>Information about Resource: {{ resource.name }}</h1>
-
-  <p><strong>Name:</strong> {{ resource.name }}</p>
-  <p><strong>Type:</strong> {{ resource.type }}</p>
-  <p><strong>CreationDate:</strong> {{ resource.creationDate }}</p> 
-  <p><strong>Description:</strong> {{ resource.description }}</p>  
-
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{resource.name}} Details</title>
+</head>
+<body>
+	<h2>Information about : {{resource.name}}</h2>
+	<p><strong>Name:</strong> {{resource.name}}</p>
+	<p><strong>Type:</strong> {{resource.type}}</p>
+	<p><strong>CreationDate:</strong> {{resource.creationDate}}</p> 
+	<p><strong>Description:</strong> {{resource.description}}</p>  
+</body>
+</html>

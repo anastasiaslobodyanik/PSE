@@ -1,17 +1,11 @@
-<html>
-<head>
-    <title>Search</title>
-</head>
-<body>
+{% extends "AuthorizationManagement/base.html" %}
 
-{% block content%}
-	<h3> Which resource do you need? </h3>
-    <form action="/search/" method="get">
-        <input type="text" name="q">
-        <input type="submit" value="Search">
-    </form>
-	
+{% block body %}
+		<h2>Resources Overview</h2>
+		<p>Which resource do you need?</p>
+		<form action="/search/" method="get">
+			<input type="text" name="q">
+			<input type="submit" value="Search">
+		</form>
 {% endblock %}
-</body>
-</html>
 
