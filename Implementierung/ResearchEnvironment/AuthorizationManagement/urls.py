@@ -37,7 +37,8 @@ urlpatterns = [
 #        
       re_path(r'^search-resources/$', views.search_form, name='search-resources'),
       re_path(r'^search/$', views.search, name='search'),
-      re_path(r'^search/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info')
+      re_path(r'^search/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info'),
+      re_path(r'^resources/\w+\d*\.txt$', views.download, name='download resources')
       
       
 #     path(r'^?P<pk>\w+)_info/$', views.Details.as_view(), name='details'), *in process*
