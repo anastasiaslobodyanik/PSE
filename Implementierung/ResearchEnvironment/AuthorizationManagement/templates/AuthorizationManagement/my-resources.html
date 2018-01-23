@@ -1,0 +1,17 @@
+{% extends "AuthorizationManagement/profile.html" %}
+
+	{% block profile %}
+
+	<ul>
+		<h3>My resources</h3>
+			{% for resource in resource_list %}
+						<p>
+			<form action="resources/{{resource.id}}">
+				<input type="submit" value={{resource.name}}>
+			</form>
+			</p>
+
+            {% endfor %}
+	</ul>>
+		
+	{% endblock %}

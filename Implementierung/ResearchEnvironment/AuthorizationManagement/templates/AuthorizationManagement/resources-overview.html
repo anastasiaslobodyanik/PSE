@@ -1,31 +1,34 @@
-<html>     
-    <head>         
-    <title>Resource Search</title>     
-    </head>     
-    <body>      
+{% extends "AuthorizationManagement/base.html" %}
 
-		<h3> Which resource do you need? </h3>
-		<form action="/search/" method="get">
-			<input type="text" name="q">
-			<input type="submit" value="Search">
-		</form>
-	
-        <p>You searched for: <strong>{{ query }}</strong></p>
+{% block body %}
+	<h2>Resources Overview</h2>
+	<p>Which resource do you need?</p>
+	<form action="/search/" method="get">
+		<input type="text" name="q">
+		<input type="submit" value="Search">
+	</form>
+
+	<p>You searched for: <strong>{{ query }}</strong></p>
    
-        {% if resource %}           
-            <p>Found {{ resource|length }} Resource{{ resource|pluralize }}.</p>
-            <ul>             
-                {% for Resource in resource %}   
-				<li><a href= "{{ Resource.pk }}"> {{ Resource.name }}</a> 
-					<button> 
+    {% if resource %}           
+        <p>Found {{ resource|length }} Resource{{ resource|pluralize }}.</p>
+        <ul>             
+            {% for Resource in resource %}
+				
+			<p>
+			<form action="/search/{{Resource.pk}}">
+				<input type="submit" value={{Resource.name}}>
+				<button> 
 					    <a href="../resources/{{Resource.name}}.txt"download>access</a>
 					</button
 				
-				</li>				            
-                {% endfor %}           
-            </ul>       
-        {% else %}           
-            <p>No Resources matched your search criteria.</p>       
-        {% endif %}     
-    </body>
-</html>
+			</form>
+			</p>
+							
+            {% endfor %}           
+        </ul>       
+    {% else %}           
+        <p>No Resources matched your search criteria.</p>       
+    {% endif %} 
+{% endblock %}
+

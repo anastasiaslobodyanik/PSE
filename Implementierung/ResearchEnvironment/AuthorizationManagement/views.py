@@ -2,11 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import Resource
-from .models import User
+
+from .models import *
 from django.core.files import File
 from django.conf import settings
 import os
+
 
 
 # def index(request):
@@ -29,9 +30,17 @@ class ResourceDetailView(generic.DetailView):
     model = Resource
     template_name = 'AuthorizationManagement/resource-details.html'
 
-class ProfilView(generic.DetailView):
+class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
+    
+class MyResourcesView(generic.ListView):
+    model = Resource
+    template_name = 'AuthorizationManagement/my-resources.html'
+    
+class MyRequestsView(generic.ListView):
+    model = AccessRequest
+    template_name = 'AuthorizationManagement/my-requests.html'
 
 #shows a search field
 @login_required()
@@ -86,20 +95,14 @@ def getOppositeOSDirectorySep():
 #
 # - Alex
 
-def bar3(request):
-    html= "<html><body><form action=/authentification/logout/><input type=submit value=logout/></form></body></html>"
-    return HttpResponse(html)
 
-def profileView(request):
-    return
+class ChosenRequestsView(generic.DetailView):
+    model = AccessRequest
+    template_name = "AuthorizationManagement/handle-request.html"
 
-def chosenRequestsView(request):
-    return
+    def handle(self):
+        return generic.FormView.as_view()
 
-def myResourcesView(request):
-    return
-def deleteResourceView():
-    return
 
 def permissionForChosenResourceView():
     return
