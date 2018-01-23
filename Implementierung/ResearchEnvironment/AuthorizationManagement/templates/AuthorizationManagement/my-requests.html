@@ -1,7 +1,17 @@
 {% extends "AuthorizationManagement/profile.html" %}
+<h3> Receved requests</h3>>
 
 	{% block profile %}		
 
-		<p> moite ZAPITVANIQ test </p>
-		
+		<ul>
+			{% for accessrequest in accessrequest_list %}
+						<p>
+			<form action="/handle/{{accessrequest.id}}">
+				<input type="submit" value={{accessrequest.id}}>
+			</form>
+			</p>
+
+            {% endfor %}
+		</ul>>
+
 	{% endblock %}

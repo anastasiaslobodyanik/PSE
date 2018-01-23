@@ -2,9 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import Resource
-from .models import User
-from .models import Owner
+from .models import *
 
 
 # def index(request):
@@ -32,11 +30,11 @@ class ProfileView(generic.ListView):
     template_name = 'AuthorizationManagement/profile.html'
     
 class MyResourcesView(generic.ListView):
-    model = Owner
+    model = Resource
     template_name = 'AuthorizationManagement/my-resources.html'
     
 class MyRequestsView(generic.ListView):
-    model = Owner
+    model = AccessRequest
     template_name = 'AuthorizationManagement/my-requests.html'
 
 #shows a search field
@@ -73,16 +71,13 @@ def search(request):
 # - Alex
 
 
-def profileView(request):
-    return
+class ChosenRequestsView(generic.DetailView):
+    model = AccessRequest
+    template_name = "AuthorizationManagement/handle-request.html"
 
-def chosenRequestsView(request):
-    return
+    def handle(self):
+        return generic.FormView.as_view()
 
-def myResourcesView(request):
-    return
-def deleteResourceView():
-    return
 
 def permissionForChosenResourceView():
     return
