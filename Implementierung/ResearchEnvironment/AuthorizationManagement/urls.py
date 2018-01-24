@@ -37,10 +37,13 @@ urlpatterns = [
 #     re_path(r'^manage_resources/delete_resource/$', views.index),
 #     re_path(r'^manage_resources/(?P<resourceID>\w+)_permissions_for_users/$', views.foo),
 #     re_path(r'^manage_resources/(?P<resourceID>\w+)_permissions_for_users/reason_for_change/$', views.foo),
-#
+
+    
     re_path(r'^search-resources/$', views.search_form, name='search-resources'),
     re_path(r'^search/$', views.search, name='search'),
-    re_path(r'^search/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info')
+    re_path(r'^search/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info'),
+    re_path(r'^resources/\w+\d*\.txt$', views.download, name='download resources')
+
       
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        

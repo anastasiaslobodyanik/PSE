@@ -46,17 +46,23 @@ class Owner(CustomUser):
     class Meta:
         proxy = True
     def giveAccessPermission(self, Resource, CustomUser):
-        pass
+        Resource.readers.add(CustomUser)
     def allowAccessPermission(self, Request):
         pass
     def deleteAccessPermission(self, Resource, CustomUser):
-        pass
+        Resource.readers.remove(CustomUser)
     def denyAccessPermission(self,Request):
         pass
     def allowOwnerPermission(self,Resource,CustomUser):
-        pass
+        CustomUser = Owner()
+        Resource.readers.add(CustomUser)
+        Resource.owners.add(CustomUser)
     def sendDeletionRequest(self,Resource):
-        pass
+        dlt_req = DeletionRequest.objects.create(sender = self,resource = Resource)
+        body = ''
+        email_to = Resource.owners.all().email
+        email = EmailMessage('Hello', body, self.email, email_to )
+        email.send()
     
 class Admin(Owner):
     

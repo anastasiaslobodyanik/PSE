@@ -2,7 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+
 from .models import *
+from django.core.files import File
+from django.conf import settings
+import os
+
 
 
 # def index(request):
@@ -53,10 +58,30 @@ def search(request):
     else:
         return render(request, 'AuthorizationManagement/try-searching-again.html')  
     
+@login_required()
+def download(request):
+    relativePath = request.path
+    if relativePath.find(os.sep) == -1:
+        relativePath = relativePath.replace(getOppositeOSDirectorySep(),os.sep)  
+        
+    els = relativePath.split(os.sep,1)
+    relativePath = els[len(els)-1]
+          
+    f = open(os.path.join(settings.BASE_DIR, relativePath), 'r')
+    myfile = File(f)
+    response = HttpResponse(myfile, content_type='text/plain')
+    
+    elements = myfile.name.rsplit(os.sep);
+    fileName = elements[len(elements)-1]
+    response['Content-Disposition'] = 'attachment; filename=' + fileName
+    return response
 
 
-
-
+def getOppositeOSDirectorySep():
+    if os.sep=='/':
+        return '\\'
+    else:
+        return '/'
 
 #Those views have to be classes and to inherit from different generic classes, 
 #they must NOT be implemented as functions(with def). For example:
