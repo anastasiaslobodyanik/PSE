@@ -3,39 +3,31 @@ from django.contrib.auth.models import User
 from datetime import datetime 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail.message import EmailMessage
+import logging
+from _pydecimal import Context
+from django.template.loader import render_to_string
 
 # Create your models here.
-
+logger = logging.getLogger(__name__)
 class CustomUser(User):
     
     class Meta:
         proxy = True
-#    def searchResources(self, Resource):
-#        pass
+#    
     def addResource(self):
         new_resource = Resource.objects.create()
-        #logging
+        logger.info('new resource is created')
         self = Owner()
         new_resource.readers.add(self)
         new_resource.owners.add(self)
-        
-    #i think this function can be deleted because we have already a function 'hasAccessPermission'
-    #with similar functionality in the Resource model. and i have changed it from void (as
-    #described in the document) to boolean because it would be meaningless with parameter Resource 
-    #as a input .Houra.
-    def accessResource(self,Resource):
-        #try:
-        #    self.reader.objects.get(Resource.id); 
-        #except ObjectDoesNotExist:
-        #   print("you have no permission to access this resource.")
-        self.reader.filter(id = Resource.id).exists()  
-          
+         
         
     def sendAccessRequest(self, Resource):
         acc_req = AccessRequest.objects.create(sender = self,resource = Resource)
-        body = ''
+        c = Context({'user' : self}, {'resource' : Resource})
+        html_context = render_to_string('AthorizationManagement/access-resource-mail.html', c)
         email_to = Resource.owners.all().email
-        email = EmailMessage('Hello', body, self.email, email_to )
+        email = EmailMessage('AccessPermission', html_context, self.email, email_to )
         email.send()
         
     def cancelRequest(self, Request):
@@ -84,9 +76,9 @@ class Resource(models.Model):
     link = models.FileField(null=True)
     
     def hasAccessPermission(self,CustomUser):
-        pass
+        self.readers.filter(id = CustomUser.id).exists()
     def hasOwnerPermission(self,CustomUser):
-        pass
+        self.owners.filter(id = CustomUser.id).exists()
     
 class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
