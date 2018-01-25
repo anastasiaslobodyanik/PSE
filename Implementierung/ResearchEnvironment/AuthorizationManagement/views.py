@@ -32,7 +32,12 @@ class ResourceDetailView(generic.DetailView):
 
 class ProfileView(generic.ListView):
     model = User
+    model = Request
     template_name = 'AuthorizationManagement/profile.html'
+
+    def get_queryset(self):
+        resources = MyResourcesView.get_queryset(self)
+        return AccessRequest.objects.filter(resource__in=resources)
     
 class MyResourcesView(generic.ListView):
     model = Resource
@@ -41,10 +46,6 @@ class MyResourcesView(generic.ListView):
     def get_queryset(self):
         current_user = Owner.objects.get(id=self.request.user.id)
         return current_user.owner.all()
-    
-class MyRequestsView(generic.ListView):
-    model = AccessRequest
-    template_name = 'AuthorizationManagement/my-requests.html'
 
 #shows a search field
 @login_required()
@@ -104,9 +105,6 @@ def getOppositeOSDirectorySep():
 class ChosenRequestsView(generic.DetailView):
     model = AccessRequest
     template_name = "AuthorizationManagement/handle-request.html"
-
-    def handle(self):
-        return generic.FormView.as_view()
 
 
 def permissionForChosenResourceView():
