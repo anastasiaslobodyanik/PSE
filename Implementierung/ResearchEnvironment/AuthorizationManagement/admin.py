@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
-from .models import Resource
-from .models import User
+from .models import *
 
 admin.site.register(Resource)
+admin.site.register(AccessRequest)
 
 # Register your models here.
  

@@ -17,7 +17,6 @@ urlpatterns = [
        
     re_path(r'^profile/', views.ProfileView.as_view(), name = 'profile'),
     re_path(r'^my-resources/$', views.MyResourcesView.as_view(), name = 'my resources' ),
-    re_path(r'^my-requests/$', views.MyRequestsView.as_view(), name = 'my requests' ),
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
     re_path(r'^handle/(?P<pk>\d+)$', views.ChosenRequestsView.as_view(), name='handle request'),
 

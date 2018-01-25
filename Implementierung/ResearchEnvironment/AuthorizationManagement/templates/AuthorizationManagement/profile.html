@@ -25,7 +25,7 @@ float:left;
 		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
 		
 		<div id="first">
-		<form action="/my-requests">
+		<form action="/profile">
 			<input type=submit value="Requests">
 		</form>
 		</div>
@@ -36,6 +36,16 @@ float:left;
 		</div> <br/>
 	
 	{% block profile %}
+			<ul>
+			{% for accessrequest in accessrequest_list %}
+						<p>
+			<form action="/handle/{{accessrequest.id}}">
+				<input type="submit" value={{accessrequest.id}}>
+			</form>
+			</p>
+
+            {% endfor %}
+		</ul>>
 	{% endblock %}
 		
 {% endblock %}	
