@@ -1,9 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Resource
 from .models import User
+from .models import Owner
 
 
 # def index(request):
@@ -29,25 +30,59 @@ class ResourceDetailView(generic.DetailView):
 class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
+    
+class MyResourcesView(generic.ListView):
+    model = Owner
+    template_name = 'AuthorizationManagement/my-resources.html'
+    
+class MyRequestsView(generic.ListView):
+    model = Owner
+    template_name = 'AuthorizationManagement/my-requests.html'
 
+class ResourcesOverview(generic.ListView):
+    model = Resource
+    template_name = 'AuthorizationManagement/my-resources-overview.html'  
+    context_object_name = "resources_list"
+    paginate_by = 2
+    
+    def get_context_data(self, **kwargs):
+        context = super(ResourcesOverview, self).get_context_data(**kwargs)
+        context['query_pagination_string'] = ''
+        return context
+    
+    
+class ResourcesOverviewSearch(generic.ListView):
+     model = Resource.objects.all()
+     template_name = 'AuthorizationManagement/my-resources-overview.html'  
+     context_object_name = "resources_list"
+     paginate_by = 2
+     query = ''
+     
+     
+     def get_queryset(self):
+         return self.model
+     
+     def get(self,request):
+        if 'q' in self.request.GET and self.request.GET['q']:
+          self.query = self.request.GET['q']
+          self.model = Resource.objects.filter(name__icontains=self.query)
+          return super(ResourcesOverviewSearch, self).get(request)
+        else:
+          return redirect("/resources-overview")
+    
+     def get_context_data(self, **kwargs):
+        context = super(ResourcesOverviewSearch, self).get_context_data(**kwargs)
+        context['query'] = self.query;
+        context['query_pagination_string'] = 'q='+self.query+'&'
+        return context
+            
+        
 #shows a search field
 @login_required()
 def search_form(request):
     return render(request, 'AuthorizationManagement/search-resources.html')
   
-#shows results of the search  
-@login_required()
-def search(request):
-    if 'q' in request.GET and request.GET['q']:
-        query = request.GET['q']
-        resource = Resource.objects.filter(name__icontains=query)
-        return render(request, 'AuthorizationManagement/resources-overview.html',
-                      {'resource': resource, 'query': query})
-    else:
-        return render(request, 'AuthorizationManagement/try-searching-again.html')  
-    
-
-
+     
 
 
 
