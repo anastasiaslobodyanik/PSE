@@ -17,8 +17,18 @@
 		      <p>Found {{paginator.count }} resource{{ paginator.count|pluralize }}.</p>
   
     		{% endif %}
-	            {% for res in resources_list %}
-           <p><a href="/resources-overview/{{res.pk}}"> {{res.name}}</a></p>
+	       {% for res in resources_list %}
+              <p><a href="/resources-overview/{{res.pk}}"> {{res.name}}</a>
+	           {% if res in can_access %}
+				      <button> 
+					       <a href="../resources/{{res.name}}.txt"download>access</a>
+					    </button>
+				     {% else %}
+				      <button> 
+					       <a>request</a>
+					     </button>
+				      {% endif %}
+            </p>
         {% endfor %}
 
 {# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
@@ -45,6 +55,6 @@
   </ul>
 {% endif %}
 {% else %}
-    <p>No resources found :(</p>
+    <p>No Resources matched your search criteria.</p>
 {% endif %}
 {% endblock %}

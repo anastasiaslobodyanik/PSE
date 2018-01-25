@@ -18,6 +18,20 @@
 			<p>
 			<form action="/search/{{Resource.pk}}">
 				<input type="submit" value={{Resource.name}}>
+<<<<<<< HEAD
+=======
+				{% if Resource in canAccess %}
+				    <button> 
+					    <a href="../resources/{{Resource.name}}.txt"download>access</a>
+					</button
+				{% else %}
+				    <button> 
+					    <a>request</a>
+					</button
+				{% endif %}
+				
+				
+>>>>>>> a112ca7ed283aa871fc77aaba552d4c68bec737c
 			</form>
 			</p>
 							
@@ -26,4 +40,9 @@
     {% else %}           
         <p>No Resources matched your search criteria.</p>       
     {% endif %} 
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+
+>>>>>>> a112ca7ed283aa871fc77aaba552d4c68bec737c

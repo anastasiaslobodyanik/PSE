@@ -5,18 +5,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Resource
 from .models import User
 from .models import Owner
-
-
-# def index(request):
-#    return HttpResponse("Test home page rendering using def. Later on it must be rewritten with view class.")
-def foo(request, requestID=None, resourceID=None, userID=None):
-    if requestID is not None:
-        html = "<html><body>Test!requestID = %s .</body></html>" % requestID
-    elif userID is not None:
-        html = "<html><body>Test!userID = %s .</body></html>" % userID
-    else:
-        html = "<html><body>Test!resourceID = %s .</body></html>" % resourceID 
-    return HttpResponse(html)
+from .models import AccessRequest
+from django.core.files import File
+from django.conf import settings
+import os
 
 @login_required()
 def homeView(request):
@@ -32,24 +24,30 @@ class ProfileView(generic.ListView):
     template_name = 'AuthorizationManagement/profile.html'
     
 class MyResourcesView(generic.ListView):
-    model = Owner
+    model = Resource
     template_name = 'AuthorizationManagement/my-resources.html'
     
 class MyRequestsView(generic.ListView):
-    model = Owner
+    model = AccessRequest
     template_name = 'AuthorizationManagement/my-requests.html'
+    
 
 class ResourcesOverview(generic.ListView):
-    model = Resource
+    model = Resource.objects.all()
     template_name = 'AuthorizationManagement/my-resources-overview.html'  
     context_object_name = "resources_list"
     paginate_by = 2
+    canAccess = Resource.objects.none() 
+    
+    def get_queryset(self):
+         return self.model
     
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverview, self).get_context_data(**kwargs)
         context['query_pagination_string'] = ''
+        context['can_access'] = self.request.user.reader.filter(id__in=self.model)
+        print(context['can_access'])
         return context
-    
     
 class ResourcesOverviewSearch(generic.ListView):
      model = Resource.objects.all()
@@ -57,7 +55,7 @@ class ResourcesOverviewSearch(generic.ListView):
      context_object_name = "resources_list"
      paginate_by = 2
      query = ''
-     
+     can_access = Resource.objects.none()     
      
      def get_queryset(self):
          return self.model
@@ -66,6 +64,7 @@ class ResourcesOverviewSearch(generic.ListView):
         if 'q' in self.request.GET and self.request.GET['q']:
           self.query = self.request.GET['q']
           self.model = Resource.objects.filter(name__icontains=self.query)
+          self.can_access=self.request.user.reader.filter(id__in=self.model)
           return super(ResourcesOverviewSearch, self).get(request)
         else:
           return redirect("/resources-overview")
@@ -74,17 +73,34 @@ class ResourcesOverviewSearch(generic.ListView):
         context = super(ResourcesOverviewSearch, self).get_context_data(**kwargs)
         context['query'] = self.query;
         context['query_pagination_string'] = 'q='+self.query+'&'
+        context['can_access'] = self.can_access
         return context
-            
-        
-#shows a search field
+                
+    
 @login_required()
-def search_form(request):
-    return render(request, 'AuthorizationManagement/search-resources.html')
-  
-     
+def download(request):
+    relativePath = request.path
+    if relativePath.find(os.sep) == -1:
+        relativePath = relativePath.replace(getOppositeOSDirectorySep(),os.sep)  
+        
+    els = relativePath.split(os.sep,1)
+    relativePath = els[len(els)-1]
+          
+    f = open(os.path.join(settings.BASE_DIR, relativePath), 'r')
+    myfile = File(f)
+    response = HttpResponse(myfile, content_type='text/plain')
+    
+    elements = myfile.name.rsplit(os.sep);
+    fileName = elements[len(elements)-1]
+    response['Content-Disposition'] = 'attachment; filename=' + fileName
+    return response
 
 
+def getOppositeOSDirectorySep():
+    if os.sep=='/':
+        return '\\'
+    else:
+        return '/'
 
 #Those views have to be classes and to inherit from different generic classes, 
 #they must NOT be implemented as functions(with def). For example:
@@ -99,16 +115,13 @@ def search_form(request):
 # - Alex
 
 
-def profileView(request):
-    return
+class ChosenRequestsView(generic.DetailView):
+    model = AccessRequest
+    template_name = "AuthorizationManagement/handle-request.html"
 
-def chosenRequestsView(request):
-    return
+    def handle(self):
+        return generic.FormView.as_view()
 
-def myResourcesView(request):
-    return
-def deleteResourceView():
-    return
 
 def permissionForChosenResourceView():
     return
