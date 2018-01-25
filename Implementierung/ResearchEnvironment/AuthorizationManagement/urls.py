@@ -1,12 +1,15 @@
 from django.urls import path
-from django.conf.urls import url
 
 from AuthorizationManagement import views
 from django.urls.conf import re_path
+from .admin import resource_manager
+from .admin import user_manager
 
 urlpatterns = [
     path('', views.homeView, name='home'),
-
+    re_path(r'^resource-manager/', resource_manager.urls),
+    re_path(r'^user-manager/', user_manager.urls),
+        
     
     
     #this section should be commented for now, so that we can work with the /admin interface from django; 
