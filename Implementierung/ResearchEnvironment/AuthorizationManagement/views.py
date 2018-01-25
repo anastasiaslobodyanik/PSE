@@ -2,9 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import Resource
-from .models import User
-from .models import Owner
+
+from .models import *
+from django.core.files import File
+from django.conf import settings
+import os
+
 
 
 # def index(request):
@@ -32,11 +35,11 @@ class ProfileView(generic.ListView):
     template_name = 'AuthorizationManagement/profile.html'
     
 class MyResourcesView(generic.ListView):
-    model = Owner
+    model = Resource
     template_name = 'AuthorizationManagement/my-resources.html'
     
 class MyRequestsView(generic.ListView):
-    model = Owner
+    model = AccessRequest
     template_name = 'AuthorizationManagement/my-requests.html'
 
 #shows a search field
@@ -50,15 +53,36 @@ def search(request):
     if 'q' in request.GET and request.GET['q']:
         query = request.GET['q']
         resource = Resource.objects.filter(name__icontains=query)
+        canAccess=request.user.reader.filter(id__in=resource)
         return render(request, 'AuthorizationManagement/resources-overview.html',
-                      {'resource': resource, 'query': query})
+                      {'resource': resource, 'query': query, 'canAccess': canAccess})
     else:
         return render(request, 'AuthorizationManagement/try-searching-again.html')  
     
+@login_required()
+def download(request):
+    relativePath = request.path
+    if relativePath.find(os.sep) == -1:
+        relativePath = relativePath.replace(getOppositeOSDirectorySep(),os.sep)  
+        
+    els = relativePath.split(os.sep,1)
+    relativePath = els[len(els)-1]
+          
+    f = open(os.path.join(settings.BASE_DIR, relativePath), 'r')
+    myfile = File(f)
+    response = HttpResponse(myfile, content_type='text/plain')
+    
+    elements = myfile.name.rsplit(os.sep);
+    fileName = elements[len(elements)-1]
+    response['Content-Disposition'] = 'attachment; filename=' + fileName
+    return response
 
 
-
-
+def getOppositeOSDirectorySep():
+    if os.sep=='/':
+        return '\\'
+    else:
+        return '/'
 
 #Those views have to be classes and to inherit from different generic classes, 
 #they must NOT be implemented as functions(with def). For example:
@@ -73,16 +97,13 @@ def search(request):
 # - Alex
 
 
-def profileView(request):
-    return
+class ChosenRequestsView(generic.DetailView):
+    model = AccessRequest
+    template_name = "AuthorizationManagement/handle-request.html"
 
-def chosenRequestsView(request):
-    return
+    def handle(self):
+        return generic.FormView.as_view()
 
-def myResourcesView(request):
-    return
-def deleteResourceView():
-    return
 
 def permissionForChosenResourceView():
     return
