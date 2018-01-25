@@ -37,6 +37,10 @@ class ProfileView(generic.ListView):
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/my-resources.html'
+
+    def get_queryset(self):
+        current_user = Owner.objects.get(id=self.request.user.id)
+        return current_user.owner.all()
     
 class MyRequestsView(generic.ListView):
     model = AccessRequest
