@@ -21,7 +21,6 @@ class ResourceDetailView(generic.DetailView):
 
 class ProfileView(generic.ListView):
     model = User
-    model = Request
     template_name = 'AuthorizationManagement/profile.html'
 
     def get_queryset(self):
@@ -31,18 +30,10 @@ class ProfileView(generic.ListView):
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/my-resources.html'
-<<<<<<< HEAD
-    
-class MyRequestsView(generic.ListView):
-    model = AccessRequest
-    template_name = 'AuthorizationManagement/my-requests.html'
-    
-=======
 
     def get_queryset(self):
         current_user = Owner.objects.get(id=self.request.user.id)
         return current_user.owner.all()
->>>>>>> 79ab8b4b328995f6baf47e5a1713bab238ad5ae0
 
 class ResourcesOverview(generic.ListView):
     model = Resource.objects.all()

@@ -4,6 +4,7 @@ from AuthorizationManagement import views
 from django.urls.conf import re_path
 from .admin import resource_manager
 from .admin import user_manager
+from .views import *
 
 urlpatterns = [
     path('', views.homeView, name='home'),
