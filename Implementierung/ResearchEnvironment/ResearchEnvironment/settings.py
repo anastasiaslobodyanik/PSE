@@ -73,7 +73,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ResearchEnvironment.wsgi.application'
 
-
+AUTHENTICATION_BACKENDS = (
+    'ResearchEnvironment.auth_backends.CustomUserModelBackend',
+)
+CUSTOM_USER_MODEL = 'AuthorizationManagement.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 

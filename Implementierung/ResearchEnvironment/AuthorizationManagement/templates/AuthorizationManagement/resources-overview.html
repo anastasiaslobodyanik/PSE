@@ -18,9 +18,16 @@
 			<p>
 			<form action="/search/{{Resource.pk}}">
 				<input type="submit" value={{Resource.name}}>
-				<button> 
+				{% if Resource in canAccess %}
+				    <button> 
 					    <a href="../resources/{{Resource.name}}.txt"download>access</a>
 					</button
+				{% else %}
+				    <button> 
+					    <a>request</a>
+					</button
+				{% endif %}
+				
 				
 			</form>
 			</p>

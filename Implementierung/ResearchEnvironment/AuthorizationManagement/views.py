@@ -53,8 +53,9 @@ def search(request):
     if 'q' in request.GET and request.GET['q']:
         query = request.GET['q']
         resource = Resource.objects.filter(name__icontains=query)
+        canAccess=request.user.reader.filter(id__in=resource)
         return render(request, 'AuthorizationManagement/resources-overview.html',
-                      {'resource': resource, 'query': query})
+                      {'resource': resource, 'query': query, 'canAccess': canAccess})
     else:
         return render(request, 'AuthorizationManagement/try-searching-again.html')  
     
