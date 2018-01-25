@@ -16,7 +16,7 @@ class CustomUser(User):
 #    
     def addResource(self):
         new_resource = Resource.objects.create()
-        logger.info('new resource is created')
+        logger.info(self.username + 'created a new resource')
         self = Owner()
         new_resource.readers.add(self)
         new_resource.owners.add(self)
