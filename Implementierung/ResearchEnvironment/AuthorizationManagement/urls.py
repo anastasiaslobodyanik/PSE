@@ -42,7 +42,8 @@ urlpatterns = [
     re_path(r'^resources-overview/$', views.ResourcesOverview.as_view(), name='resource-overview'),
     re_path(r'^resources-overview/search$', views.ResourcesOverviewSearch.as_view(), name='search-resources'),
     re_path(r'^resources-overview/(?P<pk>\d+)$', views.ResourceDetailView.as_view(), name='resource-info'),
-    re_path(r'^resources/\w+\d*\.txt$', views.download, name='download resources')
+    re_path(r'^resources/\w+\d*\.txt$', views.download, name='download resources'),
+    re_path(r'^send-access-request/\d*$', views.send_access_request, name='send-access-request')
       
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        

@@ -43,7 +43,7 @@ class ResourcesOverview(generic.ListView):
     canAccess = Resource.objects.none() 
     
     def get_queryset(self):
-         return self.model
+        return self.model
     
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverview, self).get_context_data(**kwargs)
@@ -53,32 +53,42 @@ class ResourcesOverview(generic.ListView):
         return context
     
 class ResourcesOverviewSearch(generic.ListView):
-     model = Resource.objects.all()
-     template_name = 'AuthorizationManagement/my-resources-overview.html'  
-     context_object_name = "resources_list"
-     paginate_by = 2
-     query = ''
-     can_access = Resource.objects.none()     
+    model = Resource.objects.all()
+    template_name = 'AuthorizationManagement/my-resources-overview.html'  
+    context_object_name = "resources_list"
+    paginate_by = 2
+    query = ''
+    can_access = Resource.objects.none()     
      
-     def get_queryset(self):
-         return self.model
+    def get_queryset(self):
+        return self.model
      
-     def get(self,request):
+    def get(self,request):
         if 'q' in self.request.GET and self.request.GET['q']:
-          self.query = self.request.GET['q']
-          self.model = Resource.objects.filter(name__icontains=self.query)
-          self.can_access=self.request.user.reader.filter(id__in=self.model)
-          return super(ResourcesOverviewSearch, self).get(request)
+            self.query = self.request.GET['q']
+            self.model = Resource.objects.filter(name__icontains=self.query)
+            self.can_access=self.request.user.reader.filter(id__in=self.model)
+            return super(ResourcesOverviewSearch, self).get(request)
         else:
-          return redirect("/resources-overview")
+            return redirect("/resources-overview")
     
-     def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(ResourcesOverviewSearch, self).get_context_data(**kwargs)
         context['query'] = self.query;
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
         return context
                 
+def send_access_request(request):
+    elements=request.path.rsplit('/')
+    print(elements[2])
+    #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
+    #-Sonya
+    req=AccessRequest.objects.create(sender=request.user,
+                                      resource = Resource.objects.get(id=elements[2]), description = request.GET)
+    return redirect("/resources-overview")
+    
+    
     
 @login_required()
 def download(request):

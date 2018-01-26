@@ -84,6 +84,7 @@ class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     resource = models.ForeignKey(Resource, on_delete = models.DO_NOTHING)
+    description = models.CharField(max_length=250, default = 'default_description')
     
     class Meta:
         abstract = True
