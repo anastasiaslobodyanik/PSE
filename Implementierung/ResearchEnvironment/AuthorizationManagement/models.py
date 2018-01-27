@@ -16,12 +16,12 @@ class CustomUser(User):
 #    
     def addResource(self):
         new_resource = Resource.objects.create()
-        logger.info('new resource is created')
-        self.__class__=Owner
-        self.save()
-        owner = self
-        new_resource.readers.add(owner)
-        new_resource.owners.add(owner)
+
+        logger.info(self.username + 'created a new resource')
+        self = Owner()
+        new_resource.readers.add(self)
+        new_resource.owners.add(self)
+
          
         
     def sendAccessRequest(self, Resource):
@@ -88,6 +88,7 @@ class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     resource = models.ForeignKey(Resource, on_delete = models.DO_NOTHING)
+    description = models.CharField(max_length=250, default = 'default_description')
     
     class Meta:
         abstract = True

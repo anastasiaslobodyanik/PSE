@@ -2,26 +2,15 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-
-from .models import *
+from .models import Resource
+from .models import User
+from .models import Owner
+from .models import AccessRequest
 from django.core.files import File
 from django.conf import settings
 import os
 from django.utils.decorators import method_decorator
 from django.http.response import HttpResponseRedirect
-
-
-
-# def index(request):
-#    return HttpResponse("Test home page rendering using def. Later on it must be rewritten with view class.")
-def foo(request, requestID=None, resourceID=None, userID=None):
-    if requestID is not None:
-        html = "<html><body>Test!requestID = %s .</body></html>" % requestID
-    elif userID is not None:
-        html = "<html><body>Test!userID = %s .</body></html>" % userID
-    else:
-        html = "<html><body>Test!resourceID = %s .</body></html>" % resourceID 
-    return HttpResponse(html)
 
 @login_required()
 def homeView(request):
@@ -35,30 +24,73 @@ class ResourceDetailView(generic.DetailView):
 class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
+
+    def get_queryset(self):
+        resources = MyResourcesView.get_queryset(self)
+        return AccessRequest.objects.filter(resource__in=resources)
     
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/my-resources.html'
-    
-class MyRequestsView(generic.ListView):
-    model = AccessRequest
-    template_name = 'AuthorizationManagement/my-requests.html'
 
-#shows a search field
-@login_required()
-def search_form(request):
-    return render(request, 'AuthorizationManagement/search-resources.html')
-  
-#shows results of the search  
-@login_required()
-def search(request):
-    if 'q' in request.GET and request.GET['q']:
-        query = request.GET['q']
-        resource = Resource.objects.filter(name__icontains=query)
-        return render(request, 'AuthorizationManagement/resources-overview.html',
-                      {'resource': resource, 'query': query})
-    else:
-        return render(request, 'AuthorizationManagement/try-searching-again.html')  
+    def get_queryset(self):
+        current_user = Owner.objects.get(id=self.request.user.id)
+        return current_user.owner.all()
+
+class ResourcesOverview(generic.ListView):
+    model = Resource.objects.all()
+    template_name = 'AuthorizationManagement/my-resources-overview.html'  
+    context_object_name = "resources_list"
+    paginate_by = 2
+    canAccess = Resource.objects.none() 
+    
+    def get_queryset(self):
+        return self.model
+    
+    def get_context_data(self, **kwargs):
+        context = super(ResourcesOverview, self).get_context_data(**kwargs)
+        context['query_pagination_string'] = ''
+        context['can_access'] = self.request.user.reader.filter(id__in=self.model)
+        print(context['can_access'])
+        return context
+    
+class ResourcesOverviewSearch(generic.ListView):
+    model = Resource.objects.all()
+    template_name = 'AuthorizationManagement/my-resources-overview.html'  
+    context_object_name = "resources_list"
+    paginate_by = 2
+    query = ''
+    can_access = Resource.objects.none()     
+     
+    def get_queryset(self):
+        return self.model
+     
+    def get(self,request):
+        if 'q' in self.request.GET and self.request.GET['q']:
+            self.query = self.request.GET['q']
+            self.model = Resource.objects.filter(name__icontains=self.query)
+            self.can_access=self.request.user.reader.filter(id__in=self.model)
+            return super(ResourcesOverviewSearch, self).get(request)
+        else:
+            return redirect("/resources-overview")
+    
+    def get_context_data(self, **kwargs):
+        context = super(ResourcesOverviewSearch, self).get_context_data(**kwargs)
+        context['query'] = self.query;
+        context['query_pagination_string'] = 'q='+self.query+'&'
+        context['can_access'] = self.can_access
+        return context
+                
+def send_access_request(request):
+    elements=request.path.rsplit('/')
+    print(elements[2])
+    #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
+    #-Sonya
+    req=AccessRequest.objects.create(sender=request.user,
+                                      resource = Resource.objects.get(id=elements[2]), description = request.GET)
+    return redirect("/resources-overview")
+    
+    
     
 @login_required()
 def download(request):
@@ -144,9 +176,6 @@ class PermissionEditingView(generic.ListView):
 class ChosenRequestsView(generic.DetailView):
     model = AccessRequest
     template_name = "AuthorizationManagement/handle-request.html"
-
-    def handle(self):
-        return generic.FormView.as_view()
 
 
 def permissionForChosenResourceView():

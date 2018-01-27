@@ -1,0 +1,80 @@
+{% extends "AuthorizationManagement/base.html" %}
+
+{% block body %}
+	<h2>Resources Overview</h2>
+	<p>Which resource do you need?</p>
+	<form action="/resources-overview/search" method="get">
+		<input type="text" name="q">
+		<input type="submit" value="Search">
+	</form>
+
+	{% if query %}
+		<p>You searched for: <strong>{{ query }}</strong></p>   
+    {% endif %}           
+        
+	{% if resources_list %}
+			{% if query %}
+		      <p>Found {{paginator.count }} resource{{ paginator.count|pluralize }}.</p>
+  
+    		{% endif %}
+	       {% for res in resources_list %}
+               <p><a href="/resources-overview/{{res.pk}}"> {{res.name}}</a>
+	           {% if res in can_access %}
+				      <button> 
+					       <a href="../resources/{{res.name}}.txt"download>access</a>
+					  </button>
+			   {% else %}
+				      <button id="myBtn">send request</button>
+                	  <div id="myModal" class="modal">
+					      <div class="modal-content">
+						      <span class="close">&times;</span>
+							  <form action="/send-access-request/{{res.id}}" method="get">
+							    <div class="row">
+                                    <div class="col-25">
+                                      <label for="desc">Description</label>
+                                    </div>
+                                    <div class="col-75">
+                                      <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+                                    </div>
+                                </div>
+								<div class "row">
+								<p> Are you sure you want to send access request for {{res.name}}? </p>
+								    <input type="submit" value="yes, send request">
+								</div>
+							  </form>						  
+						  </div>
+	                  </div>
+	{% load static %}
+	    <link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/dialog_box.css' %}" />
+		<script type="text/javascript" src="{% static 'AuthorizationManagement/js/modal.js' %}"></script>
+			   {% endif %}
+               </p>
+           {% endfor %}
+
+{# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?{{query_pagination_string}}page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?{{query_pagination_string}}page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?{{query_pagination_string}}page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% else %}
+    <p>No Resources matched your search criteria.</p>
+{% endif %}
+{% endblock %}

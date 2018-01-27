@@ -8,14 +8,7 @@ from .forms import UserForm
 
 from django.template import RequestContext
 
-
-
-
 # Create your views here.
-
-#This view could be deleted (khalil)
-def home(request):
-    return render(request, 'AuthorizationManagement/homeView.html')
 
 class UserFormView(View):
     form_class = UserForm
@@ -38,7 +31,7 @@ class UserFormView(View):
             user.set_password(password)
             user.save()
 
-            user.authenticate(username = username, password = password)
+            user = authenticate(username = username, password = password)
 
             if user is not None:
                 if user.is_active:
