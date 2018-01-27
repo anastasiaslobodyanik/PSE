@@ -17,18 +17,20 @@ class CustomUser(User):
     def addResource(self):
         new_resource = Resource.objects.create()
         logger.info('new resource is created')
-        self = Owner()
-        new_resource.readers.add(self)
-        new_resource.owners.add(self)
+        self.__class__=Owner
+        self.save()
+        owner = self
+        new_resource.readers.add(owner)
+        new_resource.owners.add(owner)
          
         
     def sendAccessRequest(self, Resource):
         acc_req = AccessRequest.objects.create(sender = self,resource = Resource)
         c = Context({'user' : self}, {'resource' : Resource})
         html_context = render_to_string('AthorizationManagement/access-resource-mail.html', c)
-        email_to = Resource.owners.all().email
-        email = EmailMessage('AccessPermission', html_context, self.email, email_to )
-        email.send()
+        email_to = Resource.owners.values('email')
+        msg = EmailMessage('AccessPermission', html_context, self.email, list(email_to.values()) )
+        msg.send()
         
     def cancelRequest(self, Request):
         Request.delete()  
@@ -46,9 +48,11 @@ class Owner(CustomUser):
     def denyAccessPermission(self,Request):
         pass
     def allowOwnerPermission(self,Resource,CustomUser):
-        CustomUser = Owner()
-        Resource.readers.add(CustomUser)
-        Resource.owners.add(CustomUser)
+        CustomUser.__class__=Owner
+        CustomUser.save()
+        owner = CustomUser
+        Resource.readers.add(owner)
+        Resource.owners.add(owner)
     def sendDeletionRequest(self,Resource):
         dlt_req = DeletionRequest.objects.create(sender = self,resource = Resource)
         body = ''
