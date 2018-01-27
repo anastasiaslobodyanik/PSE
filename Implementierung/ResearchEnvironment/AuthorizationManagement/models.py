@@ -4,8 +4,9 @@ from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail.message import EmailMessage
 import logging
-from _pydecimal import Context
 from django.template.loader import render_to_string
+from django.core.mail import send_mail
+
 
 # Create your models here.
 logger = logging.getLogger(__name__)
@@ -26,12 +27,11 @@ class CustomUser(User):
         
     def sendAccessRequest(self, Resource):
         acc_req = AccessRequest.objects.create(sender = self,resource = Resource)
-        c = Context({'user' : self}, {'resource' : Resource})
-        html_context = render_to_string('AthorizationManagement/access-resource-mail.html', c)
-        email_to = Resource.owners.values('email')
-        msg = EmailMessage('AccessPermission', html_context, self.email, list(email_to.values()) )
-        msg.send()
-        
+        text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : self,'resource' : Resource})
+        email_to = [x[0] for x in Resource.owners.values_list('email')]
+        email_from=self.email
+        send_mail('AccessPermission', text_content, email_from,email_to  )
+        return  acc_req
     def cancelRequest(self, Request):
         Request.delete()  
         

@@ -6,12 +6,19 @@
 		<h3>My resources</h3>
 			{% for resource in resource_list %}
 						<p>
-			<form action="resources/{{resource.id}}">
-				<input type="submit" value={{resource.name}}>
+<!--				<form action="resources/{{resource.id}}">
+				<input type="submit" value={{resource.name}}> -->
+		<button type="button" onclick="window.location.href='resources/{{resource.id}}'">
+				{{resource.name}}
+			</button> 
 						    <button>
 					    <a href="../resources/{{Resource.name}}.txt"download>access</a>
 					</button>
-			</form>
+			<!-- 	</form> -->
+			
+			<button type="button" onclick="window.location.href='/my-resources/{{resource.id}}-edit-users-permissions'">
+				edit permissions
+			</button>
 			</p>
 
             {% endfor %}

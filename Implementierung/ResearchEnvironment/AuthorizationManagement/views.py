@@ -11,6 +11,7 @@ from django.conf import settings
 import os
 from django.utils.decorators import method_decorator
 from django.http.response import HttpResponseRedirect
+from AuthorizationManagement.models import CustomUser
 
 @login_required()
 def homeView(request):
@@ -88,6 +89,10 @@ def send_access_request(request):
     #-Sonya
     req=AccessRequest.objects.create(sender=request.user,
                                       resource = Resource.objects.get(id=elements[2]), description = request.GET)
+    
+    #req=request.user.sendAccessRequest(Resource.objects.get(id=elements[2]))
+    #req.description= request.GET
+    
     return redirect("/resources-overview")
     
     
@@ -149,7 +154,7 @@ class PermissionEditingView(generic.ListView):
             user.save()
             owner = user
             resource.owners.add(owner)
-        return redirect('/profile/')
+        return redirect('/my-resources/')
          
         
     def get_context_data(self, **kwargs):

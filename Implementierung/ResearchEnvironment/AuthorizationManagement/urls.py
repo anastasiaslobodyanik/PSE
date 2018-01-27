@@ -20,7 +20,7 @@ urlpatterns = [
     re_path(r'^my-resources/$', views.MyResourcesView.as_view(), name = 'my resources' ),
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
     re_path(r'^handle/(?P<pk>\d+)$', views.ChosenRequestsView.as_view(), name='handle request'),
-    re_path(r'^my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', views.PermissionEditingView.as_view(), name='edit permission'),
+    re_path(r'^my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', views.PermissionEditingView.as_view(), name='edit permissions'),
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
 #     re_path(r'^profile/resources/(?P<resourceID>\w+)_send_deletion_request/$', views.foo),
 
