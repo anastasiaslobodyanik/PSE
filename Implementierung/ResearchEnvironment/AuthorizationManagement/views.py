@@ -9,6 +9,8 @@ from .models import AccessRequest
 from django.core.files import File
 from django.conf import settings
 import os
+from django.utils.decorators import method_decorator
+from django.http.response import HttpResponseRedirect
 
 @login_required()
 def homeView(request):
@@ -114,6 +116,49 @@ def getOppositeOSDirectorySep():
         return '\\'
     else:
         return '/'
+    
+class PermissionEditingView(generic.ListView):
+    model = User
+    template_name='AuthorizationManagement/edit-permissions.html'
+    resource = Resource.objects.all()
+    #paginate
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        resource=Resource.objects.get(id=self.kwargs['resourceid'])
+        if resource.owners.filter(id=request.user.id).exists():
+            return super().dispatch(request,*args, **kwargs)
+        return redirect('/')
+    
+    def post (self, request,*args, **kwargs ):
+        resource=Resource.objects.get(id=self.kwargs['resourceid'])
+        readerlist = request.POST.getlist('reader[]')
+        ownerlist = request.POST.getlist('owner[]')
+        
+        
+        resource.readers.clear()
+        for userid in readerlist:
+            user=CustomUser.objects.get(id=userid)
+            resource.readers.add(user)
+            #email
+        for userid in ownerlist:
+            user=CustomUser.objects.get(id=userid)
+            user.reader.add(resource)
+            #email
+            user.__class__=Owner
+            user.save()
+            owner = user
+            resource.owners.add(owner)
+        return redirect('/profile/')
+         
+        
+    def get_context_data(self, **kwargs):
+        context = super(PermissionEditingView, self).get_context_data(**kwargs)
+        context['resource'] = Resource.objects.get(id=self.kwargs['resourceid'])
+        context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
+        context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
+        return context
+        
 
 #Those views have to be classes and to inherit from different generic classes, 
 #they must NOT be implemented as functions(with def). For example:
