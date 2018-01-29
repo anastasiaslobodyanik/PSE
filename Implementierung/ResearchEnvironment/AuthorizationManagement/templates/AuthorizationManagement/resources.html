@@ -1,39 +1,89 @@
 {% extends "AuthorizationManagement/profile.html" %}
+{% block profile %}
+<ul>
+	<h3>My resources</h3>
+	{% for resource in resource_list %}
+	<p> <button style="margin-left:10px; float:left;">
+		<a href="#{{resource.pk}}"> {{resource.name}} </a>
+	</button>
 
-	{% block profile %}
+		<div id="{{resource.pk}}" class="modalDialog">
+			<div>
+				<a href="" title="Close" class="close"> x </a>
+				<h2>Information about : {{resource.name}}</h2>
+					<p><strong>Name:</strong> {{resource.name}}</p>
+					<p><strong>Type:</strong> {{resource.type}}</p>
+					<p><strong>CreationDate:</strong> {{resource.creationDate}}</p>
+					<p><strong>Description:</strong> {{resource.description}}</p>
+			</div>
+		</div>
 
-	<ul>
-		<h3>My resources</h3>
-			{% for resource in resource_list %}
-						<p>
-<button style="margin-left:10px; float:left;">
-					<a href="#{{resource.pk}}"> {{resource.name}} </a>
-					</button>
-						<div id="{{resource.pk}}" class="modalDialog">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
+
+	<button>
+		<a href="../resources/{{Resource.name}}.txt"download>access</a>
+	</button>
+
+	<button type="button" onclick="window.location.href='/my-resources/{{resource.id}}-edit-users-permissions'">
+				edit permissions
+	</button>
+
+	{% if resource in deletion_requested %}
+	<button style="float:left; margin-left:10px; background-color:tomato;">
+				      <a href="#cancel-deletion-request-{{resource.pk}}" > cancel deletion request </a>
+					  </button>
+
+						<div id="cancel-deletion-request-{{resource.pk}}" class="modalDialog">
 							<div>
 							<a href="" title="Close" class="close"> x </a>
-							<h2>Information about : {{resource.name}}</h2>
-							<p><strong>Name:</strong> {{resource.name}}</p>
-							<p><strong>Type:</strong> {{resource.type}}</p>
-							<p><strong>CreationDate:</strong> {{resource.creationDate}}</p>
-							<p><strong>Description:</strong> {{resource.description}}</p>
+							<form action="/cancel-deletion-request/{{resource.id}}" method="post">
+							{% csrf_token %}
+								<div>
+								<p> Are you sure you want to CANCEL the deletion request for {{resource.name}}? </p>
+								    <input type="submit"
+										   value="yes, cancel request">
+									<button>
+									<a href="" title="Close" class="test"> Close </a>
+									</button>
+								</div>
+							  </form>
 							</div>
 						</div>
+						<br>
+						{% load static %}
+						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/cancel_req.css' %}" />
 
-{% load static %}
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
+	{% else %}
+	<button style="float:left; margin-left:10px;">
+		<a href="#send-deletion-request-{{resource.pk}}" > delete </a>
+	</button>
+		<div id="send-deletion-request-{{resource.pk}}" class="modalDialog">
+			<div>
+				<a href="" title="Close" class="close"> x </a>
+					<form action="/send-deletion-request/{{resource.id}}" method="post">
+						{% csrf_token %}
+						    <div class="row">
+								<label for="desc">Description: </label><br><br>
+                                      <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+							</div>
 
-						      <button>
-					    <a href="../resources/{{Resource.name}}.txt"download>access</a>
-					</button>
-			<!-- 	</form> -->
-			
-			<button type="button" onclick="window.location.href='/my-resources/{{resource.id}}-edit-users-permissions'">
-				edit permissions
-			</button>
-			</p>
-
-            {% endfor %}
-	</ul>
-		
-	{% endblock %}
+							<div class = "row">
+								<p> Are you sure you want to request the deletion for {{resource.name}}?</p>
+								<input id="send" type="submit" value="yes, send request">
+							<button>
+								<a href="" title="Close" class="test"> Close </a>
+							</button>
+							</div>
+					</form>
+			</div>
+		</div>
+	<br>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />
+	{% endif %}
+	</p>
+    {% endfor %}
+</ul>
+<li><a href="/my-resources/add-new-resource">Create a Resource</a></li>
+{% endblock %}

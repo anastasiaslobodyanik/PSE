@@ -67,7 +67,7 @@ class Resource(models.Model):
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owners = models.ManyToManyField(Owner, related_name= 'owner')
-    link = models.FileField(null=True)
+    link = models.FileField(upload_to='documents/')
     
     def hasAccessPermission(self,CustomUser):
         self.readers.filter(id = CustomUser.id).exists()

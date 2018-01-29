@@ -1,26 +1,27 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import Resource
-from .models import User
-from .models import Owner
-from .models import AccessRequest
+from .models import *
 from django.core.files import File
 from django.conf import settings
 import os
 from django.utils.decorators import method_decorator
+from .forms import AddNewResourceForm
 from django.http.response import HttpResponseRedirect
-from AuthorizationManagement.models import CustomUser
-from AuthorizationManagement.utilities import getOppositeOSDirectorySep
+from django.template.context_processors import csrf
 
 
-@login_required()
-def homeView(request):
-    is_admin=request.user.is_staff
-    return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
-@method_decorator(login_required, name='dispatch') 
+class HomeView(generic.View):
+    model = User
+
+    def get(self, request):
+        is_admin = request.user.is_staff
+        return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
+
+
+@method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
@@ -28,15 +29,46 @@ class ProfileView(generic.ListView):
     def get_queryset(self):
         resources = MyResourcesView.get_queryset(self)
         return AccessRequest.objects.filter(resource__in=resources)
+
     
 @method_decorator(login_required, name='dispatch')    
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/resources.html'
+    deletion_requested = Resource.objects.none()
 
     def get_queryset(self):
         current_user = Owner.objects.get(id=self.request.user.id)
         return current_user.owner.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(MyResourcesView, self).get_context_data(**kwargs)
+        context['query_pagination_string'] = ''
+        context['deletion_requested'] = Resource.objects.filter(
+            id__in=DeletionRequest.objects.filter(sender=self.request.user).values('resource_id'))
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class SendDeletionRequestView(generic.View):
+    def  post(self, request):
+        elements = request.path.rsplit('/')
+
+        DeletionRequest.objects.create(sender=request.user,
+                                       resource=Resource.objects.get(id=elements[2]),
+                                       description=request.GET)
+        return redirect("/my-resources")
+
+
+@method_decorator(login_required, name='dispatch')
+class CancelDeletionRequestView(generic.View):
+    def post(self, request):
+        elements = request.path.rsplit('/')
+        requests_of_user = DeletionRequest.objects.filter(sender=request.user)
+        request_to_delete = requests_of_user.get(resource__id=elements[2])
+        request_to_delete.delete()
+        return redirect("/my-resources")
+
 
 @method_decorator(login_required, name='dispatch') 
 class ResourcesOverview(generic.ListView):
@@ -45,7 +77,7 @@ class ResourcesOverview(generic.ListView):
     context_object_name = "resources_list"
     paginate_by = 5
     canAccess = Resource.objects.none()  
-    requested_resources=Resource.objects.none()
+    requested_resources = Resource.objects.none()
 
     
     def get_queryset(self):
@@ -155,7 +187,8 @@ def download(request):
     fileName = elements[len(elements)-1]
     response['Content-Disposition'] = 'attachment; filename=' + fileName
     return response
-    
+
+
 class PermissionEditingView(generic.ListView):
     model = User
     template_name='AuthorizationManagement/edit-permissions.html'
@@ -212,9 +245,31 @@ def getOppositeOSDirectorySep():
  
 
 
+@login_required()    
+def AddNewResource(request):
+    if request.POST:
+        form = AddNewResourceForm(request.POST , request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            instance.owners.add(request.user.id)
+            instance.readers.add(request.user.id)
+
+            
+            return redirect("/resources-overview")# what happens in the browser after submitting
+    else:
+        form = AddNewResourceForm()
+           
+    args = {} 
+    args.update(csrf(request))  
+        
+    args['form'] = form
+    return render_to_response('AuthorizationManagement/add-new-resource.html', args)
+
 
 def permissionForChosenResourceView():
     return
 
 def requestView():
     return
+
