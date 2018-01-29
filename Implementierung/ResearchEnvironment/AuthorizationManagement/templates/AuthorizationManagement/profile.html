@@ -36,16 +36,66 @@ float:left;
 		</div> <br/>
 	
 	{% block profile %}
-			<ul>
+			
 			{% for accessrequest in accessrequest_list %}
-						<p>
-			<form action="/handle/{{accessrequest.id}}">
-				<input type="submit" value={{accessrequest.id}}>
-			</form>
-			</p>
+			    <p> From: {{accessrequest.sender.username}} </p>
+				<p> For: {{accessrequest.resource.name}} </p>
+				<p> Description: {{accessrequest.description}} </p>
+				
+			    <button style=" margin-left:10px;">
+				<a href="#approve-request-{{accessrequest.pk}}" > accept </a>
+				</button>
+								
+				<div id="approve-request-{{accessrequest.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/approve-access-request/{{accessrequest.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">
+								<label for="desc">Description: </label><br><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+                            </div>
+							<div class "row">
+								<p> Are you sure you want to approve the access request for {{accessrequest.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, allow permissions">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+						
+				<button style=" margin-left:10px;">
+				<a href="#deny-request-{{accessrequest.pk}}" > deny </a>
+				</button>
+								
+				<div id="deny-request-{{accessrequest.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/deny-access-request/{{accessrequest.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">									
+                                <label for="desc">Description: </label><br><br>		                                    
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
+                            </div>
+							<div class "row">
+								<p> Are you sure you want to deny the access request for {{accessrequest.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, deny permission">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				{% load static %}
+				<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/handle_req.css' %}" />
 
             {% endfor %}
-		</ul>
+
 	{% endblock %}
 		
 {% endblock %}	

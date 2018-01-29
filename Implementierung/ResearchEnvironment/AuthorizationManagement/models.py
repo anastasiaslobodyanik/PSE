@@ -18,9 +18,12 @@ class CustomUser(User):
         new_resource = Resource.objects.create()
 
         logger.info(self.username + 'created a new resource')
-        self = Owner()
-        new_resource.readers.add(self)
-        new_resource.owners.add(self)
+        self.__class__ = Owner
+        self.save()
+        owner=self
+        new_resource.readers.add(owner)
+        new_resource.owners.add(owner)
+        
          
         
     def sendAccessRequest(self, Resource):
@@ -40,12 +43,8 @@ class Owner(CustomUser):
         proxy = True
     def giveAccessPermission(self, Resource, CustomUser):
         Resource.readers.add(CustomUser)
-    def allowAccessPermission(self, Request):
-        pass
     def deleteAccessPermission(self, Resource, CustomUser):
         Resource.readers.remove(CustomUser)
-    def denyAccessPermission(self,Request):
-        pass
     def allowOwnerPermission(self,Resource,CustomUser):
 
         CustomUser.__class__=Owner
@@ -61,16 +60,6 @@ class Owner(CustomUser):
         email = EmailMessage('Hello', body, self.email, email_to )
         email.send()
     
-class Admin(Owner):
-    
-    class Meta:
-        proxy = True
-    
-    def acceptDeletionRequest(self,Request):
-        pass
-    def denyDeletionRequest(self,Request):
-        pass
-
 class Resource(models.Model):
     type = models.CharField(max_length=50, default = 'default_type')
     name = models.CharField(max_length=150, default = 'default_name')

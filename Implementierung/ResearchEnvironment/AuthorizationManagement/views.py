@@ -15,10 +15,12 @@ from AuthorizationManagement.models import CustomUser
 from AuthorizationManagement.utilities import getOppositeOSDirectorySep
 
 
-class HomeView(generic.View):
-    def get(self,request):
-        return render(request, 'AuthorizationManagement/home.html')
+@login_required()
+def homeView(request):
+    is_admin=request.user.is_staff
+    return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
+@method_decorator(login_required, name='dispatch') 
 class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
@@ -27,6 +29,7 @@ class ProfileView(generic.ListView):
         resources = MyResourcesView.get_queryset(self)
         return AccessRequest.objects.filter(resource__in=resources)
     
+@method_decorator(login_required, name='dispatch')    
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/resources.html'
@@ -35,6 +38,7 @@ class MyResourcesView(generic.ListView):
         current_user = Owner.objects.get(id=self.request.user.id)
         return current_user.owner.all()
 
+@method_decorator(login_required, name='dispatch') 
 class ResourcesOverview(generic.ListView):
     model = Resource.objects.all()
     template_name = 'AuthorizationManagement/resources-overview.html'  
@@ -55,7 +59,8 @@ class ResourcesOverview(generic.ListView):
             id__in=AccessRequest.objects.filter(sender=self.request.user).values('resource_id'))
 
         return context
-    
+
+@method_decorator(login_required, name='dispatch')     
 class ResourcesOverviewSearch(generic.ListView):
     model = Resource.objects.all()
     template_name = 'AuthorizationManagement/resources-overview.html'  
@@ -86,9 +91,24 @@ class ResourcesOverviewSearch(generic.ListView):
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
         context['requested_resources'] = self.requested_resources
-        return context    
+        return context
     
-    
+@login_required()
+def approve_access_request(request):
+    elements=request.path.rsplit('/')
+    req=AccessRequest.objects.get(id=elements[2])
+    req.resource.readers.add(req.sender)
+    req.delete()    
+    return redirect("/profile")
+
+@login_required()
+def deny_access_request(request):
+    elements=request.path.rsplit('/')
+    req=AccessRequest.objects.get(id=elements[2])
+    req.delete()    
+    return redirect("/profile")
+
+@method_decorator(login_required, name='dispatch')     
 class SendAccessRequestView(generic.View):
     def post(self,request):
         elements=request.path.rsplit('/')
@@ -100,20 +120,21 @@ class SendAccessRequestView(generic.View):
                                       resource = Resource.objects.get(id=elements[2]), description = request.GET)
         return redirect("/resources-overview")
    
-    
+
+@method_decorator(login_required, name='dispatch')     
 class CancelAccessRequest(generic.View):
-     def post(self,request):
+    def post(self,request):
         elements=request.path.rsplit('/')
         requests_of_user = AccessRequest.objects.filter(sender=request.user)
         request_to_delete = requests_of_user.get(resource__id=elements[2])
         request_to_delete.delete()
         return redirect("/resources-overview")
     
-    
+
+@method_decorator(login_required, name='dispatch')     
 class OpenResourceView(generic.View):
     def get(self,request):
         return download(request)
-    
     
 @login_required()
 def download(request):
@@ -134,7 +155,7 @@ def download(request):
     return response
     
 class PermissionEditingView(generic.ListView):
-    model = User.objects.all()
+    model = User
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
     paginate_by = 5
@@ -142,20 +163,21 @@ class PermissionEditingView(generic.ListView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         resource=Resource.objects.get(id=self.kwargs['resourceid'])
+        if request.user.is_staff :
+            return redirect('/resource-manager/AuthorizationManagement/resource/'+self.kwargs['resourceid']+'/change/')
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
         return redirect('/')
     
-    def get_queryset(self):
-        return self.model
+    
     
     def post (self, request,*args, **kwargs ):
         resource=Resource.objects.get(id=self.kwargs['resourceid'])
         readerlist = request.POST.getlist('reader[]')
         ownerlist = request.POST.getlist('owner[]')
-        
-        
         resource.readers.clear()
+        for user in resource.owners.all():
+            resource.readers.add(user)
         for userid in readerlist:
             user=CustomUser.objects.get(id=userid)
             resource.readers.add(user)
@@ -179,20 +201,13 @@ class PermissionEditingView(generic.ListView):
         return context
         
 
+def getOppositeOSDirectorySep():
+    if os.sep=='/':
+        return '\\'
+    else:
+        return '/'
 
-#Those views have to be classes and to inherit from different generic classes, 
-#they must NOT be implemented as functions(with def). For example:
-#  
-#    class ResourceInfoView(generic.DetailView):
-#        model = models.Resource
-#        template_name = '...'
-#        .
-#        .
-#    .
-#
-# - Alex
-
-
+@method_decorator(login_required, name='dispatch') 
 class ChosenRequestsView(generic.DetailView):
     model = AccessRequest
     template_name = "AuthorizationManagement/handle-request.html"
@@ -201,26 +216,5 @@ class ChosenRequestsView(generic.DetailView):
 def permissionForChosenResourceView():
     return
 
-def manageUsersView():
-    return
-
-def permissionsForResourceView():
-    return
-
-def manageResourcesView():
-    return
-
-def permissionsForUsersView():
-    return
-
-def resourcesOverview():
-    return
-
-def openResourceView():
-    return
-
 def requestView():
-    return
-
-def resourceInfoView():
     return
