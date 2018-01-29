@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -7,6 +7,10 @@ from django.core.files import File
 from django.conf import settings
 import os
 from django.utils.decorators import method_decorator
+from .forms import AddNewResourceForm
+from django.http.response import HttpResponseRedirect
+from django.template.context_processors import csrf
+
 
 
 class HomeView(generic.View):
@@ -240,6 +244,27 @@ def getOppositeOSDirectorySep():
 class ChosenRequestsView(generic.DetailView):
     model = AccessRequest
     template_name = "AuthorizationManagement/handle-request.html"
+
+@login_required()    
+def AddNewResource(request):
+    if request.POST:
+        form = AddNewResourceForm(request.POST , request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            instance.owners.add(request.user.id)
+            instance.readers.add(request.user.id)
+
+            
+            return redirect("/resources-overview")# what happens in the browser after submitting
+    else:
+        form = AddNewResourceForm()
+           
+    args = {} 
+    args.update(csrf(request))  
+        
+    args['form'] = form
+    return render_to_response('AuthorizationManagement/add-new-resource.html', args)
 
 
 def permissionForChosenResourceView():

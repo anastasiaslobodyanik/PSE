@@ -47,11 +47,13 @@ urlpatterns = [
 
     re_path(r'^resources/\w+\d*\.txt$', OpenResourceView.as_view(), name='open resources'),
     re_path(r'^send-access-request/\d*$', SendAccessRequestView.as_view(), name='send-access-request'),
-    re_path(r'^cancel-access-request/\d*$', CancelAccessRequest.as_view(), name='cancel-access-request')
+    re_path(r'^cancel-access-request/\d*$', CancelAccessRequest.as_view(), name='cancel-access-request'),
       
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        
 #     re_path(r'^(?P<resourceID>\w+)/$', views.foo),
+    re_path(r'^my-resources/add-new-resource/$', AddNewResource, name='add-new-resource'),
+
       
      
     
