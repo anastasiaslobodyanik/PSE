@@ -1,0 +1,122 @@
+\documentclass[parskip=full,11pt]{scrartcl}
+%\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[yyyymmdd]{datetime} 
+\usepackage{hyperref}
+\usepackage[toc, nonumberlist, automake]{glossaries} %added automake option
+\usepackage{csquotes}
+\usepackage{graphicx}
+\hypersetup{
+ 		pdftitle={Implementierung},
+ 		bookmarks=true,
+ }
+\usepackage{fancyhdr}%<-------------to control headers and footers
+\usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
+\fancyhf{}
+\fancyfoot[C]{\thepage} %<----to get page number below text
+\pagestyle{fancy} %<-------the page style itself
+ 
+\title{Implementierung}
+\subtitle{Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
+\author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
+\date{11.01.18}
+ % define custom lists
+\usepackage{enumitem}
+
+% add glossary
+\makeglossaries
+\newglossaryentry{Geheimnisprinzip}
+{
+	name={Geheimnisprinzip},
+	description={Vom Innenleben einer Klasse soll der Verwender – gemeint sind sowohl die Algorithmen, die mit der Klasse arbeiten, als auch der Programmierer, der diese entwickelt – möglichst wenig wissen müssen},
+}
+
+
+\usepackage{linegoal,listings}
+\newsavebox{\mylisting}
+\makeatletter
+\newcommand{\lstInline}[2][,]{%
+	\begingroup%
+	\lstset{#1}% Set any keys locally
+	\begin{lrbox}{\mylisting}\lstinline!#2!\end{lrbox}% Store listing in \mylisting
+	\setlength{\@tempdima}{\linegoal}% Space left on line.
+	\ifdim\wd\mylisting>\@tempdima\hfill\\\fi% Insert line break
+	\lstinline!#2!% Reset listing
+	\endgroup%
+}
+\makeatother
+\setlength{\parindent}{0pt}% Just for this example
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline,showstringspaces=false,upquote=true}
+
+
+ 
+\begin{document}
+ 
+ \begin{titlepage}
+ 	
+ 	\begin{center}
+ 	\includegraphics[width=0.5\linewidth]{res/KITLogo.png}\\
+ 	\vspace{2cm}
+ 	{\scshape\LARGE\bfseries Implementierung \par}
+ 	\vspace{0.5cm}
+ 	{\scshape\Large Praxis der Softwareentwicklung\\}
+ 	\vspace{1cm}
+ 	{\scshape\Large Wintersemester 17/18\\}
+ 	\vspace{2cm}
+ 	{\huge\bfseries Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\par}
+ 	\vspace{2cm}
+ 	\vfill
+ 	{\bfseries {\Large Autoren}:\par}
+ 	{\Large Bachvarov, Aleksandar }\\
+ 	{\Large Dimitrov, Atanas }\\
+ 	{\Large Mortazavi Moshkenan, Houraalsadat }\\
+ 	{\Large Sakly, Khalil }\\
+ 	{\Large Slobodyanik, Anastasia }\\
+ 	{\Large Voneva, Sonya}\\
+ 	\vfill
+ 	{\large 07.02.18 \par}
+ 	\end{center}
+ \end{titlepage}
+ 
+ \tableofcontents
+ 
+ \newpage
+ \section{Einleitung}
+ 
+Anschluss auf Pflichtenheft und Entwurf
+
+ 
+ \section{Änderungen}
+ 
+ \subsection{Model}
+Änderungen im Model\\
+ 
+ \subsection{View} %todo erweitern/korrigieren wenn möglich
+Änderungen im view\\
+
+ \subsection{URL Verzeichnis}
+Änderungen in URLs\\
+ 
+\subsection{Datenbank}
+Änderungen in DB Struktur\\
+
+
+ \section{Implementierte Kriterien}
+ \subsection{Musskriterien}
+ 
+ \subsection{Wunschkriterien}
+ 
+ 
+ \section{Unittests}
+\section{Implementierungsplan}
+ \newpage
+\setglossarystyle{altlist}
+\printglossary	
+	
+ \end{document}
+\grid
