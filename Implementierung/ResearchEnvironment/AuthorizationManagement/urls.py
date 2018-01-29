@@ -7,7 +7,7 @@ from .admin import user_manager
 from .views import *
 
 urlpatterns = [
-    path('', views.homeView, name='home'),
+    path('', views.HomeView.as_view(), name='home'),
     re_path(r'^resource-manager/', resource_manager.urls),
     re_path(r'^user-manager/', user_manager.urls),
         
@@ -43,9 +43,9 @@ urlpatterns = [
     re_path(r'^resources-overview/$', views.ResourcesOverview.as_view(), name='resource-overview'),
     re_path(r'^resources-overview/search$', views.ResourcesOverviewSearch.as_view(), name='search-resources'),
 
-    re_path(r'^resources/\w+\d*\.txt$', views.download, name='download resources'),
-    re_path(r'^send-access-request/\d*$', views.send_access_request, name='send-access-request'),
-    re_path(r'^cancel-access-request/\d*$', views.cancel_access_request, name='cancel-access-request')
+    re_path(r'^resources/\w+\d*\.txt$', views.OpenResourceView.as_view(), name='open resources'),
+    re_path(r'^send-access-request/\d*$', views.SendAccessRequestView.as_view(), name='send-access-request'),
+    re_path(r'^cancel-access-request/\d*$', views.CancelAccessRequest.as_view(), name='cancel-access-request')
       
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        

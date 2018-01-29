@@ -12,11 +12,12 @@ import os
 from django.utils.decorators import method_decorator
 from django.http.response import HttpResponseRedirect
 from AuthorizationManagement.models import CustomUser
+from AuthorizationManagement.utilities import getOppositeOSDirectorySep
 
 
-@login_required()
-def homeView(request):
-    return render(request, 'AuthorizationManagement/home.html')
+class HomeView(generic.View):
+    def get(self,request):
+        return render(request, 'AuthorizationManagement/home.html')
 
 class ProfileView(generic.ListView):
     model = User
@@ -85,24 +86,34 @@ class ResourcesOverviewSearch(generic.ListView):
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
         context['requested_resources'] = self.requested_resources
-        return context
-                
-def send_access_request(request):
-    elements=request.path.rsplit('/')
+        return context    
+    
+    
+class SendAccessRequestView(generic.View):
+    def post(self,request):
+        elements=request.path.rsplit('/')
 
   
-    #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
-    #-Sonya
-    AccessRequest.objects.create(sender=request.user,
+        #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
+        #-Sonya
+        AccessRequest.objects.create(sender=request.user,
                                       resource = Resource.objects.get(id=elements[2]), description = request.GET)
-    return redirect("/resources-overview")
+        return redirect("/resources-overview")
+   
     
-def cancel_access_request(request):
-    elements=request.path.rsplit('/')
-    requests_of_user = AccessRequest.objects.filter(sender=request.user)
-    request_to_delete = requests_of_user.get(resource__id=elements[2])
-    request_to_delete.delete()
-    return redirect("/resources-overview")
+class CancelAccessRequest(generic.View):
+     def post(self,request):
+        elements=request.path.rsplit('/')
+        requests_of_user = AccessRequest.objects.filter(sender=request.user)
+        request_to_delete = requests_of_user.get(resource__id=elements[2])
+        request_to_delete.delete()
+        return redirect("/resources-overview")
+    
+    
+class OpenResourceView(generic.View):
+    def get(self,request):
+        return download(request)
+    
     
 @login_required()
 def download(request):
@@ -121,13 +132,6 @@ def download(request):
     fileName = elements[len(elements)-1]
     response['Content-Disposition'] = 'attachment; filename=' + fileName
     return response
-
-
-def getOppositeOSDirectorySep():
-    if os.sep=='/':
-        return '\\'
-    else:
-        return '/'
     
 class PermissionEditingView(generic.ListView):
     model = User
