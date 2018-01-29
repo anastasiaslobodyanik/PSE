@@ -20,6 +20,7 @@ def homeView(request):
     is_admin=request.user.is_staff
     return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
+@method_decorator(login_required, name='dispatch') 
 class ProfileView(generic.ListView):
     model = User
     template_name = 'AuthorizationManagement/profile.html'
@@ -28,7 +29,7 @@ class ProfileView(generic.ListView):
         resources = MyResourcesView.get_queryset(self)
         return AccessRequest.objects.filter(resource__in=resources)
     
-    
+@method_decorator(login_required, name='dispatch')    
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/resources.html'
@@ -37,6 +38,7 @@ class MyResourcesView(generic.ListView):
         current_user = Owner.objects.get(id=self.request.user.id)
         return current_user.owner.all()
 
+@method_decorator(login_required, name='dispatch') 
 class ResourcesOverview(generic.ListView):
     model = Resource.objects.all()
     template_name = 'AuthorizationManagement/resources-overview.html'  
@@ -57,7 +59,8 @@ class ResourcesOverview(generic.ListView):
             id__in=AccessRequest.objects.filter(sender=self.request.user).values('resource_id'))
 
         return context
-    
+
+@method_decorator(login_required, name='dispatch')     
 class ResourcesOverviewSearch(generic.ListView):
     model = Resource.objects.all()
     template_name = 'AuthorizationManagement/resources-overview.html'  
@@ -104,7 +107,8 @@ def deny_access_request(request):
     req=AccessRequest.objects.get(id=elements[2])
     req.delete()    
     return redirect("/profile")
-    
+
+@method_decorator(login_required, name='dispatch')     
 class SendAccessRequestView(generic.View):
     def post(self,request):
         elements=request.path.rsplit('/')
@@ -116,7 +120,8 @@ class SendAccessRequestView(generic.View):
                                       resource = Resource.objects.get(id=elements[2]), description = request.GET)
         return redirect("/resources-overview")
    
-    
+
+@method_decorator(login_required, name='dispatch')     
 class CancelAccessRequest(generic.View):
     def post(self,request):
         elements=request.path.rsplit('/')
@@ -125,7 +130,8 @@ class CancelAccessRequest(generic.View):
         request_to_delete.delete()
         return redirect("/resources-overview")
     
-    
+
+@method_decorator(login_required, name='dispatch')     
 class OpenResourceView(generic.View):
     def get(self,request):
         return download(request)
@@ -149,7 +155,7 @@ def download(request):
     return response
     
 class PermissionEditingView(generic.ListView):
-    model = User.objects.all()
+    model = User
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
     paginate_by = 5
@@ -157,20 +163,21 @@ class PermissionEditingView(generic.ListView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         resource=Resource.objects.get(id=self.kwargs['resourceid'])
+        if request.user.is_staff :
+            return redirect('/resource-manager/AuthorizationManagement/resource/'+self.kwargs['resourceid']+'/change/')
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
         return redirect('/')
     
-    def get_queryset(self):
-        return self.model
+    
     
     def post (self, request,*args, **kwargs ):
         resource=Resource.objects.get(id=self.kwargs['resourceid'])
         readerlist = request.POST.getlist('reader[]')
         ownerlist = request.POST.getlist('owner[]')
-        
-        
         resource.readers.clear()
+        for user in resource.owners.all():
+            resource.readers.add(user)
         for userid in readerlist:
             user=CustomUser.objects.get(id=userid)
             resource.readers.add(user)
@@ -200,6 +207,7 @@ def getOppositeOSDirectorySep():
     else:
         return '/'
 
+@method_decorator(login_required, name='dispatch') 
 class ChosenRequestsView(generic.DetailView):
     model = AccessRequest
     template_name = "AuthorizationManagement/handle-request.html"
