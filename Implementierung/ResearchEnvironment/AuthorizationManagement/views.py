@@ -92,21 +92,23 @@ class ResourcesOverviewSearch(generic.ListView):
         context['can_access'] = self.can_access
         context['requested_resources'] = self.requested_resources
         return context
-    
-@login_required()
-def approve_access_request(request):
-    elements=request.path.rsplit('/')
-    req=AccessRequest.objects.get(id=elements[2])
-    req.resource.readers.add(req.sender)
-    req.delete()    
-    return redirect("/profile")
 
-@login_required()
-def deny_access_request(request):
-    elements=request.path.rsplit('/')
-    req=AccessRequest.objects.get(id=elements[2])
-    req.delete()    
-    return redirect("/profile")
+@method_decorator(login_required, name='dispatch') 
+class ApproveAccessRequest(generic.View):
+    def post(self,request):
+        elements=request.path.rsplit('/')
+        req=AccessRequest.objects.get(id=elements[2])
+        req.resource.readers.add(req.sender)
+        req.delete()    
+        return redirect("/profile")
+
+@method_decorator(login_required, name='dispatch')     
+class DenyAccessRequest(generic.View):
+    def post(self,request):
+        elements=request.path.rsplit('/')
+        req=AccessRequest.objects.get(id=elements[2])
+        req.delete()    
+        return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
 class SendAccessRequestView(generic.View):
@@ -117,7 +119,7 @@ class SendAccessRequestView(generic.View):
         #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
         #-Sonya
         AccessRequest.objects.create(sender=request.user,
-                                      resource = Resource.objects.get(id=elements[2]), description = request.GET)
+                                      resource = Resource.objects.get(id=elements[2]), description = request.POST['descr'])
         return redirect("/resources-overview")
    
 
@@ -207,10 +209,8 @@ def getOppositeOSDirectorySep():
     else:
         return '/'
 
-@method_decorator(login_required, name='dispatch') 
-class ChosenRequestsView(generic.DetailView):
-    model = AccessRequest
-    template_name = "AuthorizationManagement/handle-request.html"
+ 
+
 
 
 def permissionForChosenResourceView():
