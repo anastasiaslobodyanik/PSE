@@ -7,7 +7,6 @@ import logging
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 
-
 # Create your models here.
 logger = logging.getLogger(__name__)
 class CustomUser(User):
@@ -22,11 +21,11 @@ class CustomUser(User):
         self = Owner()
         new_resource.readers.add(self)
         new_resource.owners.add(self)
-
          
         
     def sendAccessRequest(self, Resource):
         acc_req = AccessRequest.objects.create(sender = self,resource = Resource)
+
         text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : self,'resource' : Resource})
         email_to = [x[0] for x in Resource.owners.values_list('email')]
         email_from=self.email
@@ -34,7 +33,7 @@ class CustomUser(User):
         return  acc_req
     def cancelRequest(self, Request):
         Request.delete()  
-        
+
 class Owner(CustomUser):
     
     class Meta:
@@ -48,11 +47,13 @@ class Owner(CustomUser):
     def denyAccessPermission(self,Request):
         pass
     def allowOwnerPermission(self,Resource,CustomUser):
+
         CustomUser.__class__=Owner
         CustomUser.save()
         owner = CustomUser
         Resource.readers.add(owner)
         Resource.owners.add(owner)
+
     def sendDeletionRequest(self,Resource):
         dlt_req = DeletionRequest.objects.create(sender = self,resource = Resource)
         body = ''
@@ -92,6 +93,8 @@ class Request(models.Model):
     
     class Meta:
         abstract = True
+
+        unique_together=('sender','resource',)
     
     def deny(self):
         pass
