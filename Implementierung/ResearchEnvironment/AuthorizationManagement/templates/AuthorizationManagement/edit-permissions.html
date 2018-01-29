@@ -1,0 +1,68 @@
+{% extends "AuthorizationManagement/profile.html" %}
+{% block body %}
+
+	{% for user in user_list %}
+	
+	
+	<p>
+	<form method="post">
+	{% csrf_token %}
+	
+  	<div>
+    		<h3 >{{user.username}}:</h3>
+  	</div>
+  	{% if user in owners %}
+  	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
+    	<input  type="hidden" name="reader[]" value={{user.id}} >
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" disabled>
+    	<input  type="hidden" name="owner[]" value={{user.id}} >
+    	<label  >owner</label>
+    	</p>
+    	{% elif user in readers %}
+    	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}} checked="checked">
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}>
+    	<label  >owner</label>
+    	</p>
+    	
+    	{% else %}
+    	
+    	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}}>
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}>
+    	<label  >owner</label>
+    	</p>
+    	{% endif %}
+    	
+  	{% endfor %}
+  	<p>
+    	<button type="submit">Submit</button>
+  	</p>
+  	</div>
+	</form>
+	{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% endblock %}

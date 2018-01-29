@@ -1,0 +1,134 @@
+{% extends "AuthorizationManagement/base.html" %}
+
+{% block body %}
+	<h2>Resources Overview</h2>
+	<p>Which resource do you need?</p>
+	<form action="/resources-overview/search" method="get">
+		<input type="text" name="q">
+		<input type="submit" value="Search">
+	</form>
+
+	{% if query %}
+		<p>You searched for: <strong>{{ query }}</strong></p>   
+    {% endif %}           
+        
+	{% if resources_list %}
+			{% if query %}
+		      <p>Found {{paginator.count }} resource{{ paginator.count|pluralize }}.</p>
+  
+    		{% endif %}
+	        {% for res in resources_list %}
+		            <p>
+					<button style="margin-left:10px; float:left;"> 
+					<a href="#{{res.pk}}"> {{res.name}} </a>
+					</button>			
+						<div id="{{res.pk}}" class="modalDialog">
+							<div>
+							<a href="" title="Close" class="close"> x </a>
+							<h2>Information about : {{res.name}}</h2>
+							<p><strong>Name:</strong> {{res.name}}</p>
+							<p><strong>Type:</strong> {{res.type}}</p>
+							<p><strong>CreationDate:</strong> {{res.creationDate}}</p> 
+							<p><strong>Description:</strong> {{res.description}}</p>  
+							</div>
+						</div>
+						{% load static %}			
+						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />	
+		
+	           {% if res in can_access %}
+				      <button style="margin-left:10px;"> 
+					       <a href="../resources/{{res.name}}.txt"download>access</a>
+					  </button> 			    		
+				
+			   {% elif res in requested_resources %}
+			   
+			   <button style="float:left; margin-left:10px; background-color:tomato;">
+				      <a href="#cancel-request-{{res.pk}}" > cancel request </a>
+					  </button>
+								
+						<div id="cancel-request-{{res.pk}}" class="modalDialog">
+							<div>
+							<a href="" title="Close" class="close"> x </a>
+							<form action="/cancel-access-request/{{res.id}}" method="post">	
+							{% csrf_token %}						    
+								<div>
+								<p> Are you sure you want to CANCEL the access request for {{res.name}}? </p>
+								    <input type="submit" 
+										   value="yes, cancel request">
+									<button>
+									<a href="" title="Close" class="test"> Close </a>
+									</button>
+								</div>
+							  </form>
+							</div>
+						</div>
+						<br>
+						{% load static %}			
+						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/cancel_req.css' %}" />	
+			   	
+					
+				{% else %}
+					 <button style="float:left; margin-left:10px;">
+				      <a href="#send-request-{{res.pk}}" > send request </a>
+					  </button>
+								
+						<div id="send-request-{{res.pk}}" class="modalDialog">
+							<div>
+							<a href="" title="Close" class="close"> x </a>
+							<form action="/send-access-request/{{res.id}}" method="post">
+							{% csrf_token %}
+							
+							    <div class="row">
+									
+                                      <label for="desc">Description: </label><br><br>									
+                                    
+                                      <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+                                    
+                                </div>
+								<div class "row">
+								<p> Are you sure you want to SEND an access request for {{res.name}}? </p>
+								    <input id="send" 
+										   type="submit" 
+										   value="yes, send request">
+									<button>
+									<a href="" title="Close" class="test"> Close </a>
+									</button>
+								</div>
+							  </form>
+							</div>
+						</div>
+						<br>
+						{% load static %}			
+						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />	
+
+			   {% endif %}
+               </p> 
+      {% endfor %}
+
+{# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?{{query_pagination_string}}page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?{{query_pagination_string}}page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?{{query_pagination_string}}page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% else %}
+    <p>No Resources matched your search criteria.</p>
+{% endif %}
+{% endblock %}
