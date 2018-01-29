@@ -6,13 +6,24 @@
 		<h3>My resources</h3>
 			{% for resource in resource_list %}
 						<p>
+<button style="margin-left:10px; float:left;">
+					<a href="#{{resource.pk}}"> {{resource.name}} </a>
+					</button>
+						<div id="{{resource.pk}}" class="modalDialog">
+							<div>
+							<a href="" title="Close" class="close"> x </a>
+							<h2>Information about : {{resource.name}}</h2>
+							<p><strong>Name:</strong> {{resource.name}}</p>
+							<p><strong>Type:</strong> {{resource.type}}</p>
+							<p><strong>CreationDate:</strong> {{resource.creationDate}}</p>
+							<p><strong>Description:</strong> {{resource.description}}</p>
+							</div>
+						</div>
 
-<!--				<form action="resources/{{resource.id}}">
-				<input type="submit" value={{resource.name}}> -->
-		<button type="button" onclick="window.location.href='resources/{{resource.id}}'">
-				{{resource.name}}
-			</button> 
-						    <button>
+{% load static %}
+						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
+
+						      <button>
 					    <a href="../resources/{{Resource.name}}.txt"download>access</a>
 					</button>
 			<!-- 	</form> -->
