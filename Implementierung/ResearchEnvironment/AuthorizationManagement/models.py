@@ -30,9 +30,7 @@ class CustomUser(User):
         email = EmailMessage('AccessPermission', html_context, self.email, email_to )
         email.send()
         
-    def cancelRequest(self, Request):
-        Request.delete()  
-        
+
 class Owner(CustomUser):
     
     class Meta:
@@ -88,6 +86,7 @@ class Request(models.Model):
     
     class Meta:
         abstract = True
+        unique_together=('sender','resource',)
     
     def deny(self):
         pass
