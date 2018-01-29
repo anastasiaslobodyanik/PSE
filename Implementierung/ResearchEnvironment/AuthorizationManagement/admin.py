@@ -4,6 +4,7 @@ from .models import *
 
 admin.site.register(Resource)
 admin.site.register(AccessRequest)
+admin.site.register(DeletionRequest)
 
 # Register your models here.
  
