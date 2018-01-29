@@ -9,10 +9,12 @@ import os
 from django.utils.decorators import method_decorator
 
 
-@login_required()
-def homeView(request):
-    is_admin=request.user.is_staff
-    return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
+class HomeView(generic.View):
+    model = User
+
+    def get(self, request):
+        is_admin = request.user.is_staff
+        return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
 
 @method_decorator(login_required, name='dispatch')

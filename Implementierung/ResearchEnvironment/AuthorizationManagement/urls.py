@@ -6,7 +6,7 @@ from .admin import user_manager
 from .views import *
 
 urlpatterns = [
-    path('', homeView, name='home'),
+    path('', HomeView.as_view(), name='home'),
     re_path(r'^resource-manager/', resource_manager.urls),
     re_path(r'^user-manager/', user_manager.urls),
         
