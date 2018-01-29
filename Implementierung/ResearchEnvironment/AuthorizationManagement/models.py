@@ -4,8 +4,8 @@ from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail.message import EmailMessage
 import logging
-from _pydecimal import Context
 from django.template.loader import render_to_string
+from django.core.mail import send_mail
 
 # Create your models here.
 logger = logging.getLogger(__name__)
@@ -16,6 +16,7 @@ class CustomUser(User):
 #    
     def addResource(self):
         new_resource = Resource.objects.create()
+
         logger.info(self.username + 'created a new resource')
         self = Owner()
         new_resource.readers.add(self)
@@ -24,12 +25,14 @@ class CustomUser(User):
         
     def sendAccessRequest(self, Resource):
         acc_req = AccessRequest.objects.create(sender = self,resource = Resource)
-        c = Context({'user' : self}, {'resource' : Resource})
-        html_context = render_to_string('AthorizationManagement/access-resource-mail.html', c)
-        email_to = Resource.owners.all().email
-        email = EmailMessage('AccessPermission', html_context, self.email, email_to )
-        email.send()
-        
+
+        text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : self,'resource' : Resource})
+        email_to = [x[0] for x in Resource.owners.values_list('email')]
+        email_from=self.email
+        send_mail('AccessPermission', text_content, email_from,email_to  )
+        return  acc_req
+    def cancelRequest(self, Request):
+        Request.delete()  
 
 class Owner(CustomUser):
     
@@ -44,9 +47,13 @@ class Owner(CustomUser):
     def denyAccessPermission(self,Request):
         pass
     def allowOwnerPermission(self,Resource,CustomUser):
-        CustomUser = Owner()
-        Resource.readers.add(CustomUser)
-        Resource.owners.add(CustomUser)
+
+        CustomUser.__class__=Owner
+        CustomUser.save()
+        owner = CustomUser
+        Resource.readers.add(owner)
+        Resource.owners.add(owner)
+
     def sendDeletionRequest(self,Resource):
         dlt_req = DeletionRequest.objects.create(sender = self,resource = Resource)
         body = ''
@@ -86,6 +93,7 @@ class Request(models.Model):
     
     class Meta:
         abstract = True
+
         unique_together=('sender','resource',)
     
     def deny(self):

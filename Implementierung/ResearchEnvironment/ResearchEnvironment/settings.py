@@ -129,3 +129,5 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'resources')
 MEDIA_URL ='/resources/'
 LOGIN_URL = '/authentification/login'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+

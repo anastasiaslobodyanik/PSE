@@ -9,6 +9,10 @@ from .models import AccessRequest
 from django.core.files import File
 from django.conf import settings
 import os
+from django.utils.decorators import method_decorator
+from django.http.response import HttpResponseRedirect
+from AuthorizationManagement.models import CustomUser
+
 
 @login_required()
 def homeView(request):
@@ -37,6 +41,7 @@ class ResourcesOverview(generic.ListView):
     paginate_by = 5
     canAccess = Resource.objects.none()  
     requested_resources=Resource.objects.none()
+
     
     def get_queryset(self):
         return self.model
@@ -47,12 +52,14 @@ class ResourcesOverview(generic.ListView):
         context['can_access'] = self.request.user.reader.filter(id__in=self.model)
         context['requested_resources'] = Resource.objects.filter(
             id__in=AccessRequest.objects.filter(sender=self.request.user).values('resource_id'))
+
         return context
     
 class ResourcesOverviewSearch(generic.ListView):
     model = Resource.objects.all()
     template_name = 'AuthorizationManagement/my-resources-overview.html'  
     context_object_name = "resources_list"
+
     paginate_by = 5
     query = ''
     can_access = Resource.objects.none()
@@ -60,7 +67,7 @@ class ResourcesOverviewSearch(generic.ListView):
     
     def get_queryset(self):
         return self.model
-    
+
     def get(self,request):
         if 'q' in self.request.GET and self.request.GET['q']:
             self.query = self.request.GET['q']
@@ -68,7 +75,6 @@ class ResourcesOverviewSearch(generic.ListView):
             self.can_access=self.request.user.reader.filter(id__in=self.model)
             current_user_has_requested = AccessRequest.objects.filter(sender=self.request.user).values('resource_id')
             self.requested_resources = Resource.objects.filter(id__in=current_user_has_requested)
-            print(len(current_user_has_requested), len(self.requested_resources))
             return super(ResourcesOverviewSearch, self).get(request)
         else:
             return redirect("/resources-overview")
@@ -79,11 +85,11 @@ class ResourcesOverviewSearch(generic.ListView):
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
         context['requested_resources'] = self.requested_resources
-       
         return context
                 
 def send_access_request(request):
     elements=request.path.rsplit('/')
+
   
     #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
     #-Sonya
@@ -122,6 +128,50 @@ def getOppositeOSDirectorySep():
         return '\\'
     else:
         return '/'
+    
+class PermissionEditingView(generic.ListView):
+    model = User
+    template_name='AuthorizationManagement/edit-permissions.html'
+    resource = Resource.objects.all()
+    #paginate
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        resource=Resource.objects.get(id=self.kwargs['resourceid'])
+        if resource.owners.filter(id=request.user.id).exists():
+            return super().dispatch(request,*args, **kwargs)
+        return redirect('/')
+    
+    def post (self, request,*args, **kwargs ):
+        resource=Resource.objects.get(id=self.kwargs['resourceid'])
+        readerlist = request.POST.getlist('reader[]')
+        ownerlist = request.POST.getlist('owner[]')
+        
+        
+        resource.readers.clear()
+        for userid in readerlist:
+            user=CustomUser.objects.get(id=userid)
+            resource.readers.add(user)
+            #email
+        for userid in ownerlist:
+            user=CustomUser.objects.get(id=userid)
+            user.reader.add(resource)
+            #email
+            user.__class__=Owner
+            user.save()
+            owner = user
+            resource.owners.add(owner)
+        return redirect('/my-resources/')
+         
+        
+    def get_context_data(self, **kwargs):
+        context = super(PermissionEditingView, self).get_context_data(**kwargs)
+        context['resource'] = Resource.objects.get(id=self.kwargs['resourceid'])
+        context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
+        context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
+        return context
+        
+
 
 #Those views have to be classes and to inherit from different generic classes, 
 #they must NOT be implemented as functions(with def). For example:
