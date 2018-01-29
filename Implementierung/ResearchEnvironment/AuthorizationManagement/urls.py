@@ -19,8 +19,9 @@ urlpatterns = [
     re_path(r'^profile/', views.ProfileView.as_view(), name = 'profile'),
     re_path(r'^my-resources/$', views.MyResourcesView.as_view(), name = 'my resources' ),
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
-    re_path(r'^handle/(?P<pk>\d+)$', views.ChosenRequestsView.as_view(), name='handle request'),
-
+    re_path(r'^approve-access-request/\d*$', views.approve_access_request, name='approve access request'),
+    re_path(r'^deny-access-request/\d*$', views.deny_access_request, name='deny access request'),
+    
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
 #     re_path(r'^profile/resources/(?P<resourceID>\w+)_send_deletion_request/$', views.foo),
 #     re_path(r'^profile/resources/(?P<resorceID>\w+)_edit_users_permissions/$', views.foo),

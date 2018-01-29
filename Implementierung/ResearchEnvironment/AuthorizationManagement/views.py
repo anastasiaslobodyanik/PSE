@@ -12,11 +12,13 @@ import os
 
 @login_required()
 def homeView(request):
-    return render(request, 'AuthorizationManagement/home.html')
+    is_admin=request.user.is_staff
+    return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
 #details for resource, not yet finished
 class ResourceDetailView(generic.DetailView):
     model = Resource
+    
     template_name = 'AuthorizationManagement/resource-details.html'
 
 class ProfileView(generic.ListView):
@@ -26,6 +28,7 @@ class ProfileView(generic.ListView):
     def get_queryset(self):
         resources = MyResourcesView.get_queryset(self)
         return AccessRequest.objects.filter(resource__in=resources)
+    
     
 class MyResourcesView(generic.ListView):
     model = Resource
@@ -78,18 +81,31 @@ class ResourcesOverviewSearch(generic.ListView):
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
         return context
-                
+    
+@login_required()          
 def send_access_request(request):
     elements=request.path.rsplit('/')
-    print(elements[2])
     #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
     #-Sonya
-    req=AccessRequest.objects.create(sender=request.user,
-                                      resource = Resource.objects.get(id=elements[2]), description = request.GET)
+    AccessRequest.objects.create(sender=request.user,
+                                      resource = Resource.objects.get(id=elements[2]), description = request.GET['descr'])
     return redirect("/resources-overview")
     
-    
-    
+@login_required()
+def approve_access_request(request):
+    elements=request.path.rsplit('/')
+    req=AccessRequest.objects.get(id=elements[2])
+    req.resource.readers.add(req.sender)
+    req.delete()    
+    return redirect("/profile")
+
+@login_required()
+def deny_access_request(request):
+    elements=request.path.rsplit('/')
+    req=AccessRequest.objects.get(id=elements[2])
+    req.delete()    
+    return redirect("/profile")
+
 @login_required()
 def download(request):
     relativePath = request.path
@@ -115,19 +131,6 @@ def getOppositeOSDirectorySep():
     else:
         return '/'
 
-#Those views have to be classes and to inherit from different generic classes, 
-#they must NOT be implemented as functions(with def). For example:
-#  
-#    class ResourceInfoView(generic.DetailView):
-#        model = models.Resource
-#        template_name = '...'
-#        .
-#        .
-#    .
-#
-# - Alex
-
-
 class ChosenRequestsView(generic.DetailView):
     model = AccessRequest
     template_name = "AuthorizationManagement/handle-request.html"
@@ -136,26 +139,5 @@ class ChosenRequestsView(generic.DetailView):
 def permissionForChosenResourceView():
     return
 
-def manageUsersView():
-    return
-
-def permissionsForResourceView():
-    return
-
-def manageResourcesView():
-    return
-
-def permissionsForUsersView():
-    return
-
-def resourcesOverview():
-    return
-
-def openResourceView():
-    return
-
 def requestView():
-    return
-
-def resourceInfoView():
     return

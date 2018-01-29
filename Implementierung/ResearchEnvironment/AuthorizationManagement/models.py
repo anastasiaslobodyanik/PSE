@@ -39,12 +39,8 @@ class Owner(CustomUser):
         proxy = True
     def giveAccessPermission(self, Resource, CustomUser):
         Resource.readers.add(CustomUser)
-    def allowAccessPermission(self, Request):
-        pass
     def deleteAccessPermission(self, Resource, CustomUser):
         Resource.readers.remove(CustomUser)
-    def denyAccessPermission(self,Request):
-        pass
     def allowOwnerPermission(self,Resource,CustomUser):
         CustomUser = Owner()
         Resource.readers.add(CustomUser)
@@ -56,16 +52,6 @@ class Owner(CustomUser):
         email = EmailMessage('Hello', body, self.email, email_to )
         email.send()
     
-class Admin(Owner):
-    
-    class Meta:
-        proxy = True
-    
-    def acceptDeletionRequest(self,Request):
-        pass
-    def denyDeletionRequest(self,Request):
-        pass
-
 class Resource(models.Model):
     type = models.CharField(max_length=50, default = 'default_type')
     name = models.CharField(max_length=150, default = 'default_name')

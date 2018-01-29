@@ -13,6 +13,10 @@
 			<li><a href="/">Home</a></li>
 			<li><a href="/profile/">Profile</a></li>
 			<li><a href="/resources-overview/">Resources Overview</a></li>
+			{% if is_admin %}
+			    <li><a href="/resource-manager/">Manage Resources</a></li>
+			    <li><a href="/user-manager/">Manage Users</a></li>
+			{% endif %}
 		</ul>			
 	</div>
 
