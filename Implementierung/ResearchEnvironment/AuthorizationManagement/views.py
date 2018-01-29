@@ -29,7 +29,7 @@ class ProfileView(generic.ListView):
     
 class MyResourcesView(generic.ListView):
     model = Resource
-    template_name = 'AuthorizationManagement/my-resources.html'
+    template_name = 'AuthorizationManagement/resources.html'
 
     def get_queryset(self):
         current_user = Owner.objects.get(id=self.request.user.id)
@@ -37,7 +37,7 @@ class MyResourcesView(generic.ListView):
 
 class ResourcesOverview(generic.ListView):
     model = Resource.objects.all()
-    template_name = 'AuthorizationManagement/my-resources-overview.html'  
+    template_name = 'AuthorizationManagement/resources-overview.html'  
     context_object_name = "resources_list"
     paginate_by = 5
     canAccess = Resource.objects.none()  
@@ -58,7 +58,7 @@ class ResourcesOverview(generic.ListView):
     
 class ResourcesOverviewSearch(generic.ListView):
     model = Resource.objects.all()
-    template_name = 'AuthorizationManagement/my-resources-overview.html'  
+    template_name = 'AuthorizationManagement/resources-overview.html'  
     context_object_name = "resources_list"
 
     paginate_by = 5
@@ -134,10 +134,10 @@ def download(request):
     return response
     
 class PermissionEditingView(generic.ListView):
-    model = User
+    model = User.objects.all()
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
-    #paginate
+    paginate_by = 5
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -145,6 +145,9 @@ class PermissionEditingView(generic.ListView):
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
         return redirect('/')
+    
+    def get_queryset(self):
+        return self.model
     
     def post (self, request,*args, **kwargs ):
         resource=Resource.objects.get(id=self.kwargs['resourceid'])
