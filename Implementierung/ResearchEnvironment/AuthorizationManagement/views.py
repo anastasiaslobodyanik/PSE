@@ -10,7 +10,10 @@ from django.utils.decorators import method_decorator
 from .forms import AddNewResourceForm
 from django.http.response import HttpResponseRedirect
 from django.template.context_processors import csrf
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 
 class HomeView(generic.View):
@@ -152,6 +155,7 @@ class SendAccessRequestView(generic.View):
         #-Sonya
         AccessRequest.objects.create(sender=request.user,
                                       resource = Resource.objects.get(id=elements[2]), description = request.POST['descr'])
+        
         return redirect("/resources-overview")
    
 
