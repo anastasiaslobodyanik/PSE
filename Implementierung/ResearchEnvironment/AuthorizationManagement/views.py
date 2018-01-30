@@ -10,7 +10,6 @@ from django.utils.decorators import method_decorator
 from .forms import AddNewResourceForm
 from django.http.response import HttpResponseRedirect
 from django.template.context_processors import csrf
-import logging
 
 
 logger = logging.getLogger(__name__)
