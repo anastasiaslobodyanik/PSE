@@ -15,8 +15,8 @@ urlpatterns = [
     #this section should be commented for now, so that we can work with the /admin interface from django; 
     #that means views.foo should not be used for now
        
-    re_path(r'^profile/', ProfileView.as_view(), name = 'profile'),
-    re_path(r'^my-resources/$', MyResourcesView.as_view(), name = 'my resources' ),
+    re_path(r'^profile/$', ProfileView.as_view(), name = 'profile'),
+    re_path(r'^profile/my-resources/$', MyResourcesView.as_view(), name = 'my resources' ),
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
 
 
