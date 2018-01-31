@@ -146,12 +146,13 @@ class DenyAccessRequest(generic.View):
 class SendAccessRequestView(generic.View):
     def post(self,request):
         elements=request.path.rsplit('/')
-
-  
-        #method sendAccessRequest returns error, for testing purposes the request is created manually until the error is cleared
-        #-Sonya
-        AccessRequest.objects.create(sender=request.user,
-                                      resource = Resource.objects.get(id=elements[2]), description = request.POST['descr'])
+        
+        res=Resource.objects.get(id=elements[2])
+        req=AccessRequest.objects.create(sender= request.user, resource=res, description=request.POST['descr'])
+        text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : request.user, 'resource' : res, 'request': req})
+        email_to = [x[0] for x in res.owners.values_list('email')]
+        email_from=request.user.email
+        send_mail('AccessPermission', text_content, email_from,email_to  )
         return redirect("/resources-overview")
    
 
@@ -242,8 +243,6 @@ def getOppositeOSDirectorySep():
     else:
         return '/'
 
- 
-
 
 @login_required()    
 def AddNewResource(request):
@@ -265,11 +264,3 @@ def AddNewResource(request):
         
     args['form'] = form
     return render_to_response('AuthorizationManagement/add-new-resource.html', args)
-
-
-def permissionForChosenResourceView():
-    return
-
-def requestView():
-    return
-

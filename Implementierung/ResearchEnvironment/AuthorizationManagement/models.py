@@ -29,14 +29,12 @@ class CustomUser(User):
     def sendAccessRequest(self, Resource):
         acc_req = AccessRequest.objects.create(sender = self,resource = Resource)
 
-        text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : self,'resource' : Resource})
+        text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : self,'resource' : Resource, 'request': acc_req})
         email_to = [x[0] for x in Resource.owners.values_list('email')]
         email_from=self.email
         send_mail('AccessPermission', text_content, email_from,email_to  )
         return  acc_req
-    def cancelRequest(self, Request):
-        Request.delete()  
-
+   
 class Owner(CustomUser):
     
     class Meta:
