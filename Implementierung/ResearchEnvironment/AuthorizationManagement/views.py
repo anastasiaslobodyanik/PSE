@@ -304,7 +304,7 @@ class PermissionEditingView(generic.ListView):
             user.save()
             owner = user
             resource.owners.add(owner)
-        return redirect('/my-resources/')
+        return redirect('../')
          
         
     def get_context_data(self, **kwargs):
