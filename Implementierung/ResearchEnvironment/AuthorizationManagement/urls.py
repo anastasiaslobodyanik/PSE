@@ -19,14 +19,13 @@ urlpatterns = [
     re_path(r'^profile/my-resources/$', MyResourcesView.as_view(), name = 'my resources' ),
     re_path(r'^profile/my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', PermissionEditingView.as_view(), name='edit permissions'),
     re_path(r'^profile/my-resources/add-new-resource/$', AddNewResource, name='add-new-resource'),
-
-    # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
-
+    re_path(r'^profile/deletion-requests/$', DeletionRequestsView.as_view(), name='deletion-requests'),
 
     re_path(r'^approve-access-request/\d*$', ApproveAccessRequest.as_view(), name='approve access request'),
     re_path(r'^deny-access-request/\d*$', DenyAccessRequest.as_view(), name='deny access request'),
-   
 
+    re_path(r'^approve-deletion-request/\d*$', ApproveDeletionRequest.as_view(), name='approve deletion request'),
+    re_path(r'^deny-deletion-request/\d*$', DenyDeletionRequest.as_view(), name='deny deletion request'),
 
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
     re_path(r'^send-deletion-request/\d*$', SendDeletionRequestView.as_view(), name='send delete request'),

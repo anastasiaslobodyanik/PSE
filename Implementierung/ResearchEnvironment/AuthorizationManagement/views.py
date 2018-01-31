@@ -19,6 +19,7 @@ from django.utils.html import strip_tags
 
 logger = logging.getLogger(__name__)
 
+
 @method_decorator(login_required, name='dispatch')
 class HomeView(generic.View):
     model = User
@@ -31,7 +32,10 @@ class HomeView(generic.View):
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
     model = User
-    template_name = 'AuthorizationManagement/profile.html'
+
+    def get(self, request):
+        is_admin = request.user.is_staff
+        return render(request, 'AuthorizationManagement/profile.html', {'is_admin': is_admin})
 
     def get_queryset(self):
         resources = MyResourcesView.get_queryset(self)
@@ -126,6 +130,7 @@ class ResourcesOverview(generic.ListView):
             id__in=AccessRequest.objects.filter(sender=self.request.user).values('resource_id'))
 
         return context
+
 
 @method_decorator(login_required, name='dispatch')     
 class ResourcesOverviewSearch(ResourcesOverview):
@@ -282,8 +287,8 @@ class PermissionEditingView(generic.ListView):
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
         return redirect('/')
-    
-    
+
+
     
     def post (self, request,*args, **kwargs ):
         resource=Resource.objects.get(id=self.kwargs['resourceid'])
@@ -315,6 +320,87 @@ class PermissionEditingView(generic.ListView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
+class DeletionRequestsView(generic.ListView):
+    model = DeletionRequest
+    template_name = 'AuthorizationManagement/deletion-requests.html'
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+
+@method_decorator(login_required, name='dispatch')
+class ApproveDeletionRequest(generic.View):
+    def post(self, request):
+        elements = request.path.rsplit('/')
+        req = DeletionRequest.objects.get(id=elements[2])
+        owners = req.resource.owners.all()
+        message = req.description
+
+        html_content = render_to_string('AuthorizationManagement/delete-request-accepted-mail.html',
+                                        {'user': request.user,
+                                         'resource': req.resource,
+                                         'request': req,
+                                         'message': message})
+        text_content = strip_tags(html_content)
+
+        res = req.resource
+
+        # delete all permissions for this resource
+        res.owners.clear()
+        res.readers.clear()
+
+        # delete all requests for this resource
+        AccessRequest.objects.filter(resource=res).delete()
+        DeletionRequest.objects.filter(resource=res).delete()
+
+        # delete resource
+        res.delete()
+
+        # send email to request sender
+        email_to = req.sender.email
+        email_from = request.user.email
+        send_mail('Deletion Request approved', text_content, email_from, [email_to])
+        msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+        # notify all owners
+        for owner in owners:
+            email_to = owner.email
+            email_from = request.user.email
+            send_mail('Deletion Request approved', text_content, email_from, [email_to])
+            msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+        req.delete()
+        return redirect("/profile/deletion-requests")
+
+
+@method_decorator(login_required, name='dispatch')
+class DenyDeletionRequest(generic.View):
+    def post(self, request):
+        elements = request.path.rsplit('/')
+        req = DeletionRequest.objects.get(id=elements[2])
+        message = request.POST['descr']
+
+        html_content = render_to_string('AuthorizationManagement/delete-request-denied-mail.html',
+                                        {'user': request.user,
+                                         'resource': req.resource,
+                                         'request': req,
+                                         'message': message})
+        text_content = strip_tags(html_content)
+        email_to = req.sender.email
+        email_from = request.user.email
+        send_mail('Deletion Request denied', text_content, email_from, [email_to])
+        msg = EmailMultiAlternatives('Deletion Request denied', text_content, email_from, [email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        req.delete()
+        return redirect("/profile")
+
+
 @login_required()    
 def AddNewResource(request):
     if request.POST:
@@ -337,16 +423,20 @@ def AddNewResource(request):
     args['form'] = form
     return render_to_response('AuthorizationManagement/add-new-resource.html', args)
 
+
 class PageNotFoundView(generic.View):
     def get(self,request):
         response = render_to_response('AuthorizationManagement/404.html', {},
                                   context_instance=RequestContext(request))
         response.status_code = 404
-        return response    
+        return response
+
 
 def permissionForChosenResourceView():
     return
 
+
 def requestView():
     return
+
 

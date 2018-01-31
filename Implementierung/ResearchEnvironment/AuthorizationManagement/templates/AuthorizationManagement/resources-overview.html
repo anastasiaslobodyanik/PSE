@@ -98,10 +98,10 @@
                                       <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
                                     
                                 </div>
-								<div class "row">
+								<div class=row">
 								<p> Are you sure you want to SEND an access request for {{res.name}}? </p>
-								    <input id="send" 
-										   type="submit" 
+								    <input id="send"
+										   type="submit"
 										   value="yes, send request">
 									<button>
 									<a href="" title="Close" class="test"> Close </a>
@@ -111,11 +111,11 @@
 							</div>
 						</div>
 						<br>
-						{% load static %}			
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />	
+						{% load static %}
+						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />
 
 			   {% endif %}
-               </p> 
+               </p>
       {% endfor %}
 
 {# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
