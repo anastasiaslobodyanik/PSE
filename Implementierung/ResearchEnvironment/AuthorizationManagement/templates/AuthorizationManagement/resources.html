@@ -22,10 +22,10 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
 
 	<button type="button" style="margin-left:10px; float: left;">
-		<a href="../resources/{{resource.name}}.txt"download>access</a>
+		<a href="../../resources/{{resource.id}}"download>access</a>
 	</button>
 
-	<button style="margin-left:10px; float: left;" type="button" onclick="window.location.href='/my-resources/{{resource.id}}-edit-users-permissions'">
+	<button style="margin-left:10px; float: left;" type="button" onclick="window.location.href='/profile/my-resources/{{resource.id}}-edit-users-permissions'">
 				edit permissions
 	</button>
 
@@ -85,5 +85,5 @@
 	</p>
     {% endfor %}
 </ul>
-<li><a href="/my-resources/add-new-resource">Create a Resource</a></li>
+<li><a href="/profile/my-resources/add-new-resource">Create a Resource</a></li>
 {% endblock %}

@@ -17,12 +17,15 @@ urlpatterns = [
        
     re_path(r'^profile/$', ProfileView.as_view(), name = 'profile'),
     re_path(r'^profile/my-resources/$', MyResourcesView.as_view(), name = 'my resources' ),
+    re_path(r'^profile/my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', PermissionEditingView.as_view(), name='edit permissions'),
+    re_path(r'^profile/my-resources/add-new-resource/$', AddNewResource, name='add-new-resource'),
+
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
 
 
     re_path(r'^approve-access-request/\d*$', ApproveAccessRequest.as_view(), name='approve access request'),
     re_path(r'^deny-access-request/\d*$', DenyAccessRequest.as_view(), name='deny access request'),
-    re_path(r'^my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', PermissionEditingView.as_view(), name='edit permissions'),
+   
 
 
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
@@ -47,16 +50,14 @@ urlpatterns = [
     re_path(r'^resources-overview/$', ResourcesOverview.as_view(), name='resource-overview'),
     re_path(r'^resources-overview/search$', ResourcesOverviewSearch.as_view(), name='search-resources'),
 
-    re_path(r'^resources/\w+\d*\.txt$', OpenResourceView.as_view(), name='open resources'),
+    re_path(r'^resources/(?P<resourceid>\d+)$', OpenResourceView.as_view(), name='open resources'),
     re_path(r'^send-access-request/\d*$', SendAccessRequestView.as_view(), name='send-access-request'),
     re_path(r'^cancel-access-request/\d*$', CancelAccessRequest.as_view(), name='cancel-access-request'),
       
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        
 #     re_path(r'^(?P<resourceID>\w+)/$', views.foo),
-    re_path(r'^my-resources/add-new-resource/$', AddNewResource, name='add-new-resource'),
-
-      
      
-    
 ]
+
+handler404 = 'mysite.views.PageNotFoundView.as_view'

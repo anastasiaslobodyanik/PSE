@@ -10,6 +10,9 @@ from django.utils.decorators import method_decorator
 from .forms import AddNewResourceForm
 from django.http.response import HttpResponseRedirect
 from django.template.context_processors import csrf
+from AuthorizationManagement import utilities
+from django.http import Http404
+from django.template import RequestContext
 
 
 logger = logging.getLogger(__name__)
@@ -78,7 +81,9 @@ class ResourcesOverview(generic.ListView):
     template_name = 'AuthorizationManagement/resources-overview.html'  
     context_object_name = "resources_list"
     paginate_by = 5
-    canAccess = Resource.objects.none()  
+    
+    query = ''
+    can_access = Resource.objects.none()  
     requested_resources = Resource.objects.none()
 
     
@@ -95,19 +100,8 @@ class ResourcesOverview(generic.ListView):
         return context
 
 @method_decorator(login_required, name='dispatch')     
-class ResourcesOverviewSearch(generic.ListView):
-    model = Resource.objects.all()
-    template_name = 'AuthorizationManagement/resources-overview.html'  
-    context_object_name = "resources_list"
-
-    paginate_by = 5
-    query = ''
-    can_access = Resource.objects.none()
-    requested_resources = Resource.objects.none()
+class ResourcesOverviewSearch(ResourcesOverview):
     
-    def get_queryset(self):
-        return self.model
-
     def get(self,request):
         if 'q' in self.request.GET and self.request.GET['q']:
             self.query = self.request.GET['q']
@@ -170,25 +164,32 @@ class CancelAccessRequest(generic.View):
 
 @method_decorator(login_required, name='dispatch')     
 class OpenResourceView(generic.View):
-    def get(self,request):
-        return download(request)
+    def get(self,request,*args, **kwargs):
+        return download(request,self.kwargs['resourceid'])
     
 @login_required()
-def download(request):
-    relativePath = request.path
-    if relativePath.find(os.sep) == -1:
-        relativePath = relativePath.replace(getOppositeOSDirectorySep(),os.sep)  
+def download(request,pk):
+    relative_path = request.path
+    if relative_path.find(os.sep) == -1:
+        relative_path = relative_path.replace(utilities.getOppositeOSDirectorySep(),os.sep)  
         
-    els = relativePath.split(os.sep,1)
-    relativePath = els[len(els)-1]
-          
-    f = open(os.path.join(settings.BASE_DIR, relativePath), 'r')
+    relative_path_elements = relative_path.split(os.sep,1)
+    relative_path = relative_path_elements[len(relative_path_elements)-1]
+    
+    if not Resource.objects.filter(id=pk).exists():
+        raise Http404("The requested file doesn't exist!")
+    
+            
+    resource=Resource.objects.get(id=pk)
+    file_name = resource.link.name
+    relative_path = relative_path.replace(pk+'',file_name)
+    
+    
+    f = open(os.path.join(settings.BASE_DIR, relative_path), 'r')
     myfile = File(f)
     response = HttpResponse(myfile, content_type='text/plain')
     
-    elements = myfile.name.rsplit(os.sep);
-    fileName = elements[len(elements)-1]
-    response['Content-Disposition'] = 'attachment; filename=' + fileName
+    response['Content-Disposition'] = 'attachment; filename=' + file_name
     return response
 
 
@@ -238,19 +239,10 @@ class PermissionEditingView(generic.ListView):
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
         return context
         
-
-def getOppositeOSDirectorySep():
-    if os.sep=='/':
-        return '\\'
-    else:
-        return '/'
-
- 
-
-
 @login_required()    
 def AddNewResource(request):
     if request.POST:
+        print(request.FILES)
         form = AddNewResourceForm(request.POST , request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
@@ -269,6 +261,13 @@ def AddNewResource(request):
     args['form'] = form
     return render_to_response('AuthorizationManagement/add-new-resource.html', args)
 
+
+class PageNotFoundView(generic.View):
+    def get(self,request):
+        response = render_to_response('AuthorizationManagement/404.html', {},
+                                  context_instance=RequestContext(request))
+        response.status_code = 404
+        return response    
 
 def permissionForChosenResourceView():
     return
