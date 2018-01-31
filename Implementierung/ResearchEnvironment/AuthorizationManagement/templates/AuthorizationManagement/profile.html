@@ -13,12 +13,12 @@ float:left;
 float:left;
 }
 </style>
-
+<form action=/authentification/logout/>
+			<input type=submit value="Logout">
+		</form>	
 		<h2>Profile ({{user.username}})</h1>
 
-		<form action=/authentification/logout/>
-			<input type=submit value="Logout">
-		</form>
+		
   
 		<p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
 		<p><strong>E-mail:</strong> {{ user.email }}</p>
@@ -30,7 +30,7 @@ float:left;
 		</form>
 		</div>
 		<div id="second">
-		<form action="/my-resources">
+		<form action="/profile/my-resources">
 			<input type=submit value="My Resources">
 		</form>
 		</div> <br/>

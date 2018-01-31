@@ -3,5 +3,5 @@ from .models import Resource
 
 class AddNewResourceForm(forms.ModelForm):
     class Meta:
-        model = Resource
+        model = Resource       
         fields = ("name","type","description","link")

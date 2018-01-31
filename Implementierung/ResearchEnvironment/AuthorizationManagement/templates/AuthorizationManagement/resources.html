@@ -3,7 +3,7 @@
 <ul>
 	<h3>My resources</h3>
 	{% for resource in resource_list %}
-	<p> <button style="margin-left:10px; float:left;">
+	<p> <button  style="margin-left:10px; float:left;">
 		<a href="#{{resource.pk}}"> {{resource.name}} </a>
 	</button>
 
@@ -21,16 +21,16 @@
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
 
-	<button>
-		<a href="../resources/{{Resource.name}}.txt"download>access</a>
+	<button type="button" style="margin-left:10px; float: left;">
+		<a href="../../resources/{{resource.id}}"download>access</a>
 	</button>
 
-	<button type="button" onclick="window.location.href='/my-resources/{{resource.id}}-edit-users-permissions'">
+	<button style="margin-left:10px; float: left;" type="button" onclick="window.location.href='/profile/my-resources/{{resource.id}}-edit-users-permissions'">
 				edit permissions
 	</button>
 
 	{% if resource in deletion_requested %}
-	<button style="float:left; margin-left:10px; background-color:tomato;">
+	<button style="margin-left:10px; background-color:tomato;">
 				      <a href="#cancel-deletion-request-{{resource.pk}}" > cancel deletion request </a>
 					  </button>
 
@@ -55,7 +55,7 @@
 						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/cancel_req.css' %}" />
 
 	{% else %}
-	<button style="float:left; margin-left:10px;">
+	<button style="margin-left:10px;">
 		<a href="#send-deletion-request-{{resource.pk}}" > delete </a>
 	</button>
 		<div id="send-deletion-request-{{resource.pk}}" class="modalDialog">
@@ -85,5 +85,5 @@
 	</p>
     {% endfor %}
 </ul>
-<li><a href="/my-resources/add-new-resource">Create a Resource</a></li>
+<li><a href="/profile/my-resources/add-new-resource">Create a Resource</a></li>
 {% endblock %}
