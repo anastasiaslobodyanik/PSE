@@ -60,6 +60,7 @@ class MyResourcesView(generic.ListView):
 class SendDeletionRequestView(generic.View):
     def  post(self, request):
         elements = request.path.rsplit('/')
+        res=Resource.objects.get(id=elements[2])#added by khalil for logging
 
         req = DeletionRequest.objects.create(sender=request.user,
                                        resource=Resource.objects.get(id=elements[2]),
@@ -77,7 +78,7 @@ class SendDeletionRequestView(generic.View):
         msg=EmailMultiAlternatives('Request for deletion of a resource', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        
+        logger.info("Deletion request for '%s' resource sent by %s \n" % (res.name,request.user.username))
         return redirect("/profile/my-resources")
 
 
@@ -98,7 +99,7 @@ class CancelDeletionRequestView(generic.View):
         msg=EmailMultiAlternatives('Request for deletion of a resource canceled', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        
+        logger.info("Deletion request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
         request_to_delete.delete()
         return redirect("/profile/my-resources")
 
@@ -168,7 +169,8 @@ class ApproveAccessRequest(generic.View):
         msg=EmailMultiAlternatives('Access Request approved', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        req.delete()    
+        req.delete() 
+        logger.info("Request from %s to access '%s' approved by %s \n" % (req.sender,req.resource.name,request.user.username))           
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
@@ -189,7 +191,8 @@ class DenyAccessRequest(generic.View):
         msg=EmailMultiAlternatives('Access Request denied', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        req.delete()    
+        req.delete()  
+        logger.info("Request from %s to access '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username))      
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
@@ -212,6 +215,7 @@ class SendAccessRequestView(generic.View):
         msg=EmailMultiAlternatives('AccessPermission', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        logger.info("Access request for '%s' resource sent by %s \n" % (res.name,request.user.username))
         return redirect("/resources-overview")
    
 
@@ -233,7 +237,7 @@ class CancelAccessRequest(generic.View):
         msg=EmailMultiAlternatives('Access Request canceled', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        
+        logger.info("Access request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
         return redirect("/resources-overview")
     
 
@@ -265,6 +269,7 @@ def download(request,pk):
     response = HttpResponse(myfile, content_type='text/plain')
     
     response['Content-Disposition'] = 'attachment; filename=' + file_name
+    logger.info("User %s accessed '%s' \n" % (request.user.username,resource.name))
     return response
 
 
@@ -326,7 +331,7 @@ def AddNewResource(request):
             instance.owners.add(request.user.id)
             instance.readers.add(request.user.id)
 
-            
+            logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
             return redirect("/resources-overview")# what happens in the browser after submitting
     else:
         form = AddNewResourceForm()
