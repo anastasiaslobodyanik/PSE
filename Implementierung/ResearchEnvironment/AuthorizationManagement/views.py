@@ -45,8 +45,11 @@ class ProfileView(generic.ListView):
 @method_decorator(login_required, name='dispatch')    
 class MyResourcesView(generic.ListView):
     model = Resource
-    template_name = 'AuthorizationManagement/resources.html'
     deletion_requested = Resource.objects.none()
+
+    def get(self, request):
+        is_admin = request.user.is_staff
+        return render(request, 'AuthorizationManagement/resources.html', {'is_admin': is_admin})
 
     def get_queryset(self):
         current_user = Owner.objects.get(id=self.request.user.id)
