@@ -13,11 +13,13 @@ from django.template.context_processors import csrf
 from AuthorizationManagement import utilities
 from django.http import Http404
 from django.template import RequestContext
+from django.core.mail.message import EmailMultiAlternatives
+from django.utils.html import strip_tags
 
 
 logger = logging.getLogger(__name__)
 
-
+@method_decorator(login_required, name='dispatch')
 class HomeView(generic.View):
     model = User
 
@@ -59,10 +61,24 @@ class SendDeletionRequestView(generic.View):
     def  post(self, request):
         elements = request.path.rsplit('/')
 
-        DeletionRequest.objects.create(sender=request.user,
+        req = DeletionRequest.objects.create(sender=request.user,
                                        resource=Resource.objects.get(id=elements[2]),
-                                       description=request.GET)
-        return redirect("/my-resources")
+                                       description=request.POST['descr'])
+        message=req.description
+        
+        html_content = render_to_string('AuthorizationManagement/delete-resource-mail.html', {'user' : request.user,
+                                                                                             'resource' : req.resource,
+                                                                                             'request': req,
+                                                                                             'message': message})
+        text_content=strip_tags(html_content)
+        email_to = [x[0] for x in CustomUser.objects.filter(is_staff=True).values_list('email')]
+        email_from=request.user.email
+        send_mail('Request for deletion of a resource', text_content, email_from,email_to)
+        msg=EmailMultiAlternatives('Request for deletion of a resource', text_content, email_from,email_to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        
+        return redirect("/profile/my-resources")
 
 
 @method_decorator(login_required, name='dispatch')
@@ -71,8 +87,20 @@ class CancelDeletionRequestView(generic.View):
         elements = request.path.rsplit('/')
         requests_of_user = DeletionRequest.objects.filter(sender=request.user)
         request_to_delete = requests_of_user.get(resource__id=elements[2])
+        
+        html_content = render_to_string('AuthorizationManagement/deletion-request-canceled-mail.html', {'user' : request.user,
+                                                                                             'resource' : request_to_delete.resource,
+                                                                                             'request': request_to_delete})
+        text_content=strip_tags(html_content)
+        email_to = [x[0] for x in CustomUser.objects.filter(is_staff=True).values_list('email')]
+        email_from=request.user.email
+        send_mail('Request for deletion of a resource canceled', text_content, email_from,email_to)
+        msg=EmailMultiAlternatives('Request for deletion of a resource canceled', text_content, email_from,email_to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        
         request_to_delete.delete()
-        return redirect("/my-resources")
+        return redirect("/profile/my-resources")
 
 
 @method_decorator(login_required, name='dispatch') 
@@ -127,6 +155,19 @@ class ApproveAccessRequest(generic.View):
         elements=request.path.rsplit('/')
         req=AccessRequest.objects.get(id=elements[2])
         req.resource.readers.add(req.sender)
+        message=req.description
+       
+        html_content = render_to_string('AuthorizationManagement/access-request-approved-mail.html', {'user' : request.user,
+                                                                                             'resource' : req.resource,
+                                                                                             'request': req,
+                                                                                             'message': message})
+        text_content=strip_tags(html_content)
+        email_to = req.sender.email
+        email_from=request.user.email
+        send_mail('Access Request approved', text_content, email_from,[email_to])
+        msg=EmailMultiAlternatives('Access Request approved', text_content, email_from, [email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         req.delete()    
         return redirect("/profile")
 
@@ -135,6 +176,19 @@ class DenyAccessRequest(generic.View):
     def post(self,request):
         elements=request.path.rsplit('/')
         req=AccessRequest.objects.get(id=elements[2])
+        message=request.POST['descr']
+       
+        html_content = render_to_string('AuthorizationManagement/access-request-denied-mail.html', {'user' : request.user,
+                                                                                             'resource' : req.resource,
+                                                                                             'request': req,
+                                                                                             'message': message})
+        text_content=strip_tags(html_content)
+        email_to = req.sender.email
+        email_from=request.user.email
+        send_mail('Access Request denied', text_content, email_from,[email_to])
+        msg=EmailMultiAlternatives('Access Request denied', text_content, email_from, [email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         req.delete()    
         return redirect("/profile")
 
@@ -145,10 +199,19 @@ class SendAccessRequestView(generic.View):
 
         res=Resource.objects.get(id=elements[2])
         req=AccessRequest.objects.create(sender= request.user, resource=res, description=request.POST['descr'])
-        text_content = render_to_string('AuthorizationManagement/access-resource-mail.txt', {'user' : request.user, 'resource' : res, 'request': req})
+        message=req.description
+       
+        html_content = render_to_string('AuthorizationManagement/access-resource-mail.html', {'user' : request.user,
+                                                                                             'resource' : res,
+                                                                                             'request': req,
+                                                                                             'message': message})
+        text_content=strip_tags(html_content)
         email_to = [x[0] for x in res.owners.values_list('email')]
         email_from=request.user.email
         send_mail('AccessPermission', text_content, email_from,email_to)
+        msg=EmailMultiAlternatives('AccessPermission', text_content, email_from,email_to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         return redirect("/resources-overview")
    
 
@@ -159,6 +222,18 @@ class CancelAccessRequest(generic.View):
         requests_of_user = AccessRequest.objects.filter(sender=request.user)
         request_to_delete = requests_of_user.get(resource__id=elements[2])
         request_to_delete.delete()
+        
+        html_content=render_to_string('AuthorizationManagement/access-request-canceled-mail.html', {'user' : request.user,
+                                                                                                    'resource' : request_to_delete.resource,
+                                                                                                    'request': request_to_delete})                                                               
+        text_content=strip_tags(html_content)
+        email_to = [x[0] for x in request_to_delete.resource.owners.values_list('email')]
+        email_from=request.user.email
+        send_mail('Access Request canceled', text_content, email_from,email_to)
+        msg=EmailMultiAlternatives('Access Request canceled', text_content, email_from,email_to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        
         return redirect("/resources-overview")
     
 
