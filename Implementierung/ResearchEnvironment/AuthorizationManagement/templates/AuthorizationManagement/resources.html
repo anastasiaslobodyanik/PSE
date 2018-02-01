@@ -15,11 +15,16 @@
 					<p><strong>Type:</strong> {{resource.type}}</p>
 					<p><strong>CreationDate:</strong> {{resource.creationDate}}</p>
 					<p><strong>Description:</strong> {{resource.description}}</p>
+					<p>
+						<button style="margin-left:10px;">
+							<a href="../../../resources/{{resource.pk}}"download>access</a>
+						</button>
+					</p>
 			</div>
 		</div>
 
 	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
+	<link rel="stylesheet" href="{% static 'AuthorizationManagement/css/info.css' %}" />
 
 	<button type="button" style="margin-left:10px; float: left;">
 		<a href="../../resources/{{resource.id}}"download>access</a>

@@ -1,0 +1,64 @@
+{% extends "AuthorizationManagement/profile.html" %}
+{% block profile %}
+<ul>
+	<h3>Deletion requests</h3>
+	{% for deletionrequest in deletionrequest_list %}
+			    <p> From: {{deletionrequest.sender.username}} </p>
+				<p> For: {{deletionrequest.resource.name}} </p>
+				<p> Description: {{deletionrequest.description}} </p>
+				
+			    <button style=" margin-left:10px;">
+				<a href="#approve-request-{{deletionrequest.pk}}" > accept </a>
+				</button>
+								
+				<div id="approve-request-{{deletionrequest.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/approve-deletion-request/{{deletionrequest.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">
+								<label for="desc">Description: </label><br><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+                            </div>
+							<div class="row">
+								<p> Are you sure you want to delete {{deletionrequest.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, delete resource">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+						
+				<button style=" margin-left:10px;">
+				<a href="#deny-request-{{deletionrequest.pk}}" > deny </a>
+				</button>
+								
+				<div id="deny-request-{{deletionrequest.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/deny-deletion-request/{{deletionrequest.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">									
+                                <label for="desc">Description: </label><br><br>		                                    
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
+                            </div>
+							<div class=row">
+								<p> Are you sure you want to deny the deletion request for {{deletionrequest.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, deny deletion">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				{% load static %}
+				<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/handle_req.css' %}" />
+
+            {% endfor %}
+
+	{% endblock %}

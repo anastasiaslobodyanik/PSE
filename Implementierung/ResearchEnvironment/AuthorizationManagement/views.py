@@ -10,14 +10,19 @@ from django.utils.decorators import method_decorator
 from .forms import AddNewResourceForm
 from django.http.response import HttpResponseRedirect
 from django.template.context_processors import csrf
-from AuthorizationManagement import utilities
+from . import utilities
 from django.http import Http404
 from django.template import RequestContext
 from django.core.mail.message import EmailMultiAlternatives
 from django.utils.html import strip_tags
+from django.core.exceptions import PermissionDenied
+from _csv import reader
+import mimetypes
+from test.support import resource
 
 
 logger = logging.getLogger(__name__)
+
 
 @method_decorator(login_required, name='dispatch')
 class HomeView(generic.View):
@@ -31,14 +36,17 @@ class HomeView(generic.View):
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
     model = User
-    template_name = 'AuthorizationManagement/profile.html'
+
+    def get(self, request):
+        is_admin = request.user.is_staff
+        return render(request, 'AuthorizationManagement/profile.html', {'is_admin': is_admin})
 
     def get_queryset(self):
         resources = MyResourcesView.get_queryset(self)
         return AccessRequest.objects.filter(resource__in=resources)
 
-    
-@method_decorator(login_required, name='dispatch')    
+
+@method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
     model = Resource
     template_name = 'AuthorizationManagement/resources.html'
@@ -53,16 +61,19 @@ class MyResourcesView(generic.ListView):
         context['query_pagination_string'] = ''
         context['deletion_requested'] = Resource.objects.filter(
             id__in=DeletionRequest.objects.filter(sender=self.request.user).values('resource_id'))
+        context['is_admin'] = self.request.user.is_staff
         return context
 
 
 @method_decorator(login_required, name='dispatch')
 class SendDeletionRequestView(generic.View):
-    def  post(self, request):
-        elements = request.path.rsplit('/')
+    def  post(self, request,*args, **kwargs):
+
+        pk = self.kwargs['resourceid']
+        res=Resource.objects.get(id=pk)
 
         req = DeletionRequest.objects.create(sender=request.user,
-                                       resource=Resource.objects.get(id=elements[2]),
+                                       resource=Resource.objects.get(id=pk),
                                        description=request.POST['descr'])
         message=req.description
         
@@ -77,16 +88,17 @@ class SendDeletionRequestView(generic.View):
         msg=EmailMultiAlternatives('Request for deletion of a resource', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        
+        logger.info("Deletion request for '%s' resource sent by %s \n" % (res.name,request.user.username))
         return redirect("/profile/my-resources")
 
 
 @method_decorator(login_required, name='dispatch')
 class CancelDeletionRequestView(generic.View):
-    def post(self, request):
-        elements = request.path.rsplit('/')
+    def post(self, request,*args, **kwargs):
+
+        pk = self.kwargs['resourceid']
         requests_of_user = DeletionRequest.objects.filter(sender=request.user)
-        request_to_delete = requests_of_user.get(resource__id=elements[2])
+        request_to_delete = requests_of_user.get(resource__id=pk)
         
         html_content = render_to_string('AuthorizationManagement/deletion-request-canceled-mail.html', {'user' : request.user,
                                                                                              'resource' : request_to_delete.resource,
@@ -98,7 +110,7 @@ class CancelDeletionRequestView(generic.View):
         msg=EmailMultiAlternatives('Request for deletion of a resource canceled', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        
+        logger.info("Deletion request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
         request_to_delete.delete()
         return redirect("/profile/my-resources")
 
@@ -120,6 +132,7 @@ class ResourcesOverview(generic.ListView):
     
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverview, self).get_context_data(**kwargs)
+        context['query'] = self.query;
         context['query_pagination_string'] = ''
         context['can_access'] = self.request.user.reader.filter(id__in=self.model)
         context['requested_resources'] = Resource.objects.filter(
@@ -151,9 +164,9 @@ class ResourcesOverviewSearch(ResourcesOverview):
 
 @method_decorator(login_required, name='dispatch') 
 class ApproveAccessRequest(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
-        req=AccessRequest.objects.get(id=elements[2])
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
+        req=AccessRequest.objects.get(id=pk)
         req.resource.readers.add(req.sender)
         message=req.description
        
@@ -168,14 +181,15 @@ class ApproveAccessRequest(generic.View):
         msg=EmailMultiAlternatives('Access Request approved', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        req.delete()    
+        req.delete() 
+        logger.info("Request from %s to access '%s' approved by %s \n" % (req.sender,req.resource.name,request.user.username))           
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
 class DenyAccessRequest(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
-        req=AccessRequest.objects.get(id=elements[2])
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
+        req=AccessRequest.objects.get(id=pk)
         message=request.POST['descr']
        
         html_content = render_to_string('AuthorizationManagement/access-request-denied-mail.html', {'user' : request.user,
@@ -189,15 +203,20 @@ class DenyAccessRequest(generic.View):
         msg=EmailMultiAlternatives('Access Request denied', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        req.delete()    
+        req.delete()  
+        logger.info("Request from %s to access '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username))      
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
 class SendAccessRequestView(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
 
-        res=Resource.objects.get(id=elements[2])
+        res=Resource.objects.get(id=pk)
+
+        if res.readers.filter(id= request.user.id).exists() or request.user.is_staff or AccessRequest.objects.filter(resource=res,sender = request.user):
+            logger.info("Try to inconsistently send  access request for resource '%s' with id '%s' sent by %s \n" % (res.name,pk,request.user.username))
+            return redirect("/resources-overview")
         req=AccessRequest.objects.create(sender= request.user, resource=res, description=request.POST['descr'])
         message=req.description
        
@@ -212,15 +231,17 @@ class SendAccessRequestView(generic.View):
         msg=EmailMultiAlternatives('AccessPermission', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        logger.info("Access request for resource '%s' with id '%s' sent by %s \n" % (res.name,pk,request.user.username))
         return redirect("/resources-overview")
    
 
 @method_decorator(login_required, name='dispatch')     
 class CancelAccessRequest(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
+
         requests_of_user = AccessRequest.objects.filter(sender=request.user)
-        request_to_delete = requests_of_user.get(resource__id=elements[2])
+        request_to_delete = requests_of_user.get(resource__id=pk)
         request_to_delete.delete()
         
         html_content=render_to_string('AuthorizationManagement/access-request-canceled-mail.html', {'user' : request.user,
@@ -233,46 +254,60 @@ class CancelAccessRequest(generic.View):
         msg=EmailMultiAlternatives('Access Request canceled', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        
+        logger.info("Access request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
         return redirect("/resources-overview")
     
 
 @method_decorator(login_required, name='dispatch')     
 class OpenResourceView(generic.View):
     def get(self,request,*args, **kwargs):
-        return download(request,self.kwargs['resourceid'])
+        pk = self.kwargs['resourceid']
+
+        if not Resource.objects.filter(id=pk).exists():
+            raise Http404("The requested file doesn't exist!")
+
+
+        resource=Resource.objects.get(id=pk)
+
+        if (not resource.readers.filter(id= request.user.id).exists())and (not request.user.is_staff) :
+            raise PermissionDenied
+
+        logger.info("User %s accessed '%s' with id = %s \n" % (request.user.username,resource.name,resource.id))
+        ## Download function that tests the functionality.
+        ## It could be replaced with another view according to the specific resource
+        return download(request,resource)
     
 @login_required()
-def download(request,pk):
+def download(request,resource):
     relative_path = request.path
     if relative_path.find(os.sep) == -1:
         relative_path = relative_path.replace(utilities.getOppositeOSDirectorySep(),os.sep)  
         
     relative_path_elements = relative_path.split(os.sep,1)
     relative_path = relative_path_elements[len(relative_path_elements)-1]
-    
-    if not Resource.objects.filter(id=pk).exists():
-        raise Http404("The requested file doesn't exist!")
-    
-            
-    resource=Resource.objects.get(id=pk)
+
     file_name = resource.link.name
-    relative_path = relative_path.replace(pk+'',file_name)
+    relative_path = relative_path.replace(str(resource.id),file_name)
+
+    absolute_path = os.path.join(settings.BASE_DIR, relative_path)
+    data = mimetypes.guess_type(absolute_path)
     
-    
-    f = open(os.path.join(settings.BASE_DIR, relative_path), 'r')
+
+    f = open(absolute_path,'rb')
+
     myfile = File(f)
-    response = HttpResponse(myfile, content_type='text/plain')
+    response = HttpResponse(myfile.read(), content_type=data[0])
     
     response['Content-Disposition'] = 'attachment; filename=' + file_name
     return response
 
 
 class PermissionEditingView(generic.ListView):
-    model = User
+    model = User.objects.all()
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
-    paginate_by = 5
+    query = ''
+    context_object_name = "user_list"
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -282,42 +317,207 @@ class PermissionEditingView(generic.ListView):
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
         return redirect('/')
-    
-    
+
+
     
     def post (self, request,*args, **kwargs ):
-        resource=Resource.objects.get(id=self.kwargs['resourceid'])
-        readerlist = request.POST.getlist('reader[]')
-        ownerlist = request.POST.getlist('owner[]')
-        resource.readers.clear()
-        for user in resource.owners.all():
-            resource.readers.add(user)
-        for userid in readerlist:
-            user=CustomUser.objects.get(id=userid)
-            resource.readers.add(user)
-            #email
-        for userid in ownerlist:
-            user=CustomUser.objects.get(id=userid)
-            user.reader.add(resource)
-            #email
-            user.__class__=Owner
-            user.save()
-            owner = user
-            resource.owners.add(owner)
-        return redirect('/my-resources/')
-         
+
+        
+            resource=Resource.objects.get(id=self.kwargs['resourceid'])
+            readerlist = request.POST.getlist('reader[]')
+            ownerlist = request.POST.getlist('owner[]')
+            
+            for user in resource.readers.filter(id__in=self.model):
+                if user.id in readerlist:
+                    continue
+                resource.readers.remove(user)
+                #hier email fuer entzogene zugriffsrechte
+            for userid in readerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.readers.filter(id__in=self.model):
+                    continue
+                resource.readers.add(user)
+                #hier email fuer vergebene zugriffsrechte
+            if len(resource.owners.all()) - len(User.objects.filter(is_staff=True))   > 1:
+                for user in resource.owners.filter(id__in=self.model):
+                
+                    if user.id in ownerlist:
+                        continue
+                    resource.owners.remove(user)
+                #hier email fuer entzogene besitzerrechte
+            for userid in ownerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.owners.filter(id__in=self.model):
+                    continue 
+                user.reader.add(resource)
+                user.__class__=Owner
+                user.save()
+                owner = user
+                resource.owners.add(owner)
+                #email fuer vergebene besitzerrechte
+            
+            return redirect('/profile/my-resources/')
+        
+        
+    
+    def get_queryset(self):
+        return self.model
+    
+
         
     def get_context_data(self, **kwargs):
         context = super(PermissionEditingView, self).get_context_data(**kwargs)
         context['resource'] = Resource.objects.get(id=self.kwargs['resourceid'])
         context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
+        context['query'] = self.query
+        return context
+    
+    
+    
+@method_decorator(login_required, name='dispatch')     
+class PermissionEditingViewSearch(PermissionEditingView):
+    
+    def post(self, request,*args, **kwargs):
+            self.query = self.request.GET['q']
+            self.model = User.objects.filter(username__icontains=self.query)
+            resource=Resource.objects.get(id=self.kwargs['resourceid'])
+            readerlist = request.POST.getlist('reader[]')
+            ownerlist = request.POST.getlist('owner[]')
+            #resource.readers.clear()
+            for user in resource.readers.filter(id__in=self.model):
+                if user.id in readerlist:
+                    continue
+                resource.readers.remove(user)
+                #hier email fuer entzogene zugriffsrechte
+            for userid in readerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.readers.filter(id__in=self.model):
+                    continue
+                resource.readers.add(user)
+                #hier email fuer vergebene zugriffsrechte
+            if len(resource.owners.all()) - len(User.objects.filter(is_staff=True))   > 1:
+                for user in resource.owners.filter(id__in=self.model):
+                
+                    if user.id in ownerlist:
+                        continue
+                    resource.owners.remove(user)
+                
+                #hier email fuer entzogene besitzerrechte
+            for userid in ownerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.owners.filter(id__in=self.model):
+                    continue 
+                user.reader.add(resource)
+                user.__class__=Owner
+                user.save()
+                owner = user
+                resource.owners.add(owner)
+                #email fuer vergebene besitzerrechte
+            
+            return redirect('/profile/my-resources/')
+    def get(self,request,*args, **kwargs):
+        if 'q' in self.request.GET and self.request.GET['q']:
+            self.query = self.request.GET['q']
+            self.model = User.objects.filter(username__icontains=self.query)
+        return super().get(request,*args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super(PermissionEditingViewSearch, self).get_context_data(**kwargs)
+        context['resource'] = Resource.objects.get(id=self.kwargs['resourceid'])
+        context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
+        context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
+        context['query'] = self.query
         return context
 
 
-@login_required()    
-def AddNewResource(request):
-    if request.POST:
+@method_decorator(login_required, name='dispatch')
+class DeletionRequestsView(generic.ListView):
+    model = DeletionRequest
+    template_name = 'AuthorizationManagement/deletion-requests.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DeletionRequestsView, self).get_context_data(**kwargs)
+        context['query_pagination_string'] = ''
+        context['is_admin'] = self.request.user.is_staff
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class ApproveDeletionRequest(generic.View):
+    def post(self, request):
+        elements = request.path.rsplit('/')
+        req = DeletionRequest.objects.get(id=elements[2])
+        owners = req.resource.owners.all()
+        message = req.description
+
+        html_content = render_to_string('AuthorizationManagement/delete-request-accepted-mail.html',
+                                        {'user': request.user,
+                                         'resource': req.resource,
+                                         'request': req,
+                                         'message': message})
+        text_content = strip_tags(html_content)
+
+        res = req.resource
+
+        # delete all permissions for this resource
+        res.owners.clear()
+        res.readers.clear()
+
+        # delete all requests for this resource
+        AccessRequest.objects.filter(resource=res).delete()
+        DeletionRequest.objects.filter(resource=res).delete()
+
+        # delete resource
+        res.delete()
+
+        # send email to request sender
+        email_to = req.sender.email
+        email_from = request.user.email
+        send_mail('Deletion Request approved', text_content, email_from, [email_to])
+        msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+        # notify all owners
+        for owner in owners:
+            email_to = owner.email
+            email_from = request.user.email
+            send_mail('Deletion Request approved', text_content, email_from, [email_to])
+            msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+        req.delete()
+        return redirect("/profile/deletion-requests")
+
+
+@method_decorator(login_required, name='dispatch')
+class DenyDeletionRequest(generic.View):
+    def post(self, request):
+        elements = request.path.rsplit('/')
+        req = DeletionRequest.objects.get(id=elements[2])
+        message = request.POST['descr']
+
+        html_content = render_to_string('AuthorizationManagement/delete-request-denied-mail.html',
+                                        {'user': request.user,
+                                         'resource': req.resource,
+                                         'request': req,
+                                         'message': message})
+        text_content = strip_tags(html_content)
+        email_to = req.sender.email
+        email_from = request.user.email
+        send_mail('Deletion Request denied', text_content, email_from, [email_to])
+        msg = EmailMultiAlternatives('Deletion Request denied', text_content, email_from, [email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        req.delete()
+        return redirect("/profile")
+
+
+@method_decorator(login_required, name='dispatch')
+class AddNewResourceView(generic.View):
+    def post(self,request):
         print(request.FILES)
         form = AddNewResourceForm(request.POST , request.FILES)
         if form.is_valid():
@@ -326,27 +526,23 @@ def AddNewResource(request):
             instance.owners.add(request.user.id)
             instance.readers.add(request.user.id)
 
-            
+            logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
             return redirect("/resources-overview")# what happens in the browser after submitting
-    else:
-        form = AddNewResourceForm()
-           
-    args = {} 
-    args.update(csrf(request))  
-        
-    args['form'] = form
-    return render_to_response('AuthorizationManagement/add-new-resource.html', args)
 
-class PageNotFoundView(generic.View):
     def get(self,request):
-        response = render_to_response('AuthorizationManagement/404.html', {},
-                                  context_instance=RequestContext(request))
-        response.status_code = 404
-        return response    
+        form = AddNewResourceForm()
+
+        args = {}
+        args.update(csrf(request))
+        
+        args['form'] = form
+        return render_to_response('AuthorizationManagement/add-new-resource.html', args)
 
 def permissionForChosenResourceView():
     return
 
+
 def requestView():
     return
+
 
