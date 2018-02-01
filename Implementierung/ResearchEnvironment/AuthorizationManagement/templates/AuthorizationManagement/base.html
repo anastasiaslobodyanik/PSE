@@ -2,26 +2,33 @@
 <html>
 <head>
     <title>Authorization Management</title>
+	<link href="../static/AuthorizationManagement/css/base.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
-	<div id="logo">
-		<h1>PSE Authorization Management</h1>
-	</div>	
-	
-			
-	<div id="nav">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/profile/">Profile</a></li>
-			<li><a href="/resources-overview/">Resources Overview</a></li>
+	<header>
+	<div class "row">
+		<div class="logo">
+			<img src="../static/AuthorizationManagement/images/logo.png">
+		</div>	
+		<ul class="main-nav">
+						
+			<li><a {% block home%}{% endblock %} href="/">Home</a></li>
+			<li><a {% block profil%}{% endblock %} href="/profile/">Profile</a></li>
+			<li><a {% block overview%}{% endblock %} href="/resources-overview/">Resources Overview</a></li>
 			{% if is_admin %}
-			    <li><a href="/resource-manager/">Manage Resources</a></li>
-			    <li><a href="/user-manager/">Manage Users</a></li>
+			    <li><a {% block resource-manager%}{% endblock %} href="/resource-manager/">Manage Resources</a></li>
+			    <li><a {% block user-manager%}{% endblock %} href="/user-manager/">Manage Users</a></li>
 			{% endif %}
-		</ul>			
-	</div>
-
-{% block body %}
-{% endblock %}
+			<li><a {% block logout%}{% endblock %} href="/authentification/logout">Log out</a></li>
+						
+		</ul>
+		
+	</div>	
+	</header>
+	
+	{% block body %}
+	{% endblock %}
+	
 </body>
 </html>

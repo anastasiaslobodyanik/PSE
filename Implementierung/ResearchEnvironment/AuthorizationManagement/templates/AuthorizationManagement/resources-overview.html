@@ -1,5 +1,10 @@
 {% extends "AuthorizationManagement/base.html" %}
 
+{% block overview%}
+	class="active";
+{% endblock %}
+
+
 {% block body %}
 <form action=/authentification/logout/>
 			<input type=submit value="Logout">
