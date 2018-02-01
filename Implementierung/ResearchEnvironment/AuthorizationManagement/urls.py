@@ -23,14 +23,14 @@ urlpatterns = [
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
 
 
-    re_path(r'^approve-access-request/\d*$', ApproveAccessRequest.as_view(), name='approve access request'),
-    re_path(r'^deny-access-request/\d*$', DenyAccessRequest.as_view(), name='deny access request'),
+    re_path(r'^approve-access-request/(?P<resourceid>\d+)$', ApproveAccessRequest.as_view(), name='approve access request'),
+    re_path(r'^deny-access-request/(?P<resourceid>\d+)$', DenyAccessRequest.as_view(), name='deny access request'),
    
 
 
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
-    re_path(r'^send-deletion-request/\d*$', SendDeletionRequestView.as_view(), name='send delete request'),
-    re_path(r'^cancel-deletion-request/\d*$', CancelDeletionRequestView.as_view(), name='send delete request'),
+    re_path(r'^send-deletion-request/(?P<resourceid>\d+)$', SendDeletionRequestView.as_view(), name='send delete request'),
+    re_path(r'^cancel-deletion-request/(?P<resourceid>\d+)$', CancelDeletionRequestView.as_view(), name='send delete request'),
 
 #     re_path(r'^profile/resources/(?P<resourceID>\w+)_edit_users_permissions/reason_for_change/$', views.foo),
 #
@@ -51,8 +51,8 @@ urlpatterns = [
     re_path(r'^resources-overview/search$', ResourcesOverviewSearch.as_view(), name='search-resources'),
 
     re_path(r'^resources/(?P<resourceid>\d+)$', OpenResourceView.as_view(), name='open resources'),
-    re_path(r'^send-access-request/\d*$', SendAccessRequestView.as_view(), name='send-access-request'),
-    re_path(r'^cancel-access-request/\d*$', CancelAccessRequest.as_view(), name='cancel-access-request'),
+    re_path(r'^send-access-request/(?P<resourceid>\d+)$', SendAccessRequestView.as_view(), name='send-access-request'),
+    re_path(r'^cancel-access-request/(?P<resourceid>\d+)$', CancelAccessRequest.as_view(), name='cancel-access-request'),
       
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        

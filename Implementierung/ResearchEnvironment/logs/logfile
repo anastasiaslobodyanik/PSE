@@ -134,3 +134,9 @@
 
 [01/Feb/2018 08:01:01] INFO [AuthorizationManagement.views:262] User owner1 accessed 'resource1' with id = 1 
 
+[01/Feb/2018 08:36:03] INFO [AuthorizationManagement.views:107] Deletion request for 'resource2' canceled by owner1 
+
+[01/Feb/2018 08:36:16] INFO [AuthorizationManagement.views:85] Deletion request for 'resource2' resource sent by owner1 
+
+[01/Feb/2018 08:36:23] INFO [AuthorizationManagement.views:107] Deletion request for 'resource2' canceled by owner1 
+

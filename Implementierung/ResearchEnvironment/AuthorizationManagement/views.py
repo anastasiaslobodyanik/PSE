@@ -18,6 +18,7 @@ from django.utils.html import strip_tags
 from django.core.exceptions import PermissionDenied
 from _csv import reader
 import mimetypes
+from test.support import resource
 
 
 logger = logging.getLogger(__name__)
@@ -61,12 +62,13 @@ class MyResourcesView(generic.ListView):
 
 @method_decorator(login_required, name='dispatch')
 class SendDeletionRequestView(generic.View):
-    def  post(self, request):
-        elements = request.path.rsplit('/')
-        res=Resource.objects.get(id=elements[2])#added by khalil for logging
+    def  post(self, request,*args, **kwargs):
+        
+        pk = self.kwargs['resourceid']
+        res=Resource.objects.get(id=pk)
 
         req = DeletionRequest.objects.create(sender=request.user,
-                                       resource=Resource.objects.get(id=elements[2]),
+                                       resource=Resource.objects.get(id=pk),
                                        description=request.POST['descr'])
         message=req.description
         
@@ -87,10 +89,11 @@ class SendDeletionRequestView(generic.View):
 
 @method_decorator(login_required, name='dispatch')
 class CancelDeletionRequestView(generic.View):
-    def post(self, request):
-        elements = request.path.rsplit('/')
+    def post(self, request,*args, **kwargs):
+        
+        pk = self.kwargs['resourceid']
         requests_of_user = DeletionRequest.objects.filter(sender=request.user)
-        request_to_delete = requests_of_user.get(resource__id=elements[2])
+        request_to_delete = requests_of_user.get(resource__id=pk)
         
         html_content = render_to_string('AuthorizationManagement/deletion-request-canceled-mail.html', {'user' : request.user,
                                                                                              'resource' : request_to_delete.resource,
@@ -124,6 +127,7 @@ class ResourcesOverview(generic.ListView):
     
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverview, self).get_context_data(**kwargs)
+        context['query'] = self.query;
         context['query_pagination_string'] = ''
         context['can_access'] = self.request.user.reader.filter(id__in=self.model)
         context['requested_resources'] = Resource.objects.filter(
@@ -155,9 +159,9 @@ class ResourcesOverviewSearch(ResourcesOverview):
 
 @method_decorator(login_required, name='dispatch') 
 class ApproveAccessRequest(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
-        req=AccessRequest.objects.get(id=elements[2])
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
+        req=AccessRequest.objects.get(id=pk)
         req.resource.readers.add(req.sender)
         message=req.description
        
@@ -178,9 +182,9 @@ class ApproveAccessRequest(generic.View):
 
 @method_decorator(login_required, name='dispatch')     
 class DenyAccessRequest(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
-        req=AccessRequest.objects.get(id=elements[2])
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
+        req=AccessRequest.objects.get(id=pk)
         message=request.POST['descr']
        
         html_content = render_to_string('AuthorizationManagement/access-request-denied-mail.html', {'user' : request.user,
@@ -200,10 +204,14 @@ class DenyAccessRequest(generic.View):
 
 @method_decorator(login_required, name='dispatch')     
 class SendAccessRequestView(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
 
-        res=Resource.objects.get(id=elements[2])
+        res=Resource.objects.get(id=pk)
+        
+        if res.readers.filter(id= request.user.id).exists() or request.user.is_staff or AccessRequest.objects.filter(resource=res,sender = request.user):
+            logger.info("Try to inconsistently send  access request for resource '%s' with id '%s' sent by %s \n" % (res.name,pk,request.user.username))
+            return redirect("/resources-overview")
         req=AccessRequest.objects.create(sender= request.user, resource=res, description=request.POST['descr'])
         message=req.description
        
@@ -218,16 +226,17 @@ class SendAccessRequestView(generic.View):
         msg=EmailMultiAlternatives('AccessPermission', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        logger.info("Access request for '%s' resource sent by %s \n" % (res.name,request.user.username))
+        logger.info("Access request for resource '%s' with id '%s' sent by %s \n" % (res.name,pk,request.user.username))
         return redirect("/resources-overview")
    
 
 @method_decorator(login_required, name='dispatch')     
 class CancelAccessRequest(generic.View):
-    def post(self,request):
-        elements=request.path.rsplit('/')
+    def post(self,request,*args, **kwargs):
+        pk = self.kwargs['resourceid']
+        
         requests_of_user = AccessRequest.objects.filter(sender=request.user)
-        request_to_delete = requests_of_user.get(resource__id=elements[2])
+        request_to_delete = requests_of_user.get(resource__id=pk)
         request_to_delete.delete()
         
         html_content=render_to_string('AuthorizationManagement/access-request-canceled-mail.html', {'user' : request.user,
@@ -254,8 +263,7 @@ class OpenResourceView(generic.View):
     
             
         resource=Resource.objects.get(id=pk)
-        print(not resource.readers.filter(id= request.user.id).exists())
-        print(not request.user.is_staff)
+
         if (not resource.readers.filter(id= request.user.id).exists())and (not request.user.is_staff) :
             raise PermissionDenied
             
