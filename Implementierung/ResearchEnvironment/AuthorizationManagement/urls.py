@@ -27,7 +27,8 @@ urlpatterns = [
     re_path(r'^approve-access-request/(?P<resourceid>\d+)$', ApproveAccessRequest.as_view(), name='approve access request'),
     re_path(r'^deny-access-request/(?P<resourceid>\d+)$', DenyAccessRequest.as_view(), name='deny access request'),
 
-
+    re_path(r'^approve-deletion-request/\d*$', ApproveDeletionRequest.as_view(), name='approve deletion request'),
+    re_path(r'^deny-deletion-request/\d*$', DenyDeletionRequest.as_view(), name='deny deletion request'),
 
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
     re_path(r'^send-deletion-request/(?P<resourceid>\d+)$', SendDeletionRequestView.as_view(), name='send delete request'),
