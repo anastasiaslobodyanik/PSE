@@ -15,6 +15,9 @@ from django.http import Http404
 from django.template import RequestContext
 from django.core.mail.message import EmailMultiAlternatives
 from django.utils.html import strip_tags
+from django.core.exceptions import PermissionDenied
+from _csv import reader
+import mimetypes
 
 
 logger = logging.getLogger(__name__)
@@ -244,32 +247,45 @@ class CancelAccessRequest(generic.View):
 @method_decorator(login_required, name='dispatch')     
 class OpenResourceView(generic.View):
     def get(self,request,*args, **kwargs):
-        return download(request,self.kwargs['resourceid'])
+        pk = self.kwargs['resourceid']
+        
+        if not Resource.objects.filter(id=pk).exists():
+            raise Http404("The requested file doesn't exist!")
+    
+            
+        resource=Resource.objects.get(id=pk)
+        print(not resource.readers.filter(id= request.user.id).exists())
+        print(not request.user.is_staff)
+        if (not resource.readers.filter(id= request.user.id).exists())and (not request.user.is_staff) :
+            raise PermissionDenied
+            
+        logger.info("User %s accessed '%s' with id = %s \n" % (request.user.username,resource.name,resource.id))
+        ## Download function that tests the functionality.
+        ## It could be replaced with another view according to the specific resource   
+        return download(request,resource)
     
 @login_required()
-def download(request,pk):
+def download(request,resource):
     relative_path = request.path
     if relative_path.find(os.sep) == -1:
         relative_path = relative_path.replace(utilities.getOppositeOSDirectorySep(),os.sep)  
         
     relative_path_elements = relative_path.split(os.sep,1)
     relative_path = relative_path_elements[len(relative_path_elements)-1]
-    
-    if not Resource.objects.filter(id=pk).exists():
-        raise Http404("The requested file doesn't exist!")
-    
             
-    resource=Resource.objects.get(id=pk)
     file_name = resource.link.name
-    relative_path = relative_path.replace(pk+'',file_name)
+    relative_path = relative_path.replace(str(resource.id),file_name)
+     
+    absolute_path = os.path.join(settings.BASE_DIR, relative_path)   
+    data = mimetypes.guess_type(absolute_path)
     
     
-    f = open(os.path.join(settings.BASE_DIR, relative_path), 'r')
+    f = open(absolute_path,'rb')
+    
     myfile = File(f)
-    response = HttpResponse(myfile, content_type='text/plain')
+    response = HttpResponse(myfile.read(), content_type=data[0])
     
     response['Content-Disposition'] = 'attachment; filename=' + file_name
-    logger.info("User %s accessed '%s' \n" % (request.user.username,resource.name))
     return response
 
 
@@ -320,9 +336,9 @@ class PermissionEditingView(generic.ListView):
         return context
 
 
-@login_required()    
-def AddNewResource(request):
-    if request.POST:
+@method_decorator(login_required, name='dispatch')
+class AddNewResourceView(generic.View):
+    def post(self,request):
         print(request.FILES)
         form = AddNewResourceForm(request.POST , request.FILES)
         if form.is_valid():
@@ -333,21 +349,15 @@ def AddNewResource(request):
 
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
             return redirect("/resources-overview")# what happens in the browser after submitting
-    else:
-        form = AddNewResourceForm()
-           
-    args = {} 
-    args.update(csrf(request))  
-        
-    args['form'] = form
-    return render_to_response('AuthorizationManagement/add-new-resource.html', args)
-
-class PageNotFoundView(generic.View):
+    
     def get(self,request):
-        response = render_to_response('AuthorizationManagement/404.html', {},
-                                  context_instance=RequestContext(request))
-        response.status_code = 404
-        return response    
+        form = AddNewResourceForm()
+        
+        args = {} 
+        args.update(csrf(request))  
+        
+        args['form'] = form
+        return render_to_response('AuthorizationManagement/add-new-resource.html', args)  
 
 def permissionForChosenResourceView():
     return
