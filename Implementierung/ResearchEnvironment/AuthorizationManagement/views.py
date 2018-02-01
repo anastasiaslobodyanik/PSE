@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect, render_to_response, _get_queryset
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -36,14 +36,27 @@ class HomeView(generic.View):
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
     model = User
-
-    def get(self, request):
-        is_admin = request.user.is_staff
-        return render(request, 'AuthorizationManagement/profile.html', {'is_admin': is_admin})
-
-    def get_queryset(self):
+    template_name = 'AuthorizationManagement/profile.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        current_user = Owner.objects.get(id=self.request.user.id)
         resources = MyResourcesView.get_queryset(self)
-        return AccessRequest.objects.filter(resource__in=resources)
+        
+        context['query_pagination_string'] = ''
+        context['is_admin'] = current_user.is_staff
+        
+        # load all access and deletion request if user is staff
+        if current_user.is_staff:
+            context['deletionrequest_list'] = DeletionRequest.objects.all()
+            context['accessrequest_list'] = AccessRequest.objects.all()
+            
+        # load access requests else if user owns any resources
+        elif resources.exists():
+            context['accessrequest_list'] = AccessRequest.objects.filter(resource__in=resources)
+ 
+        return context
+    
 
 
 @method_decorator(login_required, name='dispatch')
@@ -89,6 +102,7 @@ class SendDeletionRequestView(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Deletion request for '%s' resource sent by %s \n" % (res.name,request.user.username))
+        logger.info("An email was sent to the Staff members from %s, Object: Deletion Request for '%s' \n" % (request.user.username,res.name))
         return redirect("/profile/my-resources")
 
 
@@ -111,6 +125,7 @@ class CancelDeletionRequestView(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Deletion request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
+        logger.info("An email was sent to the Staff members from %s, Object: Cancel the Deletion Request for '%s' \n" % (request.user.username,request_to_delete.resource.name))
         request_to_delete.delete()
         return redirect("/profile/my-resources")
 
@@ -182,7 +197,8 @@ class ApproveAccessRequest(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         req.delete() 
-        logger.info("Request from %s to access '%s' approved by %s \n" % (req.sender,req.resource.name,request.user.username))           
+        logger.info("Request from %s to access '%s' approved by %s \n" % (req.sender,req.resource.name,request.user.username))
+        logger.info("An email was sent from %s to %s, Object: Access Request for '%s' approved \n" % (request.user.username,req.sender,req.resource.name))           
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
@@ -204,7 +220,8 @@ class DenyAccessRequest(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         req.delete()  
-        logger.info("Request from %s to access '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username))      
+        logger.info("Request from %s to access '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username)) 
+        logger.info("An email was sent from %s to %s, Object: Access Request for '%s' denied \n" % (request.user.username,req.sender,req.resource.name))     
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
@@ -232,6 +249,7 @@ class SendAccessRequestView(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Access request for resource '%s' with id '%s' sent by %s \n" % (res.name,pk,request.user.username))
+        logger.info("An email was sent from %s to '%s' owners, Object: Access Request for '%s' \n" % (request.user.username,res.name,res.name))
         return redirect("/resources-overview")
    
 
@@ -255,6 +273,7 @@ class CancelAccessRequest(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Access request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
+        logger.info("An email was sent from %s to '%s' owners, Object: Cancel the Access Request for '%s' \n" % (request.user.username,request_to_delete.resource.name,request_to_delete.resource.name))
         return redirect("/resources-overview")
     
 
@@ -468,18 +487,6 @@ class PermissionEditingViewSearch(PermissionEditingView):
 
 
 @method_decorator(login_required, name='dispatch')
-class DeletionRequestsView(generic.ListView):
-    model = DeletionRequest
-    template_name = 'AuthorizationManagement/deletion-requests.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DeletionRequestsView, self).get_context_data(**kwargs)
-        context['query_pagination_string'] = ''
-        context['is_admin'] = self.request.user.is_staff
-        return context
-
-
-@method_decorator(login_required, name='dispatch')
 class ApproveDeletionRequest(generic.View):
     def post(self, request):
         elements = request.path.rsplit('/')
@@ -514,6 +521,8 @@ class ApproveDeletionRequest(generic.View):
         msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        logger.info("Request from %s to delete '%s' accepted by %s \n" % (req.sender,req.resource.name,request.user.username))
+        logger.info("An email was sent from %s to %s, Object: Deletion Request for '%s' accepted \n" % (request.user.username,req.sender,req.resource.name))
 
         # notify all owners
         for owner in owners:
@@ -523,10 +532,10 @@ class ApproveDeletionRequest(generic.View):
             msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
-
+            logger.info("An email was sent to all '%s' owners, Object: '%s' is deleted " % (req.resource.name,req.resource.name))
         req.delete()
-        return redirect("/profile/deletion-requests")
 
+        return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')
 class DenyDeletionRequest(generic.View):
@@ -547,6 +556,8 @@ class DenyDeletionRequest(generic.View):
         msg = EmailMultiAlternatives('Deletion Request denied', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        logger.info("Request from %s to delete '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username))
+        logger.info("An email was sent from %s to %s, Object: Deletion Request for '%s' denied\n" % (request.user.username,req.sender,req.resource.name))
         req.delete()
         return redirect("/profile")
 
