@@ -18,13 +18,13 @@ urlpatterns = [
     re_path(r'^profile/$', ProfileView.as_view(), name = 'profile'),
     re_path(r'^profile/my-resources/$', MyResourcesView.as_view(), name = 'my resources' ),
     re_path(r'^profile/my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', PermissionEditingView.as_view(), name='edit permissions'),
-<<<<<<< HEAD
+
     re_path(r'^profile/my-resources/(?P<resourceid>\d+)-edit-users-permissions/search$', PermissionEditingViewSearch.as_view(), name='edit permissions searching for user'),
-    re_path(r'^profile/my-resources/add-new-resource/$', AddNewResource, name='add-new-resource'),
-=======
+    
+
     re_path(r'^profile/deletion-requests/$', DeletionRequestsView.as_view(), name='deletion-requests'),
     re_path(r'^profile/my-resources/add-new-resource/$', AddNewResourceView.as_view(), name='add-new-resource'),
->>>>>>> 2284730a4ee1897c50c346ea1b60036088aa99cc
+
 
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
 
