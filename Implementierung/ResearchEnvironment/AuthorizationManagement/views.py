@@ -89,6 +89,7 @@ class SendDeletionRequestView(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Deletion request for '%s' resource sent by %s \n" % (res.name,request.user.username))
+        logger.info("An email was sent to the Staff members from %s, Object: Deletion Request for '%s' \n" % (request.user.username,res.name))
         return redirect("/profile/my-resources")
 
 
@@ -111,6 +112,7 @@ class CancelDeletionRequestView(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Deletion request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
+        logger.info("An email was sent to the Staff members from %s, Object: Cancel the Deletion Request for '%s' \n" % (request.user.username,request_to_delete.resource.name))
         request_to_delete.delete()
         return redirect("/profile/my-resources")
 
@@ -182,7 +184,8 @@ class ApproveAccessRequest(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         req.delete() 
-        logger.info("Request from %s to access '%s' approved by %s \n" % (req.sender,req.resource.name,request.user.username))           
+        logger.info("Request from %s to access '%s' approved by %s \n" % (req.sender,req.resource.name,request.user.username))
+        logger.info("An email was sent from %s to %s, Object: Access Request for '%s' approved \n" % (request.user.username,req.sender,req.resource.name))           
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
@@ -204,7 +207,8 @@ class DenyAccessRequest(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         req.delete()  
-        logger.info("Request from %s to access '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username))      
+        logger.info("Request from %s to access '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username)) 
+        logger.info("An email was sent from %s to %s, Object: Access Request for '%s' denied \n" % (request.user.username,req.sender,req.resource.name))     
         return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')     
@@ -232,6 +236,7 @@ class SendAccessRequestView(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Access request for resource '%s' with id '%s' sent by %s \n" % (res.name,pk,request.user.username))
+        logger.info("An email was sent from %s to '%s' owners, Object: Access Request for '%s' \n" % (request.user.username,res.name,res.name))
         return redirect("/resources-overview")
    
 
@@ -255,6 +260,7 @@ class CancelAccessRequest(generic.View):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("Access request for '%s' canceled by %s \n" % (request_to_delete.resource.name,request.user.username))
+        logger.info("An email was sent from %s to '%s' owners, Object: Cancel the Access Request for '%s' \n" % (request.user.username,request_to_delete.resource.name,request_to_delete.resource.name))
         return redirect("/resources-overview")
     
 
@@ -478,6 +484,8 @@ class ApproveDeletionRequest(generic.View):
         msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        logger.info("Request from %s to delete '%s' accepted by %s \n" % (req.sender,req.resource.name,request.user.username))
+        logger.info("An email was sent from %s to %s, Object: Deletion Request for '%s' accepted \n" % (request.user.username,req.sender,req.resource.name))
 
         # notify all owners
         for owner in owners:
@@ -487,8 +495,9 @@ class ApproveDeletionRequest(generic.View):
             msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
-
+            logger.info("An email was sent to all '%s' owners, Object: '%s' is deleted " % (req.resource.name,req.resource.name))
         req.delete()
+        
         return redirect("/profile/deletion-requests")
 
 
@@ -511,6 +520,8 @@ class DenyDeletionRequest(generic.View):
         msg = EmailMultiAlternatives('Deletion Request denied', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        logger.info("Request from %s to delete '%s' denied by %s \n" % (req.sender,req.resource.name,request.user.username))
+        logger.info("An email was sent from %s to %s, Object: Deletion Request for '%s' denied\n" % (request.user.username,req.sender,req.resource.name))
         req.delete()
         return redirect("/profile")
 
