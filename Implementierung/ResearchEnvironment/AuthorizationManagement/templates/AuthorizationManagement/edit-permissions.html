@@ -1,6 +1,22 @@
 {% extends "AuthorizationManagement/profile.html" %}
 {% block body %}
 
+
+
+
+<p>Search for user:</p>
+
+<form action="/profile/my-resources/{{resource.id}}-edit-users-permissions/search" method="get">
+
+
+  <input type="text" name='q' placeholder="Type a username">
+  <input type="submit" value="Search">
+</form>
+
+
+{% if query %}
+
+
 	{% for user in user_list %}
 	
 	
@@ -12,13 +28,23 @@
     		<h3 >{{user.username}}:</h3>
   	</div>
   	{% if user in owners %}
+  	{% if not user.is_staff %}
   	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
+    	<input  type="hidden" name="reader[]" value={{user.id}} >
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
+    	
+    	<label  >owner</label>
+    	{% else %}
+    	<div id='checkboxes'>
     	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
     	<input  type="hidden" name="reader[]" value={{user.id}} >
     	<label  >reader</label>
     	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" disabled>
     	<input  type="hidden" name="owner[]" value={{user.id}} >
     	<label  >owner</label>
+    	{% endif %}
     	</p>
     	{% elif user in readers %}
     	<div id='checkboxes'>
@@ -43,26 +69,60 @@
     	<button type="submit">Submit</button>
   	</p>
   	</div>
+	</form> 
+{% else %}	
+	
+	
+	<p>
+	<form method="post">
+	{% csrf_token %}
+	{% for user in readers %}
+	{% if user in owners %}
+	{% if not user.is_staff %}
+  	<div>
+    		<h3 >{{user.username}}:</h3>
+  	</div>
+  	
+  	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
+    	<input  type="hidden" name="reader[]" value={{user.id}} >
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
+    	<label  >owner</label>
+    	{% else %}
+    	<div>
+    		<h3 >{{user.username}}:</h3>
+  	</div>
+    	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
+    	<input  type="hidden" name="reader[]" value={{user.id}} >
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" disabled>
+    	<input  type="hidden" name="owner[]" value={{user.id}} >
+    	<label  >owner</label>
+    	{% endif %}
+    	</p>
+    	{% else %}
+    	<div>
+    		<h3 >{{user.username}}:</h3>
+  	</div>
+    	<div id='checkboxes'>
+    	<input  type="checkbox" name="reader[]" value={{user.id}} checked="checked">
+    	<label  >reader</label>
+    	<input type="checkbox" name="owner[]" value={{user.id}}>
+    	<label  >owner</label>
+    	</p>
+    	{% endif %}
+    	
+  	{% endfor %}
+  	
+  	<p>
+    	<button type="submit">Submit</button>
+  	</p>
+  	
+  	</div>
+  	
 	</form>
-	{% if is_paginated %}
-  <ul class="pagination">
-    {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}
+	{% endif %}
+	
 {% endblock %}

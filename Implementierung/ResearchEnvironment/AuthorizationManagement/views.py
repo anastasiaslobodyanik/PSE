@@ -194,10 +194,11 @@ def download(request,pk):
 
 
 class PermissionEditingView(generic.ListView):
-    model = User
+    model = User.objects.all()
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
-    paginate_by = 5
+    query = ''
+    context_object_name = "user_list"
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -211,32 +212,111 @@ class PermissionEditingView(generic.ListView):
     
     
     def post (self, request,*args, **kwargs ):
-        resource=Resource.objects.get(id=self.kwargs['resourceid'])
-        readerlist = request.POST.getlist('reader[]')
-        ownerlist = request.POST.getlist('owner[]')
-        resource.readers.clear()
-        for user in resource.owners.all():
-            resource.readers.add(user)
-        for userid in readerlist:
-            user=CustomUser.objects.get(id=userid)
-            resource.readers.add(user)
-            #email
-        for userid in ownerlist:
-            user=CustomUser.objects.get(id=userid)
-            user.reader.add(resource)
-            #email
-            user.__class__=Owner
-            user.save()
-            owner = user
-            resource.owners.add(owner)
-        return redirect('/my-resources/')
-         
+        
+            resource=Resource.objects.get(id=self.kwargs['resourceid'])
+            readerlist = request.POST.getlist('reader[]')
+            ownerlist = request.POST.getlist('owner[]')
+            
+            for user in resource.readers.filter(id__in=self.model):
+                if user.id in readerlist:
+                    continue
+                resource.readers.remove(user)
+                #hier email fuer entzogene zugriffsrechte
+            for userid in readerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.readers.filter(id__in=self.model):
+                    continue
+                resource.readers.add(user)
+                #hier email fuer vergebene zugriffsrechte
+            if len(resource.owners.all()) - len(User.objects.filter(is_staff=True))   > 1:
+                for user in resource.owners.filter(id__in=self.model):
+                
+                    if user.id in ownerlist:
+                        continue
+                    resource.owners.remove(user)
+                #hier email fuer entzogene besitzerrechte
+            for userid in ownerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.owners.filter(id__in=self.model):
+                    continue 
+                user.reader.add(resource)
+                user.__class__=Owner
+                user.save()
+                owner = user
+                resource.owners.add(owner)
+                #email fuer vergebene besitzerrechte
+            
+            return redirect('/profile/my-resources/')
+        
+        
+    
+    def get_queryset(self):
+        return self.model
+    
         
     def get_context_data(self, **kwargs):
         context = super(PermissionEditingView, self).get_context_data(**kwargs)
         context['resource'] = Resource.objects.get(id=self.kwargs['resourceid'])
         context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
+        context['query'] = self.query
+        return context
+    
+    
+    
+@method_decorator(login_required, name='dispatch')     
+class PermissionEditingViewSearch(PermissionEditingView):
+    
+    def post(self, request,*args, **kwargs):
+            self.query = self.request.GET['q']
+            self.model = User.objects.filter(username__icontains=self.query)
+            resource=Resource.objects.get(id=self.kwargs['resourceid'])
+            readerlist = request.POST.getlist('reader[]')
+            ownerlist = request.POST.getlist('owner[]')
+            #resource.readers.clear()
+            for user in resource.readers.filter(id__in=self.model):
+                if user.id in readerlist:
+                    continue
+                resource.readers.remove(user)
+                #hier email fuer entzogene zugriffsrechte
+            for userid in readerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.readers.filter(id__in=self.model):
+                    continue
+                resource.readers.add(user)
+                #hier email fuer vergebene zugriffsrechte
+            if len(resource.owners.all()) - len(User.objects.filter(is_staff=True))   > 1:
+                for user in resource.owners.filter(id__in=self.model):
+                
+                    if user.id in ownerlist:
+                        continue
+                    resource.owners.remove(user)
+                
+                #hier email fuer entzogene besitzerrechte
+            for userid in ownerlist:
+                user=CustomUser.objects.get(id=userid)
+                if user in resource.owners.filter(id__in=self.model):
+                    continue 
+                user.reader.add(resource)
+                user.__class__=Owner
+                user.save()
+                owner = user
+                resource.owners.add(owner)
+                #email fuer vergebene besitzerrechte
+            
+            return redirect('/profile/my-resources/')
+    def get(self,request,*args, **kwargs):
+        if 'q' in self.request.GET and self.request.GET['q']:
+            self.query = self.request.GET['q']
+            self.model = User.objects.filter(username__icontains=self.query)
+        return super().get(request,*args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super(PermissionEditingViewSearch, self).get_context_data(**kwargs)
+        context['resource'] = Resource.objects.get(id=self.kwargs['resourceid'])
+        context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
+        context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
+        context['query'] = self.query
         return context
         
 @login_required()    
