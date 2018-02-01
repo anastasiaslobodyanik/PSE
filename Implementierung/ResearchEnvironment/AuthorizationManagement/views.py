@@ -303,7 +303,7 @@ def download(request,resource):
 
 
 class PermissionEditingView(generic.ListView):
-    model = User.objects.all()
+    model = User.objects.filter(is_staff=False)
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
     query = ''
@@ -331,13 +331,31 @@ class PermissionEditingView(generic.ListView):
                 if user.id in readerlist:
                     continue
                 resource.readers.remove(user)
-                #hier email fuer entzogene zugriffsrechte
+                
+                html_content=render_to_string('AuthorizationManagement/access-removed-mail.html', {'user' : request.user,
+                                                                                                    'resource' : resource})                                                               
+                text_content=strip_tags(html_content)
+                email_to = [user.email]
+                email_from=request.user.email
+                msg=EmailMultiAlternatives('Access Permission removed', text_content, email_from,email_to)
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+                logger.info("Access permission for '%s' removed by %s \n" % (resource.name,request.user.username))
             for userid in readerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.readers.filter(id__in=self.model):
                     continue
                 resource.readers.add(user)
-                #hier email fuer vergebene zugriffsrechte
+                
+                html_content=render_to_string('AuthorizationManagement/access-granted-mail.html', {'user' : request.user,
+                                                                                                    'resource' : resource})                                                               
+                text_content=strip_tags(html_content)
+                email_to = [user.email]
+                email_from=request.user.email
+                msg=EmailMultiAlternatives('Access Permission granted', text_content, email_from,email_to)
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+                logger.info("Access permission for '%s' granted by %s \n" % (resource.name,request.user.username))
             if len(resource.owners.all()) - len(User.objects.filter(is_staff=True))   > 1:
                 for user in resource.owners.filter(id__in=self.model):
                 
@@ -380,22 +398,40 @@ class PermissionEditingViewSearch(PermissionEditingView):
     
     def post(self, request,*args, **kwargs):
             self.query = self.request.GET['q']
-            self.model = User.objects.filter(username__icontains=self.query)
+            self.model = User.objects.filter(username__icontains=self.query,is_staff=False)
             resource=Resource.objects.get(id=self.kwargs['resourceid'])
             readerlist = request.POST.getlist('reader[]')
             ownerlist = request.POST.getlist('owner[]')
-            #resource.readers.clear()
+        
             for user in resource.readers.filter(id__in=self.model):
                 if user.id in readerlist:
                     continue
                 resource.readers.remove(user)
-                #hier email fuer entzogene zugriffsrechte
+                
+                html_content=render_to_string('AuthorizationManagement/access-removed-mail.html', {'user' : request.user,
+                                                                                                    'resource' : resource})                                                               
+                text_content=strip_tags(html_content)
+                email_to = [user.email]
+                email_from=request.user.email
+                msg=EmailMultiAlternatives('Access Permission removed', text_content, email_from,email_to)
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+                logger.info("Access permission for '%s' removed by %s \n" % (resource.name,request.user.username))
             for userid in readerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.readers.filter(id__in=self.model):
                     continue
                 resource.readers.add(user)
-                #hier email fuer vergebene zugriffsrechte
+                
+                html_content=render_to_string('AuthorizationManagement/access-granted-mail.html', {'user' : request.user,
+                                                                                                    'resource' : resource})                                                               
+                text_content=strip_tags(html_content)
+                email_to = [user.email]
+                email_from=request.user.email
+                msg=EmailMultiAlternatives('Access Permission granted', text_content, email_from,email_to)
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+                logger.info("Access permission for '%s' granted by %s \n" % (resource.name,request.user.username))
             if len(resource.owners.all()) - len(User.objects.filter(is_staff=True))   > 1:
                 for user in resource.owners.filter(id__in=self.model):
                 
@@ -419,7 +455,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
     def get(self,request,*args, **kwargs):
         if 'q' in self.request.GET and self.request.GET['q']:
             self.query = self.request.GET['q']
-            self.model = User.objects.filter(username__icontains=self.query)
+            self.model = User.objects.filter(username__icontains=self.query,is_staff=False)
         return super().get(request,*args, **kwargs)
     
     def get_context_data(self, **kwargs):

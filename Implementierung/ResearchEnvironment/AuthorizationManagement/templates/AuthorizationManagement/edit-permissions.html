@@ -15,7 +15,10 @@
 
 
 {% if query %}
-
+<p>You searched for: <strong>{{ query }}</strong></p> 
+{% if not user_list %}
+<p>No users matched your search criteria.</p>
+{% endif %} 
 
 	{% for user in user_list %}
 	
@@ -28,7 +31,7 @@
     		<h3 >{{user.username}}:</h3>
   	</div>
   	{% if user in owners %}
-  	{% if not user.is_staff %}
+  	
   	<div id='checkboxes'>
     	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
     	<input  type="hidden" name="reader[]" value={{user.id}} >
@@ -36,15 +39,8 @@
     	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
     	
     	<label  >owner</label>
-    	{% else %}
-    	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
-    	<input  type="hidden" name="reader[]" value={{user.id}} >
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" disabled>
-    	<input  type="hidden" name="owner[]" value={{user.id}} >
-    	<label  >owner</label>
-    	{% endif %}
+ 
+    	
     	</p>
     	{% elif user in readers %}
     	<div id='checkboxes'>
@@ -89,17 +85,7 @@
     	<label  >reader</label>
     	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
     	<label  >owner</label>
-    	{% else %}
-    	<div>
-    		<h3 >{{user.username}}:</h3>
-  	</div>
-    	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
-    	<input  type="hidden" name="reader[]" value={{user.id}} >
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" disabled>
-    	<input  type="hidden" name="owner[]" value={{user.id}} >
-    	<label  >owner</label>
+    	
     	{% endif %}
     	</p>
     	{% else %}
