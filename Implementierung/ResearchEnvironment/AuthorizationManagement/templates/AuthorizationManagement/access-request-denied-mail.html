@@ -6,7 +6,10 @@
 <body>
 	<div >
 		<h1>Hello!</h1>
-		<p>{{user.username}} has denied your request for permission to access {{resource.name}} resource</p>
+		<p>{{user.username}} has denied your request for permission to access resource: {{resource.name}}</p>
+		{% if message %}
+			He left the following message: {{message}}
+		{% endif %}
 	</div>		
 </body>
 </html>

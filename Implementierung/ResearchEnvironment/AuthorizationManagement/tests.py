@@ -5,7 +5,7 @@ class SimpleTest(unittest.TestCase):
     
     def setUp(self):
         self.client = Client()
-        self.client.login(username = 'reader',password='leser1leser')
+        self.client.login(username = 'reader1',password='leser1leser')
 
     
     def test_index(self):
@@ -16,6 +16,7 @@ class SimpleTest(unittest.TestCase):
         self.client.login(user='admin',password="adm1nistrator")
         response = self.client.get('/resource-manager')
         self.assertEqual(response.status_code, 200)
+        
 
         
         

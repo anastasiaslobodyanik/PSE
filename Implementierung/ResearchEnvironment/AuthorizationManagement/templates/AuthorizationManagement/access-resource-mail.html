@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AccessPermission</title>
+    <title>Access Permission</title>
 </head>
 <body>
 	<div >
 		<h1>Hello!</h1>
-		<p>{{user.username}} requested for permission to access your {{resource.name}} resource</p>
+		<p>{{user.username}} requested for permission to access your resource: {{resource.name}}</p>
+		{% if message %}
+			He left the following message: {{message}}
+		{% endif %}
 	</div>		
 </body>
 </html>

@@ -26,10 +26,19 @@ float:left;
 		
 		<div id="first">
 		<form action="/profile">
-			<input type=submit value="Requests">
+			<input type=submit value="Access Requests">
 		</form>
 		</div>
-		<div id="second">
+
+        {% if is_admin %}
+        <div id="second">
+		<form action="/profile/deletion-requests">
+			<input type=submit value="Deletion Requests">
+		</form>
+		</div>
+        {% endif %}
+
+        <div id="third">
 		<form action="/profile/my-resources">
 			<input type=submit value="My Resources">
 		</form>
@@ -56,7 +65,7 @@ float:left;
 								<label for="desc">Description: </label><br><br>									
                                 <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
                             </div>
-							<div class "row">
+							<div class="row">
 								<p> Are you sure you want to approve the access request for {{accessrequest.resource.name}}? </p>
 								<input id="yes" type="submit" value="yes, allow permissions">
 								<button>

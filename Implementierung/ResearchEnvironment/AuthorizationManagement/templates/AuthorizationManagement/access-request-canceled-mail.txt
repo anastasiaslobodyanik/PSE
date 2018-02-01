@@ -1,0 +1,1 @@
+{{user.username}} canceled his access request for resource: {{resource.name}}
