@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect, render_to_response, _get_queryset
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -36,14 +36,27 @@ class HomeView(generic.View):
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
     model = User
-
-    def get(self, request):
-        is_admin = request.user.is_staff
-        return render(request, 'AuthorizationManagement/profile.html', {'is_admin': is_admin})
-
-    def get_queryset(self):
+    template_name = 'AuthorizationManagement/profile.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        current_user = Owner.objects.get(id=self.request.user.id)
         resources = MyResourcesView.get_queryset(self)
-        return AccessRequest.objects.filter(resource__in=resources)
+        
+        context['query_pagination_string'] = ''
+        context['is_admin'] = current_user.is_staff
+        
+        # load all access and deletion request if user is staff
+        if current_user.is_staff:
+            context['deletionrequest_list'] = DeletionRequest.objects.all()
+            context['accessrequest_list'] = AccessRequest.objects.all()
+            
+        # load access requests else if user owns any resources
+        elif resources.exists():
+            context['accessrequest_list'] = AccessRequest.objects.filter(resource__in=resources)
+ 
+        return context
+    
 
 
 @method_decorator(login_required, name='dispatch')
@@ -432,18 +445,6 @@ class PermissionEditingViewSearch(PermissionEditingView):
 
 
 @method_decorator(login_required, name='dispatch')
-class DeletionRequestsView(generic.ListView):
-    model = DeletionRequest
-    template_name = 'AuthorizationManagement/deletion-requests.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DeletionRequestsView, self).get_context_data(**kwargs)
-        context['query_pagination_string'] = ''
-        context['is_admin'] = self.request.user.is_staff
-        return context
-
-
-@method_decorator(login_required, name='dispatch')
 class ApproveDeletionRequest(generic.View):
     def post(self, request):
         elements = request.path.rsplit('/')
@@ -489,8 +490,7 @@ class ApproveDeletionRequest(generic.View):
             msg.send()
 
         req.delete()
-        return redirect("/profile/deletion-requests")
-
+        return redirect("/profile")
 
 @method_decorator(login_required, name='dispatch')
 class DenyDeletionRequest(generic.View):
