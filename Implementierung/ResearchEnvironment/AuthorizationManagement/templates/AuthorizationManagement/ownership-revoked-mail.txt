@@ -1,0 +1,1 @@
+{{user.username}} revoked  the ownership of  {{resource.name}} from you

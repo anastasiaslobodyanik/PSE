@@ -1,1 +1,1 @@
-{{user.username}} has accepted your request to delete the {{resource.name}} resource
+{{user.username}} has accepted your request to delete the Resource: {{resource.name}} 

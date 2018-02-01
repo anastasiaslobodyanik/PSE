@@ -1,1 +1,1 @@
-{{user.username}} removed  the access to the {{resource.name}} resource from you
+{{user.username}} removed  the access to {{resource.name}}  from you
