@@ -97,7 +97,6 @@ class SendDeletionRequestView(generic.View):
         text_content=strip_tags(html_content)
         email_to = [x[0] for x in CustomUser.objects.filter(is_staff=True).values_list('email')]
         email_from=request.user.email
-        send_mail('Request for deletion of a resource', text_content, email_from,email_to)
         msg=EmailMultiAlternatives('Request for deletion of a resource', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -120,7 +119,6 @@ class CancelDeletionRequestView(generic.View):
         text_content=strip_tags(html_content)
         email_to = [x[0] for x in CustomUser.objects.filter(is_staff=True).values_list('email')]
         email_from=request.user.email
-        send_mail('Request for deletion of a resource canceled', text_content, email_from,email_to)
         msg=EmailMultiAlternatives('Request for deletion of a resource canceled', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -192,7 +190,6 @@ class ApproveAccessRequest(generic.View):
         text_content=strip_tags(html_content)
         email_to = req.sender.email
         email_from=request.user.email
-        send_mail('Access Request approved', text_content, email_from,[email_to])
         msg=EmailMultiAlternatives('Access Request approved', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -215,7 +212,6 @@ class DenyAccessRequest(generic.View):
         text_content=strip_tags(html_content)
         email_to = req.sender.email
         email_from=request.user.email
-        send_mail('Access Request denied', text_content, email_from,[email_to])
         msg=EmailMultiAlternatives('Access Request denied', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -244,7 +240,6 @@ class SendAccessRequestView(generic.View):
         text_content=strip_tags(html_content)
         email_to = [x[0] for x in res.owners.values_list('email')]
         email_from=request.user.email
-        send_mail('AccessPermission', text_content, email_from,email_to)
         msg=EmailMultiAlternatives('AccessPermission', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -268,7 +263,6 @@ class CancelAccessRequest(generic.View):
         text_content=strip_tags(html_content)
         email_to = [x[0] for x in request_to_delete.resource.owners.values_list('email')]
         email_from=request.user.email
-        send_mail('Access Request canceled', text_content, email_from,email_to)
         msg=EmailMultiAlternatives('Access Request canceled', text_content, email_from,email_to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -517,7 +511,6 @@ class ApproveDeletionRequest(generic.View):
         # send email to request sender
         email_to = req.sender.email
         email_from = request.user.email
-        send_mail('Deletion Request approved', text_content, email_from, [email_to])
         msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -528,7 +521,6 @@ class ApproveDeletionRequest(generic.View):
         for owner in owners:
             email_to = owner.email
             email_from = request.user.email
-            send_mail('Deletion Request approved', text_content, email_from, [email_to])
             msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
@@ -552,7 +544,6 @@ class DenyDeletionRequest(generic.View):
         text_content = strip_tags(html_content)
         email_to = req.sender.email
         email_from = request.user.email
-        send_mail('Deletion Request denied', text_content, email_from, [email_to])
         msg = EmailMultiAlternatives('Deletion Request denied', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
