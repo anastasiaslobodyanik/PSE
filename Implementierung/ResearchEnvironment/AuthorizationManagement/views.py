@@ -380,6 +380,7 @@ class PermissionEditingView(generic.ListView):
     resource = Resource.objects.all()
     query = ''
     context_object_name = "user_list"
+    #paginate_by = 2
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -419,7 +420,7 @@ class PermissionEditingView(generic.ListView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission removed \n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission removed \n" % (request.user.username,user.username))
             for userid in readerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.readers.filter(id__in=self.model):
@@ -435,24 +436,23 @@ class PermissionEditingView(generic.ListView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
             if len(resource.owners.all() )   > 1:
                 for user in resource.owners.filter(id__in=self.model):
                 
                     if user.id in ownerlist:
                         continue
                     resource.owners.remove(user)
-                
-                html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
+                    html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
                                                                                                     'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.name))
+                    text_content=strip_tags(html_content)
+                    email_to = [user.email]
+                    email_from=request.user.email
+                    msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+                    logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
+                    logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
             for userid in ownerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.owners.filter(id__in=self.model):
@@ -471,8 +471,8 @@ class PermissionEditingView(generic.ListView):
                 msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
-                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.name))
+                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
+                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
             return redirect('/profile/my-resources/')
         
         
@@ -488,6 +488,7 @@ class PermissionEditingView(generic.ListView):
         context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
         context['query'] = self.query
+        context['query_pagination_string'] = ''
         return context
     
     
@@ -516,7 +517,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.email))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission for removed\n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission for removed\n" % (request.user.username,user.username))
             for userid in readerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.readers.filter(id__in=self.model):
@@ -532,25 +533,23 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
             if len(resource.owners.all())  > 1:
                 for user in resource.owners.filter(id__in=self.model):
                 
                     if user.id in ownerlist:
                         continue
                     resource.owners.remove(user)
-                
-                
-                html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
+                    html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
                                                                                                     'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.name))
+                    text_content=strip_tags(html_content)
+                    email_to = [user.email]
+                    email_from=request.user.email
+                    msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+                    logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
+                    logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
             for userid in ownerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.owners.filter(id__in=self.model):
@@ -569,8 +568,8 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
-                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.name))
+                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
+                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
             return redirect('/profile/my-resources/')
     def get(self,request,*args, **kwargs):
         if 'q' in self.request.GET and self.request.GET['q']:
@@ -584,6 +583,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
         context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
         context['query'] = self.query
+        context['query_pagination_string'] = 'q='+self.query+'&'
         return context
 
 
