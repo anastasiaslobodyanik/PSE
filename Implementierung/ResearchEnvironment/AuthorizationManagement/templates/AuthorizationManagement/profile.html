@@ -41,9 +41,7 @@
 				<p> For: {{access_request.resource.name}} </p>
 				<p> Description: {{access_request.description}} </p>
 				
-			    <button style=" margin-left:10px;">
 				<a href="#approve-request-{{access_request.pk}}" > accept </a>
-				</button>
 								
 				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
 					<div>
@@ -66,9 +64,7 @@
 					</div>
 				</div>
 
-				<button style=" margin-left:10px;">
-						<a href="#deny-request-{{access_request.pk}}" > deny </a>
-				</button>
+				<a href="#deny-request-{{access_request.pk}}" > deny </a>
 								
 				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
 					<div>
@@ -101,9 +97,7 @@
 				<p> For: {{deletionrequest.resource.name}} </p>
 				<p> Description: {{deletionrequest.description}} </p>
 				
-			    <button style=" margin-left:10px;">
 				<a href="#approve-request-{{deletionrequest.pk}}" > accept </a>
-				</button>
 								
 				<div id="approve-request-{{deletionrequest.pk}}" class="modalDialog">
 					<div>
@@ -126,9 +120,7 @@
 					</div>
 				</div>
 						
-				<button style=" margin-left:10px;">
 				<a href="#deny-request-{{deletionrequest.pk}}" > deny </a>
-				</button>
 								
 				<div id="deny-request-{{deletionrequest.pk}}" class="modalDialog">
 					<div>

@@ -8,20 +8,17 @@
 {% block styles %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />	
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
+	<link href="{% static 'AuthorizationManagement/css/resources-overview.css' %}" rel="stylesheet" type="text/css"/>	
 {% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
 
-<link href="../static/AuthorizationManagement/css/resources-overview.css" rel="stylesheet" type="text/css"/>
+
 
 
 
 <div class="search">
-=======
-	<h2>Resources Overview</h2>
->>>>>>> d709b931eb4d366a3b5bb33e4091d5f98542f762
 	<p>Which resource do you need?</p>
 	<form action="/resources-overview/search" method="get">
 		<input type="text" name="q" class="search-box">
@@ -59,36 +56,15 @@
 							{% endif %}
 							</p>
 							</div>
-
-
-
-<<<<<<< HEAD
-						</div>
-						{% load static %}			
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />	
-				
-	           {% if res in can_access %}
-					  
-					       <a href="../resources/{{res.pk}}" class="access-btn"download>Access</a>
-					  			    		
-=======
 						</div>		
-		
-	           {% if res in can_access %}
-				      <button style="margin-left:10px;"> 
-					       <a href="../resources/{{res.pk}}"download>access</a>
-					  </button> 			    		
+						
 				
-				{% elif is_admin %}
-					<button style="margin-left:10px;"> 
-					       <a href="../resources/{{res.pk}}"download>access</a>
-					  </button> 
->>>>>>> d709b931eb4d366a3b5bb33e4091d5f98542f762
+	           {% if res in can_access or is_admin %}
+					  
+					       <a href="../resources/{{res.pk}}" class="access-btn"download>Access</a>			    		
 			   {% elif res in requested_resources %}
 			   
-			   <button>
 				      <a href="#cancel-request-{{res.pk}}" > cancel request </a>
-					  </button>
 								
 						<div id="cancel-request-{{res.pk}}" class="modalDialog">
 							<div>
@@ -111,9 +87,7 @@
 			   	
 					
 				{% else %}
-					 <button>
 				      <a href="#send-request-{{res.pk}}" > send request </a>
-					  </button>
 								
 						<div id="send-request-{{res.pk}}" class="modalDialog">
 							<div>
@@ -140,14 +114,6 @@
 							  </form>
 							</div>
 						</div>
-<<<<<<< HEAD
-						
-						{% load static %}
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />
-
-=======
-						<br>
->>>>>>> d709b931eb4d366a3b5bb33e4091d5f98542f762
 			   {% endif %}
 			{% endfor %}
 			</div>

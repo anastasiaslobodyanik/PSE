@@ -10,10 +10,8 @@
 <ul>
 	<h3>My resources</h3>
 	{% for resource in resource_list %}
-	<p> <button  style="margin-left:10px; float:left;">
+	<p>
 		<a href="#{{resource.pk}}"> {{resource.name}} </a>
-	</button>
-
 		<div id="{{resource.pk}}" class="modalDialog">
 			<div>
 				<a href="" title="Close" class="close"> x </a>
@@ -23,25 +21,19 @@
 					<p><strong>CreationDate:</strong> {{resource.creationDate}}</p>
 					<p><strong>Description:</strong> {{resource.description}}</p>
 					<p>
-						<button style="margin-left:10px;">
 							<a href="../../../resources/{{resource.pk}}"download>access</a>
-						</button>
 					</p>
 			</div>
 		</div>
 
-	<button type="button" style="margin-left:10px; float: left;">
 		<a href="../../resources/{{resource.id}}"download>access</a>
-	</button>
 
 	<button style="margin-left:10px; float: left;" type="button" onclick="window.location.href='/profile/my-resources/{{resource.id}}-edit-users-permissions'">
 				edit permissions
 	</button>
 
 	{% if resource in deletion_requested %}
-	<button style="margin-left:10px; background-color:tomato;">
 				      <a href="#cancel-deletion-request-{{resource.pk}}" > cancel deletion request </a>
-					  </button>
 
 						<div id="cancel-deletion-request-{{resource.pk}}" class="modalDialog">
 							<div>
@@ -63,15 +55,10 @@
 						
 
 	{% else %}
-		{% if is_admin %}
-		
-		<button style="margin-left:10px;">
+		{% if is_admin %}	
 			<a href="#delete-resource-{{resource.pk}}" > delete </a>
-		</button>
 		{% else %}
-		<button style="margin-left:10px;">
 			<a href="#send-deletion-request-{{resource.pk}}" > delete </a>
-		</button>
 		{% endif %}
 		<div id="send-deletion-request-{{resource.pk}}" class="modalDialog">
 			<div>
