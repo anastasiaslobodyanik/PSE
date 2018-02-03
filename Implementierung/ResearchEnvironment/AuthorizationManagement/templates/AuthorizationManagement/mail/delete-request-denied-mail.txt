@@ -1,1 +1,0 @@
-{{user.username}} has denied your request to delete the "{{resource.name}}" resource

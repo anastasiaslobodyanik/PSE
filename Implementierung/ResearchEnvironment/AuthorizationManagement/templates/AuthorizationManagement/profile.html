@@ -13,9 +13,19 @@
 {% block body %}
 
 		<h2>Profile ({{user.username}})</h2>
-
-		
-  
+		<button onclick="showEditForm()"> edit </button>
+		<form action="/profile/edit-name/" id="editName" style="display:none;" method="post">
+		{% csrf_token %}
+			<input type=text placeholder="{{user.first_name}}" name="firstName" >
+			<input type=text name="lastName" placeholder="{{user.last_name}}">
+			<input type="submit" value="ok">
+		</form>
+		<script>
+			function showEditForm()
+			{
+				document.getElementById('editName').style.display="block" ;
+			}
+		</script>
 		<p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
 		<p><strong>E-mail:</strong> {{ user.email }}</p>
 		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
@@ -36,7 +46,7 @@
 	{% block requests_or_resources %}
 			
 			<h3>Access requests</h3>
-			{% for access_request in access_request_list %}
+			{% for access_request in accessrequest_list %}
 			    <p> From: {{access_request.sender.username}} </p>
 				<p> For: {{access_request.resource.name}} </p>
 				<p> Description: {{access_request.description}} </p>

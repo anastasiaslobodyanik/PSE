@@ -1,43 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime 
+from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail.message import EmailMessage
 import logging
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 
-# Create your models here.
 logger = logging.getLogger(__name__)
 class CustomUser(User):
     
     class Meta:
         proxy = True
-#    
-    def addResource(self):
-        new_resource = Resource.objects.create()
-
-        logger.info(self.username + 'created a new resource')
-        self.__class__ = Owner
-        self.save()
-        owner=self
-        new_resource.readers.add(owner)
-        new_resource.owners.add(owner)
    
 class Owner(CustomUser):
     
     class Meta:
         proxy = True
-    def giveAccessPermission(self, Resource, CustomUser):
-        Resource.readers.add(CustomUser)
-    def deleteAccessPermission(self, Resource, CustomUser):
-        Resource.readers.remove(CustomUser)
-    def allowOwnerPermission(self,Resource,CustomUser):
-        CustomUser.__class__=Owner
-        CustomUser.save()
-        owner = CustomUser
-        Resource.readers.add(owner)
-        Resource.owners.add(owner)
 
 class Resource(models.Model):
     type = models.CharField(max_length=50, default = 'default_type')
@@ -47,11 +26,6 @@ class Resource(models.Model):
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owners = models.ManyToManyField(Owner, related_name= 'owner')
     link = models.FileField(upload_to='')
-    
-    def hasAccessPermission(self,CustomUser):
-        self.readers.filter(id = CustomUser.id).exists()
-    def hasOwnerPermission(self,CustomUser):
-        self.owners.filter(id = CustomUser.id).exists()
     
 class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
@@ -63,11 +37,6 @@ class Request(models.Model):
         abstract = True
 
         unique_together=('sender','resource',)
-    
-    def deny(self):
-        pass
-    def accept(self):
-        pass
     
 class AccessRequest(Request):
     

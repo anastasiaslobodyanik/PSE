@@ -1,1 +1,0 @@
-{{user.username}} requested to delete the resource: "{{resource.name}}" 

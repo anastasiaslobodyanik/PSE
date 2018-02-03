@@ -126,7 +126,7 @@ class CancelDeletionRequestView(generic.View):
             logger.info("User %s tried to cancel a deletion request for non-existing resource \n" % (request.user.username))
             return redirect("/resources-overview")
 
-        if not res.owner.filter(id= request.user.id).exists() or request.user.is_staff or  not DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
+        if not res.owners.filter(id= request.user.id).exists() or request.user.is_staff or  not DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
             logger.info("User %s tried to cancel a deletion request for resource '%s' \n" % (request.user.username,res.name))
             return redirect("/resources-overview")
         
@@ -759,11 +759,9 @@ class AddNewResourceView(generic.View):
         args['form'] = form
         return render_to_response('AuthorizationManagement/add-new-resource.html', args)
 
-def permissionForChosenResourceView():
-    return
-
-
-def requestView():
-    return
-
-
+class EditNameView(generic.View):
+    def post(self, request):
+            request.user.first_name=request.POST['firstName']
+            request.user.last_name=request.POST['lastName']
+            request.user.save()
+            return redirect('/profile')
