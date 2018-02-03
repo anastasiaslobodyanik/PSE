@@ -26,11 +26,11 @@ body {
 	margin-right: 10px;
 }
  
- .nav{
+#main-nav{
  	list-style: none;
- }
+}
 
-.nav li {
+#main-nav li {
 	display: inline-block;
 }
 

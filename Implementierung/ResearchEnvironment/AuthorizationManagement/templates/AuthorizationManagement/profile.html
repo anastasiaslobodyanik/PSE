@@ -8,6 +8,7 @@
 	{% load static %}
 	<link href="{% static 'AuthorizationManagement/css/home.css' %}" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/profile.css' %}" />
 {% endblock %}
 
 {% block body %}
@@ -26,32 +27,34 @@
 				document.getElementById('editName').style.display="block" ;
 			}
 		</script>
-		<p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
-		<p><strong>E-mail:</strong> {{ user.email }}</p>
-		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
 		
-		<ul class="nav">
-			<li>
-				<div id="first">
-					<form action="/profile"><input type=submit value="Requests"></form>
-				</div>
-			</li>
-			<li>
-				<div id="second">
-					<form action="/profile/my-resources"><input type=submit value="My Resources"></form>
-				</div>
-			</li>
+		<div class="body">
+  
+		<p class="name"><strong>{{ user.first_name }} {{user.last_name}}</strong></p>
+		<p>({{user.username}})</p>
+
+		<ul class="profile-nav">
+			<li><a href="/profile/">Requests</a></li>
+				
+			<li><a href="/profile/my-resources">My Resources</a></li>
+				
 		<ul/>
-	
-	{% block requests_or_resources %}
+		</div>
+		
+		
+{% block requests_or_resources %}
+		
+			<div class="container">
 			
-			<h3>Access requests</h3>
 			{% for access_request in accessrequest_list %}
+			<div class="info">
 			    <p> From: {{access_request.sender.username}} </p>
 				<p> For: {{access_request.resource.name}} </p>
 				<p> Description: {{access_request.description}} </p>
-				
-				<a href="#approve-request-{{access_request.pk}}" > accept </a>
+				<p> Created on: {{access_request.creationDate}}
+			</div>	
+				<a href="#approve-request-{{access_request.pk}}" class="accept-btn"> Accept </a>
+
 								
 				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
 					<div>
@@ -74,7 +77,8 @@
 					</div>
 				</div>
 
-				<a href="#deny-request-{{access_request.pk}}" > deny </a>
+				<a href="#deny-request-{{access_request.pk}}" class="deny-btn"> Deny </a>
+
 								
 				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
 					<div>
@@ -155,7 +159,8 @@
 
             {% endfor %}
             {% endif %}
-
-	{% endblock %}
-		
+				
+	</div>
+	
+	{% endblock %}		
 {% endblock %}	
