@@ -19,8 +19,6 @@
 			<li><a {% block overview%}{% endblock %} href="/resources-overview/">Resources Overview</a></li>
 			{% if is_admin %}
 			    <li><a {% block resource-manager%}{% endblock %} href="/resource-manager/">Manage Resources</a></li>
-			{% endif %}
-			{% if is_superuser %}
 			    <li><a {% block user-manager%}{% endblock %} href="/user-manager/">Manage Users</a></li>
 			{% endif %}
 			<li><a {% block logout%}{% endblock %} href="/authentification/logout">Log out</a></li>

@@ -14,15 +14,15 @@
 
 }
 .search-btn {
-	background: #174e43;
+	background: #173e43;
 	height: 39px;
 	width: 70px;
 	font-size: 16px;
 	border: none;
-    color: #fae596;
+    color: white;
 }
 .search-btn:hover {
-	color: white;
+	color: #fae596;
 }
 .results {
 	grid-row: 1/2;
@@ -47,7 +47,7 @@
 	margin-top: 15px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	font-size: 17px;
+	font-size: 20px;
 	color: #173e43;
 }
 .pagination li {
@@ -70,15 +70,46 @@
 	padding: 15px 20px;
 	color: #174e43;
 }
+.resource-name:hover {
+	color: #3fb0ac;
+	border: 1px solid;
+}
 
 .access-btn {
-	grid-column: 3/4;
+	grid-column: 3/4;	
+	font-size: 17px;
 	background: #3fb0ac;
 	text-decoration: none;
 	text-align: center;
-	padding: 15px 20px;
-	color: #173e43;
+	padding: 1.5vw 20px;
+	color: white;
 }
 .access-btn:hover {
+	color: #173e43;
+	background: #fae596;
+}
+.cancel-btn {
+	font-size: 17px;
+	border: 1px solid;
+	text-decoration: none;
+	text-align: center;
+	padding: 1.4vw 20px;
+	color: #b03f41;
+}
+.cancel-btn:hover {
+	color: #b03f41;
+	background: #fae596;
+}
+
+.send-btn {
+	font-size: 17px;
+	background: #173e43;
+	text-decoration: none;
+	text-align: center;
+	padding: 1.4vw 20px;
 	color: white;
+}
+.send-btn:hover {
+	color: #173e43;
+	background: #fae596;
 }
