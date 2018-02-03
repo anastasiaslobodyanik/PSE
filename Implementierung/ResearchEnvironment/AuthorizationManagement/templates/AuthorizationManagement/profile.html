@@ -13,9 +13,21 @@
 
 {% block body %}
 
-
-	
-
+		<h2>Profile ({{user.username}})</h2>
+		<button onclick="showEditForm()"> edit </button>
+		<form action="/profile/edit-name/" id="editName" style="display:none;" method="post">
+		{% csrf_token %}
+			<input type=text placeholder="{{user.first_name}}" name="firstName" >
+			<input type=text name="lastName" placeholder="{{user.last_name}}">
+			<input type="submit" value="ok">
+		</form>
+		<script>
+			function showEditForm()
+			{
+				document.getElementById('editName').style.display="block" ;
+			}
+		</script>
+		
 		<div class="body">
   
 		<p class="name"><strong>{{ user.first_name }} {{user.last_name}}</strong></p>
@@ -34,7 +46,6 @@
 		
 			<div class="container">
 			
-			
 			{% for access_request in accessrequest_list %}
 			<div class="info">
 			    <p> From: {{access_request.sender.username}} </p>
@@ -43,6 +54,7 @@
 				<p> Created on: {{access_request.creationDate}}
 			</div>	
 				<a href="#approve-request-{{access_request.pk}}" class="accept-btn"> Accept </a>
+
 								
 				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
 					<div>
@@ -66,6 +78,7 @@
 				</div>
 
 				<a href="#deny-request-{{access_request.pk}}" class="deny-btn"> Deny </a>
+
 								
 				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
 					<div>
@@ -98,9 +111,7 @@
 				<p> For: {{deletionrequest.resource.name}} </p>
 				<p> Description: {{deletionrequest.description}} </p>
 				
-			    <button style=" margin-left:10px;">
 				<a href="#approve-request-{{deletionrequest.pk}}" > accept </a>
-				</button>
 								
 				<div id="approve-request-{{deletionrequest.pk}}" class="modalDialog">
 					<div>
@@ -123,9 +134,7 @@
 					</div>
 				</div>
 						
-				<button style=" margin-left:10px;">
 				<a href="#deny-request-{{deletionrequest.pk}}" > deny </a>
-				</button>
 								
 				<div id="deny-request-{{deletionrequest.pk}}" class="modalDialog">
 					<div>

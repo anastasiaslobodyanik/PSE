@@ -1,2 +1,0 @@
-{{user.username}} requested for permission to access your "{{resource.name}}" resource
-He/she left the message: {{request.description}}
