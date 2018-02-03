@@ -130,7 +130,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'resources')
 MEDIA_URL ='/resources/'
 LOGIN_URL = '/authentification/login'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
-
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = 'YOUR EMAIL'
+#EMAIL_HOST_PASSWORD = 'PASSWORD'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

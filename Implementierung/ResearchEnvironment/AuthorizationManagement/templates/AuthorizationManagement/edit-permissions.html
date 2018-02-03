@@ -74,7 +74,7 @@
 	{% csrf_token %}
 	{% for user in readers %}
 	{% if user in owners %}
-	{% if not user.is_staff %}
+	
   	<div>
     		<h3 >{{user.username}}:</h3>
   	</div>
@@ -86,7 +86,7 @@
     	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
     	<label  >owner</label>
     	
-    	{% endif %}
+    
     	</p>
     	{% else %}
     	<div>
