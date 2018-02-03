@@ -13,24 +13,24 @@
 
 {% block body %}
 
-		<h2>Profile ({{user.username}})</h2>
-		<button onclick="showEditForm()"> edit </button>
-		<form action="/profile/edit-name/" id="editName" style="display:none;" method="post">
-		{% csrf_token %}
-			<input type=text placeholder="{{user.first_name}}" name="firstName" >
-			<input type=text name="lastName" placeholder="{{user.last_name}}">
-			<input type="submit" value="ok">
-		</form>
 		<script>
 			function showEditForm()
 			{
-				document.getElementById('editName').style.display="block" ;
+				document.getElementById('editName').style.display="block";
+				document.getElementById('name').style.display="none";
 			}
 		</script>
 		
 		<div class="body">
-  
-		<p class="name"><strong>{{ user.first_name }} {{user.last_name}}</strong></p>
+  	
+		<button onclick="showEditForm()" class="name" id="name"><strong>{{ user.first_name }} {{user.last_name}}</strong></button>
+		<form action="/profile/edit-name/" id="editName" style="display:none;" method="post">
+		{% csrf_token %}
+			<input type=text placeholder="{{user.first_name}}" name="firstName">
+			<input type=text placeholder="{{user.last_name}}" name="lastName">
+			<input type="submit" value="OK">
+		</form>
+		
 		<p>({{user.username}})</p>
 
 		<ul class="profile-nav">

@@ -7,7 +7,15 @@
 }
 .name {
 	font-size: 30px;
+	border: none;
+	background: none;
+	text-decoration: none;
 }
+.name:hover {
+	color: #3fb0ac;
+	cursor: text;
+}
+
 .profile-nav{
  	list-style: none;
 	margin-top: 40px;

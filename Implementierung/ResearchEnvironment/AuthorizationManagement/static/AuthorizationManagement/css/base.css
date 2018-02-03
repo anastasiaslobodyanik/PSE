@@ -22,7 +22,7 @@ body {
 
 #main-nav { 
 	float: right;
-	margin-top: 15px;
+	margin-top: 8px;
 	margin-right: 10px;
 }
  
@@ -46,6 +46,11 @@ body {
 #main-nav li a:hover {
 	background-color: #fae596;
 	color: #173e43;
+}
+
+.notification {
+	font-size: 16px;
+	color: #fae596;
 }
 
 .active {
