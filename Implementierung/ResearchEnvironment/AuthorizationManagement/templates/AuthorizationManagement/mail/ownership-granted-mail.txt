@@ -1,0 +1,1 @@
+{{user.username}} granted you ownership of the resource: "{{resource.name}}"

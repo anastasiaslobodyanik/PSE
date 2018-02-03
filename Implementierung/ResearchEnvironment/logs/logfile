@@ -1,0 +1,115 @@
+[02/Feb/2018 21:15:37] INFO [AuthorizationManagement.views:124] Deletion request for 'resource2' canceled by owner1 
+
+[02/Feb/2018 21:15:37] INFO [AuthorizationManagement.views:125] An email was sent to the Staff members from owner1, Object: Cancel the Deletion Request for 'resource2' 
+
+[02/Feb/2018 21:15:45] INFO [AuthorizationManagement.views:291] User owner1 accessed 'resource2' with id = 2 
+
+[02/Feb/2018 21:15:55] INFO [AuthorizationManagement.views:101] Deletion request for 'resource2' resource sent by owner1 
+
+[02/Feb/2018 21:15:55] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from owner1, Object: Deletion Request for 'resource2' 
+
+[02/Feb/2018 21:16:04] INFO [AuthorizationManagement.views:124] Deletion request for 'resource2' canceled by owner1 
+
+[02/Feb/2018 21:16:04] INFO [AuthorizationManagement.views:125] An email was sent to the Staff members from owner1, Object: Cancel the Deletion Request for 'resource2' 
+
+[02/Feb/2018 21:27:43] INFO [AuthorizationManagement.views:101] Deletion request for 'resource2' resource sent by owner1 
+
+[02/Feb/2018 21:27:43] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from owner1, Object: Deletion Request for 'resource2' 
+
+[02/Feb/2018 21:30:10] INFO [AuthorizationManagement.views:124] Deletion request for 'resource2' canceled by owner1 
+
+[02/Feb/2018 21:30:10] INFO [AuthorizationManagement.views:125] An email was sent to the Staff members from owner1, Object: Cancel the Deletion Request for 'resource2' 
+
+[02/Feb/2018 21:30:51] INFO [AuthorizationManagement.views:101] Deletion request for 'resource2' resource sent by owner1 
+
+[02/Feb/2018 21:30:51] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from owner1, Object: Deletion Request for 'resource2' 
+
+[02/Feb/2018 23:35:10] INFO [AuthorizationManagement.views:291] User owner1 accessed 'resource2' with id = 2 
+
+[02/Feb/2018 23:39:45] INFO [AuthorizationManagement.views:291] User reader1 accessed 'resource1' with id = 1 
+
+[02/Feb/2018 23:41:27] INFO [AuthorizationManagement.views:232] Try to inconsistently send  access request for resource 'paper' with id '4' sent by reader1 
+
+[02/Feb/2018 23:41:34] INFO [AuthorizationManagement.views:232] Try to inconsistently send  access request for resource 'paper' with id '4' sent by reader1 
+
+[03/Feb/2018 00:09:40] INFO [AuthorizationManagement.views:101] Deletion request for 'paper' resource sent by reader2 
+
+[03/Feb/2018 00:09:40] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from reader2, Object: Deletion Request for 'paper' 
+
+[03/Feb/2018 00:09:48] INFO [AuthorizationManagement.views:124] Deletion request for 'paper' canceled by reader2 
+
+[03/Feb/2018 00:09:48] INFO [AuthorizationManagement.views:125] An email was sent to the Staff members from reader2, Object: Cancel the Deletion Request for 'paper' 
+
+[03/Feb/2018 00:10:27] INFO [AuthorizationManagement.views:101] Deletion request for 'paper' resource sent by reader2 
+
+[03/Feb/2018 00:10:27] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from reader2, Object: Deletion Request for 'paper' 
+
+[03/Feb/2018 00:11:19] INFO [AuthorizationManagement.views:124] Deletion request for 'paper' canceled by reader2 
+
+[03/Feb/2018 00:11:19] INFO [AuthorizationManagement.views:125] An email was sent to the Staff members from reader2, Object: Cancel the Deletion Request for 'paper' 
+
+[03/Feb/2018 00:11:21] INFO [AuthorizationManagement.views:101] Deletion request for 'paper' resource sent by reader2 
+
+[03/Feb/2018 00:11:21] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from reader2, Object: Deletion Request for 'paper' 
+
+[03/Feb/2018 00:11:44] INFO [AuthorizationManagement.views:124] Deletion request for 'paper' canceled by reader2 
+
+[03/Feb/2018 00:11:44] INFO [AuthorizationManagement.views:125] An email was sent to the Staff members from reader2, Object: Cancel the Deletion Request for 'paper' 
+
+[03/Feb/2018 00:11:46] INFO [AuthorizationManagement.views:101] Deletion request for 'paper' resource sent by reader2 
+
+[03/Feb/2018 00:11:46] INFO [AuthorizationManagement.views:102] An email was sent to the Staff members from reader2, Object: Deletion Request for 'paper' 
+
+[03/Feb/2018 02:06:55] INFO [AuthorizationManagement.views:293] Access request for resource 'resource1' with id '1' sent by reader2 
+
+[03/Feb/2018 02:06:55] INFO [AuthorizationManagement.views:294] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
+
+[03/Feb/2018 02:06:58] INFO [AuthorizationManagement.views:328] Access request for 'resource1' canceled by reader2 
+
+[03/Feb/2018 02:06:58] INFO [AuthorizationManagement.views:329] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
+
+[03/Feb/2018 02:07:03] INFO [AuthorizationManagement.views:348] User reader2 accessed 'resource2' with id = 2 
+
+[03/Feb/2018 02:07:06] INFO [AuthorizationManagement.views:348] User reader2 accessed 'paper' with id = 4 
+
+[03/Feb/2018 02:09:48] INFO [AuthorizationManagement.views:596] Request from reader2 to delete 'paper' accepted by reader1 
+
+[03/Feb/2018 02:09:48] INFO [AuthorizationManagement.views:597] An email was sent from reader1 to reader2, Object: Deletion Request for 'paper' accepted 
+
+[03/Feb/2018 02:12:37] INFO [AuthorizationManagement.views:641] Request from owner1 to delete 'resource2' denied by reader1 
+
+[03/Feb/2018 02:12:37] INFO [AuthorizationManagement.views:642] An email was sent from reader1 to owner1, Object: Deletion Request for 'resource2' denied
+
+[03/Feb/2018 02:12:38] INFO [AuthorizationManagement.views:641] Request from owner1 to delete 'resource2' denied by reader1 
+
+[03/Feb/2018 02:12:38] INFO [AuthorizationManagement.views:642] An email was sent from reader1 to owner1, Object: Deletion Request for 'resource2' denied
+
+[03/Feb/2018 02:15:46] INFO [AuthorizationManagement.views:348] User reader1 accessed 'resource1' with id = 1 
+
+[03/Feb/2018 03:20:23] INFO [AuthorizationManagement.views:703] User admin created the 'default_name' Resource 
+
+[03/Feb/2018 03:23:34] INFO [AuthorizationManagement.views:703] User admin created the 'awd' Resource 
+
+[03/Feb/2018 03:24:31] INFO [AuthorizationManagement.views:348] User admin accessed 'awd' with id = 9 
+
+[03/Feb/2018 03:28:44] INFO [AuthorizationManagement.views:702] User admin created the 'a' Resource 
+
+[03/Feb/2018 03:28:50] INFO [AuthorizationManagement.views:348] User admin accessed 'a' with id = 10 
+
+[03/Feb/2018 03:36:06] INFO [AuthorizationManagement.views:703] User reader1 created the 'default_name' Resource 
+
+[03/Feb/2018 03:36:29] INFO [AuthorizationManagement.views:589] User reader1 deleted resource default_name 
+[03/Feb/2018 03:38:32] INFO [AuthorizationManagement.views:703] User admin created the 'default_name' Resource 
+
+[03/Feb/2018 03:38:40] INFO [AuthorizationManagement.views:589] User admin deleted resource default_name 
+[03/Feb/2018 03:38:40] INFO [AuthorizationManagement.views:590] An email was sent to all 'default_name' owners, Object: 'default_name' is deleted 
+[03/Feb/2018 04:00:37] INFO [AuthorizationManagement.views:353] User reader1 accessed 'default_name' with id = 11 
+
+[03/Feb/2018 04:02:44] INFO [AuthorizationManagement.views:353] User admin accessed 'default_name' with id = 11 
+
+[03/Feb/2018 04:03:20] INFO [AuthorizationManagement.views:708] User admin created the 'default_name' Resource 
+
+[03/Feb/2018 04:05:29] INFO [AuthorizationManagement.views:353] User reader1 accessed 'default_name' with id = 13 
+
+[03/Feb/2018 04:05:51] INFO [AuthorizationManagement.views:594] User admin deleted resource default_name 
+[03/Feb/2018 04:05:51] INFO [AuthorizationManagement.views:595] An email was sent to all 'default_name' owners, Object: 'default_name' is deleted 

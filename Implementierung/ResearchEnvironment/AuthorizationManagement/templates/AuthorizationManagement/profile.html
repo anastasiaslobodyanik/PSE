@@ -1,27 +1,18 @@
 {% extends "AuthorizationManagement/base.html" %}
 
-{% block profil%}
+{% block profile %}
 	class="active";
 {% endblock %}
 
+{% block styles %}
+	{% load static %}
+	<link href="{% static 'AuthorizationManagement/css/home.css' %}" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
+{% endblock %}
 
 {% block body %}
 
-<style>
-#first {
-float:left;
-}
-#second {
-float:left;
-}
-#third {
-float:left;
-}
-</style>
-<form action=/authentification/logout/>
-			<input type=submit value="Logout">
-		</form>	
-		<h2>Profile ({{user.username}})</h1>
+		<h2>Profile ({{user.username}})</h2>
 
 		
   
@@ -29,35 +20,35 @@ float:left;
 		<p><strong>E-mail:</strong> {{ user.email }}</p>
 		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
 		
-		<div id="first">
-		<form action="/profile">
-			<input type=submit value="Requests">
-		</form>
-		</div>
-
-        <div id="second">
-		<form action="/profile/my-resources">
-			<input type=submit value="My Resources">
-		</form>
-		</div> <br/>
+		<ul class="nav">
+			<li>
+				<div id="first">
+					<form action="/profile"><input type=submit value="Requests"></form>
+				</div>
+			</li>
+			<li>
+				<div id="second">
+					<form action="/profile/my-resources"><input type=submit value="My Resources"></form>
+				</div>
+			</li>
+		<ul/>
 	
-	{% block profile %}
-			{% if is_admin %}
+	{% block requests_or_resources %}
+			
 			<h3>Access requests</h3>
-			{% endif %}
-			{% for accessrequest in accessrequest_list %}
-			    <p> From: {{accessrequest.sender.username}} </p>
-				<p> For: {{accessrequest.resource.name}} </p>
-				<p> Description: {{accessrequest.description}} </p>
+			{% for access_request in access_request_list %}
+			    <p> From: {{access_request.sender.username}} </p>
+				<p> For: {{access_request.resource.name}} </p>
+				<p> Description: {{access_request.description}} </p>
 				
 			    <button style=" margin-left:10px;">
-				<a href="#approve-request-{{accessrequest.pk}}" > accept </a>
+				<a href="#approve-request-{{access_request.pk}}" > accept </a>
 				</button>
 								
-				<div id="approve-request-{{accessrequest.pk}}" class="modalDialog">
+				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
 					<div>
 						<a href="" title="Close" class="close"> x </a>
-						<form action="/approve-access-request/{{accessrequest.pk}}" method="post">
+						<form action="/approve-access-request/{{access_request.pk}}" method="post">
 						{% csrf_token %}
 							
 							<div class="row">
@@ -65,7 +56,7 @@ float:left;
                                 <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
                             </div>
 							<div class="row">
-								<p> Are you sure you want to approve the access request for {{accessrequest.resource.name}}? </p>
+								<p> Are you sure you want to approve the access request for {{access_request.resource.name}}? </p>
 								<input id="yes" type="submit" value="yes, allow permissions">
 								<button>
 									<a href="" title="close" class="close"> close </a>
@@ -74,15 +65,15 @@ float:left;
 						</form>
 					</div>
 				</div>
-						
+
 				<button style=" margin-left:10px;">
-				<a href="#deny-request-{{accessrequest.pk}}" > deny </a>
+						<a href="#deny-request-{{access_request.pk}}" > deny </a>
 				</button>
 								
-				<div id="deny-request-{{accessrequest.pk}}" class="modalDialog">
+				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
 					<div>
 						<a href="" title="Close" class="close"> x </a>
-						<form action="/deny-access-request/{{accessrequest.pk}}" method="post">
+						<form action="/deny-access-request/{{access_request.pk}}" method="post">
 						{% csrf_token %}
 							
 							<div class="row">									
@@ -90,7 +81,7 @@ float:left;
                                 <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
                             </div>
 							<div class "row">
-								<p> Are you sure you want to deny the access request for {{accessrequest.resource.name}}? </p>
+								<p> Are you sure you want to deny the access request for {{access_request.resource.name}}? </p>
 								<input id="yes" type="submit" value="yes, deny permission">
 								<button>
 									<a href="" title="close" class="close"> close </a>
@@ -99,8 +90,7 @@ float:left;
 						</form>
 					</div>
 				</div>
-				{% load static %}
-				<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/handle_req.css' %}" />
+
 
             {% endfor %}
             
@@ -160,8 +150,6 @@ float:left;
 						</form>
 					</div>
 				</div>
-				{% load static %}
-				<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/handle_req.css' %}" />
 
             {% endfor %}
             {% endif %}

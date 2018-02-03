@@ -1,5 +1,12 @@
 {% extends "AuthorizationManagement/profile.html" %}
-{% block profile %}
+
+{% block styles %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'AuthorizationManagement/css/info.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
+{% endblock %}
+
+{% block requests_or_resources %}
 <ul>
 	<h3>My resources</h3>
 	{% for resource in resource_list %}
@@ -22,9 +29,6 @@
 					</p>
 			</div>
 		</div>
-
-	{% load static %}
-	<link rel="stylesheet" href="{% static 'AuthorizationManagement/css/info.css' %}" />
 
 	<button type="button" style="margin-left:10px; float: left;">
 		<a href="../../resources/{{resource.id}}"download>access</a>
@@ -56,13 +60,19 @@
 							</div>
 						</div>
 						<br>
-						{% load static %}
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/cancel_req.css' %}" />
+						
 
 	{% else %}
-	<button style="margin-left:10px;">
-		<a href="#send-deletion-request-{{resource.pk}}" > delete </a>
-	</button>
+		{% if is_admin %}
+		
+		<button style="margin-left:10px;">
+			<a href="#delete-resource-{{resource.pk}}" > delete </a>
+		</button>
+		{% else %}
+		<button style="margin-left:10px;">
+			<a href="#send-deletion-request-{{resource.pk}}" > delete </a>
+		</button>
+		{% endif %}
 		<div id="send-deletion-request-{{resource.pk}}" class="modalDialog">
 			<div>
 				<a href="" title="Close" class="close"> x </a>
@@ -83,9 +93,27 @@
 					</form>
 			</div>
 		</div>
+		<div id="delete-resource-{{resource.pk}}" class="modalDialog">
+			<div>
+				<a href="" title="Close" class="close"> x </a>
+					<form action="/delete-resource/{{resource.id}}" method="post">
+						{% csrf_token %}
+						    <div class="row">
+								<label for="desc">Description: </label><br><br>
+                                      <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+							</div>
+
+							<div class = "row">
+								<p> Are you sure you want to to delete the resource {{resource.name}}?</p>
+								<input id="send" type="submit" value="yes">
+							<button>
+								<a href="" title="Close" class="test"> Close </a>
+							</button>
+							</div>
+					</form>
+			</div>
+		</div>
 	<br>
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />
 	{% endif %}
 	</p>
     {% endfor %}

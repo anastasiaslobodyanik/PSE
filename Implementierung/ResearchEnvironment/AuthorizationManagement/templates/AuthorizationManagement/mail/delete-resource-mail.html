@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Access Permission</title>
+    <title>Resource Deleted</title>
 </head>
 <body>
 	<div >
 		<h1>Hello!</h1>
-		<p>{{user.username}} requested for permission to access your resource: {{resource.name}}</p>
+		<p>The admin {{user.username}} deleted the resource: <b>{{resource.name}}</b></p>
 		{% if message %}
 			He left the following message: {{message}}
 		{% endif %}

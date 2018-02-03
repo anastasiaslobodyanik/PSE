@@ -1,12 +1,15 @@
 {% extends "AuthorizationManagement/base.html" %}
 
+{% block styles %}
+	{% load static %}
+	<link href="{% static 'AuthorizationManagement/css/home.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
 	{% block home%}
 		class="active";
 	{% endblock %}
 
 	{%block body%}
-	
-	<link href="../static/AuthorizationManagement/css/home.css" rel="stylesheet" type="text/css"/>
 	
 	<div class="home">
 		<p>	Homepage eines PSE Projekts... </p>

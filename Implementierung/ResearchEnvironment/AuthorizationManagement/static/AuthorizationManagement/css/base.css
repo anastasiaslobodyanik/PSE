@@ -20,18 +20,21 @@ body {
 	float: left;
 }
 
-.main-nav { 
+#main-nav { 
 	float: right;
-	list-style: none;
 	margin-top: 15px;
 	margin-right: 10px;
 }
  
-.main-nav li {
+ .nav{
+ 	list-style: none;
+ }
+
+.nav li {
 	display: inline-block;
 }
 
-.main-nav li a {
+#main-nav li a {
 	color: white;
 	text-decoration: none;
 	padding: 5px 20px;
@@ -40,7 +43,7 @@ body {
 	text-transform: uppercase;
 }
 
-.main-nav li a:hover {
+#main-nav li a:hover {
 	background-color: #fae596;
 	color: #173e43;
 }

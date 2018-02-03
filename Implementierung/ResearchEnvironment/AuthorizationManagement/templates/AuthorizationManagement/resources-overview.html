@@ -5,10 +5,13 @@
 {% endblock %}
 
 
+{% block styles %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />	
+{% endblock %}
+
 {% block body %}
-<form action=/authentification/logout/>
-			<input type=submit value="Logout">
-		</form>	
 	<h2>Resources Overview</h2>
 	<p>Which resource do you need?</p>
 	<form action="/resources-overview/search" method="get">
@@ -49,15 +52,17 @@
 
 
 
-						</div>
-						{% load static %}			
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />	
+						</div>		
 		
 	           {% if res in can_access %}
 				      <button style="margin-left:10px;"> 
 					       <a href="../resources/{{res.pk}}"download>access</a>
 					  </button> 			    		
 				
+				{% elif is_admin %}
+					<button style="margin-left:10px;"> 
+					       <a href="../resources/{{res.pk}}"download>access</a>
+					  </button> 
 			   {% elif res in requested_resources %}
 			   
 			   <button style="float:left; margin-left:10px; background-color:tomato;">
@@ -80,9 +85,8 @@
 							  </form>
 							</div>
 						</div>
-						<br>
-						{% load static %}			
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/cancel_req.css' %}" />	
+						<br>	
+						
 			   	
 					
 				{% else %}
@@ -116,9 +120,6 @@
 							</div>
 						</div>
 						<br>
-						{% load static %}
-						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />
-
 			   {% endif %}
                </p>
       {% endfor %}

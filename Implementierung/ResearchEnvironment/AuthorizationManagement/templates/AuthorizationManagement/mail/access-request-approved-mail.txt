@@ -1,0 +1,1 @@
+{{user.username}} has accepted your request for permission to access "{{resource.name}}" resource
