@@ -1,0 +1,1 @@
+{{user.username}} deleted the resource: "{{resource.name}}"

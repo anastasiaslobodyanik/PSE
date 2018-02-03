@@ -1,0 +1,1 @@
+The admin {{user.username}} deleted the resource: "{{resource.name}}"

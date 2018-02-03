@@ -18,22 +18,18 @@ urlpatterns = [
     re_path(r'^profile/$', ProfileView.as_view(), name = 'profile'),
     re_path(r'^profile/my-resources/$', MyResourcesView.as_view(), name = 'my resources' ),
     re_path(r'^profile/my-resources/(?P<resourceid>\d+)-edit-users-permissions/$', PermissionEditingView.as_view(), name='edit permissions'),
-
     re_path(r'^profile/my-resources/(?P<resourceid>\d+)-edit-users-permissions/search$', PermissionEditingViewSearch.as_view(), name='edit permissions searching for user'),
-    
-
-    re_path(r'^profile/deletion-requests/$', DeletionRequestsView.as_view(), name='deletion-requests'),
     re_path(r'^profile/my-resources/add-new-resource/$', AddNewResourceView.as_view(), name='add-new-resource'),
 
 
     # re_path(r'^profile/handle/$', views.ChosenRequestView.as_view(), name = 'handle request'),
 
 
-    re_path(r'^approve-access-request/(?P<resourceid>\d+)$', ApproveAccessRequest.as_view(), name='approve access request'),
-    re_path(r'^deny-access-request/(?P<resourceid>\d+)$', DenyAccessRequest.as_view(), name='deny access request'),
+    re_path(r'^approve-access-request/(?P<requestid>\d+)$', ApproveAccessRequest.as_view(), name='approve access request'),
+    re_path(r'^deny-access-request/(?P<requestid>\d+)$', DenyAccessRequest.as_view(), name='deny access request'),
 
-    re_path(r'^approve-deletion-request/\d*$', ApproveDeletionRequest.as_view(), name='approve deletion request'),
-    re_path(r'^deny-deletion-request/\d*$', DenyDeletionRequest.as_view(), name='deny deletion request'),
+    re_path(r'^approve-deletion-request/(?P<requestid>\d+)*$', ApproveDeletionRequest.as_view(), name='approve deletion request'),
+    re_path(r'^deny-deletion-request/(?P<requestid>\d+)$', DenyDeletionRequest.as_view(), name='deny deletion request'),
 
     #     re_path(r'^profile/resources/add_new_resource/$', views.index),
     re_path(r'^send-deletion-request/(?P<resourceid>\d+)$', SendDeletionRequestView.as_view(), name='send delete request'),
@@ -60,9 +56,10 @@ urlpatterns = [
     re_path(r'^resources/(?P<resourceid>\d+)$', OpenResourceView.as_view(), name='open resources'),
     re_path(r'^send-access-request/(?P<resourceid>\d+)$', SendAccessRequestView.as_view(), name='send-access-request'),
     re_path(r'^cancel-access-request/(?P<resourceid>\d+)$', CancelAccessRequest.as_view(), name='cancel-access-request'),
-      
+    
 #     re_path(r'^resources_overview/(?P<resourceID>\w+)_send_request/$', views.foo),
 #        
 #     re_path(r'^(?P<resourceID>\w+)/$', views.foo),
+    re_path(r'^delete-resource/(?P<resourceid>\d+)*$', DeleteResourceView.as_view(), name='delete resource'),
      
 ]

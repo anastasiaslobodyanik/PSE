@@ -2,22 +2,25 @@
 <html>
 <head>
     <title>Authorization Management</title>
-	<link href="../static/AuthorizationManagement/css/base.css" rel="stylesheet" type="text/css"/>
-
+    {% load static %}
+	<link href="{% static 'AuthorizationManagement/css/base.css' %}" rel="stylesheet" type="text/css"/>
+	{% block styles %}{% endblock %}
 </head>
 <body>
 	<header>
 	<div class "row">
 		<div class="logo">
-			<img src="../static/AuthorizationManagement/images/logo.png">
+			<img src="{% static 'AuthorizationManagement/images/logo.png' %}">
 		</div>	
-		<ul class="main-nav">
+		<ul id="main-nav" class="nav">
 						
 			<li><a {% block home%}{% endblock %} href="/">Home</a></li>
-			<li><a {% block profil%}{% endblock %} href="/profile/">Profile</a></li>
+			<li><a {% block profile%}{% endblock %} href="/profile/">Profile</a></li>
 			<li><a {% block overview%}{% endblock %} href="/resources-overview/">Resources Overview</a></li>
 			{% if is_admin %}
 			    <li><a {% block resource-manager%}{% endblock %} href="/resource-manager/">Manage Resources</a></li>
+			{% endif %}
+			{% if is_superuser %}
 			    <li><a {% block user-manager%}{% endblock %} href="/user-manager/">Manage Users</a></li>
 			{% endif %}
 			<li><a {% block logout%}{% endblock %} href="/authentification/logout">Log out</a></li>
