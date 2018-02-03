@@ -6,30 +6,33 @@
 
 
 {% block body %}
-<form action=/authentification/logout/>
-			<input type=submit value="Logout">
-		</form>	
-	<h2>Resources Overview</h2>
+
+<link href="../static/AuthorizationManagement/css/resources-overview.css" rel="stylesheet" type="text/css"/>
+
+
+
+<div class="search">
 	<p>Which resource do you need?</p>
 	<form action="/resources-overview/search" method="get">
-		<input type="text" name="q">
-		<input type="submit" value="Search">
-	</form>
-
-	{% if query %}
-		<p>You searched for: <strong>{{ query }}</strong></p>   
-    {% endif %}           
-        
+		<input type="text" name="q" class="search-box">
+		<input type="submit" value="Search" class="search-btn">
+	</form><br>
+     
+        <div class="container">
 	{% if resources_list %}
+	
+			
+			<div class="results">
+			
+			{% if query %}
+				<p>You searched for: <strong>{{ query }}</strong></p>   
+			{% endif %}    
 			{% if query %}
 		      <p>Found {{paginator.count }} resource{{ paginator.count|pluralize }}.</p>
-  
-    		{% endif %}
+			{% endif %}
+	</div>
 	        {% for res in resources_list %}
-		            <p>
-					<button style="margin-left:10px; float:left;"> 
-					<a href="#{{res.pk}}"> {{res.name}} </a>
-					</button>			
+					<a href="#{{res.pk}}" class="resource-name"> {{res.name}} </a>
 						<div id="{{res.pk}}" class="modalDialog">
 							<div>
 							<a href="" title="Close" class="close"> x </a>
@@ -40,7 +43,7 @@
 							<p><strong>Description:</strong> {{res.description}}</p>
 							<p>
 							{% if res in can_access %}
-				      		<button style="margin-left:10px;">
+				      		<button>
 					       		<a href="../../resources/{{res.pk}}"download>access</a>
 					  		</button>
 							{% endif %}
@@ -52,15 +55,14 @@
 						</div>
 						{% load static %}			
 						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/info.css' %}" />	
-		
-	           {% if res in can_access %}
-				      <button style="margin-left:10px;"> 
-					       <a href="../resources/{{res.pk}}"download>access</a>
-					  </button> 			    		
 				
+	           {% if res in can_access %}
+					  
+					       <a href="../resources/{{res.pk}}" class="access-btn"download>Access</a>
+					  			    		
 			   {% elif res in requested_resources %}
 			   
-			   <button style="float:left; margin-left:10px; background-color:tomato;">
+			   <button>
 				      <a href="#cancel-request-{{res.pk}}" > cancel request </a>
 					  </button>
 								
@@ -86,7 +88,7 @@
 			   	
 					
 				{% else %}
-					 <button style="float:left; margin-left:10px;">
+					 <button>
 				      <a href="#send-request-{{res.pk}}" > send request </a>
 					  </button>
 								
@@ -115,13 +117,14 @@
 							  </form>
 							</div>
 						</div>
-						<br>
+						
 						{% load static %}
 						<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/send_req.css' %}" />
 
 			   {% endif %}
-               </p>
-      {% endfor %}
+			{% endfor %}
+			</div>
+ </div> 	  
 
 {# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
 
@@ -134,7 +137,7 @@
     {% endif %}
     {% for i in paginator.page_range %}
       {% if page_obj.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
       {% else %}
         <li><a href="?{{query_pagination_string}}page={{ i }}">{{ i }}</a></li>
       {% endif %}
@@ -147,6 +150,6 @@
   </ul>
 {% endif %}
 {% else %}
-    <p>No Resources matched your search criteria.</p>
+    <p class="no-results">No resources matched your search criteria.</p>
 {% endif %}
 {% endblock %}

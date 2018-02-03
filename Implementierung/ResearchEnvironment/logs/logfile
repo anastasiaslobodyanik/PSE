@@ -140,3 +140,9 @@
 
 [01/Feb/2018 08:36:23] INFO [AuthorizationManagement.views:107] Deletion request for 'resource2' canceled by owner1 
 
+[03/Feb/2018 14:39:07] INFO [AuthorizationManagement.views:529] User admin created the 'default_name' Resource 
+
+[03/Feb/2018 14:40:08] INFO [AuthorizationManagement.views:529] User admin created the 'test2' Resource 
+
+[03/Feb/2018 16:21:36] INFO [AuthorizationManagement.views:234] Access request for resource 'resource1' with id '1' sent by reader2 
+

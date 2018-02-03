@@ -17,7 +17,6 @@ body {
 	color: #3fb0ac; /* light-blue */
 	text-decoration: none;
 	padding: 5px 20px;
-	
 	font-size: 30px;	
 }
 
@@ -45,11 +44,20 @@ body {
 	
 }
 
-.test {
-	 color: white;
-    background: #7fcad0;
+.signin:hover {
+	color: white;
+}
+
+.signup {
+	color: #173e43;
+    text-decoration: none;
     padding: 10px 20px;
     display: block;
-    margin: 10px 0;
+}
+
+.signup:hover{
+	color: #3fb0ac;
+    text-decoration: none;
+    padding: 10px 20px;
 }
 
