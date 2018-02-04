@@ -1,7 +1,7 @@
 import os
 
 def getOppositeOSDirectorySep():
-    if os.sep is '/':
+    if os.sep == '/':
         return '\\'
     else:
         return '/'
