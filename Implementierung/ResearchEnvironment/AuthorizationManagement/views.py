@@ -39,7 +39,7 @@ class HomeView(generic.View):
 
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
-    model = Request
+    model = AccessRequest.objects.none()
     template_name = 'AuthorizationManagement/profile.html'
     context_object_name = "requests_list"
     paginate_by = 2
@@ -53,8 +53,13 @@ class ProfileView(generic.ListView):
             self.model = AccessRequest.objects.filter(resource__in=resources)
         
         # load all deletion request if user is staff
-        if current_user.is_staff:
-            self.model = list(chain(self.model,DeletionRequest.objects.all()))
+        if self.model.exists():            
+            if current_user.is_staff and DeletionRequest.objects.all().exists():
+                self.model = list(chain(self.model,DeletionRequest.objects.all()))
+        else: 
+             if current_user.is_staff and DeletionRequest.objects.all().exists():
+                self.model = DeletionRequest.objects.all()
+                
         
         return super(ProfileView, self).get(request)
     

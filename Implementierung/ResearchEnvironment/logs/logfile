@@ -208,3 +208,39 @@
 
 [04/Feb/2018 10:22:41] INFO [AuthorizationManagement.views:127] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
 
+[04/Feb/2018 17:42:00] INFO [AuthorizationManagement.views:744] Request from owner1 to delete 'resource2' was denied by reader1 
+
+[04/Feb/2018 17:42:00] INFO [AuthorizationManagement.views:745] An email was sent from reader1 to owner1, Subject: Deletion Request for 'resource2' denied
+
+[04/Feb/2018 17:42:05] INFO [AuthorizationManagement.views:744] Request from reader2 to delete 'paper' was denied by reader1 
+
+[04/Feb/2018 17:42:05] INFO [AuthorizationManagement.views:745] An email was sent from reader1 to reader2, Subject: Deletion Request for 'paper' denied
+
+[04/Feb/2018 17:47:01] INFO [AuthorizationManagement.views:130] Deletion request for 'resource2' resource was sent by owner1 
+
+[04/Feb/2018 17:47:01] INFO [AuthorizationManagement.views:131] An email was sent to the Staff members from owner1, Subject: Deletion Request for 'resource2' 
+
+[04/Feb/2018 17:51:53] INFO [AuthorizationManagement.views:312] Access request for resource 'paper' with id '4' was sent by owner1 
+
+[04/Feb/2018 17:51:53] INFO [AuthorizationManagement.views:313] An email was sent from owner1 to 'paper' owners, Subject: Access Request for 'paper' 
+
+[04/Feb/2018 17:53:11] INFO [AuthorizationManagement.views:743] Request from owner1 to delete 'resource2' was denied by admin 
+
+[04/Feb/2018 17:53:11] INFO [AuthorizationManagement.views:744] An email was sent from admin to owner1, Subject: Deletion Request for 'resource2' denied
+
+[04/Feb/2018 17:53:22] INFO [AuthorizationManagement.views:281] Request from reader2 to access 'default_name' was denied by admin 
+
+[04/Feb/2018 17:53:22] INFO [AuthorizationManagement.views:282] An email was sent from admin to reader2, Subject: Access Request for 'default_name' denied 
+
+[04/Feb/2018 17:53:26] INFO [AuthorizationManagement.views:281] Request from owner1 to access 'paper' was denied by admin 
+
+[04/Feb/2018 17:53:26] INFO [AuthorizationManagement.views:282] An email was sent from admin to owner1, Subject: Access Request for 'paper' denied 
+
+[04/Feb/2018 17:53:30] INFO [AuthorizationManagement.views:281] Request from reader2 to access 'resource1' was denied by admin 
+
+[04/Feb/2018 17:53:30] INFO [AuthorizationManagement.views:282] An email was sent from admin to reader2, Subject: Access Request for 'resource1' denied 
+
+[04/Feb/2018 17:53:50] INFO [AuthorizationManagement.views:130] Deletion request for 'resource2' resource was sent by owner1 
+
+[04/Feb/2018 17:53:50] INFO [AuthorizationManagement.views:131] An email was sent to the Staff members from owner1, Subject: Deletion Request for 'resource2' 
+
