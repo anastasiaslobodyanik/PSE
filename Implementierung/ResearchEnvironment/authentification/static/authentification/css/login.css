@@ -6,6 +6,7 @@
 body {
 	background-color: #dddfd4; /* grey */
 	height: 75vh;
+	text-decoration: none;
 	background-size: cover;
 	background-position: center;
 	text-align: center;	

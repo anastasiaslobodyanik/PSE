@@ -4,7 +4,7 @@
 }
 
 header {
-	background-color: #3fb0ac; /* grey */
+	background-color: #3fb0ac; /* blue */
 	height: 55px;
 }
 
@@ -22,7 +22,7 @@ body {
 
 #main-nav { 
 	float: right;
-	margin-top: 8px;
+	margin-top: 15px;
 	margin-right: 10px;
 }
  
@@ -39,7 +39,7 @@ body {
 	text-decoration: none;
 	padding: 5px 20px;
 	font-family: "Roboto", sans-serif;
-	font-size: 1.5vw;
+	font-size: 1.4vw;
 	text-transform: uppercase;
 }
 
@@ -55,7 +55,6 @@ body {
 
 .active {
 	background-color: #173e43;
-	color: #red;
 }
 
 

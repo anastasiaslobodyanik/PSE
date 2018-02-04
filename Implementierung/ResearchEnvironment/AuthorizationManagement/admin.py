@@ -33,7 +33,8 @@ class UserManager(AdminSite):
 user_manager = AdminSite(name="UserManager")
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ["last_name", 
+    list_display = ["username",
+                    "last_name", 
                     "first_name", 
                     "email", 
                     "is_active", 
