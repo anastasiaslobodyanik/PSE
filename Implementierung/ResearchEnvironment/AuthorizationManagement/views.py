@@ -49,7 +49,7 @@ class ProfileView(generic.ListView):
         
         # load access requests if user owns any resources
         if resources.exists():
-            self.model = AccessRequest.objects.filter(resource__in=resources)
+            self.model = AccessRequest.objects.filter(resource__in=resources).order_by('-creationDate')
           
         # load all deletion request if user is staff
         if self.model.exists():            
