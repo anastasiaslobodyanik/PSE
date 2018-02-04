@@ -21,6 +21,8 @@ import mimetypes
 from test.support import resource
 from pip._vendor.requests.api import request
 
+from itertools import chain
+
 
 logger = logging.getLogger(__name__)
 
@@ -37,8 +39,27 @@ class HomeView(generic.View):
 
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
-    model = User
+    model = Request
     template_name = 'AuthorizationManagement/profile.html'
+    context_object_name = "requests_list"
+    paginate_by = 2
+    
+    def get(self,request):
+        current_user = Owner.objects.get(id=self.request.user.id)
+        resources = MyResourcesView.get_queryset(self)
+        
+        # load access requests if user owns any resources
+        if resources.exists():
+            self.model = AccessRequest.objects.filter(resource__in=resources)
+        
+        # load all deletion request if user is staff
+        if current_user.is_staff:
+            self.model = list(chain(self.model,DeletionRequest.objects.all()))
+        
+        return super(ProfileView, self).get(request)
+    
+    def get_queryset(self):
+        return self.model
     
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
@@ -47,13 +68,6 @@ class ProfileView(generic.ListView):
         
         context['is_admin'] = current_user.is_staff
         context['is_superuser'] = current_user.is_superuser
-        # load access requests if user owns any resources
-        if resources.exists():
-            context['accessrequest_list'] = AccessRequest.objects.filter(resource__in=resources)
-        
-        # load all deletion request if user is staff
-        if current_user.is_staff:
-            context['deletionrequest_list'] = DeletionRequest.objects.all()
  
         return context
     
@@ -629,8 +643,8 @@ class DeleteResourceView(generic.View):
              
         email_to = [x[0] for x in res.owners.values_list('email')]
         email_from = request.user.email
-        send_mail('Deletion Request approved', text_content, email_from, [email_to])
-        msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
+        send_mail('File deleted by admin', text_content, email_from, [email_to])
+        msg = EmailMultiAlternatives('File deleted by admin', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("User %s deleted resource %s " % (request.user.username,res.name))

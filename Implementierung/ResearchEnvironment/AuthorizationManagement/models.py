@@ -58,11 +58,13 @@ class Request(models.Model):
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     resource = models.ForeignKey(Resource, on_delete = models.DO_NOTHING)
     description = models.CharField(max_length=250, default = 'default_description')
+    type=""
     
     class Meta:
         abstract = True
 
         unique_together=('sender','resource',)
+
     
     def deny(self):
         pass
@@ -70,10 +72,8 @@ class Request(models.Model):
         pass
     
 class AccessRequest(Request):
-    
-    pass
+    type = 'access'
     
 class DeletionRequest(Request):
-
-    pass 
+    type = 'deletion' 
     

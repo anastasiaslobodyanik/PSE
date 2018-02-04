@@ -148,3 +148,19 @@
 
 [03/Feb/2018 19:19:51] INFO [AuthorizationManagement.views:353] User admin accessed 'resource1' with id = 1 
 
+[03/Feb/2018 19:50:45] INFO [AuthorizationManagement.views:298] Access request for resource 'default_name' with id '5' was sent by reader2 
+
+[03/Feb/2018 19:50:45] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'default_name' owners, Subject: Access Request for 'default_name' 
+
+[03/Feb/2018 19:52:34] INFO [AuthorizationManagement.views:333] Access request for 'resource1' was canceled by reader2 
+
+[03/Feb/2018 19:52:34] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Subject: Cancel the Access Request for 'resource1' 
+
+[03/Feb/2018 19:52:37] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' was sent by reader2 
+
+[03/Feb/2018 19:52:37] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Subject: Access Request for 'resource1' 
+
+[04/Feb/2018 10:22:41] INFO [AuthorizationManagement.views:126] Deletion request for 'paper' resource was sent by reader2 
+
+[04/Feb/2018 10:22:41] INFO [AuthorizationManagement.views:127] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
+
