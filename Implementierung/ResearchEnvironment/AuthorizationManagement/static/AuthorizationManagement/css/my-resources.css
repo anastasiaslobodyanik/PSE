@@ -36,7 +36,7 @@
 
 .res-access-btn {
 	grid-column: 2/3;
-	background: #173e43;
+	background: #3fb0ac;
 	text-decoration: none;
 	text-align: center;
 	padding: 17px 20px;
@@ -45,12 +45,12 @@
 }
 .res-access-btn:hover {
 	background: #fae596;
-	color: #173e43;
+	color: #3fb0ac;
 }
 
 .edit-perm {
 	grid-column: 3/4;
-	background: #3fb0ac;
+	background: #173e43;
 	text-decoration: none;
 	text-align: center;
 	padding: 17px 20px;

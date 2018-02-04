@@ -55,10 +55,10 @@
 		{% for request in requests_list %}
 			{% if request.type == 'access' %}
 			<div class="admin-info">
-			    <p> From: {{request.sender.username}} </p>
-				<p> For: {{request.resource.name}} </p>
-				<p> Description: {{request.description}} </p>
-				<p> Created on: {{request.creationDate}}
+			    <p> From: <strong>{{request.sender.username}} </strong></p>
+				<p> For: <strong>{{request.resource.name}} </strong></p>
+				<p> Description: <strong>{{request.description}} </strong></p>
+				<p> Created on: <strong>{{request.creationDate}}</strong></p>
 			</div>	
 				<a href="#approve-request-{{request.pk}}" class="admin-accept-btn"> Accept </a>
 								
@@ -107,10 +107,10 @@
 
 		{% elif request.type == 'deletion' %}
 			<div class="del-info">
-			    <p> From: {{request.sender.username}} </p>
-				<p> For: {{request.resource.name}} </p>
-				<p> Description: {{request.description}} </p>
-				<p> Created on: {{request.creationDate}}
+			    <p> From: <strong>{{request.sender.username}} </strong></p>
+				<p> For: <strong>{{request.resource.name}} </strong></p>
+				<p> Description: <strong>{{request.description}} </strong></p>
+				<p> Created on: <strong>{{request.creationDate}} </strong></p>
 			</div>	
 				
 				<a href="#approve-request-{{request.pk}}" class="del-accept-btn"> Accept </a>
@@ -183,10 +183,10 @@
 			
 			{% for access_request in requests_list %}
 			<div class="info">
-			    <p> From: {{access_request.sender.username}} </p>
-				<p> For: {{access_request.resource.name}} </p>
-				<p> Description: {{access_request.description}} </p>
-				<p> Created on: {{access_request.creationDate}}
+			    <p> From: <strong>{{access_request.sender.username}} </strong></p>
+				<p> For: <strong>{{access_request.resource.name}} </strong></p>
+				<p> Description: <strong>{{access_request.description}} </strong></p>
+				<p> Created on: <strong>{{access_request.creationDate}} </strong></p>
 			</div>	
 				<a href="#approve-request-{{access_request.pk}}" class="accept-btn"> Accept </a>
 
