@@ -146,7 +146,51 @@
 
 [03/Feb/2018 16:21:36] INFO [AuthorizationManagement.views:234] Access request for resource 'resource1' with id '1' sent by reader2 
 
-[03/Feb/2018 19:19:51] INFO [AuthorizationManagement.views:353] User admin accessed 'resource1' with id = 1 
+[03/Feb/2018 18:25:25] INFO [AuthorizationManagement.views:298] Access request for resource 'resource3' with id '3' sent by reader2 
+
+[03/Feb/2018 18:25:25] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource3' owners, Object: Access Request for 'resource3' 
+
+[03/Feb/2018 18:27:32] INFO [AuthorizationManagement.views:333] Access request for 'resource1' canceled by reader2 
+
+[03/Feb/2018 18:27:32] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
+
+[03/Feb/2018 18:35:16] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' sent by reader2 
+
+[03/Feb/2018 18:35:16] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
+
+[03/Feb/2018 18:36:01] INFO [AuthorizationManagement.views:333] Access request for 'resource1' canceled by reader2 
+
+[03/Feb/2018 18:36:01] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
+
+[03/Feb/2018 18:36:04] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' sent by reader2 
+
+[03/Feb/2018 18:36:04] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
+
+[03/Feb/2018 19:00:59] INFO [AuthorizationManagement.views:333] Access request for 'resource1' canceled by reader2 
+
+[03/Feb/2018 19:00:59] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
+
+[03/Feb/2018 19:01:16] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' sent by reader2 
+
+[03/Feb/2018 19:01:16] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
+
+[03/Feb/2018 20:12:06] INFO [AuthorizationManagement.views:298] Access request for resource 'paper' with id '4' sent by owner1 
+
+[03/Feb/2018 20:12:06] INFO [AuthorizationManagement.views:299] An email was sent from owner1 to 'paper' owners, Object: Access Request for 'paper' 
+
+[03/Feb/2018 20:12:33] INFO [AuthorizationManagement.views:298] Access request for resource 'paper' with id '4' sent by owner2 
+
+[03/Feb/2018 20:12:33] INFO [AuthorizationManagement.views:299] An email was sent from owner2 to 'paper' owners, Object: Access Request for 'paper' 
+
+[03/Feb/2018 22:04:51] INFO [AuthorizationManagement.views:112] Deletion request for 'resource2' resource sent by owner2 
+
+[03/Feb/2018 22:04:51] INFO [AuthorizationManagement.views:113] An email was sent to the Staff members from owner2, Object: Deletion Request for 'resource2' 
+
+[03/Feb/2018 22:05:37] INFO [AuthorizationManagement.views:708] User reader1 created the 'test' Resource 
+
+[03/Feb/2018 22:06:31] INFO [AuthorizationManagement.views:298] Access request for resource 'test' with id '7' sent by reader2 
+
+[03/Feb/2018 22:06:31] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'test' owners, Object: Access Request for 'test' 
 
 [03/Feb/2018 19:50:45] INFO [AuthorizationManagement.views:298] Access request for resource 'default_name' with id '5' was sent by reader2 
 

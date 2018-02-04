@@ -1,1 +1,0 @@
-{{user.username}} granted you the access to a resource: "{{resource.name}}"
