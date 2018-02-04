@@ -55,12 +55,15 @@ class ProfileView(generic.ListView):
         # load all deletion request if user is staff
         if self.model.exists():            
             if current_user.is_staff and DeletionRequest.objects.all().exists():
-                self.model = list(chain(self.model,DeletionRequest.objects.all()))
+                
+                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())
+                    
+                
+                #self.model = list(chain(self.model,DeletionRequest.objects.all()))
         else: 
             if current_user.is_staff and DeletionRequest.objects.all().exists():
                 self.model = DeletionRequest.objects.all()
                 
-          
         return super(ProfileView, self).get(request)
     
     def get_queryset(self):
@@ -773,3 +776,25 @@ class EditNameView(generic.View):
             request.user.last_name=request.POST['lastName']
             request.user.save()
             return redirect('/profile')
+        
+def get_sorted_requests(access_request_queryset,deletion_request_queryset):
+    access_requests_list = list(access_request_queryset)
+    deletion_requests_list = list(deletion_request_queryset)
+    
+    result = []
+    longer_list_len = max(len(access_requests_list),len(deletion_requests_list))
+    shorter_list_len = min(len(access_requests_list),len(deletion_requests_list))
+    
+    if longer_list_len==len(access_requests_list):
+        longer_list = access_requests_list
+        shorter_list = deletion_requests_list
+    else:
+        longer_list = deletion_requests_list
+        shorter_list = access_requests_list
+       
+    for i in range(0,longer_list_len):
+        result.append(longer_list[i])
+        if i<shorter_list_len:
+            result.append(shorter_list[i])
+            
+    return result
