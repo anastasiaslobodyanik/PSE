@@ -12,11 +12,7 @@
 {% endblock %}
 
 {% block body %}
-
-		<h2>Profile ({{user.username}})</h2>  
-		<p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
-		<p><strong>E-mail:</strong> {{ user.email }}</p>
-		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
+ 
 		<script>
 			function showEditForm()
 			{
@@ -39,7 +35,7 @@
 		
 		
 		</div>
-
+		
 	{% block requests_or_resources %}
 	<div class="mini-nav">
 			<a href="/profile/" class="current">Requests</a></li>
@@ -110,7 +106,7 @@
 				</div>
 
 
-            {% endfor %}
+        {% endfor %}
 			
 			
 			
@@ -150,7 +146,7 @@
 						</form>
 					</div>
 				</div>
-				
+		
 				<a href="#deny-request-{{deletionrequest.pk}}" class="del-deny-btn"> Deny </a>
 								
 				<div id="deny-request-{{request.pk}}" class="modalDialog">
@@ -178,16 +174,17 @@
 						</form>
 					</div>
 				</div>
-            {% endfor %}
-
+         {% endfor %}
+	
 	</div>
 		 
 		 		 
 		 
 		 
 		<!-- requests for regular user -->
-		{% else %}
-			<div class="container">
+{% else %}
+
+	<div class="container">
 			
 			{% for access_request in accessrequest_list %}
 			<div class="info">
@@ -244,30 +241,9 @@
 					</div>
 				</div>
             {% endfor %}		 
-         {% endif %}				
-	</div>	
-	{% endblock %}	
-            
-		{% if is_paginated %}
-			  <ul class="pagination">
-			    {% if page_obj.has_previous %}
-			      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-			    {% else %}
-			      <li class="disabled"><span>&laquo;</span></li>
-			    {% endif %}
-			    {% for i in paginator.page_range %}
-			      {% if page_obj.number == i %}
-			        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
-			      {% else %}
-			        <li><a href="?page={{ i }}">{{ i }}</a></li>
-			      {% endif %}
-			    {% endfor %}
-			    {% if page_obj.has_next %}
-			      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-			    {% else %}
-			      <li class="disabled"><span>&raquo;</span></li>
-			    {% endif %}
-			  </ul>
-			{% endif %}
-	{% endblock %}	
+     			
+		</div>
+	 {% endif %}		
+{% endblock %}		
+
 {% endblock %}	

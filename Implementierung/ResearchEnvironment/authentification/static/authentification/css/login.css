@@ -28,7 +28,7 @@ body {
 
 .form-signin {
 	margin-top: 20;
-	font-size: 22px;
+	font-size: 20px;
 	color: #173e43; /* dark-blue */
 	text-transform: lowercase;	
     text-align: center;
@@ -55,11 +55,15 @@ body {
     text-decoration: none;
     padding: 10px 20px;
     display: block;
-	margin-top: 5px;
 }
 
 .signup:hover{
 	color: #3fb0ac;
 }
+
+.reg {
+	color: #173e43;
+}
+
 
 

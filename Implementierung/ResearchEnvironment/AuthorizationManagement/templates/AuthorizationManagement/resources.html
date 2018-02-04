@@ -4,16 +4,24 @@
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'AuthorizationManagement/css/info.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/profile.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/my-resources.css' %}" />
 {% endblock %}
 
 {% block requests_or_resources %}
 
+	<div class="mini-nav">
+			<a href="/profile/" class="noncurrent">Requests</a></li>
+				
+			<a href="/profile/my-resources" class="current">My Resources</a></li>
+	</div>	
 	
-<ul>
-	<h3>My resources</h3>
+<div class="resources-container">	
+	
+	<a href="/profile/my-resources/add-new-resource" class="create-resource"><strong>+</strong></a>
+	
 	{% for resource in resource_list %}
-	<p>
-		<a href="#{{resource.pk}}"> {{resource.name}} </a>
+		<a href="#{{resource.pk}}" class="res-name"> {{resource.name}} </a>
 		<div id="{{resource.pk}}" class="modalDialog">
 			<div>
 				<a href="" title="Close" class="close"> x </a>
@@ -23,19 +31,17 @@
 					<p><strong>CreationDate:</strong> {{resource.creationDate}}</p>
 					<p><strong>Description:</strong> {{resource.description}}</p>
 					<p>
-							<a href="../../../resources/{{resource.pk}}"download>access</a>
+							<a href="../../../resources/{{resource.pk}}"download>Access</a>
 					</p>
 			</div>
 		</div>
 
-		<a href="../../resources/{{resource.id}}"download>access</a>
+		<a href="../../resources/{{resource.id}}" class="res-access-btn"download>Access</a>
 
-	<button style="margin-left:10px; float: left;" type="button" onclick="window.location.href='/profile/my-resources/{{resource.id}}-edit-users-permissions'">
-				edit permissions
-	</button>
+		<a href="/profile/my-resources/{{resource.id}}-edit-users-permissions" class="edit-perm"> Edit Permissions</a>
 
-	{% if resource in deletion_requested %}
-				      <a href="#cancel-deletion-request-{{resource.pk}}" > cancel deletion request </a>
+		{% if resource in deletion_requested %}
+				      <a href="#cancel-deletion-request-{{resource.pk}}" class="cancel-del-req"> Cancel Deletion Request </a>
 
 						<div id="cancel-deletion-request-{{resource.pk}}" class="modalDialog">
 							<div>
@@ -56,14 +62,14 @@
 						<br>
 						
 
-	{% else %}
-		{% if is_admin %}	
-			<a href="#delete-resource-{{resource.pk}}" > delete </a>
 		{% else %}
-			<a href="#send-deletion-request-{{resource.pk}}" > delete </a>
-		{% endif %}
+			{% if is_admin %}	
+			<a href="#delete-resource-{{resource.pk}}" class="delete-btn"> Delete </a>
+			{% else %}
+			<a href="#send-deletion-request-{{resource.pk}}" class="delete-btn"> Delete </a>
+			{% endif %}
 		<div id="send-deletion-request-{{resource.pk}}" class="modalDialog">
-			<div>
+				<div>
 				<a href="" title="Close" class="close"> x </a>
 					<form action="/send-deletion-request/{{resource.id}}" method="post">
 						{% csrf_token %}
@@ -80,10 +86,10 @@
 							</button>
 							</div>
 					</form>
-			</div>
+				</div>
 		</div>
 		<div id="delete-resource-{{resource.pk}}" class="modalDialog">
-			<div>
+				<div>
 				<a href="" title="Close" class="close"> x </a>
 					<form action="/delete-resource/{{resource.id}}" method="post">
 						{% csrf_token %}
@@ -100,12 +106,11 @@
 							</button>
 							</div>
 					</form>
-			</div>
+				</div>
 		</div>
-	<br>
 	{% endif %}
-	</p>
-    {% endfor %}
-</ul>
-<li><a href="/profile/my-resources/add-new-resource">Create a Resource</a></li>
+  {% endfor %}
+  
+</div>
+
 {% endblock %}

@@ -39,27 +39,8 @@ class HomeView(generic.View):
 
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
-    model = Request
+    model = User
     template_name = 'AuthorizationManagement/profile.html'
-    context_object_name = "requests_list"
-    paginate_by = 2
-    
-    def get(self,request):
-        current_user = Owner.objects.get(id=self.request.user.id)
-        resources = MyResourcesView.get_queryset(self)
-        
-        # load access requests if user owns any resources
-        if resources.exists():
-            self.model = AccessRequest.objects.filter(resource__in=resources)
-        
-        # load all deletion request if user is staff
-        if current_user.is_staff:
-            self.model = list(chain(self.model,DeletionRequest.objects.all()))
-        
-        return super(ProfileView, self).get(request)
-    
-    def get_queryset(self):
-        return self.model
     
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
@@ -68,10 +49,15 @@ class ProfileView(generic.ListView):
         
         context['is_admin'] = current_user.is_staff
         context['is_superuser'] = current_user.is_superuser
+        # load access requests if user owns any resources
+        if resources.exists():
+            context['accessrequest_list'] = AccessRequest.objects.filter(resource__in=resources)
+        
+        # load all deletion request if user is staff
+        if current_user.is_staff:
+            context['deletionrequest_list'] = DeletionRequest.objects.all()
  
         return context
-    
-
 
 @method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
@@ -752,7 +738,7 @@ class AddNewResourceView(generic.View):
             instance.readers.add(request.user.id)
 
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
-            return redirect("/resources-overview")# what happens in the browser after submitting
+            return redirect("/profile/my-resources")# what happens in the browser after submitting
 
     def get(self,request):
         form = AddNewResourceForm()

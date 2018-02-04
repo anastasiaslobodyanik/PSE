@@ -286,3 +286,33 @@
 
 [04/Feb/2018 12:41:26] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
 
+[04/Feb/2018 14:36:36] INFO [AuthorizationManagement.views:144] Deletion request for 'paper' was canceled by reader2 
+
+[04/Feb/2018 14:36:36] INFO [AuthorizationManagement.views:145] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for 'paper' 
+
+[04/Feb/2018 14:37:41] INFO [AuthorizationManagement.views:740] User reader2 created the '2' Resource 
+
+[04/Feb/2018 14:58:41] INFO [AuthorizationManagement.views:111] Deletion request for 'paper' resource was sent by reader2 
+
+[04/Feb/2018 14:58:41] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
+
+[04/Feb/2018 15:17:11] INFO [AuthorizationManagement.views:740] User reader2 created the '3' Resource 
+
+[04/Feb/2018 15:17:39] INFO [AuthorizationManagement.views:293] Access request for resource '3' with id '12' was sent by owner1 
+
+[04/Feb/2018 15:17:39] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '3' owners, Subject: Access Request for '3' 
+
+[04/Feb/2018 15:18:29] INFO [AuthorizationManagement.views:293] Access request for resource '2' with id '11' was sent by owner1 
+
+[04/Feb/2018 15:18:29] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '2' owners, Subject: Access Request for '2' 
+
+[04/Feb/2018 15:18:35] INFO [AuthorizationManagement.views:293] Access request for resource '2' with id '10' was sent by owner1 
+
+[04/Feb/2018 15:18:35] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '2' owners, Subject: Access Request for '2' 
+
+[04/Feb/2018 15:18:40] INFO [AuthorizationManagement.views:293] Access request for resource '1' with id '9' was sent by owner1 
+
+[04/Feb/2018 15:18:40] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '1' owners, Subject: Access Request for '1' 
+
+[04/Feb/2018 15:40:17] INFO [AuthorizationManagement.views:740] User reader2 created the '4' Resource 
+
