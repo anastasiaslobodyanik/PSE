@@ -3,7 +3,7 @@
 	color: #174e43;
 	margin-top: 50px;
 	font-family: "Roboto", sans-serif;
-	font-size: 20px;
+	font-size: 17px;
 
 }
 .search-box {
@@ -67,7 +67,7 @@
 	background: white;
 	text-decoration: none;
 	text-align: left;
-	padding: 15px 20px;
+	padding: 17px 20px;
 	color: #174e43;
 }
 .resource-name:hover {
@@ -81,7 +81,7 @@
 	background: #3fb0ac;
 	text-decoration: none;
 	text-align: center;
-	padding: 1.5vw 20px;
+	padding: 1.3vw 20px;
 	color: white;
 }
 .access-btn:hover {
@@ -93,7 +93,7 @@
 	border: 1px solid;
 	text-decoration: none;
 	text-align: center;
-	padding: 1.4vw 20px;
+	padding: 1.3vw 20px;
 	color: #b03f41;
 }
 .cancel-btn:hover {
@@ -106,7 +106,7 @@
 	background: #173e43;
 	text-decoration: none;
 	text-align: center;
-	padding: 1.4vw 20px;
+	padding: 1.3vw 20px;
 	color: white;
 }
 .send-btn:hover {

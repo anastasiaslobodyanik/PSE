@@ -8,15 +8,12 @@
 	{% load static %}
 	<link href="{% static 'AuthorizationManagement/css/home.css' %}" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/profile.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/profile.css' %}" />	
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/resources-overview.css' %}" />	
 {% endblock %}
 
 {% block body %}
-
-		<h2>Profile ({{user.username}})</h2>  
-		<p><strong>Name:</strong> {{ user.first_name }} {{user.last_name}} </p>
-		<p><strong>E-mail:</strong> {{ user.email }}</p>
-		<p><strong>Joined on:</strong> {{ user.date_joined }}</p>  
+ 
 		<script>
 			function showEditForm()
 			{
@@ -30,34 +27,93 @@
 		<button onclick="showEditForm()" class="name" id="name"><strong>{{ user.first_name }} {{user.last_name}}</strong></button>
 		<form action="/profile/edit-name/" id="editName" style="display:none;" method="post">
 		{% csrf_token %}
-			<input type=text placeholder="{{user.first_name}}" name="firstName">
-			<input type=text placeholder="{{user.last_name}}" name="lastName">
-			<input type="submit" value="OK">
+			<input class="firstname" type=text placeholder="{{user.first_name}}" name="firstName">
+			<input class="lastname" type=text placeholder="{{user.last_name}}" name="lastName">
+			<input class="ok" type="submit" value="OK">
 		</form>
 		
 		<p>({{user.username}})</p>
-
-		<ul class="profile-nav">
-			<li><a href="/profile/">Requests</a></li>
-				
-			<li><a href="/profile/my-resources">My Resources</a></li>
-				
-		<ul/>
+		
+		
 		</div>
 		
+	{% block requests_or_resources %}
+	<div class="mini-nav">
+			<a href="/profile/" class="current">Requests</a></li>
+				
+			<a href="/profile/my-resources" class="noncurrent">My Resources</a></li>
+	</div>	
 		
-{% block requests_or_resources %}
-		
-			<div class="container">
-			
-			<h3>Requests</h3>
-			{% for request in requests_list %}
-				<p> Type: {{request.type}} </p>
+	<!-- requests for admin user -->
+{% if is_admin %}	 
+		 
+	<div class="admin-container">		 
+		 
+		 <p class="access-request"> Access Requests </p>
+		 <p class="deletion-request"> Deletion Requests </p>
+
+		{% for request in requests_list %}
+			{% if request.type == 'access' %}
+			<div class="admin-info">
 			    <p> From: {{request.sender.username}} </p>
 				<p> For: {{request.resource.name}} </p>
 				<p> Description: {{request.description}} </p>
+				<p> Created on: {{request.creationDate}}
+			</div>	
+				<a href="#approve-request-{{request.pk}}" class="admin-accept-btn"> Accept </a>
+								
+				<div id="approve-request-{{request.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/approve-access-request/{{request.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">
+								<label for="desc">Description: </label><br><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+                            </div>
+							<div class="row">
+								<p> Are you sure you want to approve the access request for {{request.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, allow permissions">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<a href="#deny-request-{{request.pk}}" class="admin-deny-btn"> Deny </a>
+				<div id="deny-request-{{request.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/deny-access-request/{{request.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">									
+                                <label for="desc">Description: </label><br><br>		                                    
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
+                            </div>
+							<div class "row">
+								<p> Are you sure you want to deny the access request for {{request.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, deny permission">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+		{% elif request.type == 'deletion' %}
+			<div class="del-info">
+			    <p> From: {{request.sender.username}} </p>
+				<p> For: {{request.resource.name}} </p>
+				<p> Description: {{request.description}} </p>
+				<p> Created on: {{request.creationDate}}
+			</div>	
 				
-				<a href="#approve-request-{{request.pk}}" > accept </a>
+				<a href="#approve-request-{{request.pk}}" class="del-accept-btn"> Accept </a>
 								
 				<div id="approve-request-{{request.pk}}" class="modalDialog">
 					<div>
@@ -84,7 +140,8 @@
 						</form>
 					</div>
 				</div>
-				<a href="#deny-request-{{request.pk}}" > deny </a>
+		
+				<a href="#deny-request-{{request.pk}}" class="del-deny-btn"> Deny </a>
 								
 				<div id="deny-request-{{request.pk}}" class="modalDialog">
 					<div>
@@ -111,27 +168,99 @@
 						</form>
 					</div>
 				</div>
-            {% endfor %}
-            {% if is_paginated %}
-			  <ul class="pagination">
-			    {% if page_obj.has_previous %}
-			      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-			    {% else %}
-			      <li class="disabled"><span>&laquo;</span></li>
-			    {% endif %}
-			    {% for i in paginator.page_range %}
-			      {% if page_obj.number == i %}
-			        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
-			      {% else %}
-			        <li><a href="?page={{ i }}">{{ i }}</a></li>
-			      {% endif %}
-			    {% endfor %}
-			    {% if page_obj.has_next %}
-			      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-			    {% else %}
-			      <li class="disabled"><span>&raquo;</span></li>
-			    {% endif %}
-			  </ul>
-			{% endif %}
-	{% endblock %}
+				{% endif %}
+         {% endfor %}
+	
+	</div>
+		 
+		 		 
+		 
+		 
+		<!-- requests for regular user -->
+{% else %}
+
+	<div class="container-regular-user">
+			
+			{% for access_request in requests_list %}
+			<div class="info">
+			    <p> From: {{access_request.sender.username}} </p>
+				<p> For: {{access_request.resource.name}} </p>
+				<p> Description: {{access_request.description}} </p>
+				<p> Created on: {{access_request.creationDate}}
+			</div>	
+				<a href="#approve-request-{{access_request.pk}}" class="accept-btn"> Accept </a>
+
+								
+				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/approve-access-request/{{access_request.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">
+								<label for="desc">Description: </label><br><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
+                            </div>
+							<div class="row">
+								<p> Are you sure you want to approve the access request for {{access_request.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, allow permissions">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<a href="#deny-request-{{access_request.pk}}" class="deny-btn"> Deny </a>
+
+								
+				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
+					<div>
+						<a href="" title="Close" class="close"> x </a>
+						<form action="/deny-access-request/{{access_request.pk}}" method="post">
+						{% csrf_token %}
+							
+							<div class="row">									
+                                <label for="desc">Description: </label><br><br>		                                    
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
+                            </div>
+							<div class "row">
+								<p> Are you sure you want to deny the access request for {{access_request.resource.name}}? </p>
+								<input id="yes" type="submit" value="yes, deny permission">
+								<button>
+									<a href="" title="close" class="close"> close </a>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+            {% endfor %}		 
+     			
+		</div>
+{% endif %}	
+{% if is_paginated %}
+ 			  <ul class="pagination">
+ 			    {% if page_obj.has_previous %}
+ 			      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+ 			    {% else %}
+ 			      <li class="disabled"><span>&laquo;</span></li>
+ 			    {% endif %}
+ 			    {% for i in paginator.page_range %}
+ 			      {% if page_obj.number == i %}
+ 			        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+ 			      {% else %}
+ 			        <li><a href="?page={{ i }}">{{ i }}</a></li>
+ 			      {% endif %}
+ 			    {% endfor %}
+ 			    {% if page_obj.has_next %}
+ 			      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+ 			    {% else %}
+ 			      <li class="disabled"><span>&raquo;</span></li>
+ 			    {% endif %}
+  			  </ul>
+  		{% endif %}
+	 
+{% endblock %}		
+
 {% endblock %}	
