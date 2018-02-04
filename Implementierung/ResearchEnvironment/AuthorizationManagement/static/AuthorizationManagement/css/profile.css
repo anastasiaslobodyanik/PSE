@@ -43,31 +43,6 @@
 .ok:hover {
 	color: #fae596;
 }
-/*
-.profile-nav{
- 	list-style: none;
-	margin-top: 40px;
-	text-align:center;
-}
-
-.profile-nav li {
-	display: inline-block;
-}
-
-.profile-nav li a {
-	color: white;
-	background: #3fb0ac;
-	text-decoration: none;
-	padding: 10px 20px;
-	font-family: "Roboto", sans-serif;
-	font-size: 1.5vw;
-}
-
-.profile-nav li a:hover {
-	color: #173e43;
-	background: #fae596;
-	text-decoration: none;
-}*/
 .mini-nav {
 	font-family: "Roboto", sans-serif;
 	font-size: 1.5vw;
@@ -94,7 +69,7 @@
 }
 
 /* user requests */
-.container {
+.container-regular-user {
 	display: grid;
 	grid-template-columns: 2fr 1fr 1fr 2fr;
 	grid-template-rows: auto 55px auto 55px;

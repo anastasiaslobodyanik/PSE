@@ -8,7 +8,8 @@
 	{% load static %}
 	<link href="{% static 'AuthorizationManagement/css/home.css' %}" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/modal_dialog_req.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/profile.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/profile.css' %}" />	
+	<link rel="stylesheet" type="text/css" href="{% static 'AuthorizationManagement/css/resources-overview.css' %}" />	
 {% endblock %}
 
 {% block body %}
@@ -44,26 +45,27 @@
 	</div>	
 		
 	<!-- requests for admin user -->
-         {% if is_admin %}	 
+{% if is_admin %}	 
 		 
 	<div class="admin-container">		 
 		 
 		 <p class="access-request"> Access Requests </p>
 		 <p class="deletion-request"> Deletion Requests </p>
 
-		{% for access_request in accessrequest_list %}
+		{% for request in requests_list %}
+			{% if request.type == 'access' %}
 			<div class="admin-info">
-			    <p> From: {{access_request.sender.username}} </p>
-				<p> For: {{access_request.resource.name}} </p>
-				<p> Description: {{access_request.description}} </p>
-				<p> Created on: {{access_request.creationDate}}
+			    <p> From: {{request.sender.username}} </p>
+				<p> For: {{request.resource.name}} </p>
+				<p> Description: {{request.description}} </p>
+				<p> Created on: {{request.creationDate}}
 			</div>	
-				<a href="#approve-request-{{access_request.pk}}" class="admin-accept-btn"> Accept </a>
+				<a href="#approve-request-{{request.pk}}" class="admin-accept-btn"> Accept </a>
 								
-				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
+				<div id="approve-request-{{request.pk}}" class="modalDialog">
 					<div>
 						<a href="" title="Close" class="close"> x </a>
-						<form action="/approve-access-request/{{access_request.pk}}" method="post">
+						<form action="/approve-access-request/{{request.pk}}" method="post">
 						{% csrf_token %}
 							
 							<div class="row">
@@ -71,7 +73,7 @@
                                 <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
                             </div>
 							<div class="row">
-								<p> Are you sure you want to approve the access request for {{access_request.resource.name}}? </p>
+								<p> Are you sure you want to approve the access request for {{request.resource.name}}? </p>
 								<input id="yes" type="submit" value="yes, allow permissions">
 								<button>
 									<a href="" title="close" class="close"> close </a>
@@ -81,13 +83,11 @@
 					</div>
 				</div>
 
-				<a href="#deny-request-{{access_request.pk}}" class="admin-deny-btn"> Deny </a>
-
-								
-				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
+				<a href="#deny-request-{{request.pk}}" class="admin-deny-btn"> Deny </a>
+				<div id="deny-request-{{request.pk}}" class="modalDialog">
 					<div>
 						<a href="" title="Close" class="close"> x </a>
-						<form action="/deny-access-request/{{access_request.pk}}" method="post">
+						<form action="/deny-access-request/{{request.pk}}" method="post">
 						{% csrf_token %}
 							
 							<div class="row">									
@@ -95,7 +95,7 @@
                                 <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
                             </div>
 							<div class "row">
-								<p> Are you sure you want to deny the access request for {{access_request.resource.name}}? </p>
+								<p> Are you sure you want to deny the access request for {{request.resource.name}}? </p>
 								<input id="yes" type="submit" value="yes, deny permission">
 								<button>
 									<a href="" title="close" class="close"> close </a>
@@ -105,21 +105,15 @@
 					</div>
 				</div>
 
-
-        {% endfor %}
-			
-			
-			
-
-		{% for deletionrequest in deletionrequest_list %}
+		{% elif request.type == 'deletion' %}
 			<div class="del-info">
-			    <p> From: {{deletionrequest.sender.username}} </p>
-				<p> For: {{deletionrequest.resource.name}} </p>
-				<p> Description: {{deletionrequest.description}} </p>
-				<p> Created on: {{deletionrequest.creationDate}}
+			    <p> From: {{request.sender.username}} </p>
+				<p> For: {{request.resource.name}} </p>
+				<p> Description: {{request.description}} </p>
+				<p> Created on: {{request.creationDate}}
 			</div>	
 				
-				<a href="#approve-request-{{deletionrequest.pk}}" class="del-accept-btn"> Accept </a>
+				<a href="#approve-request-{{request.pk}}" class="del-accept-btn"> Accept </a>
 								
 				<div id="approve-request-{{request.pk}}" class="modalDialog">
 					<div>
@@ -147,7 +141,7 @@
 					</div>
 				</div>
 		
-				<a href="#deny-request-{{deletionrequest.pk}}" class="del-deny-btn"> Deny </a>
+				<a href="#deny-request-{{request.pk}}" class="del-deny-btn"> Deny </a>
 								
 				<div id="deny-request-{{request.pk}}" class="modalDialog">
 					<div>
@@ -174,6 +168,7 @@
 						</form>
 					</div>
 				</div>
+				{% endif %}
          {% endfor %}
 	
 	</div>
@@ -184,9 +179,9 @@
 		<!-- requests for regular user -->
 {% else %}
 
-	<div class="container">
+	<div class="container-regular-user">
 			
-			{% for access_request in accessrequest_list %}
+			{% for access_request in requests_list %}
 			<div class="info">
 			    <p> From: {{access_request.sender.username}} </p>
 				<p> For: {{access_request.resource.name}} </p>
@@ -243,7 +238,29 @@
             {% endfor %}		 
      			
 		</div>
-	 {% endif %}		
+{% endif %}	
+{% if is_paginated %}
+ 			  <ul class="pagination">
+ 			    {% if page_obj.has_previous %}
+ 			      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+ 			    {% else %}
+ 			      <li class="disabled"><span>&laquo;</span></li>
+ 			    {% endif %}
+ 			    {% for i in paginator.page_range %}
+ 			      {% if page_obj.number == i %}
+ 			        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+ 			      {% else %}
+ 			        <li><a href="?page={{ i }}">{{ i }}</a></li>
+ 			      {% endif %}
+ 			    {% endfor %}
+ 			    {% if page_obj.has_next %}
+ 			      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+ 			    {% else %}
+ 			      <li class="disabled"><span>&raquo;</span></li>
+ 			    {% endif %}
+  			  </ul>
+  		{% endif %}
+	 
 {% endblock %}		
 
 {% endblock %}	

@@ -27,11 +27,14 @@ body {
 }
 
 .form-signin {
-	margin-top: 20;
+	margin-top: 10;
 	font-size: 20px;
 	color: #173e43; /* dark-blue */
 	text-transform: lowercase;	
-    text-align: center;
+	display: inline-block;
+    width: 400px;
+    text-align: right;
+	margin-right: 130px;
 	
 }
 
@@ -43,7 +46,7 @@ body {
 	font-size: 16px;
     color: #fae596;
     text-align: center;
-	
+	margin-right: 95px;
 }
 
 .signin:hover {
@@ -55,6 +58,7 @@ body {
     text-decoration: none;
     padding: 10px 20px;
     display: block;
+	margin-right: 9px;
 }
 
 .signup:hover{
