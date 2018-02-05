@@ -153,8 +153,56 @@ Während der Implementierung hat sich herausgestellt, dass einige Funktionalitä
 \end{itemize} 
 \end{itemize}
 
-\subsection{URL Verzeichnis}
+\subsection{URL-Verzeichnis}
+Änderungen an Views haben dementsprechende Änderungen am URL-Verzeichnis verursacht. Eine URL lokalisiert einen View, der entweder als ein Main-Fenster oder dessen Teil präsentiert wird.  \\
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\bullet$} 
+ 
+\begin{itemize}[itemsep=0pt]
 
+\item \textbf{/home} – Mockup-Seite. Subseiten:
+	\begin{itemize}[itemsep=0pt]
+	\item \textbf{/register}
+	\item \textbf{/login}
+	\item \textbf{/logout}
+	\end{itemize}
+
+\item \textbf{/resource-manager}
+\item \textbf{/user-manager}
+
+\item \textbf{/profile}//
+	Subseiten:
+	\begin{itemize}[itemsep=0pt]
+	\item \textbf{/my-resources}
+		\begin{itemize}
+		\item \textbf{/resourceid-edit-users-permissions}
+		\item \textbf{/searchs}
+		\end{itemize}
+
+\end{itemize}
+
+
+
+\item \textbf{/manage{\_}users} - Administratorseite zur Benutzerverwaltung, enthält Liste von Benutzern und Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{/block{\_}user} - Dialog zum Blockieren des Users.
+\item \textbf{/delete{\_}user} - Dialog zum Löschen des Users.
+\item \textbf{/$<$userID$>${\_}permissions{\_}for{\_}resources} - Dialog zur Änderung von Rechten des Benutzers.
+\end{itemize}
+
+\item \textbf{/manage{\_}resources} - Administratorseite für Ressourcenverwaltung, enthält Liste von Ressourcen und Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{/$<$resourceID$>${\_}permissions{\_}for{\_}users} - Dialog zur Änderung von Zugriffsrechten für die Ressource. 
+\item \textbf{/delete{\_}resource} - Dialog zum Löschen der Ressource.
+\end{itemize}
+\item \textbf{/resources{\_}owerview} - Übersicht von Ressourcen, enthält Liste aller Ressourcen und folgende Subseiten:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{/$<$resourceID$>${\_}info} - enthält Metadaten der Ressource.
+\item \textbf{/$<$resourceID$>${\_}send{\_}request} - Dialog zum Absenden des Requests für die Ressource.
+\end{itemize}
+\item \textbf{/<resourceID>} - Ressourcenseite, enthält Metadaten und Link für Zugriff auf die Ressource.
+\end{itemize} 
 \newpage 
 \subsection{Datenbank}
  \begin{figure}[ht!]
@@ -183,6 +231,15 @@ Folgende Wunschkriterien wurden implementiert:
 
 \newpage
 \section{Implementierungsplan}
-	
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=0.9\textwidth]{res/gannt_plan.png}
+ 	\caption{Ursprünglicher Implementierungsplan.}
+ \end{figure}
+  \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=0.9\textwidth]{res/gannt_real.png}
+ 	\caption{Reale Zeitablauf der Implementierung.}
+ \end{figure}
 \end{document}
 \grid
