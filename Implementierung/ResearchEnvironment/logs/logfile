@@ -480,3 +480,121 @@
 
 [04/Feb/2018 22:17:13] INFO [AuthorizationManagement.views:746] An email was sent from admin to reader2, Subject: Deletion Request for 'paper' denied
 
+[05/Feb/2018 04:30:34] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 04:34:27] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 04:35:50] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 04:36:44] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 04:38:43] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 04:47:28] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:443] Access permission for 'r' was removed by owner1 from owner1 
+
+[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:444] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
+
+[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:461] Access permission for 'r' was granted by owner1 
+
+[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:462] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+
+[05/Feb/2018 06:27:55] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+
+[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
+
+[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
+
+[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
+
+[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
+
+[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
+
+[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
+
+[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
+

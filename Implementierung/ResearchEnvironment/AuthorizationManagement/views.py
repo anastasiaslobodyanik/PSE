@@ -45,7 +45,7 @@ class ProfileView(generic.ListView):
     paginate_by = 2
     
     def get(self,request):
-        current_user = Owner.objects.get(id=self.request.user.id)
+        current_user = self.request.user
         resources = MyResourcesView.get_queryset(self)
          
         # load access requests if user owns any resources
@@ -56,9 +56,7 @@ class ProfileView(generic.ListView):
         if self.model.exists():            
             if current_user.is_staff and DeletionRequest.objects.all().exists():
                 
-                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())
-                    
-                
+                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())               
                 #self.model = list(chain(self.model,DeletionRequest.objects.all()))
         else: 
             if current_user.is_staff and DeletionRequest.objects.all().exists():
@@ -71,7 +69,7 @@ class ProfileView(generic.ListView):
      
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        current_user = Owner.objects.get(id=self.request.user.id)
+        current_user = self.request.user
         resources = MyResourcesView.get_queryset(self)
          
         context['is_admin'] = current_user.is_staff
@@ -110,7 +108,11 @@ class SendDeletionRequestView(generic.View):
             logger.info("User %s tried to send a deletion request for non-existing resource \n" % (request.user.username))
             return redirect("/profile/my-resources")
 
-        if  not res.owners.filter(id= request.user.id).exists() or request.user.is_staff or DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
+        if  not res.owners.filter(id= request.user.id).exists():
+            logger.info("User %s tried to send a deletion request for resource '%s' without being an owner! \n" % (request.user.username,res.name))
+            raise PermissionDenied
+        
+        if  request.user.is_staff or DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
             logger.info("User %s tried to inconsistently send a deletion request for resource '%s' \n" % (request.user.username,res.name))
             return redirect("/profile/my-resources")
 
@@ -146,7 +148,12 @@ class CancelDeletionRequestView(generic.View):
             logger.info("User %s tried to cancel a deletion request for non-existing resource \n" % (request.user.username))
             return redirect("/resources-overview")
 
-        if not res.owners.filter(id= request.user.id).exists() or request.user.is_staff or  not DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
+        if  not res.owners.filter(id= request.user.id).exists():
+            logger.info("User %s tried to cancel a deletion request for resource '%s' without being an owner! \n" % (request.user.username,res.name))
+            raise PermissionDenied
+            
+
+        if request.user.is_staff or  not DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
             logger.info("User %s tried to cancel a deletion request for resource '%s' \n" % (request.user.username,res.name))
             return redirect("/resources-overview")
         
@@ -233,7 +240,7 @@ class ApproveAccessRequest(generic.View):
         
         if not req.resource.owners.filter(id = request.user.id).exists():
             logger.info("User %s tried to approve an access request without being owner of the requested resource" % (request.user))
-            return redirect('/profile')
+            raise PermissionDenied
 
         req.resource.readers.add(req.sender)
         message=req.description
@@ -264,7 +271,7 @@ class DenyAccessRequest(generic.View):
         
         if not req.resource.owners.filter(id = request.user.id).exists():
             logger.info("User %s tried to deny an access request without being owner of the requested resource" % (request.user))
-            return redirect('/profile')
+            raise PermissionDenied
         
 
         message=request.POST['descr']
@@ -417,13 +424,13 @@ class PermissionEditingView(generic.ListView):
             return super().dispatch(request,*args, **kwargs)
         
         logger.info("User %s tried to edit the permissions of resource %s \n" % (request.user.username,resource.name))
-        return redirect('/')
+        raise PermissionDenied
 
 
     
     def post (self, request,*args, **kwargs ):
-
         
+                
             resource=Resource.objects.get(id=self.kwargs['resourceid']) 
             readerlist = request.POST.getlist('reader[]')
             ownerlist = request.POST.getlist('owner[]')
@@ -527,6 +534,20 @@ class PermissionEditingView(generic.ListView):
     
 @method_decorator(login_required, name='dispatch')     
 class PermissionEditingViewSearch(PermissionEditingView):
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        
+        #If there is no or empty query, the user is redirected to the main edit permission page
+        if ('q' in self.request.GET and self.request.GET['q']) or ('q' in self.request.POST and self.request.POST['q']):
+            return super().dispatch(request,*args, **kwargs)
+        else:
+            relative_path = self.request.path
+            relative_path_elements = relative_path.split('/')
+            del relative_path_elements[len(relative_path_elements)-1]
+            path_to_redirect = ('/').join(relative_path_elements)
+            return redirect(path_to_redirect)
+        
     
     def post(self, request,*args, **kwargs):
             self.query = self.request.GET['q']
@@ -644,7 +665,7 @@ class DeleteResourceView(generic.View):
         
         if not request.user.is_staff :
             logger.info("User %s tried to delete the resource '%s' without being an administrator" % (request.user,res.name))
-            return redirect('/profile')
+            raise PermissionDenied
 
         html_content = render_to_string('AuthorizationManagement/mail/delete-resource-mail.html',
                                         {'user': request.user,
@@ -688,7 +709,7 @@ class ApproveDeletionRequest(generic.View):
         
         if not request.user.is_staff :
             logger.info("User %s tried to approve a deletion request without being an administrator" % (request.user))
-            return redirect('/profile')
+            raise PermissionDenied
         
         owners = req.resource.owners.all()
         message = req.description
@@ -747,7 +768,7 @@ class DenyDeletionRequest(generic.View):
         
         if not request.user.is_staff:
             logger.info("User %s tried to deny a deletion request without being an administrator" % (request.user))
-            return redirect('/profile')
+            raise PermissionDenied
         
         message = request.POST['descr']
 
