@@ -808,7 +808,7 @@ class AddNewResourceView(generic.View):
         context = super(AddNewResourceView, self).get_context_data(**kwargs)
         context['is_admin'] = self.request.user.is_staff
         return context
-
+@method_decorator(login_required, name='dispatch')
 class EditNameView(generic.View):
     def post(self, request):
         if(request.POST['firstName']):

@@ -235,6 +235,35 @@ class TestMyResourcesView(TestCase):
         self.assertEqual(len(response.context['resource_list']), 2)
 
 
+
+
+class TestEditNameView(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/profile/edit-name/')
+        self.assertEqual(response.status_code, 302)
+        
+    def test_post(self): 
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/profile/edit-name/')
+        self.assertRedirects(response, '/profile/')
+    
+
 class TestResourcesOverview(TestCase):
          
     @classmethod
