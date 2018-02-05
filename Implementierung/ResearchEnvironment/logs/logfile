@@ -424,6 +424,145 @@
 
 [04/Feb/2018 19:22:24] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'f' owners, Subject: Access Request for 'f' 
 
+[04/Feb/2018 19:58:34] INFO [AuthorizationManagement.views:162] Deletion request for 'paper' was canceled by reader2 
+
+[04/Feb/2018 19:58:34] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for 'paper' 
+
+[04/Feb/2018 19:58:36] INFO [AuthorizationManagement.views:162] Deletion request for '1' was canceled by reader2 
+
+[04/Feb/2018 19:58:36] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for '1' 
+
+[04/Feb/2018 19:58:38] INFO [AuthorizationManagement.views:162] Deletion request for '2' was canceled by reader2 
+
+[04/Feb/2018 19:58:38] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for '2' 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from admin 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'admin' , Subject: Access permission removed 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from reader2 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from owner1 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'owner1' , Subject: Access permission removed 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'admin' , Subject: Access permission granted 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
+
+[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'owner1' , Subject: Access permission granted 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from admin 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'admin' , Subject: ownership revoked 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from reader2 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'reader2' , Subject: ownership revoked 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:492] ownership for 'paper' was granted by reader2 
+
+[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:493] An email was sent from reader2 to 'admin' , Subject: ownership granted 
+
+[04/Feb/2018 19:59:01] INFO [AuthorizationManagement.views:492] ownership for 'paper' was granted by reader2 
+
+[04/Feb/2018 19:59:01] INFO [AuthorizationManagement.views:493] An email was sent from reader2 to 'owner1' , Subject: ownership granted 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by owner1 from admin 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'admin' , Subject: Access permission removed 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by owner1 from reader2 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'reader2' , Subject: Access permission removed 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by owner1 from owner1 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by owner1 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'admin' , Subject: Access permission granted 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by owner1 
+
+[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'reader2' , Subject: Access permission granted 
+
+[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by owner1 
+
+[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
+
+[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by owner1 from admin 
+
+[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:473] An email was sent from owner1 to 'admin' , Subject: ownership revoked 
+
+[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by owner1 from owner1 
+
+[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:473] An email was sent from owner1 to 'owner1' , Subject: ownership revoked 
+
+[04/Feb/2018 20:02:25] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from admin 
+
+[04/Feb/2018 20:02:25] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'admin' , Subject: Access permission removed 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from reader2 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from owner1 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'owner1' , Subject: Access permission removed 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'admin' , Subject: Access permission granted 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
+
+[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'owner1' , Subject: Access permission granted 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from reader2 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'reader2' , Subject: ownership revoked 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from owner1 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'owner1' , Subject: ownership revoked 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from owner2 
+
+[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'owner2' , Subject: ownership revoked 
+
+[04/Feb/2018 22:50:00] INFO [AuthorizationManagement.views:750] User reader2 created the 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' Resource 
+
+[04/Feb/2018 22:51:22] INFO [AuthorizationManagement.views:123] Deletion request for 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' resource was sent by reader2 
+
+[04/Feb/2018 22:51:22] INFO [AuthorizationManagement.views:124] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' 
+
+[04/Feb/2018 22:54:23] INFO [AuthorizationManagement.views:689] An email was sent from admin to reader2, Subject: Deletion Request for 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' accepted 
+
+[04/Feb/2018 22:54:23] INFO [AuthorizationManagement.views:697] An email was sent to all 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' owners, Object: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is deleted 
+[04/Feb/2018 22:54:23] INFO [AuthorizationManagement.views:702] Request from reader2 to delete 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' accepted by admin 
+
+[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:432] Access permission for '1' was removed by reader2 from reader2 
+
+[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:433] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
+
+[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:448] Access permission for '1' was granted by reader2 
+
+[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:449] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
+
 [04/Feb/2018 21:07:19] INFO [AuthorizationManagement.views:365] User admin accessed 'resource1' with id = 1 
 
 [04/Feb/2018 21:15:09] INFO [AuthorizationManagement.views:162] Deletion request for 'r' was canceled by owner1 

@@ -19,19 +19,19 @@ class Owner(CustomUser):
         proxy = True
 
 class Resource(models.Model):
-    type = models.CharField(max_length=50, default = 'default_type')
-    name = models.CharField(max_length=150, default = 'default_name')
-    description = models.CharField(max_length=250, default = 'default_description')
+    type = models.CharField(max_length=50, default = '')
+    name = models.CharField(max_length=150, default = '')
+    description = models.CharField(max_length=250, default = '')
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owners = models.ManyToManyField(Owner, related_name= 'owner')
     link = models.FileField(upload_to='')
     
 class Request(models.Model):
-    sender = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
+    sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
-    resource = models.ForeignKey(Resource, on_delete = models.DO_NOTHING)
-    description = models.CharField(max_length=250, default = 'default_description')
+    resource = models.ForeignKey(Resource, on_delete = models.CASCADE)
+    description = models.CharField(max_length=250, default = '')
     type=""
     
     class Meta:

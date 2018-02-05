@@ -9,7 +9,8 @@
 .create-resource {
 	grid-column: 2/5;
 	color: #3fb0ac;
-	border: 1px dashed;
+	border: 1px dashed;	
+	border-radius: 4px;
 	text-align: center;
 	font-size: 40px;
 	padding: 5px 10px;
@@ -36,12 +37,13 @@
 
 .res-access-btn {
 	grid-column: 2/3;
-	background: #173e43;
+	background: #3fb0ac;
 	text-decoration: none;
 	text-align: center;
 	padding: 17px 20px;
 	color: white;
 	border-right: 1px solid #dddfd4;	
+	border-radius: 4px;
 }
 .res-access-btn:hover {
 	background: #fae596;
@@ -50,13 +52,14 @@
 
 .edit-perm {
 	grid-column: 3/4;
-	background: #3fb0ac;
+	background: #173e43;
 	text-decoration: none;
 	text-align: center;
 	padding: 17px 20px;
 	color: white;
 	border-right: 2px solid #dddfd4;
-	border-left: 1px solid #dddfd4;
+	border-left: 1px solid #dddfd4;	
+	border-radius: 4px;
 }
 .edit-perm:hover {
 	background: #fae596;
@@ -69,7 +72,8 @@
 	text-decoration: none;
 	text-align: center;
 	padding: 17px 20px;
-	color: white;
+	color: white;	
+	border-radius: 4px;
 }
 .delete-btn:hover {
 	background: #fae596;
@@ -82,7 +86,8 @@
 	text-decoration: none;
 	text-align: center;
 	padding: 17px 20px;
-	color: #b03f41;
+	color: #b03f41;	
+	border-radius: 4px;
 }
 .cancel-del-req:hover {
 	background: #fae596;

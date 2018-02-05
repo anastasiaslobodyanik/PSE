@@ -33,8 +33,7 @@ class HomeView(generic.View):
 
     def get(self, request):
         is_admin = request.user.is_staff
-        is_superuser= request.user.is_superuser
-        return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin,'is_superuser': is_superuser})
+        return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -42,20 +41,20 @@ class ProfileView(generic.ListView):
     model = AccessRequest.objects.none()
     template_name = 'AuthorizationManagement/profile.html'
     context_object_name = "requests_list"
-    paginate_by = 2
+    paginate_by = 4
     
     def get(self,request):
         current_user = self.request.user
         resources = MyResourcesView.get_queryset(self)
-         
+        
         # load access requests if user owns any resources
         if resources.exists():
-            self.model = AccessRequest.objects.filter(resource__in=resources)
+            self.model = AccessRequest.objects.filter(resource__in=resources).order_by('-creationDate')
+
           
         # load all deletion request if user is staff
         if self.model.exists():            
             if current_user.is_staff and DeletionRequest.objects.all().exists():
-                
                 self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())               
                 #self.model = list(chain(self.model,DeletionRequest.objects.all()))
         else: 
@@ -69,12 +68,7 @@ class ProfileView(generic.ListView):
      
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        current_user = self.request.user
-        resources = MyResourcesView.get_queryset(self)
-         
-        context['is_admin'] = current_user.is_staff
-        context['is_superuser'] = current_user.is_superuser
-  
+        context['is_admin'] = self.request.user.is_staff
         return context
    
 
@@ -193,7 +187,6 @@ class ResourcesOverview(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverview, self).get_context_data(**kwargs)
         context['is_admin'] = self.request.user.is_staff
-        context['is_superuser'] = self.request.user.is_superuser
         context['query'] = self.query;
         context['query_pagination_string'] = ''
         context['can_access'] = self.request.user.reader.filter(id__in=self.model)
@@ -219,7 +212,6 @@ class ResourcesOverviewSearch(ResourcesOverview):
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverviewSearch, self).get_context_data(**kwargs)
         context['is_admin'] = self.request.user.is_staff
-        context['is_superuser'] = self.request.user.is_superuser
         context['query'] = self.query;
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
@@ -810,13 +802,23 @@ class AddNewResourceView(generic.View):
         
         args['form'] = form
         return render_to_response('AuthorizationManagement/add-new-resource.html', args)
+    
+    def get_context_data(self, **kwargs):
+        context = super(AddNewResourceView, self).get_context_data(**kwargs)
+        context['is_admin'] = self.request.user.is_staff
+        return context
 
 class EditNameView(generic.View):
     def post(self, request):
+        if(request.POST['firstName']):
             request.user.first_name=request.POST['firstName']
+            request.user.save()
+        if(request.POST['lastName']):
             request.user.last_name=request.POST['lastName']
             request.user.save()
+
             return redirect('/profile')
+
         
 def get_sorted_requests(access_request_queryset,deletion_request_queryset):
     access_requests_list = list(access_request_queryset)

@@ -11,15 +11,21 @@
     padding: 10px 16px;
     margin: 8px 0;
 	margin-top: 15px;
-
+	border: none;	
+	border-radius: 4px;
+}
+.search-box:focus {
+	background: #fae596;
+	color: #173e43;
 }
 .search-btn {
 	background: #173e43;
-	height: 39px;
+	height: 35px;
 	width: 70px;
 	font-size: 16px;
 	border: none;
-    color: white;
+    color: white;	
+	border-radius: 4px;
 }
 .search-btn:hover {
 	color: #fae596;
@@ -82,7 +88,8 @@
 	text-decoration: none;
 	text-align: center;
 	padding: 1.3vw 20px;
-	color: white;
+	color: white;	
+	border-radius: 4px;
 }
 .access-btn:hover {
 	color: #173e43;
@@ -94,7 +101,8 @@
 	text-decoration: none;
 	text-align: center;
 	padding: 1.3vw 20px;
-	color: #b03f41;
+	color: #b03f41;	
+	border-radius: 4px;
 }
 .cancel-btn:hover {
 	color: #b03f41;
@@ -107,7 +115,8 @@
 	text-decoration: none;
 	text-align: center;
 	padding: 1.3vw 20px;
-	color: white;
+	color: white;	
+	border-radius: 4px;
 }
 .send-btn:hover {
 	color: #173e43;
