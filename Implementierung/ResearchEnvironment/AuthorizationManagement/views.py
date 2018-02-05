@@ -43,7 +43,7 @@ class ProfileView(generic.ListView):
     model = AccessRequest.objects.none()
     template_name = 'AuthorizationManagement/profile.html'
     context_object_name = "requests_list"
-    paginate_by = 4
+    paginate_by = 2
     
     def get(self,request):
         current_user = self.request.user
@@ -731,7 +731,7 @@ class AddNewResourceView(generic.View):
         context = super(AddNewResourceView, self).get_context_data(**kwargs)
         context['is_admin'] = self.request.user.is_staff
         return context
-
+@method_decorator(login_required, name='dispatch')
 class EditNameView(generic.View):
     def post(self, request):
         if(request.POST['firstName']):
@@ -739,9 +739,8 @@ class EditNameView(generic.View):
             request.user.save()
         if(request.POST['lastName']):
             request.user.last_name=request.POST['lastName']
-            request.user.save()
-
-            return redirect('/profile')
+            request.user.save()  
+        return redirect('/profile')
 
         
 def get_sorted_requests(access_request_queryset,deletion_request_queryset):
