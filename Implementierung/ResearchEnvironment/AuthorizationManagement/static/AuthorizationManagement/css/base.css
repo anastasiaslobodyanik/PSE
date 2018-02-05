@@ -4,7 +4,7 @@
 }
 
 header {
-	background-color: #3fb0ac; /* grey */
+	background-color: #3fb0ac; /* blue */
 	height: 55px;
 }
 
@@ -26,11 +26,11 @@ body {
 	margin-right: 10px;
 }
  
- .nav{
+#main-nav{
  	list-style: none;
- }
+}
 
-.nav li {
+#main-nav li {
 	display: inline-block;
 }
 
@@ -39,7 +39,7 @@ body {
 	text-decoration: none;
 	padding: 5px 20px;
 	font-family: "Roboto", sans-serif;
-	font-size: 1.5vw;
+	font-size: 1.4vw;
 	text-transform: uppercase;
 }
 
@@ -48,9 +48,13 @@ body {
 	color: #173e43;
 }
 
+.notification {
+	font-size: 16px;
+	color: #fae596;
+}
+
 .active {
 	background-color: #173e43;
-	color: #red;
 }
 
 

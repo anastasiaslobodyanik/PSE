@@ -1,17 +1,19 @@
 {% extends "AuthorizationManagement/profile.html" %}
+
+{% block styles %}
+	{% load static %}
+	<link href="{% static 'AuthorizationManagement/css/resources-overview.css' %}" rel="stylesheet" type="text/css"/>	
+{% endblock %}
+
 {% block body %}
 
 
+	<p>Search for user:</p>
 
-
-<p>Search for user:</p>
-
-<form action="/profile/my-resources/{{resource.id}}-edit-users-permissions/search" method="get">
-
-
-  <input type="text" name='q' placeholder="Type a username">
-  <input type="submit" value="Search">
-</form>
+	<form action="/profile/my-resources/{{resource.id}}-edit-users-permissions/search" method="get">
+		<input type="text" name='q' placeholder="Type a username">
+		<input type="submit" value="Search">
+	</form>
 
 
 {% if query %}

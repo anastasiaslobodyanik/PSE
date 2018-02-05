@@ -6,6 +6,7 @@
 body {
 	background-color: #dddfd4; /* grey */
 	height: 75vh;
+	text-decoration: none;
 	background-size: cover;
 	background-position: center;
 	text-align: center;	
@@ -26,26 +27,30 @@ body {
 }
 
 .form-signin {
-	margin-top: 20;
-	font-size: 25px;
+	margin-top: 10;
+	font-size: 20px;
 	color: #173e43; /* dark-blue */
 	text-transform: lowercase;	
-    text-align: center;
+	display: inline-block;
+    width: 400px;
+    text-align: right;
+	margin-right: 130px;
 	
 }
 
 .signin {
     background-color: #173e43; /* dark-blue */
     border: none;
-    color: #fae596;
-    padding: 15px 32px;
+	height: 39px;
+	width: 90px;
+	font-size: 16px;
+    color: white;
     text-align: center;
-    font-size: 20px;
-	
+	margin-right: 95px;
 }
 
 .signin:hover {
-	color: white;
+	color: #fae596;
 }
 
 .signup {
@@ -53,11 +58,16 @@ body {
     text-decoration: none;
     padding: 10px 20px;
     display: block;
+	margin-right: 9px;
 }
 
 .signup:hover{
 	color: #3fb0ac;
-    text-decoration: none;
-    padding: 10px 20px;
 }
+
+.reg {
+	color: #173e43;
+}
+
+
 

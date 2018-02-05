@@ -36,7 +36,7 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('authentification:index')
+                    return redirect('/authentification/login')
         return render(request, self.template_name, {'form' : form},RequestContext(request))
 
 

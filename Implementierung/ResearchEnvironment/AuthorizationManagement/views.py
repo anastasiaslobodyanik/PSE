@@ -21,6 +21,8 @@ import mimetypes
 from test.support import resource
 from pip._vendor.requests.api import request
 
+from itertools import chain
+
 
 logger = logging.getLogger(__name__)
 
@@ -31,33 +33,46 @@ class HomeView(generic.View):
 
     def get(self, request):
         is_admin = request.user.is_staff
-        is_superuser= request.user.is_superuser
-        return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin,'is_superuser': is_superuser})
+        return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
 
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
-    model = User
+    model = AccessRequest.objects.none()
     template_name = 'AuthorizationManagement/profile.html'
+    context_object_name = "requests_list"
+    paginate_by = 4
     
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        current_user = Owner.objects.get(id=self.request.user.id)
+    def get(self,request):
+        current_user = request.user
         resources = MyResourcesView.get_queryset(self)
         
-        context['is_admin'] = current_user.is_staff
-        context['is_superuser'] = current_user.is_superuser
         # load access requests if user owns any resources
         if resources.exists():
-            context['accessrequest_list'] = AccessRequest.objects.filter(resource__in=resources)
-        
+            self.model = AccessRequest.objects.filter(resource__in=resources)
+          
         # load all deletion request if user is staff
-        if current_user.is_staff:
-            context['deletionrequest_list'] = DeletionRequest.objects.all()
- 
-        return context
+        if self.model.exists():            
+            if current_user.is_staff and DeletionRequest.objects.all().exists():
+                
+                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())
+                    
+                
+                #self.model = list(chain(self.model,DeletionRequest.objects.all()))
+        else: 
+            if current_user.is_staff and DeletionRequest.objects.all().exists():
+                self.model = DeletionRequest.objects.all()
+                
+        return super(ProfileView, self).get(request)
     
-
+    def get_queryset(self):
+        return self.model
+     
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        context['is_admin'] = self.request.user.is_staff
+        return context
+   
 
 @method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
@@ -165,7 +180,6 @@ class ResourcesOverview(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverview, self).get_context_data(**kwargs)
         context['is_admin'] = self.request.user.is_staff
-        context['is_superuser'] = self.request.user.is_superuser
         context['query'] = self.query;
         context['query_pagination_string'] = ''
         context['can_access'] = self.request.user.reader.filter(id__in=self.model)
@@ -191,7 +205,6 @@ class ResourcesOverviewSearch(ResourcesOverview):
     def get_context_data(self, **kwargs):
         context = super(ResourcesOverviewSearch, self).get_context_data(**kwargs)
         context['is_admin'] = self.request.user.is_staff
-        context['is_superuser'] = self.request.user.is_superuser
         context['query'] = self.query;
         context['query_pagination_string'] = 'q='+self.query+'&'
         context['can_access'] = self.can_access
@@ -380,6 +393,7 @@ class PermissionEditingView(generic.ListView):
     resource = Resource.objects.all()
     query = ''
     context_object_name = "user_list"
+    #paginate_by = 2
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -387,9 +401,10 @@ class PermissionEditingView(generic.ListView):
         if resource is None:
             logger.info("User %s tried to edit the permissions of a non-existing resource \n" % (request.user.username))
             return redirect('/')
-        
+        #redirects the staff users to resource-manager
         if request.user.is_staff :
             return redirect('/resource-manager/AuthorizationManagement/resource/'+self.kwargs['resourceid']+'/change/')
+        #checks if the current user has permission to access this resource
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
         
@@ -401,10 +416,11 @@ class PermissionEditingView(generic.ListView):
     def post (self, request,*args, **kwargs ):
 
         
-            resource=Resource.objects.get(id=self.kwargs['resourceid'])
+            resource=Resource.objects.get(id=self.kwargs['resourceid']) 
             readerlist = request.POST.getlist('reader[]')
             ownerlist = request.POST.getlist('owner[]')
             
+            #checks if the access permission  was removed from a user 
             for user in resource.readers.filter(id__in=self.model):
                 if user.id in readerlist:
                     continue
@@ -419,7 +435,9 @@ class PermissionEditingView(generic.ListView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission removed \n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission removed \n" % (request.user.username,user.username))
+            
+            #checks if a user granted the access permission for this resource
             for userid in readerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.readers.filter(id__in=self.model):
@@ -435,14 +453,18 @@ class PermissionEditingView(generic.ListView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.name))
-            if len(resource.owners.all() )   > 1:
-                for user in resource.owners.filter(id__in=self.model):
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
+            
+            
+            #checks if the ownership of this resource was revoked from a user
+            for user in resource.owners.filter(id__in=self.model):
                 
-                    if user.id in ownerlist:
-                        continue
-                    resource.owners.remove(user)
+                if len(resource.owners.all() )   < 2:
+                    break
                 
+                if user.id in ownerlist:
+                    continue
+                resource.owners.remove(user)
                 html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
                                                                                                     'resource' : resource})                                                               
                 text_content=strip_tags(html_content)
@@ -452,13 +474,15 @@ class PermissionEditingView(generic.ListView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
+            
+            #checks if a user granted the ownership of this resource
             for userid in ownerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.owners.filter(id__in=self.model):
                     continue 
                 user.reader.add(resource)
-                user.__class__=Owner
+                user.__class__=Owner #if the user granted the ownership,it becomes an instance of Owner
                 user.save()
                 owner = user
                 resource.owners.add(owner)
@@ -471,8 +495,8 @@ class PermissionEditingView(generic.ListView):
                 msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
-                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.name))
+                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
+                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
             return redirect('/profile/my-resources/')
         
         
@@ -488,6 +512,7 @@ class PermissionEditingView(generic.ListView):
         context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
         context['query'] = self.query
+        context['query_pagination_string'] = ''
         return context
     
     
@@ -501,7 +526,9 @@ class PermissionEditingViewSearch(PermissionEditingView):
             resource=Resource.objects.get(id=self.kwargs['resourceid'])
             readerlist = request.POST.getlist('reader[]')
             ownerlist = request.POST.getlist('owner[]')
-        
+            
+            
+            #checks if the access permission was removed from a users
             for user in resource.readers.filter(id__in=self.model):
                 if user.id in readerlist:
                     continue
@@ -516,7 +543,9 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.email))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission for removed\n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission for removed\n" % (request.user.username,user.username))
+            
+            #checks if a user granted the access permission for this resource
             for userid in readerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.readers.filter(id__in=self.model):
@@ -532,15 +561,16 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.name))
-            if len(resource.owners.all())  > 1:
-                for user in resource.owners.filter(id__in=self.model):
-                
-                    if user.id in ownerlist:
-                        continue
-                    resource.owners.remove(user)
-                
-                
+                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
+            
+            
+            #checks if the ownership of this resource was revoked from a users
+            for user in resource.owners.filter(id__in=self.model):
+                if len(resource.owners.all()) < 2:
+                    break
+                if user.id in ownerlist:
+                    continue
+                resource.owners.remove(user)
                 html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
                                                                                                     'resource' : resource})                                                               
                 text_content=strip_tags(html_content)
@@ -550,13 +580,15 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
                 logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.name))
+                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
+                
+            #checks if a user granted the ownership for this resource    
             for userid in ownerlist:
                 user=CustomUser.objects.get(id=userid)
                 if user in resource.owners.filter(id__in=self.model):
                     continue 
                 user.reader.add(resource)
-                user.__class__=Owner
+                user.__class__=Owner#if the user granted the ownership,it becomes an instance of Owner
                 user.save()
                 owner = user
                 resource.owners.add(owner)
@@ -569,8 +601,8 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
-                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.name))
+                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
+                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
             return redirect('/profile/my-resources/')
     def get(self,request,*args, **kwargs):
         if 'q' in self.request.GET and self.request.GET['q']:
@@ -584,6 +616,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
         context['owners'] = Resource.objects.get(id=self.kwargs['resourceid']).owners.all()
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
         context['query'] = self.query
+        context['query_pagination_string'] = 'q='+self.query+'&'
         return context
 
 
@@ -623,7 +656,7 @@ class DeleteResourceView(generic.View):
              
         email_to = [x[0] for x in res.owners.values_list('email')]
         email_from = request.user.email
-        msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
+        msg = EmailMultiAlternatives('File deleted by admin', text_content, email_from, [email_to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         logger.info("User %s deleted resource %s " % (request.user.username,res.name))
@@ -738,7 +771,7 @@ class AddNewResourceView(generic.View):
             instance.readers.add(request.user.id)
 
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
-            return redirect("/resources-overview")# what happens in the browser after submitting
+            return redirect("/profile/my-resources")# what happens in the browser after submitting
 
     def get(self,request):
         form = AddNewResourceForm()
@@ -748,10 +781,40 @@ class AddNewResourceView(generic.View):
         
         args['form'] = form
         return render_to_response('AuthorizationManagement/add-new-resource.html', args)
+    
+    def get_context_data(self, **kwargs):
+        context = super(AddNewResourceView, self).get_context_data(**kwargs)
+        context['is_admin'] = self.request.user.is_staff
+        return context
 
 class EditNameView(generic.View):
     def post(self, request):
+        if(request.POST['firstName']):
             request.user.first_name=request.POST['firstName']
+            request.user.save()
+        if(request.POST['lastName']):
             request.user.last_name=request.POST['lastName']
             request.user.save()
-            return redirect('/profile')
+        return redirect('/profile')
+        
+def get_sorted_requests(access_request_queryset,deletion_request_queryset):
+    access_requests_list = list(access_request_queryset)
+    deletion_requests_list = list(deletion_request_queryset)
+    
+    result = []
+    longer_list_len = max(len(access_requests_list),len(deletion_requests_list))
+    shorter_list_len = min(len(access_requests_list),len(deletion_requests_list))
+    
+    if longer_list_len==len(access_requests_list):
+        longer_list = access_requests_list
+        shorter_list = deletion_requests_list
+    else:
+        longer_list = deletion_requests_list
+        shorter_list = access_requests_list
+       
+    for i in range(0,longer_list_len):
+        result.append(longer_list[i])
+        if i<shorter_list_len:
+            result.append(shorter_list[i])
+            
+    return result
