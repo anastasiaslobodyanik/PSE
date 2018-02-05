@@ -233,6 +233,81 @@ class TestMyResourcesView(TestCase):
         response = self.client.get('/profile/my-resources/')
         self.assertTrue('resource_list' in response.context)
         self.assertEqual(len(response.context['resource_list']), 2)
+
+
+class TestResourcesOverview(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/resources-overview/')
+        self.assertEqual(response.status_code, 302)
+        
+    def test_normal(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/resources-overview/')
+        self.assertEqual(str(response.context['user']),'boncho')
+        self.assertEqual(response.status_code, 200) 
+    
+    def test_pagination_user(self):
+        #User has to see only the two resources 
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/resources-overview/')
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'] == False) 
+        self.assertEqual(len(response.context['resources_list']), 2)
+        
+class TestResourcesOverviewSearch(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/resources-overview/search?q=2')
+        self.assertEqual(response.status_code, 302)
+         
+    
+    def test_normal(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/resources-overview/search?q=2')
+        self.assertEqual(response.status_code, 200)
+        
+    def test_no_query(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/resources-overview/search')
+        self.assertEqual(response.status_code, 302)
+     
+    def test_valid_query(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/resources-overview/search?q=2')
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'] == False) 
+        self.assertEqual(len(response.context['resources_list']), 1)
           
 class TestPermissionEditingView(TestCase):
          
