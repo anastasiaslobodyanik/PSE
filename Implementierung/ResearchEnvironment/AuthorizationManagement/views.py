@@ -49,14 +49,14 @@ class ProfileView(generic.ListView):
         
         # load access requests if user owns any resources
         if resources.exists():
-            self.model = AccessRequest.objects.filter(resource__in=resources)
+            self.model = AccessRequest.objects.filter(resource__in=resources).order_by('-creationDate')
+
           
         # load all deletion request if user is staff
         if self.model.exists():            
             if current_user.is_staff and DeletionRequest.objects.all().exists():
                 
                 self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())
-                    
                 
                 #self.model = list(chain(self.model,DeletionRequest.objects.all()))
         else: 
@@ -789,10 +789,15 @@ class AddNewResourceView(generic.View):
 
 class EditNameView(generic.View):
     def post(self, request):
+        if(request.POST['firstName']):
             request.user.first_name=request.POST['firstName']
+            request.user.save()
+        if(request.POST['lastName']):
             request.user.last_name=request.POST['lastName']
             request.user.save()
+
             return redirect('/profile')
+
         
 def get_sorted_requests(access_request_queryset,deletion_request_queryset):
     access_requests_list = list(access_request_queryset)

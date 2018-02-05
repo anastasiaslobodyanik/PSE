@@ -28,9 +28,9 @@ class Resource(models.Model):
     link = models.FileField(upload_to='')
     
 class Request(models.Model):
-    sender = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
+    sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
-    resource = models.ForeignKey(Resource, on_delete = models.DO_NOTHING)
+    resource = models.ForeignKey(Resource, on_delete = models.CASCADE)
     description = models.CharField(max_length=250, default = '')
     type=""
     

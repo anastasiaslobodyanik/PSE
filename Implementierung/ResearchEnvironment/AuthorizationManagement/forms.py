@@ -1,6 +1,5 @@
 from django import forms
 from .models import Resource
-from unittest.util import _MAX_LENGTH
 
 class AddNewResourceForm(forms.ModelForm):
     class Meta:
@@ -11,7 +10,7 @@ class AddNewResourceForm(forms.ModelForm):
         super(AddNewResourceForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class' : 'new-res-name'})
         self.fields['type'].widget.attrs.update({'class' : 'new-res-type'})
-        self.fields['description'].widget = forms.Textarea()        
+        self.fields['description'].widget = forms.Textarea()  
         self.fields['description'].widget.attrs.update({'class' : 'new-res-description'})
-        self.fields['link'].widget.attrs.update({'class' : 'new-res-link'})    
-                                                                               
+        self.fields['link'].widget.attrs.update({'class' : 'new-res-link'})                                                             
+

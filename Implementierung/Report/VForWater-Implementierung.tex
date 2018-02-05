@@ -11,7 +11,6 @@
 \usepackage{graphicx}
 \hypersetup{
  		pdftitle={Implementierung},
- 		bookmarks=true,
  }
 \usepackage{fancyhdr}%<-------------to control headers and footers
 \usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
@@ -84,23 +83,86 @@
  \end{titlepage}
  
  \tableofcontents
- 
  \newpage
  \section{Einleitung}
- 
-Anschluss auf Pflichtenheft und Entwurf
+Dieses Dokument beschreibt die Änderungen, welche an unserem Entwurfdokument vorgenommen wurden, um die Funktionalität des Projekts ``Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten`` zu gewährleisten. Das Ziel dieses Dokuments ist, die Gründe für diese Änderungen zu erläutern, beziehungsweise Probleme aufzuzeigen, die sich während der Implementierung ergeben haben.\\\\
+Es werden Änderungen an Datenhaltung und Applikationslogik beschrieben sowie begründet. Des Weiteren wird ein Überblick darüber vermittelt, welche Musskriterien implementiert wurden, welche nicht und warum. Die implementierten Wunschkriterien werden ebenfalls kurz genannt.\\\\
+Am Schluss des Dokuments befindet sich ein Vergleich zwischen unserem ursprünglichen und tatsächlichen Implementierungsplan sowie Erläuterungen eventueller Verzögerungen im Zeitplan.
 
- 
+ \newpage
  \section{Änderungen}
  
  \subsection{Model}
-Änderungen im Model\\
+Während der Designphase wurden Klassen des Model-Pakets entsprechend der Prinzipien objektorientierter Programmierung entworfen. Während der Einarbeitung in das Django-Framework hat sich allerdings herausgestellt, dass Model-Klassen eher als Datenstruktur-Träger benutzt werden und keine Anwendungslogik in sich kapseln. Daher wurde sämtliche Funktionalität in dem View-Paket implementiert, sodass Model-Klassen ausschließlich die Datenbankstruktur definieren.
  
- \subsection{View} %todo erweitern/korrigieren wenn möglich
-Änderungen im view\\
+\begin{itemize}
+\item \textbf{Klasse CustomUser}\\
+Klasse CustomUser erbt von der Django-Klasse User und ersetzt Klasse User aus dem Entwurfdokument. Sämtliche Attribute werden von Django vordefiniert und mussten nicht zusätzlich implementiert werden.
+
+\item \textbf{Klasse Admin}\\
+Da diese Klasse keine Funktionalität in sich kapselt, hat sich herausgestellt, dass sie durch die Benutzung des Attributs ``is staff`` ersetzt werden kann. Dieses Attribut wird in der User-Klasse von Django vordefiniert.
+ 
+\item\textbf{Klasse Resource}\\
+Um Lese- und Besitzerrechte zu implementieren, werden der Klasse zusätzliche Attribute hinzugefügt: die Listen ``Readers`` und ``Owners``.
+
+\item \textbf{Klasse ResourceType}\\
+TO DO
+
+\item \textbf{Klasse Request}\\
+Dieser Klasse wurde das ``Description``-Attribut hinzugefügt. Dieses Attribut hat Type String und dient dazu, die Begründung zu speichern, welche vom Absender bei der Erstellung des Requests eventuell eingegeben wurde.
+
+\item \textbf{Klassen Logging und EmailMessages}\\
+Diese von Django vordefinierten Klassen mussten nicht extra implementiert werden. 
+\end{itemize}
+
+\newpage
+\subsection{View} 
+ 
+\begin{itemize}
+\item \textbf{Klasse ChosenRequestsView}\\
+Funktionalität dieses Views wurde auf vier Views verteilt:
+\begin{itemize}
+\item \textit{ApproveAccessRequest}
+\item \textit{DenyAccessRequest}
+\item \textit{ApproveDeletionRequest}
+\item \textit{DenyDeletionRequest}
+\end{itemize}
+Diese Unterteilung hat bessere Trennung der Anwendungslogik für Bearbeitung unterschiedlicher Requests zur Folge. 
+
+\item \textbf{Klasse DeleteResourceView}\\
+Dieser View erweitert Funktionalität von Klassen \textit{ManageResourcesView} und \textit{ResourcesOverview} und wird zum Löschen der Ressourcen von Administratoren des Portals benutzt. Absenden eines Löschrequests wird stattdessen im \textit{SendDeletionRequestView} implementiert. 
+
+\item \textbf{Klassen PermissionForChosenResourceView,  PermissionsForResourceView und PermissionsForUsersView}\\
+Diese Views wurden durch \textit{PermissionEditingView} ersetzt und für bessere Übersichtlichkeit durch  \textit{PermissionEditingViewSearch} erweitert. Bearbeitung der Rechte aller Ressourcen in einem View hat bessere Benutzbarkeit des Portals zur Folge.
+
+\item \textbf{Klassen ManageUsersView und ManageResourcesView}\\
+Diese Views wurden durch vordefinierte Django-Funktionalität ersetzt.
+
+\item \textbf{Klasse ResourcesOverview}\\
+Dieser View wurde durch einen zusätzlichen View \textit{ResourcesOverviewSearch} für bessere Benutzbarkeit des Portals erweitert.
+
+\item \textbf{Klasse RequestView}\\
+Funktionalität dieses Views wurde für bessere Struktur der Anwendungslogik auf vier Views verteilt:
+\begin{itemize}
+\item \textit{SendAccessRequest}
+\item \textit{CancelAccessRequest}
+\item \textit{ApproveDeletionRequest}
+\item \textit{DenyDeletionRequest}
+\end{itemize}
+
+\item \textbf{Klasse ResourceInfoView}\\
+Funktionalität dieses Views wurde durch einen Modaldialog implementiert, um überflüssige Codezeilen zu sparen.
+\newpage
+\item \textbf{Zusätzlich implementierte Views}\\
+Während der Implementierung hat sich herausgestellt, dass einige Funktionalitäten des Portals zusätzliche View-Klassen benötigen. Die noch nicht erwähnten Views heißen:
+\begin{itemize}
+\item \textit{AddNewResourceView} dient zur Erstellung einer neuen Ressource;
+\item \textit{EditNameView} wird zum Ändern des Benutzernamens benutzt.
+\end{itemize} 
+\end{itemize}
 
  \subsection{URL Verzeichnis}
-Änderungen in URLs\\
+
  
 \subsection{Datenbank}
 Änderungen in DB Struktur\\
