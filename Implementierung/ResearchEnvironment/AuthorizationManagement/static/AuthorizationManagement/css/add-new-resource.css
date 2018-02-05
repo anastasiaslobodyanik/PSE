@@ -26,7 +26,8 @@
     color: white;
     text-align: center;
 	margin-right: 105px;
-	margin-top: 15px;
+	margin-top: 15px;	
+	border-radius: 4px;
 }
 .add:hover {
 	color: #fae596;
@@ -34,25 +35,40 @@
 
 .new-res-name {
 	border:none;
-	width: 300px;
+	width: 290px;
 	line-height: 30px;
 	border-radius: 4px;
+	padding-left: 10px;
+}
+.new-res-name:focus {
+	background: #fae596;
+	color: #173e43;
 }
 .new-res-type {
-	border:none;	
-	width: 300px;
+	border:none;
+	width: 290px;
 	line-height: 30px;
 	border-radius: 4px;
+	padding-left: 10px;
+}
+.new-res-type:focus {
+	background: #fae596;
+	color: #173e43;
 }
 .new-res-description {
 	border: none;	
-	width: 300px;
+	width: 290px;
 	height: 100px;
 	margin-top: 8px;
 	text-align:top;
-	border-radius: 4px;
+	border-radius: 4px;	
+	padding-left: 10px;
+	padding-top: 5px;
 }
-
+.new-res-description:focus {
+	background: #fae596;
+	color: #173e43;
+}
 .new-res-link {
 	border:none;
 	color: #3fb0ac;

@@ -20,14 +20,28 @@
 
 .firstname {
 	width: 114px;
+	height: 18px;
+	border: none;
 	padding: 8px 5px;
-	margin-bottom: 4px;
+	margin-bottom: 5px;	
+	border-radius: 4px;
+}
+.firstname:focus {
+	background: #fae596;
+	color: #173e43;
 }
 
 .lastname {	
-	width: 118px;
+	width: 118px;	
+	height: 18px;
+	border: none;
 	padding: 8px 5px;
-	margin-bottom: 4px;
+	margin-bottom: 5px;	
+	border-radius: 4px;
+}
+.lastname:focus {
+	background: #fae596;
+	color: #173e43;
 }
 
 .ok {
@@ -38,7 +52,8 @@
 	color: white;
 	border: none;
 	height: 34px;
-	width: 34px;
+	width: 34px;	
+	border-radius: 4px;
 }
 .ok:hover {
 	color: #fae596;
@@ -97,6 +112,7 @@
 	text-align:center;
 	border-top: 2px solid #dddfd4;
 	border-right: 1px solid #dddfd4;	
+	border-radius: 4px;	
 }
 
 .accept-btn:hover {
@@ -112,7 +128,8 @@
 	padding: 17px 20px;
 	text-align: center;
 	border-top: 2px solid #dddfd4;
-	border-left: 1px solid #dddfd4;	
+	border-left: 1px solid #dddfd4;		
+	border-radius: 4px;
 }
 
 .deny-btn:hover {
@@ -170,7 +187,8 @@
 	padding: 17px 20px;
 	text-align:center;
 	border-top: 2px solid #dddfd4;
-	border-right: 1px solid #dddfd4;	
+	border-right: 1px solid #dddfd4;		
+	border-radius: 4px;
 }
 
 .admin-accept-btn:hover {
@@ -188,6 +206,7 @@
 	border-top: 2px solid #dddfd4;
 	border-left: 1px solid #dddfd4;	
 	border-right: 10px solid #dddfd4;	
+	border-radius: 4px;	
 }
 
 .admin-deny-btn:hover {
@@ -218,6 +237,7 @@
 	border-top: 2px solid #dddfd4;
 	border-right: 1px solid #dddfd4;
 	border-left: 10px solid #dddfd4;	
+	border-radius: 4px;	
 }
 
 .del-accept-btn:hover {
@@ -233,15 +253,16 @@
 	padding: 17px 20px;
 	text-align: center;
 	border-top: 2px solid #dddfd4;
-	border-left: 1px solid #dddfd4;	
+	border-left: 1px solid #dddfd4;		
+	border-radius: 4px;
 }
 
 .del-deny-btn:hover {
 	color: #b03f41;
 	background: #fae596;
 }
-
-
 /* admin requests */
 
-
+.bell {
+	color: transparent;
+}

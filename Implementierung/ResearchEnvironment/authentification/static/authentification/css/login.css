@@ -46,7 +46,8 @@ body {
 	font-size: 16px;
     color: white;
     text-align: center;
-	margin-right: 95px;
+	margin-right: 95px;	
+	border-radius: 4px;
 }
 
 .signin:hover {

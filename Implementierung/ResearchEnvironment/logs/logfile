@@ -620,3 +620,15 @@
 [04/Feb/2018 22:17:13] INFO [AuthorizationManagement.views:746] An email was sent from admin to reader2, Subject: Deletion Request for 'paper' denied
 
 
+[04/Feb/2018 23:06:05] INFO [AuthorizationManagement.views:437] Access permission for '1' was removed by reader2 from reader2 
+
+[04/Feb/2018 23:06:05] INFO [AuthorizationManagement.views:438] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
+
+[04/Feb/2018 23:06:05] INFO [AuthorizationManagement.views:455] Access permission for '1' was granted by reader2 
+
+[04/Feb/2018 23:06:05] INFO [AuthorizationManagement.views:456] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
+
+[05/Feb/2018 01:36:34] INFO [AuthorizationManagement.views:126] Deletion request for '1' resource was sent by reader2 
+
+[05/Feb/2018 01:36:34] INFO [AuthorizationManagement.views:127] An email was sent to the Staff members from reader2, Subject: Deletion Request for '1' 
+
