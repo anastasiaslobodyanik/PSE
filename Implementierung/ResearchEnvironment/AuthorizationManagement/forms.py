@@ -13,3 +13,4 @@ class AddNewResourceForm(forms.ModelForm):
         self.fields['description'].widget = forms.Textarea()  
         self.fields['description'].widget.attrs.update({'class' : 'new-res-description'})
         self.fields['link'].widget.attrs.update({'class' : 'new-res-link'})                                                             
+

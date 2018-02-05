@@ -15,7 +15,7 @@
 		<ul id="main-nav" class="nav">
 						
 			<li><a {% block home%}{% endblock %} href="/">Home</a></li>
-			<li><a {% block profile%}{% endblock %} href="/profile/">Profile</a></li>
+			<li><a {% block profile%}{% endblock %} href="/profile/">Profile <i class="glyphicon glyphicon-bell notification"></i> </a></li>
 			<li><a {% block overview%}{% endblock %} href="/resources-overview/">Resources Overview</a></li>
 			{% if is_admin %}
 			    <li><a {% block resource-manager%}{% endblock %} href="/resource-manager/">Manage Resources</a></li>
