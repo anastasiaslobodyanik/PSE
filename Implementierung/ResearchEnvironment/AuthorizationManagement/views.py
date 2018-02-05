@@ -41,7 +41,7 @@ class ProfileView(generic.ListView):
     model = AccessRequest.objects.none()
     template_name = 'AuthorizationManagement/profile.html'
     context_object_name = "requests_list"
-    paginate_by = 2
+    paginate_by = 4
     
     def get(self,request):
         current_user = self.request.user
@@ -802,13 +802,10 @@ class AddNewResourceView(generic.View):
         args.update(csrf(request))
         
         args['form'] = form
+        args['is_admin'] = self.request.user.is_staff
+        args['user'] = self.request.user
         return render_to_response('AuthorizationManagement/add-new-resource.html', args)
     
-    def get_context_data(self, **kwargs):
-        context = super(AddNewResourceView, self).get_context_data(**kwargs)
-        context['is_admin'] = self.request.user.is_staff
-        return context
-
 class EditNameView(generic.View):
     def post(self, request):
         if(request.POST['firstName']):

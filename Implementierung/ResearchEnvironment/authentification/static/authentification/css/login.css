@@ -34,7 +34,6 @@ body {
 	display: inline-block;
     width: 400px;
     text-align: right;
-	margin-right: 130px;
 	
 }
 
@@ -46,7 +45,7 @@ body {
 	font-size: 16px;
     color: white;
     text-align: center;
-	margin-right: 95px;	
+	margin-right: 160px;	
 	border-radius: 4px;
 }
 
@@ -70,5 +69,21 @@ body {
 	color: #173e43;
 }
 
+.reg-field {
+	border:none;
+	width: 290px;
+	line-height: 30px;
+	border-radius: 4px;
+	padding-left: 10px;
+	margin-bottom: 15px;
+}
 
+.username {
+	border:none;
+	width: 290px;
+	line-height: 30px;
+	border-radius: 4px;
+	padding-left: 40px;
+	margin-bottom: 5px;
+}
 

@@ -24,19 +24,20 @@ class UserFormView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save(commit = False)
+            
             #cleaned , normalized data
-
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
-
-            user = authenticate(username = username, password = password)
-
+            user = authenticate(username = username, password = password) 
+            
+                  
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     return redirect('/authentification/login')
-        return render(request, self.template_name, {'form' : form},RequestContext(request))
+        return render(request, self.template_name, {'form' : form},RequestContext(request)) 
+    
 
-
+         

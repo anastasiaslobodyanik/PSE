@@ -60,24 +60,25 @@
 				<p> Description: <strong>{{request.description}} </strong></p>
 				<p> Created on: <strong>{{request.creationDate}}</strong></p>
 			</div>	
-				<a href="#approve-request-{{request.pk}}" class="admin-accept-btn"> Accept </a>
-								
+			
+				<a href="#approve-request-{{request.pk}}" class="admin-accept-btn"> Accept </a>								
 				<div id="approve-request-{{request.pk}}" class="modalDialog">
 					<div>
-						<a href="" title="Close" class="close"> x </a>
+						<a href="" title="Close" id="x"> x </a>
 						<form action="/approve-access-request/{{request.pk}}" method="post">
 						{% csrf_token %}
 							
+							
 							<div class="row">
-								<label for="desc">Description: </label><br><br>									
-                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
-                            </div>
+								<p> Are you sure you want to <strong>approve</strong> the access request for resource:
+								<strong>{{request.resource.name}}</strong>? </p>
+								<br>
+							</div>
 							<div class="row">
-								<p> Are you sure you want to approve the access request for {{request.resource.name}}? </p>
-								<input id="yes" type="submit" value="yes, allow permissions">
-								<button>
-									<a href="" title="close" class="close"> close </a>
-								</button>
+								<label for="desc">Message: </label><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>
+                            	<input id="yes" type="submit" value="Yes, allow permission">
+								<a href="" title="close" id="close"> Close </a>
 							</div>
 						</form>
 					</div>
@@ -86,21 +87,21 @@
 				<a href="#deny-request-{{request.pk}}" class="admin-deny-btn"> Deny </a>
 				<div id="deny-request-{{request.pk}}" class="modalDialog">
 					<div>
-						<a href="" title="Close" class="close"> x </a>
-						<form action="/deny-access-request/{{request.pk}}" method="post">
+						<a href="" title="Close" id="x"> x </a>
+						<form action="/deny-access-request/{{access_request.pk}}" method="post">
 						{% csrf_token %}
 							
-							<div class="row">									
-                                <label for="desc">Description: </label><br><br>		                                    
-                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
-                            </div>
-							<div class "row">
-								<p> Are you sure you want to deny the access request for {{request.resource.name}}? </p>
-								<input id="yes" type="submit" value="yes, deny permission">
-								<button>
-									<a href="" title="close" class="close"> close </a>
-								</button>
+							<div class="row" id="are-you-sure">
+								<p> Are you sure you want to <strong>deny</strong> the access request for resource:
+								<strong>{{request.resource.name}}</strong>? </p>
+								<br>			
 							</div>
+							<div class="row">
+								<label for="descr">Message: </label><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>
+                            </div>
+							<input id="no" type="submit" value="Yes, deny permission">
+								<a href="" title="close" id="close"> Close </a>
 						</form>
 					</div>
 				</div>
@@ -117,26 +118,22 @@
 								
 				<div id="approve-request-{{request.pk}}" class="modalDialog">
 					<div>
-						<a href="" title="Close" class="close"> x </a>
+						<a href="" title="Close" id="x"> x </a>
 						<form action="/approve-{{request.type}}-request/{{request.pk}}" method="post">
-						{% csrf_token %}
+						{% csrf_token %}							
 							
-							<div class="row">
-								<label for="desc">Description: </label><br><br>									
-                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
-                            </div>
-							<div class="row">
-								{% if request.type == 'access' %}			
-									<p> Are you sure you want to approve the access request for {{request.resource.name}}? </p>
-									<input id="yes" type="submit" value="yes, allow permissions">
-								{% else %}
-									<p> Are you sure you want to delete {{request.resource.name}}? </p>
-									<input id="yes" type="submit" value="yes, delete resource">
-								{% endif %}
-									<button>
-										<a href="" title="close" class="close"> close </a>
-									</button>
+							<div class="row">								
+									<p> Are you sure you want to <strong>delete</strong> resource: 
+									<strong>{{request.resource.name}}</strong>? </p>	
+									<br>
 							</div>
+							<div class="row">
+								<label for="descr">Message: </label><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>
+                            </div>
+							
+							<input id="yes" type="submit" value="Yes, delete resource">	
+							<a href="" title="close" id="close"> Close </a>
 						</form>
 					</div>
 				</div>
@@ -145,26 +142,21 @@
 								
 				<div id="deny-request-{{request.pk}}" class="modalDialog">
 					<div>
-						<a href="" title="Close" class="close"> x </a>
+						<a href="" title="Close" id="x"> x </a>
 						<form action="/deny-{{request.type}}-request/{{request.pk}}" method="post">
-						{% csrf_token %}
+						{% csrf_token %}							
 							
-							<div class="row">									
-                                <label for="desc">Description: </label><br><br>		                                    
-                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
-                            </div>
 							<div class "row">
-								{% if request.type == 'access' %}			
-									<p> Are you sure you want to deny the access request for {{request.resource.name}}? </p>
-									<input id="yes" type="submit" value="yes, deny permission">
-								{% else %}
-									<p> Are you sure you want to deny the deletion request for {{request.resource.name}}? </p>
-									<input id="yes" type="submit" value="yes, deny deletion">
-								{% endif %}
-									<button>
-										<a href="" title="close" class="close"> close </a>
-									</button>
+									<p> Are you sure you want to <strong>deny</strong> the deletion request for resource: 
+									<strong>{{request.resource.name}}</strong>? </p>
+									<br>
 							</div>
+							<div class="row">									
+                                <label for="descr">Message: </label><br>		                                    
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>                                    
+                            </div>
+							<input id="no" type="submit" value="Yes, deny deletion">
+							<a href="" title="close" id="close"> Close </a>
 						</form>
 					</div>
 				</div>
@@ -188,26 +180,26 @@
 				<p> Description: <strong>{{access_request.description}} </strong></p>
 				<p> Created on: <strong>{{access_request.creationDate}} </strong></p>
 			</div>	
-				<a href="#approve-request-{{access_request.pk}}" class="accept-btn"> Accept </a>
-
-								
+			
+				<a href="#approve-request-{{access_request.pk}}" class="accept-btn"> Accept </a>								
 				<div id="approve-request-{{access_request.pk}}" class="modalDialog">
 					<div>
-						<a href="" title="Close" class="close"> x </a>
+						<a href="" title="Close" id="x"> x </a>
 						<form action="/approve-access-request/{{access_request.pk}}" method="post">
 						{% csrf_token %}
 							
-							<div class="row">
-								<label for="desc">Description: </label><br><br>									
-                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
-                            </div>
-							<div class="row">
-								<p> Are you sure you want to approve the access request for {{access_request.resource.name}}? </p>
-								<input id="yes" type="submit" value="yes, allow permissions">
-								<button>
-									<a href="" title="close" class="close"> close </a>
-								</button>
+							
+							<div class="row" id="are-you-sure">
+								<p> Are you sure you want to <strong>approve</strong> the access request for resource:
+								<strong>{{access_request.resource.name}}</strong>? </p>
+								<br>			
 							</div>
+							<div class="row">
+								<label for="descr">Message: </label><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>
+                            </div>
+							<input id="yes" type="submit" value="Yes, allow permission">
+								<a href="" title="close" id="close"> Close </a>
 						</form>
 					</div>
 				</div>
@@ -217,21 +209,21 @@
 								
 				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
 					<div>
-						<a href="" title="Close" class="close"> x </a>
+						<a href="" title="Close" id="x"> x </a>
 						<form action="/deny-access-request/{{access_request.pk}}" method="post">
 						{% csrf_token %}
 							
-							<div class="row">									
-                                <label for="desc">Description: </label><br><br>		                                    
-                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>                                    
-                            </div>
-							<div class "row">
-								<p> Are you sure you want to deny the access request for {{access_request.resource.name}}? </p>
-								<input id="yes" type="submit" value="yes, deny permission">
-								<button>
-									<a href="" title="close" class="close"> close </a>
-								</button>
+							<div class="row" id="are-you-sure">
+								<p> Are you sure you want to <strong>deny</strong> the access request for resource:
+								<strong>{{access_request.resource.name}}</strong>? </p>
+								<br>			
 							</div>
+							<div class="row">
+								<label for="descr">Message: </label><br>									
+                                <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>
+                            </div>
+							<input id="no" type="submit" value="Yes, deny permission">
+								<a href="" title="close" id="close"> Close </a>
 						</form>
 					</div>
 				</div>
