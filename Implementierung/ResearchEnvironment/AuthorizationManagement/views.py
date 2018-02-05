@@ -400,7 +400,7 @@ class PermissionEditingView(generic.ListView):
     resource = Resource.objects.all()
     query = ''
     context_object_name = "user_list"
-    #paginate_by = 2
+    paginate_by = 2
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -625,6 +625,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
                 logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
                 logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
             return redirect('/profile/my-resources/')
+        
     def get(self,request,*args, **kwargs):
         if 'q' in self.request.GET and self.request.GET['q']:
             self.query = self.request.GET['q']

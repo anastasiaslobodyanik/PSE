@@ -737,3 +737,11 @@
 
 [05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
 
+[05/Feb/2018 09:17:40] INFO [AuthorizationManagement.views:625] ownership for 'r' was granted by owner1 
+
+[05/Feb/2018 09:17:40] INFO [AuthorizationManagement.views:626] An email was sent from owner1 to 'admin' , Subject: ownership granted 
+
+[05/Feb/2018 09:18:01] INFO [AuthorizationManagement.views:566] Access permission for 'r' was removed by owner1 from uzeci@student.kit.edu 
+
+[05/Feb/2018 09:18:01] INFO [AuthorizationManagement.views:584] Access permission for 'r' was granted by owner1 
+
