@@ -20,6 +20,8 @@ from _csv import reader
 import mimetypes
 from test.support import resource
 from pip._vendor.requests.api import request
+from django.db.models import Q
+
 
 from itertools import chain
 
@@ -373,7 +375,7 @@ class OpenResourceView(generic.View):
 def download(request,resource):
     relative_path = request.path
     if relative_path.find(os.sep) == -1:
-        relative_path = relative_path.replace(utilities.getOppositeOSDirectorySep(),os.sep)  
+        relative_path = relative_path.replace(utilities.get_opposite_os_directory_sep(),os.sep)  
         
     relative_path_elements = relative_path.split(os.sep,1)
     relative_path = relative_path_elements[len(relative_path_elements)-1]
@@ -395,7 +397,7 @@ def download(request,resource):
 
 
 class PermissionEditingView(generic.ListView):
-    model = User.objects.all()
+    model = User = User.objects.none()
     template_name='AuthorizationManagement/edit-permissions.html'
     resource = Resource.objects.all()
     query = ''
@@ -420,98 +422,109 @@ class PermissionEditingView(generic.ListView):
 
 
     
-    def post (self, request,*args, **kwargs ):
-        
-                
+    def post (self, request,*args, **kwargs ):              
             resource=Resource.objects.get(id=self.kwargs['resourceid']) 
-            readerlist = request.POST.getlist('reader[]')
-            ownerlist = request.POST.getlist('owner[]')
+            new_readers_list = request.POST.getlist('reader[]')
+            new_owners_list = request.POST.getlist('owner[]')
+            users_on_page = request.POST.getlist('usersIdsOnPage[]')
             
-            #checks if the access permission  was removed from a user 
-            for user in resource.readers.filter(id__in=self.model):
-                if user.id in readerlist:
-                    continue
-                resource.readers.remove(user)
-                
-                html_content=render_to_string('AuthorizationManagement/mail/access-removed-mail.html', {'user' : request.user,
+            real_readers_list = list(resource.readers.values_list('id',flat=True))
+            real_owners_list = list(resource.owners.values_list('id',flat=True)) 
+            
+            user_removed_own_right = False
+            no_rights_users =0
+            
+            for userId in users_on_page:
+                user = CustomUser.objects.get(id=userId)
+                    #checks if a user granted the access permission for this resource
+                if userId in new_readers_list and int(userId) not in real_readers_list:
+                    
+                    resource.readers.add(user)
+                    
+                    html_content=render_to_string('AuthorizationManagement/mail/access-granted-mail.html', {'user' : request.user,
                                                                                                     'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Access Permission removed', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission removed \n" % (request.user.username,user.username))
-            
-            #checks if a user granted the access permission for this resource
-            for userid in readerlist:
-                user=CustomUser.objects.get(id=userid)
-                if user in resource.readers.filter(id__in=self.model):
-                    continue
-                resource.readers.add(user)
+                    text_content=strip_tags(html_content)
+                    email_to = [user.email]
+                    email_from=request.user.email
+                    msg=EmailMultiAlternatives('Access Permission granted', text_content, email_from,email_to)
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+                    logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
+                    logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
+                    
+                    #checks if the access permission  was removed from a user 
+                elif userId not in new_readers_list and int(userId) in real_readers_list and userId not in new_owners_list:
+                    
+                    no_rights_users+=1
+                    resource.readers.remove(user)
+                    
+                    html_content=render_to_string('AuthorizationManagement/mail/access-removed-mail.html', {'user' : request.user,
+                                                                                                        'resource' : resource})                                                               
+                    text_content=strip_tags(html_content)
+                    email_to = [user.email]
+                    email_from=request.user.email
+                    msg=EmailMultiAlternatives('Access Permission removed', text_content, email_from,email_to)
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+                    logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.username))
+                    logger.info("An email was sent from %s to '%s' , Subject: Access permission removed \n" % (request.user.username,user.username))
                 
-                html_content=render_to_string('AuthorizationManagement/mail/access-granted-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Access Permission granted', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
-            
-            
-            #checks if the ownership of this resource was revoked from a user
-            for user in resource.owners.filter(id__in=self.model):
                 
-                if len(resource.owners.all() )   < 2:
-                    break
+                owner = Owner.objects.get(id=userId)
                 
-                if user.id in ownerlist:
-                    continue
-                resource.owners.remove(user)
-                html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
-            
-            #checks if a user granted the ownership of this resource
-            for userid in ownerlist:
-                user=CustomUser.objects.get(id=userid)
-                if user in resource.owners.filter(id__in=self.model):
-                    continue 
-                user.reader.add(resource)
-                user.__class__=Owner #if the user granted the ownership,it becomes an instance of Owner
-                user.save()
-                owner = user
-                resource.owners.add(owner)
-                
-                html_content=render_to_string('AuthorizationManagement/mail/ownership-granted-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
-            return redirect('/profile/my-resources/')
-        
+                #checks if a user granted the ownership of this resource
+                if userId in new_owners_list and int(userId) not in real_owners_list:
+                    
+                    resource.owners.add(owner)
+                    
+                    html_content=render_to_string('AuthorizationManagement/mail/ownership-granted-mail.html', {'user' : request.user,
+                                                                                                        'resource' : resource})                                                               
+                    text_content=strip_tags(html_content)
+                    email_to = [user.email]
+                    email_from=request.user.email
+                    msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+                    logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
+                    logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
+                    
+                #checks if the ownership of this resource was revoked from a user
+                elif userId not in new_owners_list and int(userId) in real_owners_list and len(resource.owners.all() ) > 1:
+                    
+                    resource.owners.remove(owner)
+                    
+                    if int(userId) == self.request.user.id:
+                        user_removed_own_right = True
+                    
+                    html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
+                                                                                                        'resource' : resource})                                                               
+                    text_content=strip_tags(html_content)
+                    email_to = [user.email]
+                    email_from=request.user.email
+                    msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+                    logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
+                    logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
+              
+            if user_removed_own_right:
+                path_to_redirect = '/profile/my-resources/'   
+            # All users on the page are removed and there is no search        
+            elif not('q' in self.request.GET and self.request.GET['q']) and no_rights_users == len(users_on_page):
+                path_to_redirect = '/profile/my-resources/'    
+            else:  
+                path_to_redirect = utilities.get_relative_path_with_parameters(self.request)
+            return redirect(path_to_redirect)
         
     
     def get_queryset(self):
         return self.model
     
-
+    def get(self,request,*args, **kwargs):       
+        is_owner_of_resource = Resource.objects.get(id=self.kwargs['resourceid']).owners.all().values_list('id',flat=True)
+        is_reader_of_resource = Resource.objects.get(id=self.kwargs['resourceid']).readers.all().values_list('id',flat=True)
+        self.model = User.objects.filter(Q(id__in=is_owner_of_resource)|Q(id__in=is_reader_of_resource))
+        return super().get(request,*args, **kwargs)
         
     def get_context_data(self, **kwargs):
         context = super(PermissionEditingView, self).get_context_data(**kwargs)
@@ -531,106 +544,16 @@ class PermissionEditingViewSearch(PermissionEditingView):
     def dispatch(self, request, *args, **kwargs):
         
         #If there is no or empty query, the user is redirected to the main edit permission page
-        if ('q' in self.request.GET and self.request.GET['q']) or ('q' in self.request.POST and self.request.POST['q']):
+        if 'q' in self.request.GET and self.request.GET['q']:
             return super().dispatch(request,*args, **kwargs)
         else:
-            relative_path = self.request.path
-            relative_path_elements = relative_path.split('/')
-            del relative_path_elements[len(relative_path_elements)-1]
-            path_to_redirect = ('/').join(relative_path_elements)
+            path_to_redirect = utilities.get_one_level_lower_path(self.request.path)
             return redirect(path_to_redirect)
         
-    
-    def post(self, request,*args, **kwargs):
-            self.query = self.request.GET['q']
-            self.model = User.objects.filter(username__icontains=self.query)
-            resource=Resource.objects.get(id=self.kwargs['resourceid'])
-            readerlist = request.POST.getlist('reader[]')
-            ownerlist = request.POST.getlist('owner[]')
-            
-            
-            #checks if the access permission was removed from a users
-            for user in resource.readers.filter(id__in=self.model):
-                if user.id in readerlist:
-                    continue
-                resource.readers.remove(user)
-                
-                html_content=render_to_string('AuthorizationManagement/mail/access-removed-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Access Permission removed', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("Access permission for '%s' was removed by %s from %s \n" % (resource.name,request.user.username,user.email))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission for removed\n" % (request.user.username,user.username))
-            
-            #checks if a user granted the access permission for this resource
-            for userid in readerlist:
-                user=CustomUser.objects.get(id=userid)
-                if user in resource.readers.filter(id__in=self.model):
-                    continue
-                resource.readers.add(user)
-                
-                html_content=render_to_string('AuthorizationManagement/mail/access-granted-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Access Permission granted', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("Access permission for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: Access permission granted \n" % (request.user.username,user.username))
-            
-            
-            #checks if the ownership of this resource was revoked from a users
-            for user in resource.owners.filter(id__in=self.model):
-                if len(resource.owners.all()) < 2:
-                    break
-                if user.id in ownerlist:
-                    continue
-                resource.owners.remove(user)
-                html_content=render_to_string('AuthorizationManagement/mail/ownership-revoked-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Ownership revoked', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("ownership for '%s' was revoked by %s from %s \n" % (resource.name,request.user.username, user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership revoked \n" % (request.user.username,user.username))
-                
-            #checks if a user granted the ownership for this resource    
-            for userid in ownerlist:
-                user=CustomUser.objects.get(id=userid)
-                if user in resource.owners.filter(id__in=self.model):
-                    continue 
-                user.reader.add(resource)
-                user.__class__=Owner#if the user granted the ownership,it becomes an instance of Owner
-                user.save()
-                owner = user
-                resource.owners.add(owner)
-                
-                html_content=render_to_string('AuthorizationManagement/mail/ownership-granted-mail.html', {'user' : request.user,
-                                                                                                    'resource' : resource})                                                               
-                text_content=strip_tags(html_content)
-                email_to = [user.email]
-                email_from=request.user.email
-                msg=EmailMultiAlternatives('Ownership granted', text_content, email_from,email_to)
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                logger.info("ownership for '%s' was granted by %s \n" % (resource.name,request.user.username))
-                logger.info("An email was sent from %s to '%s' , Subject: ownership granted \n" % (request.user.username,user.username))
-            return redirect('/profile/my-resources/')
-        
     def get(self,request,*args, **kwargs):
-        if 'q' in self.request.GET and self.request.GET['q']:
-            self.query = self.request.GET['q']
-            self.model = User.objects.filter(username__icontains=self.query)
-        return super().get(request,*args, **kwargs)
+        self.query = self.request.GET['q']
+        self.model = User.objects.filter(username__icontains=self.query)
+        return super(generic.ListView,self).get(request,*args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super(PermissionEditingViewSearch, self).get_context_data(**kwargs)
