@@ -252,7 +252,7 @@ class TestPermissionEditingView(TestCase):
         super().tearDownClass()
 
     def test_not_logged_in(self):
-        response = self.client.get('/profile/')
+        response = self.client.get('/profile/my-resources/1-edit-users-permissions')
         self.assertEqual(response.status_code, 302)
         
     def test_not_authorized_user(self):
@@ -301,7 +301,7 @@ class TestPermissionEditingViewSearch(TestCase):
         super().tearDownClass()
 
     def test_not_logged_in(self):
-        response = self.client.get('/profile/')
+        response = self.client.get('/profile/my-resources/1-edit-users-permissions/search?q=evl')
         self.assertEqual(response.status_code, 302)
         
     def test_not_authorized_user(self):
