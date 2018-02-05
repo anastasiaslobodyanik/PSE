@@ -233,6 +233,42 @@ class TestMyResourcesView(TestCase):
         response = self.client.get('/profile/my-resources/')
         self.assertTrue('resource_list' in response.context)
         self.assertEqual(len(response.context['resource_list']), 2)
+        
+class TestCancelAccessRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_staff_user(self):
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_reader(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+       
+    def test_post(self):       
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
 
 class TestDeleteResourceView(TestCase):
          
@@ -262,10 +298,10 @@ class TestDeleteResourceView(TestCase):
         
     def test_post(self):       
         self.client.login(username='admin', password='123456')
-        response = self.client.post('/delete-resource/1')
-        self.assertRedirects(response, '/profile/my-resources/')
+        response = self.client.post('/delete-resource/1', {'descr':''})
+        self.assertEqual(response.status_code, 302)
     
-    
+
 
 
 class TestEditNameView(TestCase):
@@ -291,8 +327,8 @@ class TestEditNameView(TestCase):
         
     def test_post(self): 
         self.client.login(username='boncho', password='123456')
-        response = self.client.post('/profile/edit-name/')
-        self.assertRedirects(response, '/profile/')
+        response = self.client.post('/profile/edit-name/', {'firstName':'', 'lastName': ''})
+        self.assertEqual(response.status_code, 302)
     
 
 class TestResourcesOverview(TestCase):
