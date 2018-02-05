@@ -233,7 +233,49 @@ class TestMyResourcesView(TestCase):
         response = self.client.get('/profile/my-resources/')
         self.assertTrue('resource_list' in response.context)
         self.assertEqual(len(response.context['resource_list']), 2)
+ 
+class TestSendAccessRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        res = Resource.objects.create(name='res',type='text',description='desc',link='res.txt')
+        res.readers.add(users['test_user'].id)
+        res.owners.add(users['test_user'].id)
+        res.readers.add(users['test_admin'].id)
+        res.owners.add(users['test_admin'].id)
+        res.save()
         
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/send-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_staff_user(self):
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/send-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_reader(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/send-access-request/1')
+        self.assertEqual(response.status_code, 302)
+       
+    def test_post(self):       
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/send-access-request/1', {'descr':''})
+        self.assertEqual(response.status_code, 302) 
+       
 class TestCancelAccessRequest(TestCase):
          
     @classmethod
