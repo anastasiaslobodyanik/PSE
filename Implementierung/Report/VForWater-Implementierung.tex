@@ -153,36 +153,134 @@ Während der Implementierung hat sich herausgestellt, dass einige Funktionalitä
 \end{itemize} 
 \end{itemize}
 
-\subsection{URL Verzeichnis}
+\subsection{URL-Verzeichnis}
+Änderungen an Views haben dementsprechende Änderungen am URL-Verzeichnis verursacht. Eine URL lokalisiert einen View, der entweder als ein Main-Fenster oder dessen Teil präsentiert wird.  \\
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{}
+\renewcommand{\labelitemiii}{}
+\renewcommand{\labelitemiv}{}  
 
+\indent Home-Seite mit Authentifizierungsfunktionalität für Testzwecke:
+\begin{itemize}[itemsep=0pt]
+\item \textbf{/home}
+	\begin{itemize}[itemsep=0pt]
+	\item \textbf{/register}
+	\item \textbf{/login}
+	\item \textbf{/logout}\\
+	\end{itemize}
+
+\noindent Verwaltungsseiten:
+\item \textbf{/resource-manager}
+\item \textbf{/user-manager}\\
+
+\noindent Benutzerseite:
+\item \textbf{/profile}
+	\begin{itemize}[itemsep=0pt]
+	\item \textbf{/my-resources}
+		\begin{itemize}
+		\item \textbf{/resourceid-edit-users-permissions}
+			\begin{itemize}
+			\item \textbf{/search}
+			\end{itemize}
+		\item \textbf{/add-new-resource}		
+		\end{itemize}
+	\item \textbf{/edit-name}\\
+	\end{itemize}
+
+\noindent Bearbeitung der Requests:
+\item \textbf{/approve-access-request/requestid}
+\item \textbf{/deny-access-request/requestid}
+\item \textbf{/approve-deletion-request/requestid}
+\item \textbf{/deny-deletion-request/requestid}\\
+
+\noindent Absenden und Löschen der Requests:
+\item \textbf{/send-access-request/resourceid}
+\item \textbf{/cancel-access-request/resourceid}
+\item \textbf{/send-deletion-request/resourceid}
+\item \textbf{/cancel-deletion-request/resourceid}\\
+
+\noindent Ressourcenübersicht:
+\item \textbf{/resources-overview}
+	\begin{itemize}
+	\item \textbf{/search}\\
+	\end{itemize}
+	
+\noindent Metadaten einer Ressource
+\item \textbf{/resources/resourceid}\\
+
+\noindent Löschen der Ressourcen für Administratoren:
+\item \textbf{/delete-resource/resourceid}
+\end{itemize}
+ 
 \newpage 
 \subsection{Datenbank}
+Jede Änderung am Model-Paket beeinflusst Datenbankstruktur. Das von Django unabhängiges Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der Abbildung 1 dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textbf{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} zu speichern. Diese Änderung sorgt für bessere Antwortzeit der Datenbank, was wiederum zur besseren Benutzbarkeit dient.
+Unterschiedliche Arten von Requests werden in getrennten Tabellen gespeichert. Das ermöglicht bessere Trennung zwischen Benutzer- und Admin-Funktionalitäten. Bearbeitete Requests werden nicht weiter gespeichert und sind ausschließlich in der Logdatei zum nachverfolgen.    
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=0.9\textwidth]{res/database.png}
- 	\caption{Schema der Datenbank.}
+ 	\caption{Schema der Datenbank. Jedes Rechteck repräsentiert eine Tabelle,
+jedes Attribut - eine Spalte in der entsprechenden Tabelle in der Datenbank. Die
+Pfeile geben Auskunft welches Attribut in welcher Tabelle als Schlüssel vorkommt.}
  \end{figure}
 
 \newpage
 \section{Implementierte Kriterien}
 \subsection{Musskriterien}
-Alle Musskriterien wurden implementiert.
+Während der Planungsphase wurde eine Anforderungsdefinition im Pflichtenheft festgelegt. Diese Anforderungen beschreiben welche Muss-, Wunsch- und Abgrenzungskriterien das zu entwickelnde Produkt erfüllen muss. In der Implementierungsphase unseres Projekts wurden alle Musskriterien erfolgreich implementiert, was an präzise und eindeutige Aufgabeformulierung verweist und zeigt, dass das Wasserfallmodel an Softwareentwicklung ergebnisreich angewendet werden kann.   
 
 \subsection{Wunschkriterien}
-Folgende Wunschkriterien wurden implementiert:
+Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass Realisierung einiger Wunschkriterien die Benutzbarkeit des Produkts deutlich verbessern würde. Als Folge wurden unten genannte Kriterien zusätzlich implementiert:
 \begin{itemize}
 \item Wird eine Ressource gelöscht, so werden alle Besitzer per E-Mail benachrichtigt.
-\item Der Administrator kann einen Benutzer blockieren.
+\item Ein Benutzer kann durch Administratoren blockiert werden.
 \item Der Administrator kann Benutzer anhand von Vorname und/oder Nachname suchen.
 \end{itemize}
 
 
 \newpage
-\section{Unittests}
+\section*{Unittests}
+\subsection*{Setup}
+\begin{itemize}
+\item \textbf{setUpUsers}
+\item \textbf{setUpResourceAndRequests}
+\end{itemize}
+\subsection*{Test Cases}
+\begin{itemize}
+\item \textbf{TestHomeView}
+\item \textbf{TestResourceManager}
+\item \textbf{TestUserManager}
+\item \textbf{TestProfileView}
+\item \textbf{TestMyResourcesView}
+\item \textbf{TestResourcesOverview}
+\item \textbf{TestResourcesOverviewSearch}
+\item \textbf{TestPermissionEditingView}
+\item \textbf{TestPermissionEditingViewSearch}
 
+\end{itemize}
+\subsection*{Cleanup}
+\begin{itemize}
+\item \textbf{deleteUsers}
+\item \textbf{deleteResourcesAndRequests}
+\end{itemize}
 
 \newpage
 \section{Implementierungsplan}
-	
+Am Anfang wurde Zeitplan erstellt (Abbildung 2). Aufwandsschätzung benutzt. Keine Erfahrung mit Django - Abweichungen als Folge.\\\\
+Änderungen an einem Teil verursachen Änderungen an schon implementierten Modulen - Task wird neu aufgemacht - Zeit verdoppelt sich. Schwere Planung wegen Abhängigkeiten der Modulen - Versagen des Wasserfallmodels. Trennung der Aufgaben meist schwer und unrealistisch.\\\\ 
+Realer Zeitablauf (Abbildung 3) zeigt Verzögerungen bei geplanten Aktivitäten und Maas der Auswirkung jeder Verzögerung auf gesamten Zeitverlauf. 
+Trotz allen Ungeschicklichkeiten nur 3 Tage Verspätung bei der Abgabe.\\
+
+
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=0.9\textwidth]{res/gannt_plan.png}
+ 	\caption{Ursprünglicher Implementierungsplan. Jede Aktivität wird in jeweiliger Zeile mit einem waagerechten Balken visualisiert. Je länger der Balken, desto länger dauert die Aktivität. Die Beziehungen (beziehungsweise Abhängigkeiten) zwischen Aktivitäten werden mit Pfeilen dargestellt.}
+ \end{figure}
+  \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=0.9\textwidth]{res/gannt_real.png}
+ 	\caption{Realer Zeitablauf der Implementierung mit geänderter Dauer der Aktivitäten. Abhängig von Folgen der Verzögerungen werden Aktivitäten farblich markiert: grün - rechtzeitig/keine negative Folgen, gelb - von anderen Aktivitäten verursachte Verzögerungen, rot - Aktivitäten, während deren Entwurfsprobleme gelöst werden mussten}
+ \end{figure}
 \end{document}
 \grid

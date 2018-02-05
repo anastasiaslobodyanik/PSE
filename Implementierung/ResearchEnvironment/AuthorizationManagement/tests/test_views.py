@@ -235,6 +235,288 @@ class TestMyResourcesView(TestCase):
         self.assertEqual(len(response.context['resource_list']), 2)
 
 
+class TestSendDeletionRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        res = Resource.objects.create(name='res',type='text',description='desc',link='res.txt')
+        res.readers.add(users['test_user'].id)
+        res.owners.add(users['test_user'].id)
+        res.readers.add(users['test_admin'].id)
+        res.owners.add(users['test_admin'].id)
+        res.save()
+        
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/send-deletion-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_staff_user(self):
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/send-deletion-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_not_owner(self):
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/send-deletion-request/1')
+        self.assertEqual(response.status_code, 403)
+       
+    def test_post(self):       
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/send-deletion-request/1', {'descr':''})
+        self.assertEqual(response.status_code, 302)
+class TestCancelDeletionRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/cancel-deletion-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_staff_user(self):
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/cancel-deletion-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_not_owner(self):
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/cancel-deletion-request/1')
+        self.assertEqual(response.status_code, 403)
+       
+    def test_post(self):       
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/cancel-deletion-request/1')
+        self.assertEqual(response.status_code, 302)
+
+class TestApproveAccessRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+        
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/approve-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    
+    def test_not_owner(self):
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/approve-access-request/1')
+        self.assertEqual(response.status_code, 403)
+       
+    def test_post(self):       
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/approve-access-request/1', {'descr':''})
+        self.assertEqual(response.status_code, 302) 
+
+class TestDenyAccessRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+        
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/deny-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    
+    def test_not_owner(self):
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/deny-access-request/1')
+        self.assertEqual(response.status_code, 403)
+       
+    def test_post(self):       
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/deny-access-request/1', {'descr':''})
+        self.assertEqual(response.status_code, 302) 
+
+ 
+class TestSendAccessRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        res = Resource.objects.create(name='res',type='text',description='desc',link='res.txt')
+        res.readers.add(users['test_user'].id)
+        res.owners.add(users['test_user'].id)
+        res.readers.add(users['test_admin'].id)
+        res.owners.add(users['test_admin'].id)
+        res.save()
+        
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/send-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_staff_user(self):
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/send-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_reader(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/send-access-request/1')
+        self.assertEqual(response.status_code, 302)
+       
+    def test_post(self):       
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/send-access-request/1', {'descr':''})
+        self.assertEqual(response.status_code, 302) 
+       
+class TestCancelAccessRequest(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_staff_user(self):
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_reader(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+       
+    def test_post(self):       
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/cancel-access-request/1')
+        self.assertEqual(response.status_code, 302)
+
+class TestDeleteResourceView(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/delete-resource/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_not_staff_user(self):
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/delete-resource/1')
+        self.assertEqual(response.status_code, 403)
+        
+    def test_post(self):       
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/delete-resource/1', {'descr':''})
+        self.assertEqual(response.status_code, 302)
+    
+
+
+
+class TestEditNameView(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
+
+    def test_not_logged_in(self):
+        response = self.client.get('/profile/edit-name/')
+        self.assertEqual(response.status_code, 302)
+        
+    def test_post(self): 
+        self.client.login(username='boncho', password='123456')
+        response = self.client.post('/profile/edit-name/', {'firstName':'', 'lastName': ''})
+        self.assertEqual(response.status_code, 302)
+    
+
 class TestResourcesOverview(TestCase):
          
     @classmethod
@@ -328,7 +610,7 @@ class TestPermissionEditingView(TestCase):
 
     def test_not_logged_in(self):
         response = self.client.get('/profile/my-resources/1-edit-users-permissions')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 301)
         
     def test_not_authorized_user(self):
         self.client.login(username='evlogi', password='123456')
