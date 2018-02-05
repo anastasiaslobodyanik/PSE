@@ -1,747 +1,146 @@
-[31/Jan/2018 17:06:01] INFO [AuthorizationManagement.views:219] Access request for 'paper' resource sent by reader1 
+[05/Feb/2018 18:44:53] INFO [AuthorizationManagement.views:503] ownership for 'awfe' was revoked by owner2 from reader1 
 
-[31/Jan/2018 17:06:16] INFO [AuthorizationManagement.views:173] Request from reader1 to access 'paper' approved by reader2 
+[05/Feb/2018 21:03:48] INFO [AuthorizationManagement.views:503] ownership for 'awfe' was revoked by owner2 from owner2 
 
-[31/Jan/2018 17:07:09] INFO [AuthorizationManagement.views:219] Access request for 'paper' resource sent by reader1 
+[05/Feb/2018 21:03:48] INFO [AuthorizationManagement.views:504] An email was sent from owner2 to 'owner2' , Subject: ownership revoked 
 
-[31/Jan/2018 17:07:24] INFO [AuthorizationManagement.views:195] Request from reader1 to access 'paper' denied by reader2 
+[05/Feb/2018 21:22:41] INFO [AuthorizationManagement.views:709] User owner2 created the 'a' Resource 
 
-[31/Jan/2018 17:08:12] INFO [AuthorizationManagement.views:80] Deletion request for 'default_name' resource sent by reader2 
+[05/Feb/2018 22:35:43] INFO [AuthorizationManagement.views:451] Access permission for 'a' was granted by owner2 
 
-[01/Feb/2018 05:02:35] INFO [AuthorizationManagement.views:272] User reader1 accessed 'resource1' 
+[05/Feb/2018 22:35:43] INFO [AuthorizationManagement.views:452] An email was sent from owner2 to 'reader2' , Subject: Access permission granted 
 
-[01/Feb/2018 06:07:19] INFO [AuthorizationManagement.views:260] User reader1 accessed 'resource1' with id = 1 
+[05/Feb/2018 22:35:43] INFO [AuthorizationManagement.views:451] Access permission for 'a' was granted by owner2 
 
-[01/Feb/2018 06:07:53] INFO [AuthorizationManagement.views:260] User reader1 accessed 'resource1' with id = 1 
+[05/Feb/2018 22:35:43] INFO [AuthorizationManagement.views:452] An email was sent from owner2 to 'alex' , Subject: Access permission granted 
 
-[01/Feb/2018 06:09:08] INFO [AuthorizationManagement.views:260] User reader1 accessed 'resource1' with id = 1 
+[05/Feb/2018 22:35:48] INFO [AuthorizationManagement.views:486] ownership for 'a' was granted by owner2 
 
-[01/Feb/2018 06:10:18] INFO [AuthorizationManagement.views:261] User reader1 accessed 'resource1' with id = 1 
+[05/Feb/2018 22:35:48] INFO [AuthorizationManagement.views:487] An email was sent from owner2 to 'reader2' , Subject: ownership granted 
 
-[01/Feb/2018 06:17:18] INFO [AuthorizationManagement.views:261] User reader1 accessed 'paper' with id = 4 
+[05/Feb/2018 22:36:08] INFO [AuthorizationManagement.views:467] Access permission for 'a' was removed by owner2 from alex 
 
-[01/Feb/2018 06:19:13] INFO [AuthorizationManagement.views:261] User reader1 accessed 'paper' with id = 4 
+[05/Feb/2018 22:36:08] INFO [AuthorizationManagement.views:468] An email was sent from owner2 to 'alex' , Subject: Access permission removed 
 
-[01/Feb/2018 06:23:34] INFO [AuthorizationManagement.views:261] User reader1 accessed 'paper' with id = 4 
+[05/Feb/2018 23:07:19] INFO [AuthorizationManagement.views:469] Access permission for 'a' was removed by owner2 from reader2 
 
-[01/Feb/2018 06:26:35] INFO [AuthorizationManagement.views:344] User reader1 created the 'a' Resource 
+[05/Feb/2018 23:07:19] INFO [AuthorizationManagement.views:470] An email was sent from owner2 to 'reader2' , Subject: Access permission removed 
 
-[01/Feb/2018 06:27:46] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:07:20] INFO [AuthorizationManagement.views:507] ownership for 'a' was revoked by owner2 from reader2 
 
-[01/Feb/2018 06:28:08] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:07:20] INFO [AuthorizationManagement.views:508] An email was sent from owner2 to 'reader2' , Subject: ownership revoked 
 
-[01/Feb/2018 06:36:34] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:07:49] INFO [AuthorizationManagement.views:452] Access permission for 'a' was granted by owner2 
 
-[01/Feb/2018 06:36:38] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:07:49] INFO [AuthorizationManagement.views:453] An email was sent from owner2 to 'admin' , Subject: Access permission granted 
 
-[01/Feb/2018 06:36:39] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:07:54] INFO [AuthorizationManagement.views:488] ownership for 'a' was granted by owner2 
 
-[01/Feb/2018 06:36:46] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:07:54] INFO [AuthorizationManagement.views:489] An email was sent from owner2 to 'admin' , Subject: ownership granted 
 
-[01/Feb/2018 06:45:11] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:08:06] INFO [AuthorizationManagement.views:469] Access permission for 'a' was removed by owner2 from owner2 
 
-[01/Feb/2018 06:45:15] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:08:06] INFO [AuthorizationManagement.views:470] An email was sent from owner2 to 'owner2' , Subject: Access permission removed 
 
-[01/Feb/2018 06:45:15] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:08:07] INFO [AuthorizationManagement.views:507] ownership for 'a' was revoked by owner2 from owner2 
 
-[01/Feb/2018 06:45:15] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:08:07] INFO [AuthorizationManagement.views:508] An email was sent from owner2 to 'owner2' , Subject: ownership revoked 
 
-[01/Feb/2018 06:45:15] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:00] INFO [AuthorizationManagement.views:236] User evlogi tried to approve an access request without being owner of the requested resource
+[05/Feb/2018 23:33:00] INFO [AuthorizationManagement.views:253] Request from evlogi to access 'res' was approved by boncho 
 
-[01/Feb/2018 06:45:15] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:00] INFO [AuthorizationManagement.views:254] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
 
-[01/Feb/2018 06:45:16] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:00] INFO [AuthorizationManagement.views:349] Access request for 'res' was canceled by evlogi 
 
-[01/Feb/2018 06:45:16] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:00] INFO [AuthorizationManagement.views:350] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
 
-[01/Feb/2018 06:45:16] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:00] INFO [AuthorizationManagement.views:333] User boncho tried to inconsistently cancel an access request for resource 'res' 
 
-[01/Feb/2018 06:45:16] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:01] INFO [AuthorizationManagement.views:333] User admin tried to inconsistently cancel an access request for resource 'res' 
 
-[01/Feb/2018 06:45:16] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:01] INFO [AuthorizationManagement.views:148] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
 
-[01/Feb/2018 06:45:17] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:01] INFO [AuthorizationManagement.views:168] Deletion request for 'res' was canceled by boncho 
 
-[01/Feb/2018 06:45:17] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:01] INFO [AuthorizationManagement.views:169] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
 
-[01/Feb/2018 06:45:17] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:01] INFO [AuthorizationManagement.views:153] User admin tried to cancel a deletion request for resource 'res' 
 
-[01/Feb/2018 06:45:17] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:02] INFO [AuthorizationManagement.views:583] User evlogi tried to delete the resource 'res' without being an administrator
+[05/Feb/2018 23:33:02] INFO [AuthorizationManagement.views:607] User admin deleted resource res 
+[05/Feb/2018 23:33:02] INFO [AuthorizationManagement.views:608] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[05/Feb/2018 23:33:02] INFO [AuthorizationManagement.views:267] User evlogi tried to deny an access request without being owner of the requested resource
+[05/Feb/2018 23:33:02] INFO [AuthorizationManagement.views:284] Request from evlogi to access 'res' was denied by boncho 
 
-[01/Feb/2018 06:45:17] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:02] INFO [AuthorizationManagement.views:285] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
 
-[01/Feb/2018 06:45:18] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:05] INFO [AuthorizationManagement.views:420] User evlogi tried to edit the permissions of resource res 
 
-[01/Feb/2018 06:45:18] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:06] INFO [AuthorizationManagement.views:420] User evlogi tried to edit the permissions of resource res 
 
-[01/Feb/2018 06:45:19] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:09] INFO [AuthorizationManagement.views:315] Access request for resource 'res' with id '1' was sent by evlogi 
 
-[01/Feb/2018 06:45:20] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:09] INFO [AuthorizationManagement.views:316] An email was sent from evlogi to 'res' owners, Subject: Access Request for 'res' 
 
-[01/Feb/2018 06:47:21] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:10] INFO [AuthorizationManagement.views:299] User boncho tried to inconsistently send an access request for resource 'res' 
 
-[01/Feb/2018 06:48:43] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:10] INFO [AuthorizationManagement.views:299] User admin tried to inconsistently send an access request for resource 'res' 
 
-[01/Feb/2018 06:48:44] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:10] INFO [AuthorizationManagement.views:108] User evlogi tried to send a deletion request for resource 'res' without being an owner! 
 
-[01/Feb/2018 06:50:51] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:10] INFO [AuthorizationManagement.views:130] Deletion request for 'res' resource was sent by boncho 
 
-[01/Feb/2018 06:52:29] INFO [AuthorizationManagement.views:261] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:10] INFO [AuthorizationManagement.views:131] An email was sent to the Staff members from boncho, Subject: Deletion Request for 'res' 
 
-[01/Feb/2018 06:57:44] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:33:10] INFO [AuthorizationManagement.views:112] User admin tried to inconsistently send a deletion request for resource 'res' 
 
-[01/Feb/2018 06:58:30] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:43] INFO [AuthorizationManagement.views:236] User evlogi tried to approve an access request without being owner of the requested resource
+[05/Feb/2018 23:37:43] INFO [AuthorizationManagement.views:253] Request from evlogi to access 'res' was approved by boncho 
 
-[01/Feb/2018 07:00:25] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:43] INFO [AuthorizationManagement.views:254] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
 
-[01/Feb/2018 07:00:25] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:43] INFO [AuthorizationManagement.views:349] Access request for 'res' was canceled by evlogi 
 
-[01/Feb/2018 07:11:00] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:43] INFO [AuthorizationManagement.views:350] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
 
-[01/Feb/2018 07:15:19] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:43] INFO [AuthorizationManagement.views:333] User boncho tried to inconsistently cancel an access request for resource 'res' 
 
-[01/Feb/2018 07:16:41] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:44] INFO [AuthorizationManagement.views:333] User admin tried to inconsistently cancel an access request for resource 'res' 
 
-[01/Feb/2018 07:19:44] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:44] INFO [AuthorizationManagement.views:148] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
 
-[01/Feb/2018 07:23:24] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:44] INFO [AuthorizationManagement.views:168] Deletion request for 'res' was canceled by boncho 
 
-[01/Feb/2018 07:23:28] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:44] INFO [AuthorizationManagement.views:169] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
 
-[01/Feb/2018 07:24:01] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:44] INFO [AuthorizationManagement.views:153] User admin tried to cancel a deletion request for resource 'res' 
 
-[01/Feb/2018 07:24:44] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:45] INFO [AuthorizationManagement.views:583] User evlogi tried to delete the resource 'res' without being an administrator
+[05/Feb/2018 23:37:45] INFO [AuthorizationManagement.views:607] User admin deleted resource res 
+[05/Feb/2018 23:37:45] INFO [AuthorizationManagement.views:608] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[05/Feb/2018 23:37:45] INFO [AuthorizationManagement.views:267] User evlogi tried to deny an access request without being owner of the requested resource
+[05/Feb/2018 23:37:46] INFO [AuthorizationManagement.views:284] Request from evlogi to access 'res' was denied by boncho 
 
-[01/Feb/2018 07:24:59] INFO [AuthorizationManagement.views:262] User reader1 accessed 'resource1' with id = 1 
+[05/Feb/2018 23:37:46] INFO [AuthorizationManagement.views:285] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
 
-[01/Feb/2018 07:26:00] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:48] INFO [AuthorizationManagement.views:420] User evlogi tried to edit the permissions of resource res 
 
-[01/Feb/2018 07:26:03] INFO [AuthorizationManagement.views:262] User reader1 accessed 'resource1' with id = 1 
+[05/Feb/2018 23:37:49] INFO [AuthorizationManagement.views:420] User evlogi tried to edit the permissions of resource res 
 
-[01/Feb/2018 07:26:09] INFO [AuthorizationManagement.views:262] User reader1 accessed 'resource2' with id = 2 
+[05/Feb/2018 23:37:52] INFO [AuthorizationManagement.views:315] Access request for resource 'res' with id '1' was sent by evlogi 
 
-[01/Feb/2018 07:27:07] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:52] INFO [AuthorizationManagement.views:316] An email was sent from evlogi to 'res' owners, Subject: Access Request for 'res' 
 
-[01/Feb/2018 07:27:07] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:299] User boncho tried to inconsistently send an access request for resource 'res' 
 
-[01/Feb/2018 07:27:10] INFO [AuthorizationManagement.views:262] User reader1 accessed 'a' with id = 6 
+[05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:299] User admin tried to inconsistently send an access request for resource 'res' 
 
-[01/Feb/2018 07:29:54] INFO [AuthorizationManagement.views:349] User reader1 created the 'reso' Resource 
+[05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:108] User evlogi tried to send a deletion request for resource 'res' without being an owner! 
 
-[01/Feb/2018 07:30:29] INFO [AuthorizationManagement.views:262] User reader1 accessed 'reso' with id = 7 
+[05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:130] Deletion request for 'res' resource was sent by boncho 
 
-[01/Feb/2018 07:44:32] INFO [AuthorizationManagement.views:350] User admin created the 'h' Resource 
+[05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:131] An email was sent to the Staff members from boncho, Subject: Deletion Request for 'res' 
 
-[01/Feb/2018 08:01:01] INFO [AuthorizationManagement.views:262] User owner1 accessed 'resource1' with id = 1 
-
-[01/Feb/2018 08:36:03] INFO [AuthorizationManagement.views:107] Deletion request for 'resource2' canceled by owner1 
-
-[01/Feb/2018 08:36:16] INFO [AuthorizationManagement.views:85] Deletion request for 'resource2' resource sent by owner1 
-
-[01/Feb/2018 08:36:23] INFO [AuthorizationManagement.views:107] Deletion request for 'resource2' canceled by owner1 
-
-[03/Feb/2018 14:39:07] INFO [AuthorizationManagement.views:529] User admin created the 'default_name' Resource 
-
-[03/Feb/2018 14:40:08] INFO [AuthorizationManagement.views:529] User admin created the 'test2' Resource 
-
-[03/Feb/2018 16:21:36] INFO [AuthorizationManagement.views:234] Access request for resource 'resource1' with id '1' sent by reader2 
-
-[03/Feb/2018 18:25:25] INFO [AuthorizationManagement.views:298] Access request for resource 'resource3' with id '3' sent by reader2 
-
-[03/Feb/2018 18:25:25] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource3' owners, Object: Access Request for 'resource3' 
-
-[03/Feb/2018 18:27:32] INFO [AuthorizationManagement.views:333] Access request for 'resource1' canceled by reader2 
-
-[03/Feb/2018 18:27:32] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
-
-[03/Feb/2018 18:35:16] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' sent by reader2 
-
-[03/Feb/2018 18:35:16] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
-
-[03/Feb/2018 18:36:01] INFO [AuthorizationManagement.views:333] Access request for 'resource1' canceled by reader2 
-
-[03/Feb/2018 18:36:01] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
-
-[03/Feb/2018 18:36:04] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' sent by reader2 
-
-[03/Feb/2018 18:36:04] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
-
-[03/Feb/2018 19:00:59] INFO [AuthorizationManagement.views:333] Access request for 'resource1' canceled by reader2 
-
-[03/Feb/2018 19:00:59] INFO [AuthorizationManagement.views:334] An email was sent from reader2 to 'resource1' owners, Object: Cancel the Access Request for 'resource1' 
-
-[03/Feb/2018 19:01:16] INFO [AuthorizationManagement.views:298] Access request for resource 'resource1' with id '1' sent by reader2 
-
-[03/Feb/2018 19:01:16] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'resource1' owners, Object: Access Request for 'resource1' 
-
-[03/Feb/2018 20:12:06] INFO [AuthorizationManagement.views:298] Access request for resource 'paper' with id '4' sent by owner1 
-
-[03/Feb/2018 20:12:06] INFO [AuthorizationManagement.views:299] An email was sent from owner1 to 'paper' owners, Object: Access Request for 'paper' 
-
-[03/Feb/2018 20:12:33] INFO [AuthorizationManagement.views:298] Access request for resource 'paper' with id '4' sent by owner2 
-
-[03/Feb/2018 20:12:33] INFO [AuthorizationManagement.views:299] An email was sent from owner2 to 'paper' owners, Object: Access Request for 'paper' 
-
-[03/Feb/2018 22:04:51] INFO [AuthorizationManagement.views:112] Deletion request for 'resource2' resource sent by owner2 
-
-[03/Feb/2018 22:04:51] INFO [AuthorizationManagement.views:113] An email was sent to the Staff members from owner2, Object: Deletion Request for 'resource2' 
-
-[03/Feb/2018 22:05:37] INFO [AuthorizationManagement.views:708] User reader1 created the 'test' Resource 
-
-[03/Feb/2018 22:06:31] INFO [AuthorizationManagement.views:298] Access request for resource 'test' with id '7' sent by reader2 
-
-[03/Feb/2018 22:06:31] INFO [AuthorizationManagement.views:299] An email was sent from reader2 to 'test' owners, Object: Access Request for 'test' 
-
-[04/Feb/2018 01:05:09] INFO [AuthorizationManagement.views:327] Access request for 'resource1' was canceled by reader2 
-
-[04/Feb/2018 01:05:10] INFO [AuthorizationManagement.views:328] An email was sent from reader2 to 'resource1' owners, Subject: Cancel the Access Request for 'resource1' 
-
-[04/Feb/2018 01:05:10] INFO [AuthorizationManagement.views:311] User reader2 tried to inconsistently cancel an access request for resource 'resource1' 
-
-[04/Feb/2018 01:05:12] INFO [AuthorizationManagement.views:327] Access request for 'resource3' was canceled by reader2 
-
-[04/Feb/2018 01:05:12] INFO [AuthorizationManagement.views:328] An email was sent from reader2 to 'resource3' owners, Subject: Cancel the Access Request for 'resource3' 
-
-[04/Feb/2018 01:05:15] INFO [AuthorizationManagement.views:293] Access request for resource 'resource1' with id '1' was sent by reader2 
-
-[04/Feb/2018 01:05:15] INFO [AuthorizationManagement.views:294] An email was sent from reader2 to 'resource1' owners, Subject: Access Request for 'resource1' 
-
-[04/Feb/2018 01:05:19] INFO [AuthorizationManagement.views:293] Access request for resource 'resource3' with id '3' was sent by reader2 
-
-[04/Feb/2018 01:05:19] INFO [AuthorizationManagement.views:294] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
-
-[04/Feb/2018 02:05:10] INFO [AuthorizationManagement.views:679] An email was sent from reader1 to owner1, Subject: Deletion Request for 'resource2' accepted 
-
-[04/Feb/2018 02:05:10] INFO [AuthorizationManagement.views:687] An email was sent to all 'resource2' owners, Object: 'resource2' is deleted 
-[04/Feb/2018 02:05:10] INFO [AuthorizationManagement.views:692] Request from owner1 to delete 'resource2' accepted by reader1 
-
-[04/Feb/2018 02:05:49] INFO [AuthorizationManagement.views:111] Deletion request for 'paper' resource was sent by reader2 
-
-[04/Feb/2018 02:05:49] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
-
-[04/Feb/2018 02:06:27] INFO [AuthorizationManagement.views:231] Request from owner1 to access 'paper' was approved by admin 
-
-[04/Feb/2018 02:06:27] INFO [AuthorizationManagement.views:232] An email was sent from admin to owner1, Subject: Access request for 'paper' approved 
-
-[04/Feb/2018 02:07:59] INFO [AuthorizationManagement.views:740] User owner2 created the 'test2' Resource 
-
-[04/Feb/2018 02:08:30] INFO [AuthorizationManagement.views:111] Deletion request for 'test2' resource was sent by owner2 
-
-[04/Feb/2018 02:08:30] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from owner2, Subject: Deletion Request for 'test2' 
-
-[04/Feb/2018 02:08:47] INFO [AuthorizationManagement.views:679] An email was sent from reader1 to owner2, Subject: Deletion Request for 'test2' accepted 
-
-[04/Feb/2018 02:08:47] INFO [AuthorizationManagement.views:687] An email was sent to all 'test2' owners, Object: 'test2' is deleted 
-[04/Feb/2018 02:08:47] INFO [AuthorizationManagement.views:692] Request from owner2 to delete 'test2' accepted by reader1 
-
-[04/Feb/2018 02:08:51] INFO [AuthorizationManagement.views:724] Request from reader2 to delete 'paper' was denied by reader1 
-
-[04/Feb/2018 02:08:51] INFO [AuthorizationManagement.views:725] An email was sent from reader1 to reader2, Subject: Deletion Request for 'paper' denied
-
-[04/Feb/2018 02:09:28] INFO [AuthorizationManagement.views:740] User owner2 created the '1' Resource 
-
-[04/Feb/2018 02:09:41] INFO [AuthorizationManagement.views:740] User owner2 created the '2' Resource 
-
-[04/Feb/2018 02:09:46] INFO [AuthorizationManagement.views:111] Deletion request for '1' resource was sent by owner2 
-
-[04/Feb/2018 02:09:46] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from owner2, Subject: Deletion Request for '1' 
-
-[04/Feb/2018 02:09:48] INFO [AuthorizationManagement.views:111] Deletion request for '2' resource was sent by owner2 
-
-[04/Feb/2018 02:09:48] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from owner2, Subject: Deletion Request for '2' 
-
-[04/Feb/2018 02:10:01] INFO [AuthorizationManagement.views:111] Deletion request for 'paper' resource was sent by reader2 
-
-[04/Feb/2018 02:10:01] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
-
-[04/Feb/2018 02:10:16] INFO [AuthorizationManagement.views:724] Request from owner2 to delete '2' was denied by admin 
-
-[04/Feb/2018 02:10:16] INFO [AuthorizationManagement.views:725] An email was sent from admin to owner2, Subject: Deletion Request for '2' denied
-
-[04/Feb/2018 02:10:20] INFO [AuthorizationManagement.views:724] Request from reader2 to delete 'paper' was denied by admin 
-
-[04/Feb/2018 02:10:20] INFO [AuthorizationManagement.views:725] An email was sent from admin to reader2, Subject: Deletion Request for 'paper' denied
-
-[04/Feb/2018 02:10:22] INFO [AuthorizationManagement.views:724] Request from owner2 to delete '1' was denied by admin 
-
-[04/Feb/2018 02:10:22] INFO [AuthorizationManagement.views:725] An email was sent from admin to owner2, Subject: Deletion Request for '1' denied
-
-[04/Feb/2018 03:09:08] INFO [AuthorizationManagement.views:111] Deletion request for 'paper' resource was sent by reader2 
-
-[04/Feb/2018 03:09:08] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
-
-[04/Feb/2018 03:10:37] INFO [AuthorizationManagement.views:293] Access request for resource 'default_name' with id '5' was sent by owner1 
-
-[04/Feb/2018 03:10:37] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to 'default_name' owners, Subject: Access Request for 'default_name' 
-
-[04/Feb/2018 03:10:44] INFO [AuthorizationManagement.views:293] Access request for resource 'test2' with id '6' was sent by owner1 
-
-[04/Feb/2018 03:10:44] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to 'test2' owners, Subject: Access Request for 'test2' 
-
-[04/Feb/2018 12:41:08] INFO [AuthorizationManagement.views:724] Request from reader2 to delete 'paper' was denied by reader1 
-
-[04/Feb/2018 12:41:08] INFO [AuthorizationManagement.views:725] An email was sent from reader1 to reader2, Subject: Deletion Request for 'paper' denied
-
-[04/Feb/2018 12:41:26] INFO [AuthorizationManagement.views:111] Deletion request for 'paper' resource was sent by reader2 
-
-[04/Feb/2018 12:41:26] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
-
-[04/Feb/2018 14:36:36] INFO [AuthorizationManagement.views:144] Deletion request for 'paper' was canceled by reader2 
-
-[04/Feb/2018 14:36:36] INFO [AuthorizationManagement.views:145] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for 'paper' 
-
-[04/Feb/2018 14:37:41] INFO [AuthorizationManagement.views:740] User reader2 created the '2' Resource 
-
-[04/Feb/2018 14:58:41] INFO [AuthorizationManagement.views:111] Deletion request for 'paper' resource was sent by reader2 
-
-[04/Feb/2018 14:58:41] INFO [AuthorizationManagement.views:112] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
-
-[04/Feb/2018 15:17:11] INFO [AuthorizationManagement.views:740] User reader2 created the '3' Resource 
-
-[04/Feb/2018 15:17:39] INFO [AuthorizationManagement.views:293] Access request for resource '3' with id '12' was sent by owner1 
-
-[04/Feb/2018 15:17:39] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '3' owners, Subject: Access Request for '3' 
-
-[04/Feb/2018 15:18:29] INFO [AuthorizationManagement.views:293] Access request for resource '2' with id '11' was sent by owner1 
-
-[04/Feb/2018 15:18:29] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '2' owners, Subject: Access Request for '2' 
-
-[04/Feb/2018 15:18:35] INFO [AuthorizationManagement.views:293] Access request for resource '2' with id '10' was sent by owner1 
-
-[04/Feb/2018 15:18:35] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '2' owners, Subject: Access Request for '2' 
-
-[04/Feb/2018 15:18:40] INFO [AuthorizationManagement.views:293] Access request for resource '1' with id '9' was sent by owner1 
-
-[04/Feb/2018 15:18:40] INFO [AuthorizationManagement.views:294] An email was sent from owner1 to '1' owners, Subject: Access Request for '1' 
-
-[04/Feb/2018 15:40:17] INFO [AuthorizationManagement.views:740] User reader2 created the '4' Resource 
-
-[04/Feb/2018 18:37:31] INFO [AuthorizationManagement.views:311] Access request for resource 'resource1' with id '1' was sent by reader2 
-
-[04/Feb/2018 18:37:31] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'resource1' owners, Subject: Access Request for 'resource1' 
-
-[04/Feb/2018 18:37:34] INFO [AuthorizationManagement.views:311] Access request for resource 'resource3' with id '3' was sent by reader2 
-
-[04/Feb/2018 18:37:34] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
-
-[04/Feb/2018 18:37:50] INFO [AuthorizationManagement.views:311] Access request for resource 'resource3' with id '3' was sent by owner2 
-
-[04/Feb/2018 18:37:50] INFO [AuthorizationManagement.views:312] An email was sent from owner2 to 'resource3' owners, Subject: Access Request for 'resource3' 
-
-[04/Feb/2018 18:37:54] INFO [AuthorizationManagement.views:311] Access request for resource 'paper' with id '4' was sent by owner2 
-
-[04/Feb/2018 18:37:54] INFO [AuthorizationManagement.views:312] An email was sent from owner2 to 'paper' owners, Subject: Access Request for 'paper' 
-
-[04/Feb/2018 18:38:22] INFO [AuthorizationManagement.views:129] Deletion request for 'paper' resource was sent by reader2 
-
-[04/Feb/2018 18:38:22] INFO [AuthorizationManagement.views:130] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'paper' 
-
-[04/Feb/2018 18:51:19] INFO [AuthorizationManagement.views:758] User reader2 created the '1' Resource 
-
-[04/Feb/2018 18:51:28] INFO [AuthorizationManagement.views:758] User reader2 created the '2' Resource 
-
-[04/Feb/2018 18:51:38] INFO [AuthorizationManagement.views:311] Access request for resource '1' with id '14' was sent by owner1 
-
-[04/Feb/2018 18:51:38] INFO [AuthorizationManagement.views:312] An email was sent from owner1 to '1' owners, Subject: Access Request for '1' 
-
-[04/Feb/2018 18:51:40] INFO [AuthorizationManagement.views:311] Access request for resource '2' with id '15' was sent by owner1 
-
-[04/Feb/2018 18:51:40] INFO [AuthorizationManagement.views:312] An email was sent from owner1 to '2' owners, Subject: Access Request for '2' 
-
-[04/Feb/2018 18:52:20] INFO [AuthorizationManagement.views:129] Deletion request for '1' resource was sent by reader2 
-
-[04/Feb/2018 18:52:20] INFO [AuthorizationManagement.views:130] An email was sent to the Staff members from reader2, Subject: Deletion Request for '1' 
-
-[04/Feb/2018 19:11:59] INFO [AuthorizationManagement.views:280] Request from reader2 to access 'resource1' was denied by admin 
-
-[04/Feb/2018 19:11:59] INFO [AuthorizationManagement.views:281] An email was sent from admin to reader2, Subject: Access Request for 'resource1' denied 
-
-[04/Feb/2018 19:12:12] INFO [AuthorizationManagement.views:280] Request from reader2 to access 'resource3' was denied by admin 
-
-[04/Feb/2018 19:12:12] INFO [AuthorizationManagement.views:281] An email was sent from admin to reader2, Subject: Access Request for 'resource3' denied 
-
-[04/Feb/2018 19:12:14] INFO [AuthorizationManagement.views:280] Request from owner2 to access 'resource3' was denied by admin 
-
-[04/Feb/2018 19:12:14] INFO [AuthorizationManagement.views:281] An email was sent from admin to owner2, Subject: Access Request for 'resource3' denied 
-
-[04/Feb/2018 19:12:16] INFO [AuthorizationManagement.views:280] Request from owner2 to access 'paper' was denied by admin 
-
-[04/Feb/2018 19:12:16] INFO [AuthorizationManagement.views:281] An email was sent from admin to owner2, Subject: Access Request for 'paper' denied 
-
-[04/Feb/2018 19:12:47] INFO [AuthorizationManagement.views:311] Access request for resource 'resource3' with id '3' was sent by owner2 
-
-[04/Feb/2018 19:12:47] INFO [AuthorizationManagement.views:312] An email was sent from owner2 to 'resource3' owners, Subject: Access Request for 'resource3' 
-
-[04/Feb/2018 19:14:45] INFO [AuthorizationManagement.views:129] Deletion request for '2' resource was sent by reader2 
-
-[04/Feb/2018 19:14:45] INFO [AuthorizationManagement.views:130] An email was sent to the Staff members from reader2, Subject: Deletion Request for '2' 
-
-[04/Feb/2018 19:15:27] INFO [AuthorizationManagement.views:758] User owner1 created the 'r' Resource 
-
-[04/Feb/2018 19:15:38] INFO [AuthorizationManagement.views:129] Deletion request for 'r' resource was sent by owner1 
-
-[04/Feb/2018 19:15:38] INFO [AuthorizationManagement.views:130] An email was sent to the Staff members from owner1, Subject: Deletion Request for 'r' 
-
-[04/Feb/2018 19:20:55] INFO [AuthorizationManagement.views:311] Access request for resource 'paper' with id '4' was sent by owner2 
-
-[04/Feb/2018 19:20:55] INFO [AuthorizationManagement.views:312] An email was sent from owner2 to 'paper' owners, Subject: Access Request for 'paper' 
-
-[04/Feb/2018 19:20:57] INFO [AuthorizationManagement.views:311] Access request for resource '1' with id '14' was sent by owner2 
-
-[04/Feb/2018 19:20:57] INFO [AuthorizationManagement.views:312] An email was sent from owner2 to '1' owners, Subject: Access Request for '1' 
-
-[04/Feb/2018 19:21:00] INFO [AuthorizationManagement.views:345] Access request for '1' was canceled by owner2 
-
-[04/Feb/2018 19:21:00] INFO [AuthorizationManagement.views:346] An email was sent from owner2 to '1' owners, Subject: Cancel the Access Request for '1' 
-
-[04/Feb/2018 19:21:02] INFO [AuthorizationManagement.views:345] Access request for 'paper' was canceled by owner2 
-
-[04/Feb/2018 19:21:02] INFO [AuthorizationManagement.views:346] An email was sent from owner2 to 'paper' owners, Subject: Cancel the Access Request for 'paper' 
-
-[04/Feb/2018 19:21:37] INFO [AuthorizationManagement.views:758] User admin created the 'f' Resource 
-
-[04/Feb/2018 19:22:04] INFO [AuthorizationManagement.views:311] Access request for resource 'resource1' with id '1' was sent by reader2 
-
-[04/Feb/2018 19:22:04] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'resource1' owners, Subject: Access Request for 'resource1' 
-
-[04/Feb/2018 19:22:09] INFO [AuthorizationManagement.views:345] Access request for 'resource1' was canceled by reader2 
-
-[04/Feb/2018 19:22:09] INFO [AuthorizationManagement.views:346] An email was sent from reader2 to 'resource1' owners, Subject: Cancel the Access Request for 'resource1' 
-
-[04/Feb/2018 19:22:14] INFO [AuthorizationManagement.views:311] Access request for resource 'resource1' with id '1' was sent by reader2 
-
-[04/Feb/2018 19:22:14] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'resource1' owners, Subject: Access Request for 'resource1' 
-
-[04/Feb/2018 19:22:16] INFO [AuthorizationManagement.views:311] Access request for resource 'resource3' with id '3' was sent by reader2 
-
-[04/Feb/2018 19:22:16] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
-
-[04/Feb/2018 19:22:20] INFO [AuthorizationManagement.views:311] Access request for resource 'r' with id '16' was sent by reader2 
-
-[04/Feb/2018 19:22:20] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'r' owners, Subject: Access Request for 'r' 
-
-[04/Feb/2018 19:22:24] INFO [AuthorizationManagement.views:311] Access request for resource 'f' with id '17' was sent by reader2 
-
-[04/Feb/2018 19:22:24] INFO [AuthorizationManagement.views:312] An email was sent from reader2 to 'f' owners, Subject: Access Request for 'f' 
-
-[04/Feb/2018 19:58:34] INFO [AuthorizationManagement.views:162] Deletion request for 'paper' was canceled by reader2 
-
-[04/Feb/2018 19:58:34] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for 'paper' 
-
-[04/Feb/2018 19:58:36] INFO [AuthorizationManagement.views:162] Deletion request for '1' was canceled by reader2 
-
-[04/Feb/2018 19:58:36] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for '1' 
-
-[04/Feb/2018 19:58:38] INFO [AuthorizationManagement.views:162] Deletion request for '2' was canceled by reader2 
-
-[04/Feb/2018 19:58:38] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from reader2, Subject: Cancel the Deletion Request for '2' 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from admin 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'admin' , Subject: Access permission removed 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from reader2 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from owner1 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'owner1' , Subject: Access permission removed 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'admin' , Subject: Access permission granted 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
-
-[04/Feb/2018 19:58:59] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'owner1' , Subject: Access permission granted 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from admin 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'admin' , Subject: ownership revoked 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from reader2 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'reader2' , Subject: ownership revoked 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:492] ownership for 'paper' was granted by reader2 
-
-[04/Feb/2018 19:59:00] INFO [AuthorizationManagement.views:493] An email was sent from reader2 to 'admin' , Subject: ownership granted 
-
-[04/Feb/2018 19:59:01] INFO [AuthorizationManagement.views:492] ownership for 'paper' was granted by reader2 
-
-[04/Feb/2018 19:59:01] INFO [AuthorizationManagement.views:493] An email was sent from reader2 to 'owner1' , Subject: ownership granted 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by owner1 from admin 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'admin' , Subject: Access permission removed 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by owner1 from reader2 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'reader2' , Subject: Access permission removed 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by owner1 from owner1 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by owner1 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'admin' , Subject: Access permission granted 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by owner1 
-
-[04/Feb/2018 19:59:28] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'reader2' , Subject: Access permission granted 
-
-[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by owner1 
-
-[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
-
-[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by owner1 from admin 
-
-[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:473] An email was sent from owner1 to 'admin' , Subject: ownership revoked 
-
-[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by owner1 from owner1 
-
-[04/Feb/2018 19:59:29] INFO [AuthorizationManagement.views:473] An email was sent from owner1 to 'owner1' , Subject: ownership revoked 
-
-[04/Feb/2018 20:02:25] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from admin 
-
-[04/Feb/2018 20:02:25] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'admin' , Subject: Access permission removed 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from reader2 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:440] Access permission for 'paper' was removed by reader2 from owner1 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:441] An email was sent from reader2 to 'owner1' , Subject: Access permission removed 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'admin' , Subject: Access permission granted 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
-
-[04/Feb/2018 20:02:26] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:456] Access permission for 'paper' was granted by reader2 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:457] An email was sent from reader2 to 'owner1' , Subject: Access permission granted 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from reader2 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'reader2' , Subject: ownership revoked 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from owner1 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'owner1' , Subject: ownership revoked 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:472] ownership for 'paper' was revoked by reader2 from owner2 
-
-[04/Feb/2018 20:02:27] INFO [AuthorizationManagement.views:473] An email was sent from reader2 to 'owner2' , Subject: ownership revoked 
-
-[04/Feb/2018 22:50:00] INFO [AuthorizationManagement.views:750] User reader2 created the 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' Resource 
-
-[04/Feb/2018 22:51:22] INFO [AuthorizationManagement.views:123] Deletion request for 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' resource was sent by reader2 
-
-[04/Feb/2018 22:51:22] INFO [AuthorizationManagement.views:124] An email was sent to the Staff members from reader2, Subject: Deletion Request for 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' 
-
-[04/Feb/2018 22:54:23] INFO [AuthorizationManagement.views:689] An email was sent from admin to reader2, Subject: Deletion Request for 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' accepted 
-
-[04/Feb/2018 22:54:23] INFO [AuthorizationManagement.views:697] An email was sent to all 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' owners, Object: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is deleted 
-[04/Feb/2018 22:54:23] INFO [AuthorizationManagement.views:702] Request from reader2 to delete 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' accepted by admin 
-
-[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:432] Access permission for '1' was removed by reader2 from reader2 
-
-[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:433] An email was sent from reader2 to 'reader2' , Subject: Access permission removed 
-
-[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:448] Access permission for '1' was granted by reader2 
-
-[04/Feb/2018 22:58:55] INFO [AuthorizationManagement.views:449] An email was sent from reader2 to 'reader2' , Subject: Access permission granted 
-
-[04/Feb/2018 21:07:19] INFO [AuthorizationManagement.views:365] User admin accessed 'resource1' with id = 1 
-
-[04/Feb/2018 21:15:09] INFO [AuthorizationManagement.views:162] Deletion request for 'r' was canceled by owner1 
-
-[04/Feb/2018 21:15:09] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from owner1, Subject: Cancel the Deletion Request for 'r' 
-
-[04/Feb/2018 21:16:12] INFO [AuthorizationManagement.views:440] Access permission for 'r' was removed by owner1 from owner1 
-
-[04/Feb/2018 21:16:12] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
-
-[04/Feb/2018 21:16:13] INFO [AuthorizationManagement.views:456] Access permission for 'r' was granted by owner1 
-
-[04/Feb/2018 21:16:13] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
-
-[04/Feb/2018 21:16:24] INFO [AuthorizationManagement.views:440] Access permission for 'r' was removed by owner1 from owner1 
-
-[04/Feb/2018 21:16:24] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
-
-[04/Feb/2018 21:16:24] INFO [AuthorizationManagement.views:456] Access permission for 'r' was granted by owner1 
-
-[04/Feb/2018 21:16:24] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
-
-[04/Feb/2018 21:16:33] INFO [AuthorizationManagement.views:365] User owner1 accessed 'r' with id = 16 
-
-[04/Feb/2018 21:16:41] INFO [AuthorizationManagement.views:440] Access permission for 'r' was removed by owner1 from owner1 
-
-[04/Feb/2018 21:16:41] INFO [AuthorizationManagement.views:441] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
-
-[04/Feb/2018 21:16:41] INFO [AuthorizationManagement.views:456] Access permission for 'r' was granted by owner1 
-
-[04/Feb/2018 21:16:41] INFO [AuthorizationManagement.views:457] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
-
-[04/Feb/2018 21:16:58] INFO [AuthorizationManagement.views:129] Deletion request for 'r' resource was sent by owner1 
-
-[04/Feb/2018 21:16:58] INFO [AuthorizationManagement.views:130] An email was sent to the Staff members from owner1, Subject: Deletion Request for 'r' 
-
-[04/Feb/2018 21:17:01] INFO [AuthorizationManagement.views:162] Deletion request for 'r' was canceled by owner1 
-
-[04/Feb/2018 21:17:01] INFO [AuthorizationManagement.views:163] An email was sent to the Staff members from owner1, Subject: Cancel the Deletion Request for 'r' 
-
-[04/Feb/2018 22:14:56] INFO [AuthorizationManagement.views:283] Request from reader2 to access 'resource1' was denied by admin 
-
-[04/Feb/2018 22:14:56] INFO [AuthorizationManagement.views:284] An email was sent from admin to reader2, Subject: Access Request for 'resource1' denied 
-
-[04/Feb/2018 22:15:25] INFO [AuthorizationManagement.views:283] Request from reader2 to access 'f' was denied by admin 
-
-[04/Feb/2018 22:15:25] INFO [AuthorizationManagement.views:284] An email was sent from admin to reader2, Subject: Access Request for 'f' denied 
-
-[04/Feb/2018 22:17:02] INFO [AuthorizationManagement.views:745] Request from reader2 to delete '2' was denied by admin 
-
-[04/Feb/2018 22:17:02] INFO [AuthorizationManagement.views:746] An email was sent from admin to reader2, Subject: Deletion Request for '2' denied
-
-[04/Feb/2018 22:17:13] INFO [AuthorizationManagement.views:745] Request from reader2 to delete 'paper' was denied by admin 
-
-[04/Feb/2018 22:17:13] INFO [AuthorizationManagement.views:746] An email was sent from admin to reader2, Subject: Deletion Request for 'paper' denied
-
-[05/Feb/2018 04:30:34] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 04:34:27] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 04:35:50] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 04:36:44] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 04:38:43] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 04:47:28] INFO [AuthorizationManagement.views:417] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:443] Access permission for 'r' was removed by owner1 from owner1 
-
-[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:444] An email was sent from owner1 to 'owner1' , Subject: Access permission removed 
-
-[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:461] Access permission for 'r' was granted by owner1 
-
-[05/Feb/2018 04:53:33] INFO [AuthorizationManagement.views:462] An email was sent from owner1 to 'owner1' , Subject: Access permission granted 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 05:37:42] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 05:49:28] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 05:49:29] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 06:25:45] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 06:25:46] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 06:27:55] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 06:27:56] INFO [AuthorizationManagement.views:426] User evlogi tried to edit the permissions of resource res 
-
-[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from admin 
-
-[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'admin' , Subject: Access permission removed 
-
-[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:452] Access permission for 'res' was removed by boncho from boncho 
-
-[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:453] An email was sent from boncho to 'boncho' , Subject: Access permission removed 
-
-[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:491] ownership for 'res' was revoked by boncho from admin 
-
-[05/Feb/2018 06:27:57] INFO [AuthorizationManagement.views:492] An email was sent from boncho to 'admin' , Subject: ownership revoked 
-
-[05/Feb/2018 09:17:40] INFO [AuthorizationManagement.views:625] ownership for 'r' was granted by owner1 
-
-[05/Feb/2018 09:17:40] INFO [AuthorizationManagement.views:626] An email was sent from owner1 to 'admin' , Subject: ownership granted 
-
-[05/Feb/2018 09:18:01] INFO [AuthorizationManagement.views:566] Access permission for 'r' was removed by owner1 from uzeci@student.kit.edu 
-
-[05/Feb/2018 09:18:01] INFO [AuthorizationManagement.views:584] Access permission for 'r' was granted by owner1 
+[05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:112] User admin tried to inconsistently send a deletion request for resource 'res' 
 

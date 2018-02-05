@@ -30,18 +30,19 @@
 {% if user_list %}
 	<form method="post">
 		{% csrf_token %}
+		
 		{% for user in user_list %}	
-		  	<div class="username">
-		    	<p>{{user.username}}:</p>
+		<input  type="hidden" name="usersIdsOnPage[]" value={{user.id}}>
+		  	<div>
+		    	<h3 >{{user.username}}:</h3>
 		  	</div>
 		  	{% if user in owners %}
 		  	
 			  	<div id='checkboxes'>
-			    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
-			    	<input  type="hidden" name="reader[]" value={{user.id}} >
-			    	<label  >reader</label>
+			    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked">
+			    	<label>reader</label>
 			    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
-			    	<label  >owner</label>
+			    	<label>owner</label>
 				</div>
 		    {% elif user in readers %}
 		    	<div id='checkboxes'>
