@@ -11,106 +11,82 @@
 	<p>Search for user:</p>
 
 	<form action="/profile/my-resources/{{resource.id}}-edit-users-permissions/search" method="get">
-		<input type="text" name='q' placeholder="Type a username">
+		<input type="text" name='q' value="{{query}}" placeholder="Type a username">
 		<input type="submit" value="Search">
 	</form>
 
 
-{% if query %}
-<p>You searched for: <strong>{{ query }}</strong></p> 
-{% if not user_list %}
-<p>No users matched your search criteria.</p>
-{% endif %} 
 
-	{% for user in user_list %}
-	
-	
-	<p>
-	<form method="post">
-	{% csrf_token %}
-	
-  	<div>
-    		<h3 >{{user.username}}:</h3>
-  	</div>
-  	{% if user in owners %}
-  	
-  	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
-    	<input  type="hidden" name="reader[]" value={{user.id}} >
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
-    	
-    	<label  >owner</label>
- 
-    	
-    	</p>
-    	{% elif user in readers %}
-    	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}} checked="checked">
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}>
-    	<label  >owner</label>
-    	</p>
-    	
-    	{% else %}
-    	
-    	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}}>
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}>
-    	<label  >owner</label>
-    	</p>
-    	{% endif %}
-    	
-  	{% endfor %}
-  	<p>
-    	<button type="submit">Submit</button>
-  	</p>
-  	</div>
-	</form> 
-{% else %}	
-	
-	
-	<p>
-	<form method="post">
-	{% csrf_token %}
-	{% for user in readers %}
-	{% if user in owners %}
-	
-  	<div>
-    		<h3 >{{user.username}}:</h3>
-  	</div>
-  	
-  	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
-    	<input  type="hidden" name="reader[]" value={{user.id}} >
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
-    	<label  >owner</label>
-    	
-    
-    	</p>
-    	{% else %}
-    	<div>
-    		<h3 >{{user.username}}:</h3>
-  	</div>
-    	<div id='checkboxes'>
-    	<input  type="checkbox" name="reader[]" value={{user.id}} checked="checked">
-    	<label  >reader</label>
-    	<input type="checkbox" name="owner[]" value={{user.id}}>
-    	<label  >owner</label>
-    	</p>
-    	{% endif %}
-    	
-  	{% endfor %}
-  	
-  	<p>
-    	<button type="submit">Submit</button>
-  	</p>
-  	
-  	</div>
-  	
-	</form>
+{% if query %}
+	<p>You searched for: <strong>{{ query }}</strong></p> 
+	{% if user_list %}
+		<p>Found {{paginator.count }} user{{ paginator.count|pluralize }}.</p>
+	{% else %}
+		<p class="no-results">No resources matched your search criteria.</p>
 	{% endif %}
-	
+{% endif %}
+	 
+{% if user_list %}
+	<form method="post">
+		{% csrf_token %}
+		{% for user in user_list %}	
+		  	<div>
+		    	<h3 >{{user.username}}:</h3>
+		  	</div>
+		  	{% if user in owners %}
+		  	
+			  	<div id='checkboxes'>
+			    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
+			    	<input  type="hidden" name="reader[]" value={{user.id}} >
+			    	<label  >reader</label>
+			    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
+			    	<label  >owner</label>
+				</div>
+		    {% elif user in readers %}
+		    	<div id='checkboxes'>
+			    	<input  type="checkbox" name="reader[]" value={{user.id}} checked="checked">
+			    	<label  >reader</label>
+			    	<input type="checkbox" name="owner[]" value={{user.id}}>
+			    	<label  >owner</label>
+		    	</div>
+		    	
+		    {% else %}		    	
+	    		<div id='checkboxes'>
+			    	<input  type="checkbox" name="reader[]" value={{user.id}}>
+			    	<label  >reader</label>
+			    	<input type="checkbox" name="owner[]" value={{user.id}}>
+			    	<label  >owner</label>
+		    	</div>
+		    {% endif %}	
+  		{% endfor %}
+	  	<p>
+	    	<button type="submit">Submit</button>
+	  	</p>
+	</form> 
+{% endif %}
+
+{# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?{{query_pagination_string}}page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+      {% else %}
+        <li><a href="?{{query_pagination_string}}page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?{{query_pagination_string}}page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
 {% endblock %}

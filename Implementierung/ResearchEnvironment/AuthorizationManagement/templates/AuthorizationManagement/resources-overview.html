@@ -17,7 +17,7 @@
 <div class="search">
 	<p>Which resource do you need?</p>
 	<form action="/resources-overview/search" method="get">
-		<input type="text" name="q" class="search-box">
+		<input type="text" name="q" class="search-box" value={{query}}>
 		<input type="submit" value="Search" class="search-btn">
 	</form><br>
      
@@ -29,8 +29,6 @@
 			
 			{% if query %}
 				<p>You searched for: <strong>{{ query }}</strong></p>   
-			{% endif %}    
-			{% if query %}
 		      <p>Found {{paginator.count }} resource{{ paginator.count|pluralize }}.</p>
 			{% endif %}
 	</div>
