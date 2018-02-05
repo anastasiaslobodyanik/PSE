@@ -234,7 +234,38 @@ class TestMyResourcesView(TestCase):
         self.assertTrue('resource_list' in response.context)
         self.assertEqual(len(response.context['resource_list']), 2)
 
+class TestDeleteResourceView(TestCase):
+         
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        users = setUpUsers()
+        setUpResourceAndRequests(users)
+    
+    def setUp(self):
+        self.client = Client()
+        
+    @classmethod
+    def tearDownClass(cls):
+        deleteResourcesAndRequests()
+        deleteUsers()
+        super().tearDownClass()
 
+    def test_not_logged_in(self):
+        response = self.client.get('/delete-resource/1')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_not_staff_user(self):
+        self.client.login(username='evlogi', password='123456')
+        response = self.client.post('/delete-resource/1')
+        self.assertEqual(response.status_code, 403)
+        
+    def test_post(self):       
+        self.client.login(username='admin', password='123456')
+        response = self.client.post('/delete-resource/1')
+        self.assertRedirects(response, '/profile/my-resources/')
+    
+    
 
 
 class TestEditNameView(TestCase):
