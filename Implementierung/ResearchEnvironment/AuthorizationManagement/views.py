@@ -413,8 +413,7 @@ class OpenResourceView(generic.View):
         ## Download function that tests the functionality.
         ## It could be replaced with another view according to the specific resource
         return download(request,resource)
-    
-@login_required()
+
 def download(request,resource):
     relative_path = request.path
     if relative_path.find(os.sep) == -1:
@@ -623,7 +622,7 @@ class DeleteResourceView(generic.View):
             logger.info("User %s tried to delete a non-existing resource" % (request.user))
             return redirect('/profile')
         
-        # raises the PermissionDenied exception if the current user is a staff user
+        # raises the PermissionDenied exception if the current user is not a staff user
         if not request.user.is_staff :
             logger.info("User %s tried to delete the resource '%s' without being an administrator" % (request.user,res.name))
             raise PermissionDenied

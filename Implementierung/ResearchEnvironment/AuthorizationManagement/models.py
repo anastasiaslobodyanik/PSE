@@ -43,6 +43,7 @@ class Request(models.Model):
         abstract = True        
         unique_together=('sender','resource',) # This tuple must be unique when considered together
 
+
 # corresponds to the table in the database storing all information about an access request    
 class AccessRequest(Request):
     type = 'access'

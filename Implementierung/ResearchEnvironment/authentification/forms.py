@@ -2,14 +2,13 @@ from django.contrib.auth.models import User
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+#Form for registration of a user
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     email = forms.CharField(required=True)
     username = forms.CharField()
-
-
 
     class Meta:
         model = User
