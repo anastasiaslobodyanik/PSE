@@ -1,23 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail.message import EmailMessage
 import logging
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
 
-logger = logging.getLogger(__name__)
+
+
 class CustomUser(User):
     
     class Meta:
+        #uses proxy model to extend behavior of  Django built-in user (does not generate an extra table in the database)
         proxy = True
    
 class Owner(CustomUser):
     
     class Meta:
         proxy = True
-
+        
+# corresponds to the table in the database storing all information about a resource
 class Resource(models.Model):
     type = models.CharField(max_length=50, default = '')
     name = models.CharField(max_length=150, default = '')
@@ -26,6 +27,8 @@ class Resource(models.Model):
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owners = models.ManyToManyField(Owner, related_name= 'owner')
     link = models.FileField(upload_to='')
+
+
     
 class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
@@ -35,13 +38,16 @@ class Request(models.Model):
     type=""
     
     class Meta:
-        abstract = True
-        unique_together=('sender','resource',)
+        # the Request model must be an abstract class, to put some common information into the AccessRequest and DeletionRequest  model
+        #This model will not be used to create any database table
+        abstract = True        
+        unique_together=('sender','resource',) # This tuple must be unique when considered together
 
-    
+
+# corresponds to the table in the database storing all information about an access request    
 class AccessRequest(Request):
     type = 'access'
-    
+# corresponds to the table in the database storing all information about a deletion request    
 class DeletionRequest(Request):
     type = 'deletion' 
     

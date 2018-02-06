@@ -57,11 +57,11 @@ class ProfileView(generic.ListView):
         # load all deletion request if user is staff
         if self.model.exists():            
             if current_user.is_staff and DeletionRequest.objects.all().exists():
-                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())               
+                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all().order_by('-creationDate'))               
                 #self.model = list(chain(self.model,DeletionRequest.objects.all()))
         else: 
             if current_user.is_staff and DeletionRequest.objects.all().exists():
-                self.model = DeletionRequest.objects.all()
+                self.model = DeletionRequest.objects.all().order_by('-creationDate')
                 
         return super(ProfileView, self).get(request)
     

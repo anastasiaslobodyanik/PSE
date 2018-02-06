@@ -3,6 +3,9 @@
 * {
 	margin:0;
 	padding:0;
+    line-height: 28px;		/*																 */
+    border-radius: 4px;		/* These 3 lines are for Login page Username and passwrod styles */
+    margin-bottom: 20px;	/*                                                               */
 }
 
 body {
@@ -86,6 +89,4 @@ body {
 	padding-left: 10px;
 	margin-bottom: 15px;
 }
-
-
 
