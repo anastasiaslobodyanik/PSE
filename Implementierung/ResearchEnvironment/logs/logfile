@@ -144,3 +144,5 @@
 
 [05/Feb/2018 23:37:53] INFO [AuthorizationManagement.views:112] User admin tried to inconsistently send a deletion request for resource 'res' 
 
+[06/Feb/2018 05:42:42] INFO [AuthorizationManagement.views:369] User admin accessed 'resource1' with id = 1 
+
