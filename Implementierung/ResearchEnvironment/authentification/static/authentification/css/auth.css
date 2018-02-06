@@ -2,10 +2,11 @@
 
 * {
 	margin:0;
-	padding:0;
-    line-height: 28px;		/*																 */
+	padding-left: 5px;
+    line-height: 30px;		/*																 */
     border-radius: 4px;		/* These 3 lines are for Login page Username and passwrod styles */
-    margin-bottom: 20px;	/*                                                               */
+    margin-bottom: 5px;		  
+	border:none;
 }
 
 body {
@@ -17,13 +18,14 @@ body {
 	text-align: center;	
 	margin-top: 100px;
 	font-family: "Roboto", sans-serif;
+
 }
 	
 .container {
 	color: #3fb0ac; /* light-blue */
-	text-decoration: none;
 	padding: 5px 20px;
 	font-size: 30px;	
+	margin-top: 20px;
 }
 
 .logo img {
@@ -32,13 +34,13 @@ body {
 }
 
 .form-signin {
-	margin-top: 10;
 	font-size: 20px;
 	color: #173e43; /* dark-blue */
 	text-transform: lowercase;	
 	display: inline-block;
     width: 400px;
     text-align: right;
+	margin-top: 20px;
 	
 }
 .signin-fields {
@@ -59,10 +61,12 @@ body {
     text-align: center;
 	margin-right: 160px;	
 	border-radius: 4px;
+	margin-top:10px
 }
 
-.signin:hover {
+.signin-btn:hover {
 	color: #fae596;
+	cursor: pointer;
 }
 
 .signup-btn {
@@ -70,23 +74,26 @@ body {
     text-decoration: none;
     padding: 10px 20px;
     display: block;
-	margin-right: 9px;
+	margin-right: 9px;	
+	margin-top: -20px;
 }
 
-.signup:hover{
+.signup-btn:hover{
 	color: #3fb0ac;
+	cursor: pointer;
 }
 
 .reg {
+	margin-top: 30px;
 	color: #173e43;
 }
 
 .reg-fields {
 	border:none;
-	width: 290px;
+	width: 285px;
 	line-height: 30px;
 	border-radius: 4px;
 	padding-left: 10px;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
