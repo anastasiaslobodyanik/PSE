@@ -260,3 +260,89 @@
 
 [06/Feb/2018 11:00:09] INFO [AuthorizationManagement.views:508] An email was sent from reader2 to 'admin' , Subject: ownership revoked 
 
+[06/Feb/2018 11:13:07] INFO [AuthorizationManagement.views:351] Access request for resource 'resource3' with id '3' was sent by reader2 
+
+[06/Feb/2018 11:13:07] INFO [AuthorizationManagement.views:352] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
+
+[06/Feb/2018 11:45:40] INFO [AuthorizationManagement.views:495] Access permission for 'paper' was granted by reader2 
+
+[06/Feb/2018 11:45:40] INFO [AuthorizationManagement.views:496] An email was sent from reader2 to 'admin' , Subject: Access permission granted 
+
+[06/Feb/2018 11:45:46] INFO [AuthorizationManagement.views:531] ownership for 'paper' was granted by reader2 
+
+[06/Feb/2018 11:45:46] INFO [AuthorizationManagement.views:532] An email was sent from reader2 to 'admin' , Subject: ownership granted 
+
+[06/Feb/2018 11:45:52] INFO [AuthorizationManagement.views:550] ownership for 'paper' was revoked by reader2 from admin 
+
+[06/Feb/2018 11:45:52] INFO [AuthorizationManagement.views:551] An email was sent from reader2 to 'admin' , Subject: ownership revoked 
+
+[06/Feb/2018 15:13:38] INFO [AuthorizationManagement.views:390] Access request for 'resource3' was canceled by reader2 
+
+[06/Feb/2018 15:13:38] INFO [AuthorizationManagement.views:391] An email was sent from reader2 to 'resource3' owners, Subject: Cancel the Access Request for 'resource3' 
+
+[06/Feb/2018 15:13:39] INFO [AuthorizationManagement.views:412] User reader2 accessed 'paper' with id = 4 
+
+[06/Feb/2018 15:13:56] INFO [AuthorizationManagement.views:412] User reader2 accessed 'paper' with id = 4 
+
+[06/Feb/2018 15:14:25] INFO [AuthorizationManagement.views:412] User admin accessed 'resource1' with id = 1 
+
+[06/Feb/2018 15:15:44] INFO [AuthorizationManagement.views:402] User admin tried to access a non-existing resource 
+
+[06/Feb/2018 15:15:53] INFO [AuthorizationManagement.views:412] User admin accessed 'resource1' with id = 1 
+
+[06/Feb/2018 18:22:52] INFO [AuthorizationManagement.views:412] User owner1 accessed 'paper' with id = 4 
+
+[06/Feb/2018 18:23:56] INFO [AuthorizationManagement.views:512] Access permission for 'paper' was removed by owner1 from reader2 
+
+[06/Feb/2018 18:23:56] INFO [AuthorizationManagement.views:513] An email was sent from owner1 to 'reader2' , Subject: Access permission removed 
+
+[06/Feb/2018 18:23:56] INFO [AuthorizationManagement.views:550] ownership for 'paper' was revoked by owner1 from reader2 
+
+[06/Feb/2018 18:23:56] INFO [AuthorizationManagement.views:551] An email was sent from owner1 to 'reader2' , Subject: ownership revoked 
+
+[06/Feb/2018 19:21:58] INFO [AuthorizationManagement.views:351] Access request for resource 'resource1' with id '1' was sent by alex 
+
+[06/Feb/2018 19:21:58] INFO [AuthorizationManagement.views:352] An email was sent from alex to 'resource1' owners, Subject: Access Request for 'resource1' 
+
+[06/Feb/2018 19:22:05] INFO [AuthorizationManagement.views:274] Request from alex to access 'resource1' was approved by alex 
+
+[06/Feb/2018 19:22:05] INFO [AuthorizationManagement.views:275] An email was sent from alex to alex, Subject: Access request for 'resource1' approved 
+
+[06/Feb/2018 19:31:35] INFO [AuthorizationManagement.views:351] Access request for resource 'resource3' with id '3' was sent by reader2 
+
+[06/Feb/2018 19:31:35] INFO [AuthorizationManagement.views:352] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
+
+[06/Feb/2018 19:31:57] INFO [AuthorizationManagement.views:274] Request from reader2 to access 'resource3' was approved by admin 
+
+[06/Feb/2018 19:31:57] INFO [AuthorizationManagement.views:275] An email was sent from admin to reader2, Subject: Access request for 'resource3' approved 
+
+[06/Feb/2018 19:33:06] INFO [AuthorizationManagement.views:779] User reader2 created the 'asd' Resource 
+
+[06/Feb/2018 19:33:17] INFO [AuthorizationManagement.views:495] Access permission for 'asd' was granted by reader2 
+
+[06/Feb/2018 19:33:17] INFO [AuthorizationManagement.views:496] An email was sent from reader2 to 'admin' , Subject: Access permission granted 
+
+[06/Feb/2018 19:33:17] INFO [AuthorizationManagement.views:531] ownership for 'asd' was granted by reader2 
+
+[06/Feb/2018 19:33:17] INFO [AuthorizationManagement.views:532] An email was sent from reader2 to 'admin' , Subject: ownership granted 
+
+[06/Feb/2018 19:33:25] INFO [AuthorizationManagement.views:512] Access permission for 'asd' was removed by reader2 from admin 
+
+[06/Feb/2018 19:33:25] INFO [AuthorizationManagement.views:513] An email was sent from reader2 to 'admin' , Subject: Access permission removed 
+
+[06/Feb/2018 19:33:25] INFO [AuthorizationManagement.views:550] ownership for 'asd' was revoked by reader2 from admin 
+
+[06/Feb/2018 19:33:25] INFO [AuthorizationManagement.views:551] An email was sent from reader2 to 'admin' , Subject: ownership revoked 
+
+[06/Feb/2018 19:33:34] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource3' with id = 3 
+
+[06/Feb/2018 19:33:46] INFO [AuthorizationManagement.views:390] Access request for 'resource1' was canceled by reader2 
+
+[06/Feb/2018 19:33:46] INFO [AuthorizationManagement.views:391] An email was sent from reader2 to 'resource1' owners, Subject: Cancel the Access Request for 'resource1' 
+
+[06/Feb/2018 19:38:35] INFO [AuthorizationManagement.views:274] Request from owner2 to access 'resource3' was approved by admin 
+
+[06/Feb/2018 19:38:35] INFO [AuthorizationManagement.views:275] An email was sent from admin to owner2, Subject: Access request for 'resource3' approved 
+
+[06/Feb/2018 19:39:46] INFO [AuthorizationManagement.views:652] User admin deleted resource resource3 
+[06/Feb/2018 19:39:46] INFO [AuthorizationManagement.views:653] An email was sent to all 'resource3' owners, Subject: 'resource3' is deleted 
