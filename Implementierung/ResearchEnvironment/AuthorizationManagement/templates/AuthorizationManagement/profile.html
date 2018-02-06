@@ -43,6 +43,10 @@
 				
 			<a href="/profile/my-resources" class="noncurrent">My Resources</a></li>
 	</div>	
+	
+	{% if not requests_list %}
+		<p class="body"> Currently no requests. </p>
+	{% endif %}
 		
 	<!-- requests for admin user -->
 {% if is_admin %}	 
