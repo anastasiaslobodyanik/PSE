@@ -78,7 +78,7 @@
  \newpage
  \section{Einleitung}
 Dieses Dokument beschreibt die Änderungen, welche an unserem Entwurfsdokument vorgenommen wurden, um die Funktionalität des Projekts 	\glqq Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\grqq{} zu gewährleisten. Das Ziel dieses Dokuments ist, die Gründe für diese Änderungen zu erläutern, beziehungsweise Probleme aufzuzeigen, die sich während der Implementierung ergeben haben.\\\\
-Es werden Änderungen an Datenhaltung und Applikationslogik beschrieben sowie begründet. Des Weiteren wird ein Überblick darüber vermittelt, welche Kriterien aus dem Pflichtenheft im Ergebnisprodukt erfüllt wurden.\\\\
+Es werden Änderungen an der Datenhaltung und der Applikationslogik beschrieben sowie begründet. Des Weiteren wird ein Überblick darüber vermittelt, welche Kriterien aus dem Pflichtenheft im Ergebnisprodukt erfüllt wurden.\\\\
 Am Schluss des Dokuments befindet sich ein Vergleich zwischen unserem ursprünglichen und tatsächlichen Implementierungsplan sowie Erläuterungen eventueller Verzögerungen im Zeitplan.
 
  \newpage
@@ -98,7 +98,7 @@ Da diese Klasse keine Funktionalität in sich kapselt, hat sich herausgestellt, 
 Um Lese- und Besitzerrechte zu implementieren, werden der Klasse zusätzliche Attribute hinzugefügt: die Listen \textit{Readers} und \textit{Owners}.
 
 \item \textbf{Klasse ResourceType}\\
-Im Implementierungsprozess hat sich herausgestellt, dass diese Klasse keine Auswirkung auf die Funktionalität des Produkts hat, weswegen diese Klasse nicht implementiert wurde, um unnötigen Aufwand zu vermeiden.
+Im Implementierungsprozess hat sich herausgestellt, dass diese Klasse keine Auswirkung auf die Funktionalität des Produkts hat, weswegen diese Klasse nicht implementiert wurde, um unnötige Erhöhung des Aufwands zu vermeiden.
 
 \item \textbf{Klasse Request}\\
 Dieser Klasse wurde das \textit{Description}-Attribut hinzugefügt. Dieses Attribut hat Type \textit{String} und dient dazu, die Begründung zu speichern, welche vom Absender bei der Erstellung des Requests eventuell eingegeben wurde.
@@ -214,14 +214,15 @@ Während der Implementierung hat sich herausgestellt, dass einige Funktionalitä
  
 \newpage 
 \subsection{Datenbank}
-Jede Änderung am Model-Paket beeinflusst die Datenbankstruktur. Der von Django unabhängige Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der Abbildung 1 dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textit{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} gespeichert. Diese Änderung sorgt für bessere Antwortzeiten der Datenbank, was der besseren Benutzbarkeit dient.
+Jede Änderung am Model-Paket beeinflusst die Datenbankstruktur. Der von Django unabhängige Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der \autoref{datenbank} dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textit{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} gespeichert. Diese Änderung sorgt für bessere Antwortzeiten der Datenbank, was der besseren Benutzbarkeit dient.
 Unterschiedliche Arten von Requests werden in eigenen Tabellen gespeichert. Das ermöglicht bessere Trennung zwischen Benutzer- und Admin-Funktionalitäten. Bearbeitete Requests werden nicht weiter gespeichert und sind ausschließlich in der Logdatei aufgeführt.    
  \begin{figure}[ht!]
  	\centering
- 	\includegraphics[width=0.9\textwidth]{res/database.png}
+ 	\includegraphics[width=1\textwidth]{res/database.png}
  	\caption{Schema der Datenbank. Jedes Rechteck repräsentiert eine Tabelle,
 jedes Attribut - eine Spalte in der entsprechenden Tabelle in der Datenbank. Die
 Pfeile geben Auskunft, welches Attribut in welcher Tabelle als Schlüssel vorkommt.}
+\label{datenbank}
  \end{figure}
 
 \newpage
@@ -241,7 +242,7 @@ Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass die Re
 \newpage
 \section*{Unittests}
 \subsection*{Setup}
-Setup-Funktionen erschaffen die Testumgebung beziehungsweise Testressource für alle Testcases:
+Setup-Funktionen erschaffen die Testumgebung, beziehungsweise Testressource, für alle Testcases:
 \begin{itemize}
 \item setUpUsers
 \item setUpResourceAndRequests
@@ -278,22 +279,29 @@ Cleanup-Funktionen bringen das System in den ursprünglichen Zustand, um Konsist
 
 \newpage
 \section{Implementierungsplan}
-Zu Beginn der Implementierung wurde ein Gannt-Zeitplan erstellt (Abbildung 2), in dem wir unsere ursprüngliche  Aufwandsschätzung dargestellt haben. In dem realen Ablauf der Phase kam es zu einigen Abweichungen vom Zeitplan.\\\\
-Ein Grund dafür ist, dass einige Aktivitäten stark zusammenhängen und Änderungen am Entwurf Anpassungen an schon implementierten Teilen erfordern. Als Folge werden abgeschlossene Aktivitäten vorgesetzt, weswegen die geplante Dauer sich mehrfach erhöhen kann. Strikte Zeitplanung jeder Aktivität gemäß des Wasserfallmodel erfordert Erfahrung mit benutzten Tools, in unserem Fall mit Django. \\\\ 
-Realer Zeitablauf (Abbildung 3) zeigt Verzögerungen bei geplanten Aktivitäten und das Maß der Auswirkung jeder Verzögerung auf gesamten Zeitverlauf. Trotz aller Verzögerungen wurde die Implementierung des Projekts nahezu fristgerecht abgeschlossen.\\
+Zu Beginn der Implementierung wurde ein Gannt-Zeitplan erstellt (\autoref{ganntold}), in dem wir unsere ursprüngliche  Aufwandsschätzung dargestellt haben. In dem realen Ablauf der Phase kam es zu einigen Abweichungen von diesem Zeitplan.\\\\
+Ein Grund dafür ist, dass einige Aktivitäten stark zusammenhängen und Änderungen am Entwurf Anpassungen an schon implementierten Teilen erfordern. Als Folge werden abgeschlossene Aktivitäten vorgesetzt, weswegen die geplante Dauer sich mehrfach erhöhen kann. Strikte Zeitplanung jeder Aktivität gemäß des Wasserfallmodel erfordert Erfahrung mit benutzten Tools, in unserem Fall mit Framework Django.\\\\ 
+Realer Zeitablauf (\autoref{ganntnew}) zeigt Verzögerungen bei geplanten Aktivitäten und das Maß der Auswirkung jeder Verzögerung auf gesamten Zeitverlauf. Trotz aller Verzögerungen wurde die Implementierung des Projekts nahezu fristgerecht abgeschlossen.\\
 
 
  \begin{figure}[ht!]
  	\centering
- 	\includegraphics[width=0.9\textwidth]{res/gannt_plan.png}
+ 	\includegraphics[width=1\textwidth]{res/gannt_plan.png}
  	\caption{Ursprünglicher Implementierungsplan. Jede Aktivität wird in jeweiliger Zeile mit einem waagerechten Balken visualisiert. Je länger der Balken, desto länger dauert die Aktivität. Die Beziehungen (beziehungsweise Abhängigkeiten) zwischen Aktivitäten werden mit Pfeilen dargestellt.}
+ 	\label{ganntold}
  \end{figure}
  
  \newpage
   \begin{figure}[h]
  	\centering
- 	\includegraphics[width=0.9\textwidth]{res/gannt_real.png}
+ 	\includegraphics[width=1\textwidth]{res/gannt_real.png}
  	\caption{Realer Zeitablauf der Implementierung mit geänderter Dauer der Aktivitäten. Abhängig von Folgen der Verzögerungen werden Aktivitäten farblich markiert: grün - rechtzeitig/keine negative Folgen, gelb - von anderen Aktivitäten verursachte Verzögerungen, rot - Aktivitäten, während deren Entwurfsprobleme gelöst werden mussten.}
+ 	\label{ganntnew}
  \end{figure}
+ 
+ 
+\section{Zusammenfassung}
+In der Implementierungsphase wurde ein funktionsfähiges Produkt gemäß des Entwurfs und des Pflichtenhefts fertiggestellt. Das Produkt wurde auf einer virtuellen Maschine für Testzwecke installiert und das Verhalten der Quellcode wurde mit Unittests überprüft. Der Quellcode umfasst XX Codezeilen und ist in unserem \href{https://github.com/anastasiaslobodyanik/PSE/}{GitHub-Depot} verfügbar.\\\\
+\textbf{Link zum Depot:} \href{https://github.com/anastasiaslobodyanik/PSE/}{https://github.com/anastasiaslobodyanik/PSE/}.
 \end{document}
 \grid
