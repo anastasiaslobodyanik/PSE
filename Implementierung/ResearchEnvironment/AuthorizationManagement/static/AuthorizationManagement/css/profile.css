@@ -149,7 +149,7 @@
 }
 
 .access-request {
-	grid-column: 2/4;
+	grid-column: 4/6;
 	color: #173e43;
 	text-align: center;
 	font-size: 18px;
@@ -158,7 +158,7 @@
 }
 
 .deletion-request {
-	grid-column: 4/6;
+	grid-column: 2/4;
 	color: #173e43;	
 	text-align: center;
 	font-size: 18px;
@@ -168,54 +168,6 @@
 
 /*access*/
 .admin-info {
-	grid-column: 2/4;
-	border-top: 10px solid #dddfd4;
-	border-right: 10px solid #dddfd4;
-	background: #ffffff;
-	text-decoration: none;
-	text-align: left;
-	padding: 10px 20px;
-	color: #174e43;
-	font-size: 16px;
-}
-
-.admin-accept-btn {
-	grid-column: 2/3;
-	text-decoration: none;
-	background: #173e43;
-	color: white;
-	padding: 17px 20px;
-	text-align:center;
-	border-top: 2px solid #dddfd4;
-	border-right: 1px solid #dddfd4;		
-	border-radius: 4px;
-}
-
-.admin-accept-btn:hover {
-	color: #173e43;
-	background: #fae596;
-}
-
-.admin-deny-btn {
-	grid-column: 3/4;
-	text-decoration: none;
-	background: #b03f41;
-	color: white;
-	padding: 17px 20px;
-	text-align: center;
-	border-top: 2px solid #dddfd4;
-	border-left: 1px solid #dddfd4;	
-	border-right: 10px solid #dddfd4;	
-	border-radius: 4px;	
-}
-
-.admin-deny-btn:hover {
-	color: #b03f41;
-	background: #fae596;
-}
-
-/*del*/
-.del-info {
 	grid-column: 4/6;
 	border-top: 10px solid #dddfd4;
 	border-left: 10px solid #dddfd4;
@@ -227,7 +179,7 @@
 	font-size: 16px;
 }
 
-.del-accept-btn {
+.admin-accept-btn {
 	grid-column: 4/5;
 	text-decoration: none;
 	background: #173e43;
@@ -236,7 +188,54 @@
 	text-align:center;
 	border-top: 2px solid #dddfd4;
 	border-right: 1px solid #dddfd4;
-	border-left: 10px solid #dddfd4;	
+	border-left: 10px solid #dddfd4;			
+	border-radius: 4px;
+}
+
+.admin-accept-btn:hover {
+	color: #173e43;
+	background: #fae596;
+}
+
+.admin-deny-btn {
+	grid-column: 5/6;
+	text-decoration: none;
+	background: #b03f41;
+	color: white;
+	padding: 17px 20px;
+	text-align: center;
+	border-top: 2px solid #dddfd4;
+	border-left: 1px solid #dddfd4;	
+	border-radius: 4px;	
+}
+
+.admin-deny-btn:hover {
+	color: #b03f41;
+	background: #fae596;
+}
+
+/*del*/
+.del-info {
+	grid-column: 2/4;
+	border-top: 10px solid #dddfd4;
+	border-right: 10px solid #dddfd4;
+	background: #ffffff;
+	text-decoration: none;
+	text-align: left;
+	padding: 10px 20px;
+	color: #174e43;
+	font-size: 16px;
+}
+
+.del-accept-btn {
+	grid-column: 2/3;
+	text-decoration: none;
+	background: #173e43;
+	color: white;
+	padding: 17px 20px;
+	text-align:center;
+	border-top: 2px solid #dddfd4;
+	border-right: 1px solid #dddfd4;	
 	border-radius: 4px;	
 }
 
@@ -246,14 +245,15 @@
 }
 
 .del-deny-btn {
-	grid-column: 5/6;
+	grid-column: 3/4;
 	text-decoration: none;
 	background: #b03f41;
 	color: white;
 	padding: 17px 20px;
 	text-align: center;
 	border-top: 2px solid #dddfd4;
-	border-left: 1px solid #dddfd4;		
+	border-left: 1px solid #dddfd4;	
+	border-right: 10px solid #dddfd4;	
 	border-radius: 4px;
 }
 
@@ -263,6 +263,4 @@
 }
 /* admin requests */
 
-.bell {
-	color: transparent;
-}
+

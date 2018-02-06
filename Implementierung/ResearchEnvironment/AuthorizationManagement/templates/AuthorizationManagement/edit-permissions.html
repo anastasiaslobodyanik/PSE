@@ -7,40 +7,42 @@
 
 {% block body %}
 
-
+<div class="search">
 	<p>Search for user:</p>
 
 	<form action="/profile/my-resources/{{resource.id}}-edit-users-permissions/search" method="get">
-		<input type="text" name='q' value="{{query}}" placeholder="Type a username">
-		<input type="submit" value="Search">
+		<input type="text" name='q' value="{{query}}" class="search-box" placeholder="Type a username">
+		<input type="submit" value="Search" class="search-btn">
 	</form>
 
-
+<div class="container-edit-permissions">
 
 {% if query %}
 	<p>You searched for: <strong>{{ query }}</strong></p> 
 	{% if user_list %}
 		<p>Found {{paginator.count }} user{{ paginator.count|pluralize }}.</p>
+
 	{% else %}
-		<p class="no-results">No resources matched your search criteria.</p>
+		<p class="user-no-results">No resources matched your search criteria.</p>
 	{% endif %}
 {% endif %}
-	 
+
 {% if user_list %}
 	<form method="post">
 		{% csrf_token %}
+		
 		{% for user in user_list %}	
+		<input  type="hidden" name="usersIdsOnPage[]" value={{user.id}}>
 		  	<div>
 		    	<h3 >{{user.username}}:</h3>
 		  	</div>
 		  	{% if user in owners %}
 		  	
 			  	<div id='checkboxes'>
-			    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked" disabled>
-			    	<input  type="hidden" name="reader[]" value={{user.id}} >
-			    	<label  >reader</label>
+			    	<input  type="checkbox" name="reader[]" value={{user.id}}  checked="checked">
+			    	<label>reader</label>
 			    	<input type="checkbox" name="owner[]" value={{user.id}}  checked="checked" >
-			    	<label  >owner</label>
+			    	<label>owner</label>
 				</div>
 		    {% elif user in readers %}
 		    	<div id='checkboxes'>
@@ -64,7 +66,8 @@
 	  	</p>
 	</form> 
 {% endif %}
-
+</div>
+</div>
 {# The pagination code below is taken from https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html #}
 
 {% if is_paginated %}

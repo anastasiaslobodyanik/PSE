@@ -610,7 +610,7 @@ class TestPermissionEditingView(TestCase):
 
     def test_not_logged_in(self):
         response = self.client.get('/profile/my-resources/1-edit-users-permissions')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 301)
         
     def test_not_authorized_user(self):
         self.client.login(username='evlogi', password='123456')

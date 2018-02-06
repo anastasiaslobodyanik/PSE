@@ -35,20 +35,19 @@
 	        {% for res in resources_list %}
 					<a href="#{{res.pk}}" class="resource-name"> {{res.name}} </a>
 						<div id="{{res.pk}}" class="modalDialog">
-							<div>
-							<a href="" title="Close" class="close"> x </a>
-							<h2>Information about : {{res.name}}</h2>
-							<p><strong>Name:</strong> {{res.name}}</p>
-							<p><strong>Type:</strong> {{res.type}}</p>
-							<p><strong>CreationDate:</strong> {{res.creationDate}}</p> 
-							<p><strong>Description:</strong> {{res.description}}</p>
-							<p>
+							<div class="info">
+							<a href="" title="Close" id="x"> x </a>
+							<h2 id="details" >Details</h2><br>
+							<p>Name: <strong>{{res.name}}</strong></p>
+							<p>Type: <strong>{{res.type}}</strong></p>
+							<p>CreationDate: <strong>{{res.creationDate}}</strong></p> 
+							<p>Description: <strong>{{res.description}}</strong></p>
 							{% if res in can_access or is_admin%}
-					       		<a href="../../resources/{{res.pk}}"download>Access</a>
+								<button class="button">
+					       		<a href="../../resources/{{res.pk}}" class="access"download>Access</a>
+								</button>
 							{% endif %}
-							</p>
 							</div>
-
 						</div>		
 						
 				
@@ -57,22 +56,21 @@
 					       <a href="../resources/{{res.pk}}" class="access-btn"download>Access</a>			    		
 			   {% elif res in requested_resources %}
 			   
-				      <a href="#cancel-request-{{res.pk}}" class="cancel-btn"> Cancel Request </a>
-								
+				      <a href="#cancel-request-{{res.pk}}" class="cancel-btn"> Cancel Request </a>							
 
 						<div id="cancel-request-{{res.pk}}" class="modalDialog">
 							<div>
-							<a href="" title="Close" class="close"> x </a>
+							<a href="" title="Close" id="x"> x </a>
 							<form action="/cancel-access-request/{{res.id}}" method="post">	
 							{% csrf_token %}						    
 								<div>
-								<p> Are you sure you want to CANCEL the access request for {{res.name}}? </p>
-								    <input type="submit" 
-										   value="yes, cancel request">
-									<button>
-									<a href="" title="Close" class="test"> Close </a>
-									</button>
+								<p> Are you sure you want to <strong>cancel</strong> the access request for resource: 
+								<strong>{{res.name}}</strong>? </p>
+								<br>
 								</div>
+								
+								<input type="submit" id="no" value="yes, cancel request">
+								<a href="" title="Close" id="close"> Close </a>
 							  </form>
 							</div>
 						</div>
@@ -86,26 +84,21 @@
 								
 						<div id="send-request-{{res.pk}}" class="modalDialog">
 							<div>
-							<a href="" title="Close" class="close"> x </a>
+							<a href="" title="Close" id="x"> x </a>
 							<form action="/send-access-request/{{res.id}}" method="post">
 							{% csrf_token %}
 							
-							    <div class="row">
-									
-                                      <label for="desc">Description: </label><br><br>									
-                                    
-                                      <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "50" rows = "5"></textarea>
-                                    
-                                </div>
 								<div class "row">
-								<p> Are you sure you want to SEND an access request for {{res.name}}? </p>
-								    <input id="send"
-										   type="submit"
-										   value="yes, send request">
-									<button>
-									<a href="" title="Close" class="test"> Close </a>
-									</button>
+								<p> Are you sure you want to <strong>send</strong> an access request for resource
+								<strong>{{res.name}}</strong>? </p>
+								<br>
 								</div>
+								 <div class="row">									
+                                      <label for="descr">Message: </label><br>
+                                      <textarea id="descr" name = "descr" placeholder="optional" maxlength="250" cols = "51" rows = "7"></textarea>
+                                </div>								
+								<input id="yes" type="submit" value="yes, send request">
+								<a href="" title="Close" id="close"> Close </a>
 							  </form>
 							</div>
 						</div>

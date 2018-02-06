@@ -3,12 +3,15 @@
 	padding:0;
 }
 
+@import url(fonts.css);
+
 header {
 	background-color: #3fb0ac; /* blue */
 	height: 55px;
 }
 
 body {
+	font-family: "Roboto", sans-serif;
 	background-color: #dddfd4; /* grey */
 }
 
@@ -56,29 +59,3 @@ body {
 .active {
 	background-color: #173e43;
 }
-
-.bell {
-	position: absolute;
-	top: 3.2%;
-	left: 68.2%;
-	font-size: 18px;
-	color: #fae596; 
-}
-
-.bell:hover {
-	transform-origin: 50% 0;
-	animation: vibrate 0.1s linear 0s infinite both;
-}
-
-@keyframes vibrate
-{
-	0%   {transform: rotate(10deg)}
-	25%  {transform: rotate(-10deg)}
-	50%  {transform: rotate(0)}
-	75%  {transform: rotate(10deg)}
-	100% {transform: rotate(0)}
-}
-
-
-
-
