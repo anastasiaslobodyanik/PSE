@@ -43,6 +43,10 @@
 				
 			<a href="/profile/my-resources" class="noncurrent">My Resources</a></li>
 	</div>	
+	
+	{% if not requests_list %}
+		<p class="body"> Currently no requests. </p>
+	{% endif %}
 		
 	<!-- requests for admin user -->
 {% if is_admin %}	 
@@ -205,8 +209,6 @@
 				</div>
 
 				<a href="#deny-request-{{access_request.pk}}" class="deny-btn"> Deny </a>
-
-								
 				<div id="deny-request-{{access_request.pk}}" class="modalDialog">
 					<div>
 						<a href="" title="Close" id="x"> x </a>

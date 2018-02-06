@@ -16,9 +16,14 @@
 			<a href="/profile/my-resources" class="current">My Resources</a></li>
 	</div>	
 	
-<div class="resources-container">	
+	
+  <div class="resources-container">	
 	
 	<a href="/profile/my-resources/add-new-resource" class="create-resource"><strong>+</strong></a>
+	<br>
+	{% if not resource_list %}
+		<p class="body"> Currently no resources. </p>
+	{% endif %}
 	
 	{% for resource in resource_list %}
 		<a href="#{{resource.pk}}" class="res-name"> {{resource.name}} </a>

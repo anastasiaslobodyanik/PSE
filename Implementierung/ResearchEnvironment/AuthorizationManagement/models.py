@@ -36,7 +36,6 @@ class Request(models.Model):
     
     class Meta:
         abstract = True
-
         unique_together=('sender','resource',)
 
     

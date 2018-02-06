@@ -20,6 +20,10 @@
 .create-resource:hover {
 	background: #fae596
 }
+.body {
+	text-align: center;
+	grid-column: 3/4;
+}
 
 .res-name {
 	grid-column: 2/5;
