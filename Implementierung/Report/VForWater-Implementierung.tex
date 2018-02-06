@@ -10,7 +10,7 @@
 \usepackage{csquotes}
 \usepackage{graphicx}
 \hypersetup{
- 		pdftitle={Implementierung},
+ 		pdftitle={VForWater-Implementierung},
  }
 \usepackage{fancyhdr}%<-------------to control headers and footers
 \usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
@@ -77,8 +77,8 @@
  \tableofcontents
  \newpage
  \section{Einleitung}
-Dieses Dokument beschreibt die Änderungen, welche an unserem Entwurfdokument vorgenommen wurden, um die Funktionalität des Projekts ``Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten`` zu gewährleisten. Das Ziel dieses Dokuments ist, die Gründe für diese Änderungen zu erläutern, beziehungsweise Probleme aufzuzeigen, die sich während der Implementierung ergeben haben.\\\\
-Es werden Änderungen an Datenhaltung und Applikationslogik beschrieben sowie begründet. Des Weiteren wird ein Überblick darüber vermittelt, welche Musskriterien implementiert wurden, welche nicht und warum. Die implementierten Wunschkriterien werden ebenfalls kurz genannt.\\\\
+Dieses Dokument beschreibt die Änderungen, welche an unserem Entwurfsdokument vorgenommen wurden, um die Funktionalität des Projekts 	\glqq Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\grqq{} zu gewährleisten. Das Ziel dieses Dokuments ist, die Gründe für diese Änderungen zu erläutern, beziehungsweise Probleme aufzuzeigen, die sich während der Implementierung ergeben haben.\\\\
+Es werden Änderungen an der Datenhaltung und der Applikationslogik beschrieben sowie begründet. Des Weiteren wird ein Überblick darüber vermittelt, welche Kriterien aus dem Pflichtenheft im Ergebnisprodukt erfüllt wurden.\\\\
 Am Schluss des Dokuments befindet sich ein Vergleich zwischen unserem ursprünglichen und tatsächlichen Implementierungsplan sowie Erläuterungen eventueller Verzögerungen im Zeitplan.
 
  \newpage
@@ -89,7 +89,7 @@ Während der Designphase wurden Klassen des Model-Pakets entsprechend der Prinzi
  
 \begin{itemize}
 \item \textbf{Klasse CustomUser}\\
-Klasse \textit{CustomUser} erbt von der Django-Klasse \textit{User} und ersetzt Klasse \textit{User} aus dem Entwurfdokument. Sämtliche Attribute werden von Django vordefiniert und mussten nicht zusätzlich implementiert werden.
+Klasse \textit{CustomUser} erbt von der Django-Klasse \textit{User} und ersetzt Klasse \textit{User} aus dem Entwurfsdokument. Sämtliche Attribute werden von Django vordefiniert und mussten nicht zusätzlich implementiert werden.
 
 \item \textbf{Klasse Admin}\\
 Da diese Klasse keine Funktionalität in sich kapselt, hat sich herausgestellt, dass sie durch die Benutzung des Attributs \textit{is staff} ersetzt werden kann. Dieses Attribut wird in der \textit{User}-Klasse von Django vordefiniert.
@@ -98,7 +98,7 @@ Da diese Klasse keine Funktionalität in sich kapselt, hat sich herausgestellt, 
 Um Lese- und Besitzerrechte zu implementieren, werden der Klasse zusätzliche Attribute hinzugefügt: die Listen \textit{Readers} und \textit{Owners}.
 
 \item \textbf{Klasse ResourceType}\\
-TO DO
+Im Implementierungsprozess hat sich herausgestellt, dass diese Klasse keine Auswirkung auf die Funktionalität des Produkts hat, weswegen diese Klasse nicht implementiert wurde, um unnötige Erhöhung des Aufwands zu vermeiden.
 
 \item \textbf{Klasse Request}\\
 Dieser Klasse wurde das \textit{Description}-Attribut hinzugefügt. Dieses Attribut hat Type \textit{String} und dient dazu, die Begründung zu speichern, welche vom Absender bei der Erstellung des Requests eventuell eingegeben wurde.
@@ -138,8 +138,8 @@ Funktionalität dieses Views wurde für bessere Struktur der Anwendungslogik auf
 \begin{itemize}
 \item \textit{SendAccessRequest}
 \item \textit{CancelAccessRequest}
-\item \textit{ApproveDeletionRequest}
-\item \textit{DenyDeletionRequest}
+\item \textit{SendDeletionRequest}
+\item \textit{CancelDeletionRequest}
 \end{itemize}
 
 \item \textbf{Klasse ResourceInfoView}\\
@@ -186,7 +186,7 @@ Während der Implementierung hat sich herausgestellt, dass einige Funktionalitä
 		\end{itemize}
 	\item \textbf{/edit-name}\\
 	\end{itemize}
-
+\newpage
 \noindent Bearbeitung der Requests:
 \item \textbf{/approve-access-request/requestid}
 \item \textbf{/deny-access-request/requestid}
@@ -214,23 +214,24 @@ Während der Implementierung hat sich herausgestellt, dass einige Funktionalitä
  
 \newpage 
 \subsection{Datenbank}
-Jede Änderung am Model-Paket beeinflusst Datenbankstruktur. Das von Django unabhängiges Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der Abbildung 1 dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textbf{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} zu speichern. Diese Änderung sorgt für bessere Antwortzeit der Datenbank, was wiederum zur besseren Benutzbarkeit dient.
-Unterschiedliche Arten von Requests werden in getrennten Tabellen gespeichert. Das ermöglicht bessere Trennung zwischen Benutzer- und Admin-Funktionalitäten. Bearbeitete Requests werden nicht weiter gespeichert und sind ausschließlich in der Logdatei zum nachverfolgen.    
+Jede Änderung am Model-Paket beeinflusst die Datenbankstruktur. Der von Django unabhängige Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der \autoref{datenbank} dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textit{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} gespeichert. Diese Änderung sorgt für bessere Antwortzeiten der Datenbank, was der besseren Benutzbarkeit dient.
+Unterschiedliche Arten von Requests werden in eigenen Tabellen gespeichert. Das ermöglicht bessere Trennung zwischen Benutzer- und Admin-Funktionalitäten. Bearbeitete Requests werden nicht weiter gespeichert und sind ausschließlich in der Logdatei aufgeführt.    
  \begin{figure}[ht!]
  	\centering
- 	\includegraphics[width=0.9\textwidth]{res/database.png}
+ 	\includegraphics[width=1\textwidth]{res/database.png}
  	\caption{Schema der Datenbank. Jedes Rechteck repräsentiert eine Tabelle,
 jedes Attribut - eine Spalte in der entsprechenden Tabelle in der Datenbank. Die
-Pfeile geben Auskunft welches Attribut in welcher Tabelle als Schlüssel vorkommt.}
+Pfeile geben Auskunft, welches Attribut in welcher Tabelle als Schlüssel vorkommt.}
+\label{datenbank}
  \end{figure}
 
 \newpage
 \section{Implementierte Kriterien}
 \subsection{Musskriterien}
-Während der Planungsphase wurde eine Anforderungsdefinition im Pflichtenheft festgelegt. Diese Anforderungen beschreiben welche Muss-, Wunsch- und Abgrenzungskriterien das zu entwickelnde Produkt erfüllen muss. In der Implementierungsphase unseres Projekts wurden alle Musskriterien erfolgreich implementiert, was an präzise und eindeutige Aufgabeformulierung verweist und zeigt, dass das Wasserfallmodel an Softwareentwicklung ergebnisreich angewendet werden kann.   
+Während der Planungsphase wurde eine Anforderungsdefinition im Pflichtenheft festgelegt. Diese Anforderungen beschreiben, welche Muss-, Wunsch- und Abgrenzungskriterien das zu entwickelnde Produkt erfüllen muss. In der Implementierungsphase unseres Projektes wurden alle Musskriterien erfolgreich implementiert, was für präzise und eindeutige Aufgabenformulierung spricht und zeigt, dass das Wasserfallmodel an der Softwareentwicklung ergebnisreich angewendet werden kann.   
 
 \subsection{Wunschkriterien}
-Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass Realisierung einiger Wunschkriterien die Benutzbarkeit des Produkts deutlich verbessern würde. Als Folge wurden unten genannte Kriterien zusätzlich implementiert:
+Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass die Realisierung einiger Wunschkriterien die Benutzbarkeit des Produkts deutlich verbessern würde. Als Folge wurden unten genannte Kriterien zusätzlich implementiert:
 \begin{itemize}
 \item Wird eine Ressource gelöscht, so werden alle Besitzer per E-Mail benachrichtigt.
 \item Ein Benutzer kann durch Administratoren blockiert werden.
@@ -241,46 +242,66 @@ Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass Realis
 \newpage
 \section*{Unittests}
 \subsection*{Setup}
+Setup-Funktionen erschaffen die Testumgebung, beziehungsweise Testressource, für alle Testcases:
 \begin{itemize}
-\item \textbf{setUpUsers}
-\item \textbf{setUpResourceAndRequests}
+\item setUpUsers
+\item setUpResourceAndRequests
 \end{itemize}
-\subsection*{Test Cases}
+\subsection*{Testcases}
+Um Codequalität zu gewährleisten, wurde zu jedem View entsprechende Testcases implementiert. Ein Testcase ist eine Testeinheit, die das angemessene Verhalten eines bestimmten Teils der Funktionalität unter unterschiedlichen Bedingungen überprüft. Die in unserem Projekt implementierten Testcases:  
 \begin{itemize}
-\item \textbf{TestHomeView}
-\item \textbf{TestResourceManager}
-\item \textbf{TestUserManager}
-\item \textbf{TestProfileView}
-\item \textbf{TestMyResourcesView}
-\item \textbf{TestResourcesOverview}
-\item \textbf{TestResourcesOverviewSearch}
-\item \textbf{TestPermissionEditingView}
-\item \textbf{TestPermissionEditingViewSearch}
+\item TestHomeView
+\item TestResourceManager
+\item TestUserManager
+\item TestProfileView
+\item TestMyResourcesView
+\item TestSendDeletionRequest
+\item TestCancelDeletionRequest
+\item TestApproveAccesRequest
+\item TestDenyAccesRequest
+\item TestSendAccessRequest
+\item TestCancelAccessRequest
+\item TestDeleteResourceView
+\item TestSendDeletionRequest
+\item TestEditNameView
+\item TestResourcesOverview
+\item TestResourcesOverviewSearch
+\item TestPermissionEditingView
+\item TestPermissionEditingViewSearch
 
 \end{itemize}
 \subsection*{Cleanup}
+Cleanup-Funktionen bringen das System in den ursprünglichen Zustand, um Konsistenz der Datenbank vor und nach dem Testen zu garantieren:  
 \begin{itemize}
-\item \textbf{deleteUsers}
-\item \textbf{deleteResourcesAndRequests}
+\item deleteUsers
+\item deleteResourcesAndRequests
 \end{itemize}
 
 \newpage
 \section{Implementierungsplan}
-Am Anfang wurde Zeitplan erstellt (Abbildung 2). Aufwandsschätzung benutzt. Keine Erfahrung mit Django - Abweichungen als Folge.\\\\
-Änderungen an einem Teil verursachen Änderungen an schon implementierten Modulen - Task wird neu aufgemacht - Zeit verdoppelt sich. Schwere Planung wegen Abhängigkeiten der Modulen - Versagen des Wasserfallmodels. Trennung der Aufgaben meist schwer und unrealistisch.\\\\ 
-Realer Zeitablauf (Abbildung 3) zeigt Verzögerungen bei geplanten Aktivitäten und Maas der Auswirkung jeder Verzögerung auf gesamten Zeitverlauf. 
-Trotz allen Ungeschicklichkeiten nur 3 Tage Verspätung bei der Abgabe.\\
+Zu Beginn der Implementierung wurde ein Gannt-Zeitplan erstellt (\autoref{ganntold}), in dem wir unsere ursprüngliche  Aufwandsschätzung dargestellt haben. In dem realen Ablauf der Phase kam es zu einigen Abweichungen von diesem Zeitplan.\\\\
+Ein Grund dafür ist, dass einige Aktivitäten stark zusammenhängen und Änderungen am Entwurf Anpassungen an schon implementierten Teilen erfordern. Als Folge werden abgeschlossene Aktivitäten vorgesetzt, weswegen die geplante Dauer sich mehrfach erhöhen kann. Strikte Zeitplanung jeder Aktivität gemäß des Wasserfallmodel erfordert Erfahrung mit benutzten Tools, in unserem Fall mit Framework Django.\\\\ 
+Realer Zeitablauf (\autoref{ganntnew}) zeigt Verzögerungen bei geplanten Aktivitäten und das Maß der Auswirkung jeder Verzögerung auf gesamten Zeitverlauf. Trotz aller Verzögerungen wurde die Implementierung des Projekts nahezu fristgerecht abgeschlossen.\\
 
 
  \begin{figure}[ht!]
  	\centering
- 	\includegraphics[width=0.9\textwidth]{res/gannt_plan.png}
+ 	\includegraphics[width=1\textwidth]{res/gannt_plan.png}
  	\caption{Ursprünglicher Implementierungsplan. Jede Aktivität wird in jeweiliger Zeile mit einem waagerechten Balken visualisiert. Je länger der Balken, desto länger dauert die Aktivität. Die Beziehungen (beziehungsweise Abhängigkeiten) zwischen Aktivitäten werden mit Pfeilen dargestellt.}
+ 	\label{ganntold}
  \end{figure}
-  \begin{figure}[ht!]
+ 
+ \newpage
+  \begin{figure}[h]
  	\centering
- 	\includegraphics[width=0.9\textwidth]{res/gannt_real.png}
- 	\caption{Realer Zeitablauf der Implementierung mit geänderter Dauer der Aktivitäten. Abhängig von Folgen der Verzögerungen werden Aktivitäten farblich markiert: grün - rechtzeitig/keine negative Folgen, gelb - von anderen Aktivitäten verursachte Verzögerungen, rot - Aktivitäten, während deren Entwurfsprobleme gelöst werden mussten}
+ 	\includegraphics[width=1\textwidth]{res/gannt_real.png}
+ 	\caption{Realer Zeitablauf der Implementierung mit geänderter Dauer der Aktivitäten. Abhängig von Folgen der Verzögerungen werden Aktivitäten farblich markiert: grün - rechtzeitig/keine negative Folgen, gelb - von anderen Aktivitäten verursachte Verzögerungen, rot - Aktivitäten, während deren Entwurfsprobleme gelöst werden mussten.}
+ 	\label{ganntnew}
  \end{figure}
+ 
+ 
+\section{Zusammenfassung}
+In der Implementierungsphase wurde ein funktionsfähiges Produkt gemäß des Entwurfs und des Pflichtenhefts fertiggestellt. Das Produkt wurde auf einer virtuellen Maschine für Testzwecke installiert und das Verhalten der Quellcode wurde mit Unittests überprüft. Der Quellcode umfasst XX Codezeilen und ist in unserem \href{https://github.com/anastasiaslobodyanik/PSE/}{GitHub-Depot} verfügbar.\\\\
+\textbf{Link zum Depot:} \href{https://github.com/anastasiaslobodyanik/PSE/}{https://github.com/anastasiaslobodyanik/PSE/}.
 \end{document}
 \grid

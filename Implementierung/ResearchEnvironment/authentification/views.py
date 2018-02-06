@@ -8,8 +8,9 @@ from .forms import UserForm
 
 from django.template import RequestContext
 
-# Create your views here.
 
+
+#View for registration of a user
 class UserFormView(View):
     form_class = UserForm
     template_name = 'authentification/registration.html'

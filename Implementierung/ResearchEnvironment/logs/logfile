@@ -260,6 +260,7 @@
 
 [06/Feb/2018 11:00:09] INFO [AuthorizationManagement.views:508] An email was sent from reader2 to 'admin' , Subject: ownership revoked 
 
+<<<<<<< HEAD
 [06/Feb/2018 11:13:07] INFO [AuthorizationManagement.views:351] Access request for resource 'resource3' with id '3' was sent by reader2 
 
 [06/Feb/2018 11:13:07] INFO [AuthorizationManagement.views:352] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
@@ -346,3 +347,65 @@
 
 [06/Feb/2018 19:39:46] INFO [AuthorizationManagement.views:652] User admin deleted resource resource3 
 [06/Feb/2018 19:39:46] INFO [AuthorizationManagement.views:653] An email was sent to all 'resource3' owners, Subject: 'resource3' is deleted 
+=======
+[06/Feb/2018 16:39:03] INFO [AuthorizationManagement.views:351] Access request for resource 'resource3' with id '3' was sent by reader2 
+
+[06/Feb/2018 16:39:03] INFO [AuthorizationManagement.views:352] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
+
+[06/Feb/2018 16:39:22] INFO [AuthorizationManagement.views:312] Request from reader2 to access 'resource3' was denied by admin 
+
+[06/Feb/2018 16:39:22] INFO [AuthorizationManagement.views:313] An email was sent from admin to reader2, Subject: Access Request for 'resource3' denied 
+
+[06/Feb/2018 16:49:11] INFO [AuthorizationManagement.views:412] User admin accessed 'resource1' with id = 1 
+
+[06/Feb/2018 17:20:20] INFO [AuthorizationManagement.views:312] Request from reader2 to access 'resource1' was denied by admin 
+
+[06/Feb/2018 17:20:20] INFO [AuthorizationManagement.views:313] An email was sent from admin to reader2, Subject: Access Request for 'resource1' denied 
+
+[06/Feb/2018 17:20:40] INFO [AuthorizationManagement.views:412] User admin accessed 'resource3' with id = 3 
+
+[06/Feb/2018 17:21:49] INFO [AuthorizationManagement.views:412] User reader2 accessed 'paper' with id = 4 
+
+[06/Feb/2018 17:21:55] INFO [AuthorizationManagement.views:412] User reader2 accessed 'paper' with id = 4 
+
+[06/Feb/2018 17:22:47] INFO [AuthorizationManagement.views:412] User reader2 accessed 'paper' with id = 4 
+
+[06/Feb/2018 17:23:18] INFO [AuthorizationManagement.views:351] Access request for resource 'resource3' with id '3' was sent by reader2 
+
+[06/Feb/2018 17:23:18] INFO [AuthorizationManagement.views:352] An email was sent from reader2 to 'resource3' owners, Subject: Access Request for 'resource3' 
+
+[06/Feb/2018 17:23:36] INFO [AuthorizationManagement.views:274] Request from reader2 to access 'resource3' was approved by admin 
+
+[06/Feb/2018 17:23:36] INFO [AuthorizationManagement.views:275] An email was sent from admin to reader2, Subject: Access request for 'resource3' approved 
+
+[06/Feb/2018 17:23:52] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource3' with id = 3 
+
+[06/Feb/2018 17:25:15] INFO [AuthorizationManagement.views:412] User admin accessed 'resource1' with id = 1 
+
+[06/Feb/2018 17:25:18] INFO [AuthorizationManagement.views:412] User admin accessed 'resource3' with id = 3 
+
+[06/Feb/2018 17:27:48] INFO [AuthorizationManagement.views:412] User admin accessed 'resource3' with id = 3 
+
+[06/Feb/2018 17:29:24] INFO [AuthorizationManagement.views:412] User admin accessed 'resource3' with id = 3 
+
+[06/Feb/2018 17:31:56] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource2' with id = 4 
+
+[06/Feb/2018 17:32:49] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource2' with id = 4 
+
+[06/Feb/2018 17:33:24] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource3' with id = 3 
+
+[06/Feb/2018 17:33:25] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource2' with id = 4 
+
+[06/Feb/2018 17:33:26] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource2' with id = 4 
+
+[06/Feb/2018 18:08:28] INFO [AuthorizationManagement.views:351] Access request for resource 'resource2' with id '4' was sent by owner2 
+
+[06/Feb/2018 18:08:28] INFO [AuthorizationManagement.views:352] An email was sent from owner2 to 'resource2' owners, Subject: Access Request for 'resource2' 
+
+[06/Feb/2018 18:09:38] INFO [AuthorizationManagement.views:351] Access request for resource 'resource1' with id '1' was sent by reader2 
+
+[06/Feb/2018 18:09:38] INFO [AuthorizationManagement.views:352] An email was sent from reader2 to 'resource1' owners, Subject: Access Request for 'resource1' 
+
+[06/Feb/2018 18:52:57] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource3' with id = 3 
+
+>>>>>>> bba26ca285280a1d2a1c03fc616b2341921fd103

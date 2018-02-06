@@ -11,23 +11,22 @@
 	font-family: "Roboto", sans-serif;
 	font-size: 17px;
     pointer-events: none;
-    }
+}
 
-    .modalDialog:target {
-        opacity:1;
-        pointer-events: auto;
-    }
+.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
 
-    .modalDialog > div {
-        width: 400px;
-		height: auto;
-        position: relative;
-        margin: 10% auto;
-        padding: 20px 20px 13px 20px;
-        background: #dddfd4;
-		border-radius:6px;
-
-    }
+.modalDialog > div {
+    width: 400px;
+	height: auto;
+    position: relative;
+	margin: 10% auto;
+	padding: 20px 20px 13px 20px;
+	background: #dddfd4;		
+	border-radius:6px;
+}
 
 .cancel-request {
 	height: 100px;
@@ -109,7 +108,7 @@
     clear: both;
 }
 
-.button {
+.acc-btn-info-dialog {
 	height: 55px;
 	width: 400px;
 	border: none;
@@ -119,7 +118,7 @@
 	
 }
 
-.access {
+.acc-info-dialog {
 	font-size:15px;
 	color: white;
 	text-decoration:none;

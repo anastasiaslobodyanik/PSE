@@ -57,11 +57,11 @@ class ProfileView(generic.ListView):
         # load all deletion request if user is staff
         if self.model.exists():            
             if current_user.is_staff and DeletionRequest.objects.all().exists():
-                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all())               
+                self.model=get_sorted_requests(self.model, DeletionRequest.objects.all().order_by('-creationDate'))               
                 #self.model = list(chain(self.model,DeletionRequest.objects.all()))
         else: 
             if current_user.is_staff and DeletionRequest.objects.all().exists():
-                self.model = DeletionRequest.objects.all()
+                self.model = DeletionRequest.objects.all().order_by('-creationDate')
                 
         return super(ProfileView, self).get(request)
     
@@ -78,7 +78,7 @@ class ProfileView(generic.ListView):
 @method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
     model = Resource
-    template_name = 'AuthorizationManagement/resources.html'
+    template_name = 'AuthorizationManagement/my-resources.html'
     deletion_requested = Resource.objects.none()
 
     def get_queryset(self):
@@ -413,8 +413,7 @@ class OpenResourceView(generic.View):
         ## Download function that tests the functionality.
         ## It could be replaced with another view according to the specific resource
         return download(request,resource)
-    
-@login_required()
+
 def download(request,resource):
     relative_path = request.path
     if relative_path.find(os.sep) == -1:
@@ -623,7 +622,7 @@ class DeleteResourceView(generic.View):
             logger.info("User %s tried to delete a non-existing resource" % (request.user))
             return redirect('/profile')
         
-        # raises the PermissionDenied exception if the current user is a staff user
+        # raises the PermissionDenied exception if the current user is not a staff user
         if not request.user.is_staff :
             logger.info("User %s tried to delete the resource '%s' without being an administrator" % (request.user,res.name))
             raise PermissionDenied
