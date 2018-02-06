@@ -18,8 +18,8 @@ class UserForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class' : 'reg-field'})
-        self.fields['first_name'].widget.attrs.update({'class' : 'reg-field'}) 
-        self.fields['last_name'].widget.attrs.update({'class' : 'reg-field'}) 
-        self.fields['email'].widget.attrs.update({'class' : 'reg-field'})
-        self.fields['password'].widget.attrs.update({'class' : 'reg-field'})                                                             
+        self.fields['username'].widget.attrs.update({'class' : 'reg-fields'})
+        self.fields['first_name'].widget.attrs.update({'class' : 'reg-fields'}) 
+        self.fields['last_name'].widget.attrs.update({'class' : 'reg-fields'}) 
+        self.fields['email'].widget.attrs.update({'class' : 'reg-fields'})
+        self.fields['password'].widget.attrs.update({'class' : 'reg-fields'})                                                             

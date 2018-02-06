@@ -1,9 +1,11 @@
+<!-- template for the registration page -->
+
 <html>
 <head>
 
 <title> Authorization Management Login </title>
 	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'authentification/css/login.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'authentification/css/auth.css' %}" />
 </head>
 
 <body>
@@ -11,7 +13,6 @@
 	<div class="logo">
 		<img src="../../static/authentification/images/logo.png">
 	</div>
-	
 	
 	<div class="container">
 
@@ -22,14 +23,12 @@
 			{% csrf_token %}
 			{{ form.as_p }}
 			<br>
-			<button type="submit" class="signin" >Submit</button>
+			<button type="submit" class="signin-btn">Submit</button>
 		</form>
 	</div>
 	
-	<a href="/" class="signup"> Back </a>
-	
+	<a href="/" class="signup-btn"> Back </a>
 	
 </body>
-
 </html>
 

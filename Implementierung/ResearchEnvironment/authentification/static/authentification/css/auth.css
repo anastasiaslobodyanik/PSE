@@ -1,3 +1,5 @@
+/*style sheet for the authentification functionality - login and registration)*/
+
 * {
 	margin:0;
 	padding:0;
@@ -36,8 +38,15 @@ body {
     text-align: right;
 	
 }
-
-.signin {
+.signin-fields {
+	border:none;
+	width: 290px;
+	line-height: 30px;
+	border-radius: 4px;
+	padding-left: 40px;
+	margin-bottom: 5px;
+}
+.signin-btn {
     background-color: #173e43; /* dark-blue */
     border: none;
 	height: 39px;
@@ -53,7 +62,7 @@ body {
 	color: #fae596;
 }
 
-.signup {
+.signup-btn {
 	color: #173e43;
     text-decoration: none;
     padding: 10px 20px;
@@ -69,7 +78,7 @@ body {
 	color: #173e43;
 }
 
-.reg-field {
+.reg-fields {
 	border:none;
 	width: 290px;
 	line-height: 30px;
@@ -78,12 +87,5 @@ body {
 	margin-bottom: 15px;
 }
 
-.username {
-	border:none;
-	width: 290px;
-	line-height: 30px;
-	border-radius: 4px;
-	padding-left: 40px;
-	margin-bottom: 5px;
-}
+
 

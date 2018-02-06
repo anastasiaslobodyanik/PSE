@@ -78,7 +78,7 @@ class ProfileView(generic.ListView):
 @method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
     model = Resource
-    template_name = 'AuthorizationManagement/resources.html'
+    template_name = 'AuthorizationManagement/my-resources.html'
     deletion_requested = Resource.objects.none()
 
     def get_queryset(self):

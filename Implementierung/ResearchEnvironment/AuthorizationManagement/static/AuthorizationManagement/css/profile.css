@@ -92,7 +92,7 @@
 	margin-top: 15px;	
 }
 
-.info {
+.info-access-req {
 	grid-column: 2/4;
 	border-top: 12px solid #dddfd4;
 	background: #ffffff;
@@ -167,7 +167,7 @@
 }
 
 /*access*/
-.admin-info {
+.info-access-req-adm {
 	grid-column: 4/6;
 	border-top: 10px solid #dddfd4;
 	border-left: 10px solid #dddfd4;
@@ -179,7 +179,7 @@
 	font-size: 16px;
 }
 
-.admin-accept-btn {
+.admin-acc-accept-btn {
 	grid-column: 4/5;
 	text-decoration: none;
 	background: #173e43;
@@ -192,12 +192,12 @@
 	border-radius: 4px;
 }
 
-.admin-accept-btn:hover {
+.admin-acc-accept-btn:hover {
 	color: #173e43;
 	background: #fae596;
 }
 
-.admin-deny-btn {
+.admin-acc-deny-btn {
 	grid-column: 5/6;
 	text-decoration: none;
 	background: #b03f41;
@@ -209,13 +209,13 @@
 	border-radius: 4px;	
 }
 
-.admin-deny-btn:hover {
+.admin-acc-deny-btn:hover {
 	color: #b03f41;
 	background: #fae596;
 }
 
 /*del*/
-.del-info {
+.info-deletion-req-adm {
 	grid-column: 2/4;
 	border-top: 10px solid #dddfd4;
 	border-right: 10px solid #dddfd4;
@@ -227,7 +227,7 @@
 	font-size: 16px;
 }
 
-.del-accept-btn {
+.admin-del-accept-btn {
 	grid-column: 2/3;
 	text-decoration: none;
 	background: #173e43;
@@ -239,12 +239,12 @@
 	border-radius: 4px;	
 }
 
-.del-accept-btn:hover {
+.admin-del-accept-btn:hover {
 	color: #173e43;
 	background: #fae596;
 }
 
-.del-deny-btn {
+.admin-del-deny-btn {
 	grid-column: 3/4;
 	text-decoration: none;
 	background: #b03f41;
@@ -257,10 +257,8 @@
 	border-radius: 4px;
 }
 
-.del-deny-btn:hover {
+.admin-del-deny-btn:hover {
 	color: #b03f41;
 	background: #fae596;
 }
 /* admin requests */
-
-
