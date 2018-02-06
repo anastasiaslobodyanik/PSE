@@ -214,8 +214,8 @@ Während der Implementierung hat sich herausgestellt, dass einige Funktionalitä
  
 \newpage 
 \subsection{Datenbank}
-Jede Änderung am Model-Paket beeinflusst Datenbankstruktur. Das von Django unabhängiges Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der Abbildung 1 dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textbf{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} zu speichern. Diese Änderung sorgt für bessere Antwortzeit der Datenbank, was wiederum zur besseren Benutzbarkeit dient.
-Unterschiedliche Arten von Requests werden in getrennten Tabellen gespeichert. Das ermöglicht bessere Trennung zwischen Benutzer- und Admin-Funktionalitäten. Bearbeitete Requests werden nicht weiter gespeichert und sind ausschließlich in der Logdatei zum nachverfolgen.    
+Jede Änderung am Model-Paket beeinflusst die Datenbankstruktur. Das von Django unabhängige Teil der Datenbank, die für die Datenhaltung in unserem Projekt benutzt wird, wird auf der Abbildung 1 dargestellt. Die im Entwurf geplante Tabelle \textit{Permission} wurde durch \textbf{many-to-many} Beziehungen zwischen Benutzern und Ressourcen ersetzt und in zwei Tabellen \textit{Resource Owners} und \textit{Resource Readers} gespeichert. Diese Änderung sorgt für bessere Antwortzeiten der Datenbank, was wiederum zur besseren Benutzbarkeit dient.
+Unterschiedliche Arten von Requests werden in eigenen Tabellen gespeichert. Das ermöglicht bessere Trennung zwischen Benutzer- und Admin-Funktionalitäten. Bearbeitete Requests werden nicht weiter gespeichert und sind ausschließlich in der Logdatei aufgeführt.    
  \begin{figure}[ht!]
  	\centering
  	\includegraphics[width=0.9\textwidth]{res/database.png}
@@ -227,10 +227,10 @@ Pfeile geben Auskunft welches Attribut in welcher Tabelle als Schlüssel vorkomm
 \newpage
 \section{Implementierte Kriterien}
 \subsection{Musskriterien}
-Während der Planungsphase wurde eine Anforderungsdefinition im Pflichtenheft festgelegt. Diese Anforderungen beschreiben welche Muss-, Wunsch- und Abgrenzungskriterien das zu entwickelnde Produkt erfüllen muss. In der Implementierungsphase unseres Projekts wurden alle Musskriterien erfolgreich implementiert, was an präzise und eindeutige Aufgabeformulierung verweist und zeigt, dass das Wasserfallmodel an Softwareentwicklung ergebnisreich angewendet werden kann.   
+Während der Planungsphase wurde eine Anforderungsdefinition im Pflichtenheft festgelegt. Diese Anforderungen beschreiben, welche Muss-, Wunsch- und Abgrenzungskriterien das zu entwickelnde Produkt erfüllen muss. In der Implementierungsphase unseres Projektes wurden alle Musskriterien erfolgreich implementiert, was an präzise und eindeutige Aufgabenformulierung verweist und zeigt, dass das Wasserfallmodel an der Softwareentwicklung ergebnisreich angewendet werden kann.   
 
 \subsection{Wunschkriterien}
-Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass Realisierung einiger Wunschkriterien die Benutzbarkeit des Produkts deutlich verbessern würde. Als Folge wurden unten genannte Kriterien zusätzlich implementiert:
+Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass die Realisierung einiger Wunschkriterien die Benutzbarkeit des Produkts deutlich verbessern würde. Als Folge wurden unten genannte Kriterien zusätzlich implementiert:
 \begin{itemize}
 \item Wird eine Ressource gelöscht, so werden alle Besitzer per E-Mail benachrichtigt.
 \item Ein Benutzer kann durch Administratoren blockiert werden.
@@ -266,7 +266,7 @@ Bei der Implementierung funktionaler Anforderungen hat sich ergeben, dass Realis
 
 \newpage
 \section{Implementierungsplan}
-Am Anfang wurde Zeitplan erstellt (Abbildung 2). Aufwandsschätzung benutzt. Keine Erfahrung mit Django - Abweichungen als Folge.\\\\
+Zu Beginn der Implementierung wurde ein Gannt-Zeitplan erstellt (Abbildung 2), in dem wir unsere ursprüngliche  Aufwandsschätzung dargestellt haben. In dem realen Ablauf der Phase kam es zu einigen Abweichungen vom Zeitplan.\\\\
 Änderungen an einem Teil verursachen Änderungen an schon implementierten Modulen - Task wird neu aufgemacht - Zeit verdoppelt sich. Schwere Planung wegen Abhängigkeiten der Modulen - Versagen des Wasserfallmodels. Trennung der Aufgaben meist schwer und unrealistisch.\\\\ 
 Realer Zeitablauf (Abbildung 3) zeigt Verzögerungen bei geplanten Aktivitäten und Maas der Auswirkung jeder Verzögerung auf gesamten Zeitverlauf. 
 Trotz allen Ungeschicklichkeiten nur 3 Tage Verspätung bei der Abgabe.\\
