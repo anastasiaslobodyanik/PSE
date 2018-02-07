@@ -409,3 +409,51 @@
 [06/Feb/2018 18:52:57] INFO [AuthorizationManagement.views:412] User reader2 accessed 'resource3' with id = 3 
 
 >>>>>>> bba26ca285280a1d2a1c03fc616b2341921fd103
+[07/Feb/2018 00:25:08] INFO [AuthorizationManagement.views:412] User admin accessed 'Structure of an expert system' with id = 21 
+
+[07/Feb/2018 00:36:49] INFO [AuthorizationManagement.views:778] User user_2 created the 'Mona Lisa' Resource 
+
+[07/Feb/2018 00:41:29] INFO [AuthorizationManagement.views:351] Access request for resource 'Mona Lisa' with id '26' was sent by user_1 
+
+[07/Feb/2018 00:41:29] INFO [AuthorizationManagement.views:352] An email was sent from user_1 to 'Mona Lisa' owners, Subject: Access Request for 'Mona Lisa' 
+
+[07/Feb/2018 00:45:17] INFO [AuthorizationManagement.views:312] Request from user_1 to access 'Mona Lisa' was denied by user_2 
+
+[07/Feb/2018 00:45:17] INFO [AuthorizationManagement.views:313] An email was sent from user_2 to user_1, Subject: Access Request for 'Mona Lisa' denied 
+
+[07/Feb/2018 00:45:30] INFO [AuthorizationManagement.views:494] Access permission for 'Table of common symbols' was granted by user_2 
+
+[07/Feb/2018 00:45:30] INFO [AuthorizationManagement.views:495] An email was sent from user_2 to 'user_3' , Subject: Access permission granted 
+
+[07/Feb/2018 00:45:58] INFO [AuthorizationManagement.views:511] Access permission for 'Table of common symbols' was removed by user_2 from user_2 
+
+[07/Feb/2018 00:45:58] INFO [AuthorizationManagement.views:512] An email was sent from user_2 to 'user_2' , Subject: Access permission removed 
+
+[07/Feb/2018 00:45:59] INFO [AuthorizationManagement.views:549] ownership for 'Table of common symbols' was revoked by user_2 from user_2 
+
+[07/Feb/2018 00:45:59] INFO [AuthorizationManagement.views:550] An email was sent from user_2 to 'user_2' , Subject: ownership revoked 
+
+[07/Feb/2018 00:48:27] INFO [AuthorizationManagement.views:549] ownership for 'An innovative scientific proof for...' was revoked by user_4 from admin 
+
+[07/Feb/2018 00:48:27] INFO [AuthorizationManagement.views:550] An email was sent from user_4 to 'admin' , Subject: ownership revoked 
+
+[07/Feb/2018 00:48:35] INFO [AuthorizationManagement.views:530] ownership for 'An innovative scientific proof for...' was granted by user_4 
+
+[07/Feb/2018 00:48:35] INFO [AuthorizationManagement.views:531] An email was sent from user_4 to 'admin' , Subject: ownership granted 
+
+[07/Feb/2018 00:53:17] INFO [AuthorizationManagement.views:549] ownership for 'Hybrid expert systems' was revoked by user_4 from user_2 
+
+[07/Feb/2018 00:53:17] INFO [AuthorizationManagement.views:550] An email was sent from user_4 to 'user_2' , Subject: ownership revoked 
+
+[07/Feb/2018 00:53:28] INFO [AuthorizationManagement.views:530] ownership for 'Hybrid expert systems' was granted by user_4 
+
+[07/Feb/2018 00:53:28] INFO [AuthorizationManagement.views:531] An email was sent from user_4 to 'user_2' , Subject: ownership granted 
+
+[07/Feb/2018 00:53:44] INFO [AuthorizationManagement.views:549] ownership for 'Hybrid expert systems' was revoked by user_4 from user_2 
+
+[07/Feb/2018 00:53:44] INFO [AuthorizationManagement.views:550] An email was sent from user_4 to 'user_2' , Subject: ownership revoked 
+
+[07/Feb/2018 00:54:41] INFO [AuthorizationManagement.views:530] ownership for 'Hybrid expert systems' was granted by user_4 
+
+[07/Feb/2018 00:54:41] INFO [AuthorizationManagement.views:531] An email was sent from user_4 to 'user_2' , Subject: ownership granted 
+
