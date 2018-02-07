@@ -78,7 +78,7 @@ class ProfileView(generic.ListView):
 @method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
     model = Resource
-    template_name = 'AuthorizationManagement/resources.html'
+    template_name = 'AuthorizationManagement/my-resources.html'
     deletion_requested = Resource.objects.none()
 
     def get_queryset(self):
@@ -406,7 +406,7 @@ class OpenResourceView(generic.View):
         resource=Resource.objects.get(id=pk)
         
         # raises the PermissionDenied exception if the current user is a staff user or has no access permission to this resource
-        if (not resource.readers.filter(id= request.user.id).exists())and (not request.user.is_staff) :
+        if (not resource.readers.filter(id=request.user.id).exists())and (not request.user.is_staff) :
             raise PermissionDenied
 
         logger.info("User %s accessed '%s' with id = %s \n" % (request.user.username,resource.name,resource.id))

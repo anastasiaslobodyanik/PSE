@@ -1,5 +1,5 @@
 /*
-    DJANGO Admin styles
+    DJANGO Admin styles customized 
 */
 
 @import url(fonts.css);
@@ -29,7 +29,7 @@ a:link, a:visited {
 }
 
 a:focus, a:hover {
-    color: #036;
+    color: #173e43;
 }
 
 a:focus {
@@ -43,6 +43,7 @@ a img {
 a.section:link, a.section:visited {
     color: #fff;
     text-decoration: none;
+	border-radius: 4px;
 }
 
 a.section:focus, a.section:hover {
@@ -104,7 +105,8 @@ h5 {
 
 ul li {
     list-style-type: square;
-    padding: 1px 0;
+    padding: 1px 0;	
+	border-radius: 4px;
 }
 
 li ul {
@@ -465,13 +467,15 @@ select[multiple] {
 }
 
 a.button {
-    padding: 4px 5px;
+    padding: 4px 5px;	
+	border-radius: 4px;
 }
 
 .button:active, input[type=submit]:active, input[type=button]:active,
 .button:focus, input[type=submit]:focus, input[type=button]:focus,
 .button:hover, input[type=submit]:hover, input[type=button]:hover {
-    background: #609ab6;
+    background: #609ab6;	
+	border-radius: 4px;
 }
 
 .button[disabled], input[type=submit][disabled], input[type=button][disabled] {
@@ -482,7 +486,8 @@ a.button {
     float: right;
     border: none;
     font-weight: 400;
-    background: #173e43;
+    background: #173e43;	
+	border-radius: 4px;
 }
 
 .button.default:active, input[type=submit].default:active,
@@ -531,6 +536,7 @@ input[type=button][disabled].default {
     text-align: left;
     background: #173e43;
     color: #fff;
+	border-radius: 4px;
 }
 
 .module caption,
@@ -675,16 +681,15 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
     padding: 6px 10px;
     background: #3fb0ac;
     text-align: center;
-    
-   
-    
+	border-radius: 4px;    
 }
 
 .changelink, .inlinechangelink {
    	padding: 6px 10px;
     background: #3fb0ac;
     text-align: center;
-    cursor: pointer;
+    cursor: pointer;	
+	border-radius: 4px;
 }
 
 .deletelink {
@@ -710,6 +715,7 @@ a.deletelink:focus, a.deletelink:hover {
     float: right;
     position: relative;
     margin-top: -48px;
+	border-radius: 4px;
 }
 
 .form-row .object-tools {
@@ -718,6 +724,7 @@ a.deletelink:focus, a.deletelink:hover {
     float: none;
     height: 2em;
     padding-left: 3.5em;
+	border-radius: 4px;
 }
 
 .object-tools li {
@@ -725,6 +732,7 @@ a.deletelink:focus, a.deletelink:hover {
     float: left;
     margin-left: 5px;
     height: 16px;
+	border-radius: 4px;
 }
 
 .object-tools a {
@@ -740,7 +748,8 @@ a.deletelink:focus, a.deletelink:hover {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #fff;
+    color: #fff;	
+	border-radius: 4px;
 }
 
 .object-tools a:focus, .object-tools a:hover {
@@ -851,6 +860,8 @@ table#change-history tbody th {
 
 #header a:focus , #header a:hover {
     text-decoration: underline;
+	color: #173e43;
+	border-radius: 4px;
 }
 
 #branding {
@@ -888,6 +899,7 @@ table#change-history tbody th {
 
 #branding a:hover {
     text-decoration: none;
+	color: #173e43;
 }
 
 #user-tools {
@@ -909,7 +921,7 @@ table#change-history tbody th {
 #user-tools a:focus, #user-tools a:hover {
     text-decoration: none;
     border-bottom-color: #79aec8;
-    color: #79aec8;
+    color: #173e43;
 }
 
 /* SIDEBAR */
