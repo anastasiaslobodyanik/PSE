@@ -1,0 +1,102 @@
+\documentclass[parskip=full,11pt]{scrartcl}
+%\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[yyyymmdd]{datetime} 
+\usepackage{hyperref}
+\usepackage[toc, nonumberlist, automake]{} %added automake option
+\usepackage{csquotes}
+\usepackage{graphicx}
+\hypersetup{
+ 		pdftitle={VForWater-Implementierung},
+ }
+\usepackage{fancyhdr}%<-------------to control headers and footers
+\usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
+\fancyhf{}
+\fancyfoot[C]{\thepage} %<----to get page number below text
+\pagestyle{fancy} %<-------the page style itself
+ 
+\title{Qualitätssicherung}
+\subtitle{Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
+\author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
+\date{11.01.18}
+ % define custom lists
+\usepackage{enumitem}
+
+
+\usepackage{linegoal,listings}
+\newsavebox{\mylisting}
+\makeatletter
+\newcommand{\lstInline}[2][,]{%
+	\begingroup%
+	\lstset{#1}% Set any keys locally
+	\begin{lrbox}{\mylisting}\lstinline!#2!\end{lrbox}% Store listing in \mylisting
+	\setlength{\@tempdima}{\linegoal}% Space left on line.
+	\ifdim\wd\mylisting>\@tempdima\hfill\\\fi% Insert line break
+	\lstinline!#2!% Reset listing
+	\endgroup%
+}
+\makeatother
+\setlength{\parindent}{0pt}% Just for this example
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline,showstringspaces=false,upquote=true}
+
+
+ 
+\begin{document}
+ 
+ \begin{titlepage}
+ 	
+ 	\begin{center}
+ 	\includegraphics[width=0.5\linewidth]{res/KITLogo.png}\\
+ 	\vspace{2cm}
+ 	{\scshape\LARGE\bfseries Qualitätssicherung \par}
+ 	\vspace{0.5cm}
+ 	{\scshape\Large Praxis der Softwareentwicklung\\}
+ 	\vspace{1cm}
+ 	{\scshape\Large Wintersemester 17/18\\}
+ 	\vspace{2cm}
+ 	{\huge\bfseries Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\par}
+ 	\vspace{2cm}
+ 	\vfill
+ 	{\bfseries {\Large Autoren}:\par}
+ 	{\Large Bachvarov, Aleksandar }\\
+ 	{\Large Dimitrov, Atanas }\\
+ 	{\Large Mortazavi Moshkenan, Houraalsadat }\\
+ 	{\Large Sakly, Khalil }\\
+ 	{\Large Slobodyanik, Anastasia }\\
+ 	{\Large Voneva, Sonya}\\
+ 	\vfill
+ 	{\large 14.03.18 \par}
+ 	\end{center}
+ \end{titlepage}
+ 
+ \tableofcontents
+ \newpage
+ \section{Einleitung}
+Dieses Dokument beschreibt ...
+
+ \newpage
+ \section{Qualität}
+ Wie wird Qualität gemessen.
+ 
+ \newpage
+\section{Komponenten-Test}
+Views unit Tests
+
+\newpage
+\section{Integration-Test}
+Test des Zusammenspiels der Komponenten.
+
+\newpage
+\section{System-Test}
+Manuelle Tests.
+
+\newpage
+\section{Zusammenfassung}
+Testüberdeckung. Fazit über die Qualität des Produkts.
+\end{document}
+\grid
