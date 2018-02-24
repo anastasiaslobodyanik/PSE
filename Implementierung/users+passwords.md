@@ -1,5 +1,9 @@
 1. admin................adm1nistrator  #SUPERUSER
-2. reader1..............leser1leser
-3. reader2..............leser2leser
-4. owner1...............besitzer1besitzer
-5. owner2...............besitzer2besitzer
+
+2. user_1...............userone
+
+3. user_2...............usertwo
+
+4. user_3...............userthree
+
+5. user_4...............userfour
