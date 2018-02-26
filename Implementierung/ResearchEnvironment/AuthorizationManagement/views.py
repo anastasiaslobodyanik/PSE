@@ -363,7 +363,7 @@ class OpenResourceView(generic.View):
 
         resource=Resource.objects.get(id=pk)
 
-        if (not resource.readers.filter(id= request.user.id).exists())and (not request.user.is_staff) :
+        if (not resource.readers.filter(id=request.user.id).exists())and (not request.user.is_staff) :
             raise PermissionDenied
 
         logger.info("User %s accessed '%s' with id = %s \n" % (request.user.username,resource.name,resource.id))
