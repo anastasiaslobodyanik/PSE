@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{multirow}
+\usepackage{pbox}
 \hypersetup{
  		pdftitle={VForWater-Implementierung},
  }
@@ -89,28 +90,22 @@ Dieses Dokument beschreibt ...
 \section{Komponenten-Test}
 Views unit Tests
 
-\begin{longtable}[c]{|l|l|l|l|l|l|}
+\begin{longtable}[c]{|p{0.4cm}|p{2.5cm}|p{3.5cm}|p{5cm}|p{2cm}|p{1.8cm}|}
 \caption{My caption}
 \label{my-label}\\
 \hline
-\textbf{\#} & \textbf{Testcase}                 &\textbf{Methoden}& \textbf{Beschreibung} & \textbf{Erwartung} & \textbf{Ergebnis} \\ \hline
+\textbf{\#} & \textbf{Testcase}&\textbf{Methoden}& \textbf{Beschreibung} & \textbf{Erwartung} & \textbf{Ergebnis} \\ \hline
 \endfirsthead
 %
 \endhead
 %
-\multirow{2}{*}{}1 & \multirow{2}{*}{} TestHomeView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourceManager&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{3}{*}{} 3& \multirow{3}{*}{} TestUserManager&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{5}{*}{} 4& \multirow{5}{*}{} TestProfileView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
+\multirow{2}{*}{}1 & \multirow{2}{*}{} TestHomeView & test-not-logged-in & Getestet, ob die Homeseite gezeigt wird, wenn man nicht eingeloggt ist. Das wird durch den zurückgegebene HTTP-Statuscode gemacht.& 302  & 302 \\ \cline{3-6} &   & test-normal & Getestet, ob die Homeseite gezeigt wird, wenn man eingeloggt ist.  & 200 & 200 \\ \hline
+\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourceManager&  test-not-logged-in & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man nicht eingeloggt ist. & 302  & 302  \\ \cline{3-6} & & test-logged-in-no-admin & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man eingeloggt ist, aber zwar nicht als Admin. & 302 & 302 \\ \cline{3-6} & & test-normal & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man als Admin  eingeloggt ist. & 200 & 200  \\ \hline
+\multirow{3}{*}{} 3& \multirow{3}{*}{} TestUserManager&  test-not-logged-in & Getestet, ob die UserManagerseite gezeigt wird, wenn man nicht eingeloggt ist. & 302  & 302  \\ \cline{3-6} & & test-logged-in-no-admin & Getestet, ob die UserManagerseite gezeigt wird, wenn man eingeloggt ist, aber zwar nicht als Admin. & 302 & 302 \\ \cline{3-6} & & test-normal & Getestet, ob die UserManagerseite gezeigt wird, wenn man als Admin  eingeloggt ist. & 200 & 200  \\ \hline
+\multirow{5}{*}{} 4& \multirow{5}{*}{} TestProfileView& test-not-logged-in & Getestet, ob die Profileseite gezeigt wird, wenn man nicht eingeloggt ist.& 302  & 302 \\ \cline{3-6} &   & test-normal & Getestet, ob die Profileseite gezeigt wird, wenn man eingeloggt ist.  & 200 & 200 \\ \cline{3-6} 
+                  &                   & test-pagination-user & Getestet, ob der Benutzer die zwei Zugriffsrequesten sieht, die ihm gesendet wurden. & 2 & 2 \\ \cline{3-6} 
+                  &                   & test-pagination-admin-page-1 & Getestet, ob der Admin  vier von den fünf Requesten, die ihm gesendet wurden,  auf der ersten Seite sieht. & 2 & 2 \\ \cline{3-6} 
+                  &                   & test-pagination-admin-page-2 & Getestet, ob der Admin  das Fünfte von den fünf Requesten, die ihm gesendet wurden,  auf der zweiten Seite sieht.& 2 & 2 \\  \hline
 \multirow{3}{*}{} 5& \multirow{3}{*}{} TestMyResourcesView&  &  &  &  \\ \cline{3-6} 
                   &                   &  &  &  &  \\ \cline{3-6} 
                   &                   &  &  &  &  \\ \hline
