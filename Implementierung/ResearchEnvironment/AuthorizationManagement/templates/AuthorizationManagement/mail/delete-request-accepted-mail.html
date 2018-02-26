@@ -6,7 +6,10 @@
 <body>
 	<div >
 		<h1>Hello!</h1>
-		<p>{{user.username}} has accepted your request to delete the resource : {{resource.name}} </p>
+		<p>{{user.username}} has accepted your request to delete the resource : <b>{{resource.name}}</b></p>
+		{% if message %}
+			He left the following message: {{message}}
+		{% endif %}
 	</div>		
 </body>
 </html>
