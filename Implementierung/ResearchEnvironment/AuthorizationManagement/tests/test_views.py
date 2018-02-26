@@ -40,6 +40,11 @@ def setUpResourceAndRequests(users):
     res2.owners.add(users['test_admin'].id)
     res2.save()
     
+    res3 = Resource.objects.create(name='res3',type='text',description='desc',link='res3.txt')
+    res3.readers.add(users['test_user2'].id)
+    res3.owners.add(users['test_user2'].id)
+    res3.save();
+    
     access_req = AccessRequest.objects.create(sender=users['test_user2'],resource=res)
     access_req.save()
     access_req2 = AccessRequest.objects.create(sender=users['test_user2'],resource=res2)
@@ -49,6 +54,8 @@ def setUpResourceAndRequests(users):
     deletion_req.save()
     deletion_req2 = DeletionRequest.objects.create(sender=users['test_user'],resource=res2)
     deletion_req2.save()
+    deletion_req3 = DeletionRequest.objects.create(sender=users['test_user2'],resource=res3)
+    deletion_req3.save()
 
 def deleteUsers():
     User.objects.all().delete()
@@ -183,23 +190,23 @@ class TestProfileView(TestCase):
         self.assertEqual(len(response.context['requests_list']), 2)
         
     def test_pagination_admin_page_1(self):
-        #Admin has to see the two access and the two deletion requests for him
-        #Only 2 of them are shown on page 1
+        #Admin has to see the two access and the three deletion requests for him
+        #Only 4 of them are shown on page 1
         self.client.login(username='admin', password='123456')
         response = self.client.get('/profile/')
         self.assertTrue('is_paginated' in response.context)
         self.assertTrue(response.context['is_paginated'] == True)
-        self.assertEqual(len(response.context['requests_list']), 2)
+        self.assertEqual(len(response.context['requests_list']), 4)
         
         
     def test_pagination_admin_page_2(self):
-        #Admin has to see the two access and the two deletion requests for him
-        #The second 2 of them are shown on page 2
+        #Admin has to see the two access and the three deletion requests for him
+        #The last deletion request is shown on page 2
         self.client.login(username='admin', password='123456')
         response = self.client.get('/profile/?page=2')
         self.assertTrue('is_paginated' in response.context)
         self.assertTrue(response.context['is_paginated'] == True)
-        self.assertEqual(len(response.context['requests_list']), 2)
+        self.assertEqual(len(response.context['requests_list']), 1)
         
 class TestMyResourcesView(TestCase):
          
@@ -545,12 +552,12 @@ class TestResourcesOverview(TestCase):
         self.assertEqual(response.status_code, 200) 
     
     def test_pagination_user(self):
-        #User has to see only the two resources 
+        #User has to see only the three resources 
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/resources-overview/')
         self.assertTrue('is_paginated' in response.context)
         self.assertTrue(response.context['is_paginated'] == False) 
-        self.assertEqual(len(response.context['resources_list']), 2)
+        self.assertEqual(len(response.context['resources_list']), 3)
         
 class TestResourcesOverviewSearch(TestCase):
          
