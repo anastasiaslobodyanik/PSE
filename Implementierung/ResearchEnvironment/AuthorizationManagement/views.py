@@ -626,7 +626,7 @@ class DeleteResourceView(generic.View):
             logger.info("User %s tried to delete the resource '%s' without being an administrator" % (request.user,res.name))
             raise PermissionDenied
 
-        html_content = render_to_string('AuthorizationManagement/mail/delete-resource-mail.html',
+        html_content = render_to_string('AuthorizationManagement/mail/resource-deleted-mail.html',
                                         {'user': request.user,
                                          'resource': res,
                                          'message': request.POST['descr']})
@@ -797,10 +797,10 @@ class EditNameView(generic.View):
     # updates the firstname and the lastname with the given firstname and lastname
     def post(self, request):
         
-        if(request.POST['firstName']): 
+        if(request.POST['firstName'] and (not request.POST['firstName'].isspace())): 
             request.user.first_name=request.POST['firstName']
             request.user.save()
-        if(request.POST['lastName']):
+        if(request.POST['lastName'] and (not request.POST['lastName'].isspace())):
             request.user.last_name=request.POST['lastName']
             request.user.save()  
         return redirect('/profile')
