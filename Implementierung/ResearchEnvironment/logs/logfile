@@ -457,3 +457,39 @@
 
 [07/Feb/2018 00:54:41] INFO [AuthorizationManagement.views:531] An email was sent from user_4 to 'user_2' , Subject: ownership granted 
 
+[24/Feb/2018 16:10:48] INFO [AuthorizationManagement.views:511] Access permission for 'Forward vs. backward chaining logic' was removed by user_2 from user_2 
+
+[24/Feb/2018 16:10:48] INFO [AuthorizationManagement.views:512] An email was sent from user_2 to 'user_2' , Subject: Access permission removed 
+
+[24/Feb/2018 16:10:48] INFO [AuthorizationManagement.views:549] ownership for 'Forward vs. backward chaining logic' was revoked by user_2 from user_2 
+
+[24/Feb/2018 16:10:48] INFO [AuthorizationManagement.views:550] An email was sent from user_2 to 'user_2' , Subject: ownership revoked 
+
+[24/Feb/2018 16:15:07] INFO [AuthorizationManagement.views:511] Access permission for 'Hybrid expert systems' was removed by user_4 from user_4 
+
+[24/Feb/2018 16:15:07] INFO [AuthorizationManagement.views:512] An email was sent from user_4 to 'user_4' , Subject: Access permission removed 
+
+[24/Feb/2018 16:15:07] INFO [AuthorizationManagement.views:549] ownership for 'Hybrid expert systems' was revoked by user_4 from user_4 
+
+[24/Feb/2018 16:15:07] INFO [AuthorizationManagement.views:550] An email was sent from user_4 to 'user_4' , Subject: ownership revoked 
+
+[24/Feb/2018 16:15:42] INFO [AuthorizationManagement.views:412] User user_4 accessed 'Forward vs. backward chaining logic' with id = 24 
+
+[24/Feb/2018 16:16:33] INFO [AuthorizationManagement.views:494] Access permission for 'Hybrid expert systems' was granted by user_2 
+
+[24/Feb/2018 16:16:33] INFO [AuthorizationManagement.views:495] An email was sent from user_2 to 'user_4' , Subject: Access permission granted 
+
+[24/Feb/2018 16:16:33] INFO [AuthorizationManagement.views:530] ownership for 'Hybrid expert systems' was granted by user_2 
+
+[24/Feb/2018 16:16:33] INFO [AuthorizationManagement.views:531] An email was sent from user_2 to 'user_4' , Subject: ownership granted 
+
+[24/Feb/2018 16:16:50] INFO [AuthorizationManagement.views:412] User user_4 accessed 'Hybrid expert systems' with id = 25 
+
+[24/Feb/2018 16:16:58] INFO [AuthorizationManagement.views:511] Access permission for 'Hybrid expert systems' was removed by user_2 from user_4 
+
+[24/Feb/2018 16:16:58] INFO [AuthorizationManagement.views:512] An email was sent from user_2 to 'user_4' , Subject: Access permission removed 
+
+[24/Feb/2018 16:16:59] INFO [AuthorizationManagement.views:549] ownership for 'Hybrid expert systems' was revoked by user_2 from user_4 
+
+[24/Feb/2018 16:16:59] INFO [AuthorizationManagement.views:550] An email was sent from user_2 to 'user_4' , Subject: ownership revoked 
+
