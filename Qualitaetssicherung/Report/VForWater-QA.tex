@@ -10,6 +10,7 @@
 \usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{longtable}
+\usepackage{multirow}
 \hypersetup{
  		pdftitle={VForWater-Implementierung},
  }
@@ -88,123 +89,77 @@ Dieses Dokument beschreibt ...
 \section{Komponenten-Test}
 Views unit Tests
 
-\begin{longtable}[c]{|l|l|l|l|l|}
+\begin{longtable}[c]{|l|l|l|l|l|l|}
 \caption{My caption}
 \label{my-label}\\
 \hline
-\textbf{\#} & \textbf{Testcase}                 & \textbf{Beschreibung} & \textbf{Erwartung} & \textbf{Ergebnis} \\ \hline
+\textbf{\#} & \textbf{Testcase}                 &\textbf{Methoden}& \textbf{Beschreibung} & \textbf{Erwartung} & \textbf{Ergebnis} \\ \hline
 \endfirsthead
 %
 \endhead
 %
-
-1 & TestHomeView 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-2 & TestResourceManager
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-3 & TestUserManager
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-4 & TestProfileView
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-5 & TestMyResourcesView
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-6 & TestSendDeletionRequest
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-7 & TestCancelDeletionRequest 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-8 & TestApproveAccesRequest 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-9 & TestDenyAccesRequest
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-10 & TestSendAccessRequest
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-11 & TestCancelAccessRequest 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-12 & TestDeleteResourceView 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-13 & TestDeleteResourceView 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-14 & TestEditNameView
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-15 & TestResourcesOverview
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-16 & TestResourcesOverviewSearch
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-17 & TestPermissionEditingView
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
-
-18 & TestPermissionEditingViewSearch 
-& todo %description
-& todo %expected
-& todo	%result
-\\ \hline
+\multirow{2}{*}{}1 & \multirow{2}{*}{} TestHomeView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourceManager&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 3& \multirow{3}{*}{} TestUserManager&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{5}{*}{} 4& \multirow{5}{*}{} TestProfileView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 5& \multirow{3}{*}{} TestMyResourcesView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{}6 & \multirow{4}{*}{} TestSendDeletionRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{}7& \multirow{4}{*}{} TestCancelDeletionRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{}8 & \multirow{3}{*}{} TestApproveAccesRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 9& \multirow{3}{*}{} TestDenyAccesRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{} 10& \multirow{4}{*}{} TestSendAccessRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{} 11& \multirow{4}{*}{} TestCancelAccessRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 12& \multirow{3}{*}{} TestDeleteResourceView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{2}{*}{} 13& \multirow{2}{*}{} TestDeleteResourceView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 14& \multirow{3}{*}{} TestEditNameView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{}15 & \multirow{4}{*}{} TestResourcesOverview&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{5}{*}{}16& \multirow{5}{*}{} TestResourcesOverviewSearch&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{7}{*}{} 17& \multirow{7}{*}{} TestPermissionEditingView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
 \end{longtable}
 \newpage
 
