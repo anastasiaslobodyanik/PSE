@@ -8,8 +8,9 @@ from .forms import UserForm
 
 from django.template import RequestContext
 
-# Create your views here.
 
+
+#View for registration of a user
 class UserFormView(View):
     form_class = UserForm
     template_name = 'authentification/registration.html'
@@ -36,7 +37,7 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/authentification/login')
+                    return redirect('/')
         return render(request, self.template_name, {'form' : form},RequestContext(request)) 
     
 

@@ -1,0 +1,5 @@
+1. CSS in Debug = False (OK)
+2. error pages anpassen (X)
+3. homepage text (OK)
+4. profile name button font (X)
+5. error pages Admin navigation (X)

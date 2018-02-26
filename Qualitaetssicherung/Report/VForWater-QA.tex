@@ -1,0 +1,179 @@
+\documentclass[parskip=full,11pt]{scrartcl}
+%\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[yyyymmdd]{datetime} 
+\usepackage{hyperref}
+\usepackage[toc, nonumberlist, automake]{} %added automake option
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{multirow}
+\hypersetup{
+ 		pdftitle={VForWater-Implementierung},
+ }
+\usepackage{fancyhdr}%<-------------to control headers and footers
+\usepackage[a4paper,margin=1in,footskip=.25in]{geometry}
+\fancyhf{}
+\fancyfoot[C]{\thepage} %<----to get page number below text
+\pagestyle{fancy} %<-------the page style itself
+ 
+\title{Qualitätssicherung}
+\subtitle{Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten}
+\author{Alex\\Anastasia\\Atanas\\Dannie\\ Houra\\Sonya\\}
+\date{11.01.18}
+ % define custom lists
+\usepackage{enumitem}
+
+
+\usepackage{linegoal,listings}
+\newsavebox{\mylisting}
+\makeatletter
+\newcommand{\lstInline}[2][,]{%
+	\begingroup%
+	\lstset{#1}% Set any keys locally
+	\begin{lrbox}{\mylisting}\lstinline!#2!\end{lrbox}% Store listing in \mylisting
+	\setlength{\@tempdima}{\linegoal}% Space left on line.
+	\ifdim\wd\mylisting>\@tempdima\hfill\\\fi% Insert line break
+	\lstinline!#2!% Reset listing
+	\endgroup%
+}
+\makeatother
+\setlength{\parindent}{0pt}% Just for this example
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline,showstringspaces=false,upquote=true}
+
+
+ 
+\begin{document}
+ 
+ \begin{titlepage}
+ 	
+ 	\begin{center}
+ 	\includegraphics[width=0.5\linewidth]{res/KITLogo.png}\\
+ 	\vspace{2cm}
+ 	{\scshape\LARGE\bfseries Qualitätssicherung \par}
+ 	\vspace{0.5cm}
+ 	{\scshape\Large Praxis der Softwareentwicklung\\}
+ 	\vspace{1cm}
+ 	{\scshape\Large Wintersemester 17/18\\}
+ 	\vspace{2cm}
+ 	{\huge\bfseries Autorisierungsmanagement für eine virtuelle Forschungsumgebung für Geodaten\par}
+ 	\vspace{2cm}
+ 	\vfill
+ 	{\bfseries {\Large Autoren}:\par}
+ 	{\Large Bachvarov, Aleksandar }\\
+ 	{\Large Dimitrov, Atanas }\\
+ 	{\Large Mortazavi Moshkenan, Houraalsadat }\\
+ 	{\Large Sakly, Khalil }\\
+ 	{\Large Slobodyanik, Anastasia }\\
+ 	{\Large Voneva, Sonya}\\
+ 	\vfill
+ 	{\large 14.03.18 \par}
+ 	\end{center}
+ \end{titlepage}
+ 
+ \tableofcontents
+ \newpage
+ \section{Einleitung}
+Dieses Dokument beschreibt ...
+
+ \newpage
+ \section{Qualität}
+ Wie wird Qualität gemessen.
+ 
+ \newpage
+\section{Komponenten-Test}
+Views unit Tests
+
+\begin{longtable}[c]{|l|l|l|l|l|l|}
+\caption{My caption}
+\label{my-label}\\
+\hline
+\textbf{\#} & \textbf{Testcase}                 &\textbf{Methoden}& \textbf{Beschreibung} & \textbf{Erwartung} & \textbf{Ergebnis} \\ \hline
+\endfirsthead
+%
+\endhead
+%
+\multirow{2}{*}{}1 & \multirow{2}{*}{} TestHomeView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourceManager&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 3& \multirow{3}{*}{} TestUserManager&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{5}{*}{} 4& \multirow{5}{*}{} TestProfileView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 5& \multirow{3}{*}{} TestMyResourcesView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{}6 & \multirow{4}{*}{} TestSendDeletionRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{}7& \multirow{4}{*}{} TestCancelDeletionRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{}8 & \multirow{3}{*}{} TestApproveAccesRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 9& \multirow{3}{*}{} TestDenyAccesRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{} 10& \multirow{4}{*}{} TestSendAccessRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{} 11& \multirow{4}{*}{} TestCancelAccessRequest&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 12& \multirow{3}{*}{} TestDeleteResourceView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{2}{*}{} 13& \multirow{2}{*}{} TestDeleteResourceView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{3}{*}{} 14& \multirow{3}{*}{} TestEditNameView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{4}{*}{}15 & \multirow{4}{*}{} TestResourcesOverview&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{5}{*}{}16& \multirow{5}{*}{} TestResourcesOverviewSearch&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\multirow{7}{*}{} 17& \multirow{7}{*}{} TestPermissionEditingView&  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \cline{3-6} 
+                  &                   &  &  &  &  \\ \hline
+\end{longtable}
+\newpage
+
+
+\section{Integration-Test}
+Test des Zusammenspiels der Komponenten.
+
+\newpage
+\section{System-Test}
+System-Test im Sinne von Software Entwicklung ist der abschließende Test, der vom Entwickler durchgeführt wird. Das Ziel ist das Verhalten des Produkts als Ganzes in einer realen Umgebung (immer noch ohne Kunden) zu beobachten.\\
+Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - für Benutzer, für Besitzer und für Administrator.
+
+\newpage
+\section{Zusammenfassung}
+Testüberdeckung. Fazit über die Qualität des Produkts.
+\end{document}
+\grid

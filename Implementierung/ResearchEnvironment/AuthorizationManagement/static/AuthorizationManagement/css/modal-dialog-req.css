@@ -11,23 +11,22 @@
 	font-family: "Roboto", sans-serif;
 	font-size: 17px;
     pointer-events: none;
-    }
+}
 
-    .modalDialog:target {
-        opacity:1;
-        pointer-events: auto;
-    }
+.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
 
-    .modalDialog > div {
-        width: 400px;
-		height: auto;
-        position: relative;
-        margin: 10% auto;
-        padding: 20px 20px 13px 20px;
-        background: #dddfd4;
-		border-radius:6px;
-
-    }
+.modalDialog > div {
+    width: 400px;
+	height: auto;
+    position: relative;
+	margin: 10% auto;
+	padding: 20px 20px 13px 20px;
+	background: #dddfd4;		
+	border-radius:6px;
+}
 
 .cancel-request {
 	height: 100px;
@@ -59,6 +58,7 @@
 	font-size:15px;
 	background: #173e43;
 	border-radius: 4px;
+	margin-top: 10px;
 }
 #yes:hover{
 	color: #fae596;
@@ -72,7 +72,8 @@
 	color: white;
 	font-size:15px;
 	background: #b03f41;
-	border-radius: 4px;
+	border-radius: 4px;	
+	margin-top: 10px;
 }
 #no:hover{
 	color: #fae596;
@@ -80,7 +81,7 @@
 }
 
 #close {
-	padding: 18px 75px 18px 75px;
+	padding: 16.5px 75px 16.5px 75px;
 	font-size:15px;
 	text-align: center;
 	border: 1px solid;
@@ -109,7 +110,7 @@
     clear: both;
 }
 
-.button {
+.acc-btn-info-dialog {
 	height: 55px;
 	width: 400px;
 	border: none;
@@ -119,7 +120,7 @@
 	
 }
 
-.access {
+.acc-info-dialog {
 	font-size:15px;
 	color: white;
 	text-decoration:none;

@@ -20,6 +20,10 @@
 .create-resource:hover {
 	background: #fae596
 }
+.body {
+	text-align: center;
+	grid-column: 3/4;
+}
 
 .res-name {
 	grid-column: 2/5;
@@ -35,7 +39,7 @@
 	color: #3fb0ac;
 }
 
-.res-access-btn {
+.acc-btn {
 	grid-column: 2/3;
 	background: #3fb0ac;
 	text-decoration: none;
