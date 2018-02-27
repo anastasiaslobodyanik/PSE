@@ -96,7 +96,8 @@ Der abschließende Teil der Testphase ist System-Test, der alle Komponenten zusa
 In der \hyperref[zusammenfassung]{Zusammenfassung} werden Ergebnisse der Testphase betrachtet: Code\"uberdeckung vor und nach der Phase, behobene Fehler und unsere Beurteilung der Lieferfertigkeit des Produktes.
  \newpage
 \section{Komponenten-Test} \label{komponententest}
-Views unit Tests
+Um die Einzelteile unseres Projekt auf ihre Korrektheit zu überprüfen, wurden sowohl die View-Klassen als auch ihre relevante URLs durch entsprechnde Unittest-Klassen getestet. Indem für jede Test-Klasse  alle mögliche Fälle durch verschiedene Methoden berücksichtigt sind.\\
+In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert wurden, was in den jeweiligen Tests gemacht wurde und welches Ergebnis erwartet wird.
 
 \begin{longtable}[c]{|p{0.4cm}|P{2.5cm}|p{3.5cm}|p{5cm}|p{3cm}|}
 \caption{My caption}
@@ -131,66 +132,66 @@ Views unit Tests
                   
                   
 \multirow{6}{*}{}7& \multirow{6}{*}{} TestCancelDeletionRequestView& test-not-logged-in & Getestet, ob man ein Löschrequest ablehnen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5} 
-                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Löschrequest ablehnen kann. & 403   \\ \cline{3-5} 
+                  &                   & test-not-existing-resource  & Getestet, ob man für eine nicht existierte Ressource einen Löschrequest zu stornieren versucht.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet   \\ \cline{3-5} 
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Löschrequest stornieren kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet   \\ \cline{3-5} 
                   &                   & test-staff-user &Getestet, ob der Admin ein Löschrequest ablehnen kann(Admin kann keine Löschrequeste senden).  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5}
-                  &                   &TODO  &  &    \\ \hline
+                  &                   & test-deletion-request-doesnt-exist  & Getestet, ob man einen nicht existierten Löschrequest zu stornieren versucht.  &  HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet  \\ \cline{3-5}
+                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man einen Löschrequest storniert. & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet    \\ \hline
                   
                   
                   
 \multirow{4}{*}{}8 & \multirow{4}{*}{} TestApproveAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest genehmigen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet   \\ \cline{3-5}  
-                  &                   &  &  &    \\ \cline{3-5}
-                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Zugriffsrequest genehmigen kann. & 403  \\ \cline{3-5}
-                  &                   & TODO  &  &    \\ \hline
+                  &                   & test-not-existing-request  & Getestet, ob man einen nicht existierten Zugriffsrequest zu genehmigen versucht.  &  HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet   \\ \cline{3-5}
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Zugriffsrequest genehmigen kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet  \\ \cline{3-5}
+                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man einen Zugriffsrequest genehmigt. &   HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet \\ \hline
                   
                   
                   
 \multirow{4}{*}{} 9& \multirow{4}{*}{} TestDenyAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest verweigern kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5}  
-                  &                   &  &  &    \\ \cline{3-5}
-                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Zugriffsrequest verweigern kann. & 403   \\ \cline{3-5}
-                  &                   & TODO  &  &    \\ \hline
+                  &                   & test-not-existing-request   & Getestet, ob man einen nicht existierten Zugriffsrequest abzulehnen versucht.  &  HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet    \\ \cline{3-5}
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Zugriffsrequest verweigern kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet  \\ \cline{3-5}
+                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man einen Zugriffsrequest ablehnt. &   HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet  \\ \hline
                   
                   
                   
 \multirow{6}{*}{} 10& \multirow{6}{*}{} TestSendAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest senden kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5}
+                  &                   & test-not-existing-resource &  Getestet, man ein Zugriffsrequest für eine Ressource senden kann, wenn die Ressource nicht existiert  &  HTTP Status Code 302: Der Benutzer wird zur ResourcesOverviewseite weitergeleitet    \\ \cline{3-5}
 				  &                   & test-reader &Getestet, ob ein Benutzer, der die Ressource schon zugreifen darf, ein Zugriffsrequest senden kann. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5}
                   &                   & test-staff-user &Getestet, ob der Admin ein Zugriffsrequest senden kann.  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5}  
-                  &                   &  &  &    \\ \cline{3-5}
-                  &                   &TODO  &  &    \\ \hline
+                  &                   & test-access-request-exists  & Getestet, ob der Benutzer schon einen Zugriffsrequest gesendet hat.   &  HTTP Status Code 302: Der Benutzer wird zur ResourcesOverviewseite weitergeleitet    \\ \cline{3-5}
+                  &                   &test-normal  & Getestet, was es im normalen Fall passiert, wenn man einen Zugriffsrequest sendet.  & HTTP Status Code 302: Der Benutzer wird zur ResourcesOverviewseite weitergeleitet    \\ \hline
                   
                   
                   
 \multirow{6}{*}{} 11& \multirow{6}{*}{} TestCancelAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest ablehnen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5}
-                  &                   & test-reader &Getestet, ob ein Benutzer, der die Ressource schon zugreifen darf, ein Zugriffsrequest ablehnen kann. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+                 &                   & test-not-existing-resource  & Getestet, ob man für eine nicht existierte Ressource einen Zugriffsrequest zu stornieren versucht.  & HTTP Status Code 302: Der Benutzer wird zur ResourcesOverviewseite weitergeleitet   \\ \cline{3-5}
+                  &                   & test-reader &Getestet, ob ein Benutzer, der die Ressource schon zugreifen darf, ein Zugriffsrequest stornieren kann. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
                   &                   & test-staff-user &Getestet, ob der Admin ein Zugriffsrequest ablehnen kann(Der Admin kann keine Zugriffsrequeste senden ).  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5}
+                  &                   & test-deletion-request-doesnt-exist  & Getestet, ob man einen nicht existierten Zugriffsrequest zu stornieren versucht.  &  HTTP Status Code 302: Der Benutzer wird zur ResourcesOverviewseite weitergeleitet    \\ \cline{3-5}
 
-                  &                   &TODO  &  &    \\ \hline
+                  &                   &test-normal  & Getestet, was es im normalen Fall passiert, wenn man einen Zugriffsrequest storniert.  & HTTP Status Code 302: Der Benutzer wird zur ResourcesOverviewseite weitergeleitet    \\ \hline
                   
                   
                   
-\multirow{4}{*}{} 12& \multirow{4}{*}{} TestDeleteResourceView&  &  &   \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5} 
-				  &                   &  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \hline
+\multirow{4}{*}{} 12& \multirow{4}{*}{} TestDeleteResourceView& test-not-logged-in & Getestet, ob man eine Ressource löschen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet   \\ \cline{3-5} 
+                  &                   & test-not-existing-resource  & Getestet, ob man für eine nicht existierte Ressource  löschen kann.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet    \\ \cline{3-5} 
+				  &                   & test-not-staff-user &Getestet, ob der Benutzer, der kein Admin ist, eine Ressource löschen kann.  &HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet     \\ \cline{3-5} 
+                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man eine Ressource löscht.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet    \\ \hline
                   
                   
-\multirow{2}{*}{} 13& \multirow{2}{*}{} TestEditNameView&  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \hline
+\multirow{2}{*}{} 13& \multirow{2}{*}{} TestEditNameView& test-not-logged-in & Getestet, ob man seinen Name editieren kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet    \\ \cline{3-5} 
+                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man seinen Name editiert.  & HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet    \\ \hline
                   
                   
-\multirow{3}{*}{} 14& \multirow{3}{*}{} TestResourcesOverview&  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \hline
+\multirow{3}{*}{} 14& \multirow{3}{*}{} TestResourcesOverview& test-not-logged-in & Getestet, ob die ResourcesOverviewseite gezeigt ist, wen man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleite   \\ \cline{3-5} 
+                  &                   &test-normal  & Getestet, ob die ResourcesOverviewseite gezeigt ist, wenn man eingeloggt ist. &  HTPP Status Code 200: OK  \\ \cline{3-5} 
+                  &                   &test-pagination-user  & Getestet, ob der Benutzer die vier existierten Ressourcen auf der Seite sieht. & Anzahl der gezeigten Ressourcen auf der seite-4   \\ \hline
                   
                   
-\multirow{4}{*}{}15 & \multirow{4}{*}{} TestResourcesOverviewSearch&  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \cline{3-5} 
-                  &                   &  &  &    \\ \hline
+\multirow{4}{*}{}15 & \multirow{4}{*}{} TestResourcesOverviewSearch& test-not-logged-in & Getestet, ob die ResourcesOverviewSearchseite gezeigt ist, wen man nicht eingeloggt ist. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleite   \\ \cline{3-5} 
+                  &                   &test-normal  & Getestet, ob die ResourcesOverviewSearchseite gezeigt ist, wenn man eingeloggt ist. &  HTPP Status Code 200: OK     \\ \cline{3-5} 
+                  &                   &test-no-query  &  Getestet, wenn der Benutzer keinen Charakter für die Suchabfrage eingibt& HTTP Status Code 302: Der Benutzer wird zur ResourcesOverview weitergeleite   \\ \cline{3-5} 
+                  &                   & test-valid-query & Getestet, ob der Benutzer die alle Ressourcen, deren Namen die eingegebene Charakter für Suchabfrage enthalten, sieht.& Anzahl der gezeigten Ressourcen auf der seite.    \\ \hline
                   
                   
 \multirow{8}{*}{}16& \multirow{8}{*}{} TestPermissionEditingView&  &  &    \\ \cline{3-5} 
