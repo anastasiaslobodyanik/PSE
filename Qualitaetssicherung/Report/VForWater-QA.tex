@@ -88,15 +88,14 @@
 \begin{flushright}
 - Edsger W. Dijkstra\\
 \end{flushright}
-Das Testen in der Software-Entwicklung ist das Prozess der Untersuchung des Produktes auf Unterschiede zwischen dem beobachteten Verhalten und dem erwarteten Verhalten des Systemmodells.
+Das Testen in der Software-Entwicklung ist der Prozess der Untersuchung des Produktes auf Unterschiede zwischen seinem beobachteten Verhalten und dem erwarteten Verhalten des modellierten Systems.
 In dem Wasserfall-Vorgehensmodell wird die Testphase direkt vor der Auslieferung des Produkts durchgeführt und wird als Sicherstellung festgelegter Qualitätsanforderungen betrachtet.\\
-Testphase ist 
+Testphase ist mit anderen Entwicklungsphasen eng verbunden. Die erste Tests werden schon in der Implentierungphase erstellt: Unit-Tests zu jedem View entsprechen dem Komponenten-Test, dessen Ziel ist, Fehler in jedem Teil des Systems aufzufinden. Diese Tests werden im Kapitel \hyperref[komponententest]{\textit{Komponenten-Test}} beschrieben.\\
+Das Zusammenspiel einzelnen Komponenten wird im Integration-Test gepr\"uft. In dieser Phase wird R\"uckblick auf Artefakt des Entwurfs genommen, um die Integrationsstrategie w\"arend dem Test zu ber\"ucksichtigen. Tests, die diese Phase umschließt, beschreiben wir im Kapitel \hyperref[integrationtest]{\textit{Integration-Test}}.\\
+Der abschließende Teil der Testphase ist System-Test, der alle Komponenten zusammen pr\"uft. In unserem Projekt werden daf\"ur manuelle Tests angewendet, die erm\"oglichen, Benutzerszenarien nah zu Realit\"at durchzuarbeiten. Testcases (Testszenarien) in dieser Phase werden anhand funktioneller Anforderungen aus dem Pflichtenheft erstellt und im Kapitel \hyperref[systemtest]{System-Test} beschrieben.\\
+In der \hyperref[zusammenfassung]{Zusammenfassung} werden Ergebnisse der Testphase betrachtet: Code\"uberdeckung vor und nach der Phase, behobene Fehler und unsere Beurteilung der Lieferfertigkeit des Produktes.
  \newpage
- \section{Qualität}
- Wie wird Qualität gemessen.
- 
- \newpage
-\section{Komponenten-Test}
+\section{Komponenten-Test} \label{komponententest}
 Views unit Tests
 
 \begin{longtable}[c]{|p{0.4cm}|P{2.5cm}|p{3.5cm}|p{5cm}|p{3cm}|}
@@ -241,16 +240,16 @@ Views unit Tests
 \newpage
 
 
-\section{Integration-Test}
+\section{Integration-Test} \label{integrationtest}
 Test des Zusammenspiels der Komponenten.
 
 \newpage
-\section{System-Test}
-System-Test im Sinne von Software Entwicklung ist der abschließende Test, der vom Entwickler durchgeführt wird. Das Ziel ist das Verhalten des Produkts als Ganzes in einer realen Umgebung (immer noch ohne Kunden) zu beobachten.\\
+\section{System-Test} \label{systemtest}
+System-Test im Sinne der Software-Entwicklung ist der abschließende Test, der vom Entwickler durchgeführt wird. Das Ziel dieses Tests ist das Verhalten des Produkts als Ganzes in einer realen Umgebung (immer noch ohne Kunden) zu beobachten.\\
 Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - für Benutzer, für Besitzer und für Administrator.
 
 \newpage
-\section{Zusammenfassung}
+\section{Zusammenfassung} \label{zusammenfassung}
 Testüberdeckung. Fazit über die Qualität des Produkts.
 \end{document}
 \grid
