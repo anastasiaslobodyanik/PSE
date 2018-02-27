@@ -21,6 +21,7 @@ import mimetypes
 from test.support import resource
 from pip._vendor.requests.api import request
 from django.db.models import Q
+from django.views.decorators.cache import never_cache
 
 
 from itertools import chain
@@ -39,6 +40,7 @@ class HomeView(generic.View):
         return render(request, 'AuthorizationManagement/home.html', {'is_admin': is_admin})
 
 
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.ListView):
     model = AccessRequest.objects.none()
@@ -76,6 +78,7 @@ class ProfileView(generic.ListView):
    
 
 # the view for showing all the user's resources
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class MyResourcesView(generic.ListView):
     model = Resource
@@ -96,6 +99,7 @@ class MyResourcesView(generic.ListView):
 
 
 # the view for sending a deletion request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class SendDeletionRequestView(generic.View):
     def  post(self, request,*args, **kwargs):
@@ -142,6 +146,7 @@ class SendDeletionRequestView(generic.View):
 
 
 # the view for canceling a deletion request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class CancelDeletionRequestView(generic.View):
     def post(self, request,*args, **kwargs):
@@ -184,6 +189,7 @@ class CancelDeletionRequestView(generic.View):
         request_to_delete.delete()
         return redirect("/profile/my-resources")
 
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch') 
 class ResourcesOverview(generic.ListView):
     model = Resource.objects.all()
@@ -213,6 +219,7 @@ class ResourcesOverview(generic.ListView):
 
      
 # the view for ResourcesOverview after search
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')     
 class ResourcesOverviewSearch(ResourcesOverview):
     
@@ -239,6 +246,7 @@ class ResourcesOverviewSearch(ResourcesOverview):
         return context
 
 # the view for approving an access request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch') 
 class ApproveAccessRequest(generic.View):
     def post(self,request,*args, **kwargs):
@@ -278,6 +286,7 @@ class ApproveAccessRequest(generic.View):
         return redirect("/profile")
 
 # the view for denying an access request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')     
 class DenyAccessRequest(generic.View):
     def post(self,request,*args, **kwargs):
@@ -317,6 +326,7 @@ class DenyAccessRequest(generic.View):
         return redirect("/profile")
 
 #the view for sending an access request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')     
 class SendAccessRequestView(generic.View):
     def post(self,request,*args, **kwargs):
@@ -357,6 +367,7 @@ class SendAccessRequestView(generic.View):
    
 
 # the view for canceling an access request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')     
 class CancelAccessRequest(generic.View):
     def post(self,request,*args, **kwargs):
@@ -393,7 +404,7 @@ class CancelAccessRequest(generic.View):
         logger.info("An email was sent from %s to '%s' owners, Subject: Cancel the Access Request for '%s' \n" % (request.user.username,request_to_delete.resource.name,request_to_delete.resource.name))
         return redirect("/resources-overview")
     
-
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')     
 class OpenResourceView(generic.View):
     def get(self,request,*args, **kwargs):
@@ -440,6 +451,7 @@ def download(request,resource):
     return response
 
 
+@method_decorator(never_cache, name='dispatch')
 class PermissionEditingView(generic.ListView):
     model = User = User.objects.none()
     template_name='AuthorizationManagement/edit-permissions.html'
@@ -584,7 +596,7 @@ class PermissionEditingView(generic.ListView):
         return context
     
     
-    
+@method_decorator(never_cache, name='dispatch')    
 @method_decorator(login_required, name='dispatch')     
 class PermissionEditingViewSearch(PermissionEditingView):
     
@@ -614,6 +626,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
 
 
 # the view for deleting a resource
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class DeleteResourceView(generic.View):
     def post(self, request,*args, **kwargs):
@@ -661,6 +674,7 @@ class DeleteResourceView(generic.View):
         return redirect("/profile/my-resources")
 
 # the view for approving a deletion request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class ApproveDeletionRequest(generic.View):
     def post(self, request,*args, **kwargs):
@@ -724,6 +738,7 @@ class ApproveDeletionRequest(generic.View):
         return redirect("/profile")
 
 # the view for denying a deletion request
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class DenyDeletionRequest(generic.View):
     
@@ -767,6 +782,7 @@ class DenyDeletionRequest(generic.View):
 
 
 # the view for adding a new resource
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class AddNewResourceView(generic.View):
     
@@ -799,6 +815,7 @@ class AddNewResourceView(generic.View):
 
     
 # the view for editing the name of the user
+@method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class EditNameView(generic.View):
     
