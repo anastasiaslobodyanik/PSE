@@ -16,7 +16,7 @@ from django.template import RequestContext
 from django.core.mail.message import EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.core.exceptions import PermissionDenied
-from _csv import reader
+from _csv import reader, Error
 import mimetypes
 from test.support import resource
 from pip._vendor.requests.api import request
@@ -24,6 +24,7 @@ from django.db.models import Q
 
 
 from itertools import chain
+from AuthorizationManagement.apps import AuthorizationmanagementConfig
 
 
 logger = logging.getLogger(__name__)
@@ -100,13 +101,14 @@ class SendDeletionRequestView(generic.View):
     def  post(self, request,*args, **kwargs):
 
         pk = self.kwargs['resourceid'] # get the id of the resource which is included in the url
-
-        res=Resource.objects.get(id=pk)
         
-        # redirects the current user to resources-overview if a resource with such an id does not exist
-        if res is None:
+        try:
+            res=Resource.objects.get(id=pk)
+        except Resource.DoesNotExist:
+            # redirects the current user to profile/my-resources if a resource with such an id does not exist
             logger.info("User %s tried to send a deletion request for non-existing resource \n" % (request.user.username))
             return redirect("/profile/my-resources")
+        
         
         # raises the PermissionDenied exception if the current user has no ownership for this resource
         if  not res.owners.filter(id= request.user.id).exists():
@@ -146,22 +148,23 @@ class CancelDeletionRequestView(generic.View):
 
         pk = self.kwargs['resourceid'] # get the id of the resource which is included in the url
         
-        res = Resource.objects.get(id=pk)
         
-        # redirects the current user to resources-overview if a resource with such an id does not exist
-        if res is None:
+        try:
+            res=Resource.objects.get(id=pk)
+        except Resource.DoesNotExist:
+            # redirects the current user to profile/my-resources if a resource with such an id does not exist
             logger.info("User %s tried to cancel a deletion request for non-existing resource \n" % (request.user.username))
-            return redirect("/resources-overview")
-
+            return redirect("/profile/my-resources")
+        
         # raises the PermissionDenied exception if the current user has no ownership for this resource
         if  not res.owners.filter(id= request.user.id).exists():
             logger.info("User %s tried to cancel a deletion request for resource '%s' without being an owner! \n" % (request.user.username,res.name))
             raise PermissionDenied
             
-        # redirects the current user to resources-overview if the user is a staff user or there is no deletion request 
+        # redirects the current user to /profile/my-resources if the user is a staff user or there is no deletion request 
         if request.user.is_staff or  not DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
             logger.info("User %s tried to cancel a deletion request for resource '%s' \n" % (request.user.username,res.name))
-            return redirect("/resources-overview")
+            return redirect("/profile/my-resources")
         
         requests_of_user = DeletionRequest.objects.filter(sender=request.user) 
         request_to_delete = requests_of_user.get(resource__id=pk)
@@ -242,11 +245,10 @@ class ApproveAccessRequest(generic.View):
         
         pk = self.kwargs['requestid'] # gets the id of the request which is included in the url
         
-        
-        req=AccessRequest.objects.get(id=pk)
-        
-        # redirects the current user to profile if a request with a such id does not exist
-        if req is None:
+        try:
+            req=AccessRequest.objects.get(id=pk)
+        except AccessRequest.DoesNotExist:
+            # redirects the current user to profile if a request with a such id does not exist
             logger.info("User %s tried to approve a non-existing access request" % (request.user))
             return redirect('/profile')
         
@@ -281,10 +283,11 @@ class DenyAccessRequest(generic.View):
     def post(self,request,*args, **kwargs):
         
         pk = self.kwargs['requestid'] # gets the id of the request which is included in the url
-        req=AccessRequest.objects.get(id=pk)
         
-        # redirects the current user to profile if a request with a such id does not exist
-        if req is None:
+        try:
+            req=AccessRequest.objects.get(id=pk)
+        except AccessRequest.DoesNotExist:
+            # redirects the current user to profile if a request with a such id does not exist
             logger.info("User %s tried to deny a non-existing access request" % (request.user))
             return redirect('/profile')
         
@@ -319,12 +322,12 @@ class SendAccessRequestView(generic.View):
     def post(self,request,*args, **kwargs):
         pk = self.kwargs['resourceid'] # gets the id of the resource which is included in the url
 
-        res=Resource.objects.get(id=pk)
-        
-        # redirects the current user to resources-overview if a resource with a such id does not exist
-        if res is None:
+        try:
+            res=Resource.objects.get(id=pk)
+        except Resource.DoesNotExist:
+            # redirects the current user to resources-overview if a resource with a such id does not exist
             logger.info("User %s tried to send an access request for non-existing resource \n" % (request.user.username))
-            return redirect("/resources-overview")
+            return redirect("/resources-overview") 
 
         # redirects the current user to resources-overview if the user is a staff user or already has an access permission to this resource
         # or if the user has already requested to access this resource
@@ -359,14 +362,13 @@ class CancelAccessRequest(generic.View):
     def post(self,request,*args, **kwargs):
         pk = self.kwargs['resourceid'] # gets the id of the resource which is included in the url
 
-        
-        res=Resource.objects.get(id=pk)
-        
-        # redirects the current user to resources-overview if a resource with a such id does not exist
-        if res is None:
+        try:
+            res=Resource.objects.get(id=pk)
+        except Resource.DoesNotExist:
+            # redirects the current user to resources-overview if a resource with a such id does not exist
             logger.info("User %s tried to cancel an access request for non-existing resource \n" % (request.user.username))
             return redirect("/resources-overview")
-
+           
         # redirects the current user to resources-overview if the user is a staff user or already has an access permission to this resource or if there is no access request
         if res.readers.filter(id= request.user.id).exists() or request.user.is_staff or  not AccessRequest.objects.filter(resource=res,sender = request.user).exists():
             logger.info("User %s tried to inconsistently cancel an access request for resource '%s' \n" % (request.user.username,res.name))
@@ -397,13 +399,14 @@ class OpenResourceView(generic.View):
     def get(self,request,*args, **kwargs):
         pk = self.kwargs['resourceid'] # gets the id of the resource which is included in the url
         
-        # redirects the current user to the 404 if a resource with a such id does not exist 
-        if not Resource.objects.filter(id=pk).exists():
+         
+        try:
+            resource=Resource.objects.get(id=pk)   
+        except Resource.DoesNotExist:
+            # redirects the current user to the 404 if a resource with a such id does not exist 
             logger.info("User %s tried to access a non-existing resource \n" % (request.user.username))
-            raise Http404("The requested file doesn't exist!")
-
-
-        resource=Resource.objects.get(id=pk)       
+            raise Http404
+        
         # raises the PermissionDenied exception if the current user is a staff user or has no access permission to this resource
         if (not resource.readers.filter(id=request.user.id).exists())and (not request.user.is_staff) :
             raise PermissionDenied
@@ -447,10 +450,17 @@ class PermissionEditingView(generic.ListView):
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        resource=Resource.objects.get(id=self.kwargs['resourceid'])
-        if resource is None:
+        
+        try:
+            resource=Resource.objects.get(id=self.kwargs['resourceid'])   
+        except Resource.DoesNotExist:
             logger.info("User %s tried to edit the permissions of a non-existing resource \n" % (request.user.username))
-            return redirect('/')
+            if request.method == 'GET':
+                raise Http404
+            else:
+                return redirect('/')
+                
+        
         #redirects the staff users to resource-manager
         if request.user.is_staff :
             return redirect('/resource-manager/AuthorizationManagement/resource/'+self.kwargs['resourceid']+'/change/')
@@ -613,13 +623,12 @@ class DeleteResourceView(generic.View):
         
         pk = self.kwargs['resourceid'] # gets the id of the resource which is included in the url
         
-        
-        res=Resource.objects.get(id=pk)
-        
-        # redirects the current user if a resource with a such id does not exist
-        if res is None:
+        try:
+            res=Resource.objects.get(id=pk)   
+        except Resource.DoesNotExist:
+            # redirects the current user if a resource with a such id does not exist
             logger.info("User %s tried to delete a non-existing resource" % (request.user))
-            return redirect('/profile')
+            return redirect("/profile/my-resources")
         
         # raises the PermissionDenied exception if the current user is not a staff user
         if not request.user.is_staff :
@@ -661,11 +670,10 @@ class ApproveDeletionRequest(generic.View):
         
         pk = self.kwargs['requestid']
         
-        
-        req=DeletionRequest.objects.get(id=pk)
-        
-        # redirects the current user if a request with a such id does not exist
-        if req is None:
+        try:
+            req=DeletionRequest.objects.get(id=pk)
+        except DeletionRequest.DoesNotExist:
+            # redirects the current user if a request with a such id does not exist
             logger.info("User %s tried to approve a non-existing deletion request" % (request.user))
             return redirect('/profile')
         
@@ -674,7 +682,6 @@ class ApproveDeletionRequest(generic.View):
             logger.info("User %s tried to approve a deletion request without being an administrator" % (request.user))
             raise PermissionDenied
         
-        owners = req.resource.owners.all()
         message = req.description # gets the description of the request
 
         html_content = render_to_string('AuthorizationManagement/mail/delete-request-accepted-mail.html',
@@ -727,10 +734,11 @@ class DenyDeletionRequest(generic.View):
     def post(self, request,*args, **kwargs):
         
         pk = self.kwargs['requestid']
-        req=DeletionRequest.objects.get(id=pk) 
         
-        # redirects the current user if a request with a such id does not exist
-        if req is None:
+        try:
+            req=DeletionRequest.objects.get(id=pk)
+        except DeletionRequest.DoesNotExist:
+            # redirects the current user if a request with a such id does not exist
             logger.info("User %s tried to deny a non-existing deletion request" % (request.user))
             return redirect('/profile')
         
@@ -776,6 +784,9 @@ class AddNewResourceView(generic.View):
 
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
             return redirect("/profile/my-resources")# what happens in the browser after submitting
+        else:
+            logger.info("User %s tried to inconsistently create a resource \n" % request.user.username)
+            return redirect("/profile/my-resources")
 
     def get(self,request):
         form = AddNewResourceForm()

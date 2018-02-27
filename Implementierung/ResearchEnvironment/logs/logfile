@@ -1,58 +1,427 @@
-[26/Feb/2018 16:28:24] INFO [AuthorizationManagement.views:372] User boncho tried to inconsistently cancel an access request for resource 'res' 
+[27/Feb/2018 16:13:35] INFO [AuthorizationManagement.views:257] User evlogi tried to approve an access request without being owner of the requested resource
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:276] Request from evlogi to access 'res' was approved by boncho 
 
-[26/Feb/2018 16:28:24] INFO [AuthorizationManagement.views:372] User admin tried to inconsistently cancel an access request for resource 'res' 
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:277] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
 
-[26/Feb/2018 16:28:24] INFO [AuthorizationManagement.views:158] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:374] User boncho tried to inconsistently cancel an access request for resource 'res4' 
 
-[26/Feb/2018 16:28:25] INFO [AuthorizationManagement.views:179] Deletion request for 'res' was canceled by boncho 
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:369] User boncho tried to cancel an access request for non-existing resource 
 
-[26/Feb/2018 16:28:25] INFO [AuthorizationManagement.views:180] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:392] Access request for 'res' was canceled by evlogi 
 
-[26/Feb/2018 16:28:25] INFO [AuthorizationManagement.views:163] User admin tried to cancel a deletion request for resource 'res' 
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:393] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
 
-[26/Feb/2018 16:28:25] INFO [AuthorizationManagement.views:626] User evlogi tried to delete the resource 'res' without being an administrator
-[26/Feb/2018 16:28:25] INFO [AuthorizationManagement.views:650] User admin deleted resource res 
-[26/Feb/2018 16:28:25] INFO [AuthorizationManagement.views:651] An email was sent to all 'res' owners, Subject: 'res' is deleted 
-[26/Feb/2018 16:28:26] INFO [AuthorizationManagement.views:293] User evlogi tried to deny an access request without being owner of the requested resource
-[26/Feb/2018 16:28:26] INFO [AuthorizationManagement.views:312] Request from evlogi to access 'res' was denied by boncho 
+[27/Feb/2018 16:13:36] INFO [AuthorizationManagement.views:374] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
 
-[26/Feb/2018 16:28:26] INFO [AuthorizationManagement.views:313] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
+[27/Feb/2018 16:13:37] INFO [AuthorizationManagement.views:374] User admin tried to inconsistently cancel an access request for resource 'res3' 
 
-[26/Feb/2018 16:28:28] INFO [AuthorizationManagement.views:461] User evlogi tried to edit the permissions of resource res 
+[27/Feb/2018 16:13:37] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res4' 
 
-[26/Feb/2018 16:28:29] INFO [AuthorizationManagement.views:461] User evlogi tried to edit the permissions of resource res 
+[27/Feb/2018 16:13:37] INFO [AuthorizationManagement.views:156] User evlogi tried to cancel a deletion request for non-existing resource 
 
-[26/Feb/2018 16:28:33] INFO [AuthorizationManagement.views:351] Access request for resource 'res' with id '1' was sent by evlogi 
+[27/Feb/2018 16:13:37] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
 
-[26/Feb/2018 16:28:33] INFO [AuthorizationManagement.views:352] An email was sent from evlogi to 'res' owners, Subject: Access Request for 'res' 
+[27/Feb/2018 16:13:37] INFO [AuthorizationManagement.views:182] Deletion request for 'res' was canceled by boncho 
 
-[26/Feb/2018 16:28:33] INFO [AuthorizationManagement.views:332] User boncho tried to inconsistently send an access request for resource 'res' 
+[27/Feb/2018 16:13:37] INFO [AuthorizationManagement.views:183] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
 
-[26/Feb/2018 16:28:33] INFO [AuthorizationManagement.views:332] User admin tried to inconsistently send an access request for resource 'res' 
+[27/Feb/2018 16:13:38] INFO [AuthorizationManagement.views:166] User admin tried to cancel a deletion request for resource 'res' 
 
-[26/Feb/2018 16:28:34] INFO [AuthorizationManagement.views:113] User evlogi tried to send a deletion request for resource 'res' without being an owner! 
+[27/Feb/2018 16:13:38] INFO [AuthorizationManagement.views:635] User evlogi tried to delete the resource 'res' without being an administrator
+[27/Feb/2018 16:13:38] INFO [AuthorizationManagement.views:659] User admin deleted resource res 
+[27/Feb/2018 16:13:38] INFO [AuthorizationManagement.views:660] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[27/Feb/2018 16:13:39] INFO [AuthorizationManagement.views:291] User boncho tried to deny a non-existing access request
+[27/Feb/2018 16:13:39] INFO [AuthorizationManagement.views:296] User evlogi tried to deny an access request without being owner of the requested resource
+[27/Feb/2018 16:13:39] INFO [AuthorizationManagement.views:315] Request from evlogi to access 'res' was denied by boncho 
 
-[26/Feb/2018 16:28:34] INFO [AuthorizationManagement.views:137] Deletion request for 'res' resource was sent by boncho 
+[27/Feb/2018 16:13:39] INFO [AuthorizationManagement.views:316] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
 
-[26/Feb/2018 16:28:34] INFO [AuthorizationManagement.views:138] An email was sent to the Staff members from boncho, Subject: Deletion Request for 'res' 
+[27/Feb/2018 16:13:41] INFO [AuthorizationManagement.views:414] User boncho accessed 'res' with id = 1 
 
-[26/Feb/2018 16:28:34] INFO [AuthorizationManagement.views:117] User admin tried to inconsistently send a deletion request for resource 'res' 
+[27/Feb/2018 16:13:41] INFO [AuthorizationManagement.views:407] User boncho tried to access a non-existing resource 
 
-[26/Feb/2018 17:04:03] INFO [AuthorizationManagement.views:137] Deletion request for 'Forward vs. backward chaining logic' resource was sent by user_4 
+[27/Feb/2018 16:13:42] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
 
-[26/Feb/2018 17:04:03] INFO [AuthorizationManagement.views:138] An email was sent to the Staff members from user_4, Subject: Deletion Request for 'Forward vs. backward chaining logic' 
+[27/Feb/2018 16:13:42] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
 
-[26/Feb/2018 17:04:24] INFO [AuthorizationManagement.views:756] Request from user_4 to delete 'Forward vs. backward chaining logic' was denied by admin 
+[27/Feb/2018 16:13:42] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
 
-[26/Feb/2018 17:04:24] INFO [AuthorizationManagement.views:757] An email was sent from admin to user_4, Subject: Deletion Request for 'Forward vs. backward chaining logic' denied
+[27/Feb/2018 16:13:44] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
 
-[26/Feb/2018 17:06:20] INFO [AuthorizationManagement.views:137] Deletion request for 'Forward vs. backward chaining logic' resource was sent by user_4 
+[27/Feb/2018 16:13:44] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
 
-[26/Feb/2018 17:06:20] INFO [AuthorizationManagement.views:138] An email was sent to the Staff members from user_4, Subject: Deletion Request for 'Forward vs. backward chaining logic' 
+[27/Feb/2018 16:13:47] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res' 
 
-[26/Feb/2018 17:06:41] INFO [AuthorizationManagement.views:756] Request from user_4 to delete 'Forward vs. backward chaining logic' was denied by admin 
+[27/Feb/2018 16:13:47] INFO [AuthorizationManagement.views:329] User boncho tried to send an access request for non-existing resource 
 
-[26/Feb/2018 17:06:41] INFO [AuthorizationManagement.views:757] An email was sent from admin to user_4, Subject: Deletion Request for 'Forward vs. backward chaining logic' denied
+[27/Feb/2018 16:13:47] INFO [AuthorizationManagement.views:354] Access request for resource 'res4' with id '4' was sent by boncho 
 
-[26/Feb/2018 17:14:34] INFO [AuthorizationManagement.views:650] User admin deleted resource New formula for the calculation of... 
-[26/Feb/2018 17:14:34] INFO [AuthorizationManagement.views:651] An email was sent to all 'New formula for the calculation of...' owners, Subject: 'New formula for the calculation of...' is deleted 
+[27/Feb/2018 16:13:47] INFO [AuthorizationManagement.views:355] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
+
+[27/Feb/2018 16:13:48] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res4' 
+
+[27/Feb/2018 16:13:48] INFO [AuthorizationManagement.views:335] User admin tried to inconsistently send an access request for resource 'res3' 
+
+[27/Feb/2018 16:13:48] INFO [AuthorizationManagement.views:119] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+
+[27/Feb/2018 16:13:48] INFO [AuthorizationManagement.views:109] User evlogi tried to send a deletion request for non-existing resource 
+
+[27/Feb/2018 16:13:48] INFO [AuthorizationManagement.views:115] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+
+[27/Feb/2018 16:13:49] INFO [AuthorizationManagement.views:139] Deletion request for 'res4' resource was sent by evlogi 
+
+[27/Feb/2018 16:13:49] INFO [AuthorizationManagement.views:140] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+
+[27/Feb/2018 16:13:49] INFO [AuthorizationManagement.views:119] User admin tried to inconsistently send a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:22:20] INFO [AuthorizationManagement.views:788] User boncho tried to inconsistently create a resource 
+
+[27/Feb/2018 16:22:20] INFO [AuthorizationManagement.views:252] User boncho tried to approve a non-existing access request
+[27/Feb/2018 16:22:20] INFO [AuthorizationManagement.views:257] User evlogi tried to approve an access request without being owner of the requested resource
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:276] Request from evlogi to access 'res' was approved by boncho 
+
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:277] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
+
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:374] User boncho tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:369] User boncho tried to cancel an access request for non-existing resource 
+
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:392] Access request for 'res' was canceled by evlogi 
+
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:393] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
+
+[27/Feb/2018 16:22:21] INFO [AuthorizationManagement.views:374] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:22:22] INFO [AuthorizationManagement.views:374] User admin tried to inconsistently cancel an access request for resource 'res3' 
+
+[27/Feb/2018 16:22:22] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:22:22] INFO [AuthorizationManagement.views:156] User evlogi tried to cancel a deletion request for non-existing resource 
+
+[27/Feb/2018 16:22:22] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
+
+[27/Feb/2018 16:22:22] INFO [AuthorizationManagement.views:182] Deletion request for 'res' was canceled by boncho 
+
+[27/Feb/2018 16:22:22] INFO [AuthorizationManagement.views:183] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
+
+[27/Feb/2018 16:22:23] INFO [AuthorizationManagement.views:166] User admin tried to cancel a deletion request for resource 'res' 
+
+[27/Feb/2018 16:22:23] INFO [AuthorizationManagement.views:630] User boncho tried to delete a non-existing resource
+[27/Feb/2018 16:22:23] INFO [AuthorizationManagement.views:635] User evlogi tried to delete the resource 'res' without being an administrator
+[27/Feb/2018 16:22:23] INFO [AuthorizationManagement.views:659] User admin deleted resource res 
+[27/Feb/2018 16:22:23] INFO [AuthorizationManagement.views:660] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[27/Feb/2018 16:22:24] INFO [AuthorizationManagement.views:291] User boncho tried to deny a non-existing access request
+[27/Feb/2018 16:22:24] INFO [AuthorizationManagement.views:296] User evlogi tried to deny an access request without being owner of the requested resource
+[27/Feb/2018 16:22:24] INFO [AuthorizationManagement.views:315] Request from evlogi to access 'res' was denied by boncho 
+
+[27/Feb/2018 16:22:24] INFO [AuthorizationManagement.views:316] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
+
+[27/Feb/2018 16:22:26] INFO [AuthorizationManagement.views:407] User boncho tried to access a non-existing resource 
+
+[27/Feb/2018 16:22:27] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:22:27] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:22:27] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:22:28] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:22:29] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:22:32] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res' 
+
+[27/Feb/2018 16:22:32] INFO [AuthorizationManagement.views:329] User boncho tried to send an access request for non-existing resource 
+
+[27/Feb/2018 16:22:32] INFO [AuthorizationManagement.views:354] Access request for resource 'res4' with id '4' was sent by boncho 
+
+[27/Feb/2018 16:22:32] INFO [AuthorizationManagement.views:355] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
+
+[27/Feb/2018 16:22:32] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res4' 
+
+[27/Feb/2018 16:22:33] INFO [AuthorizationManagement.views:335] User admin tried to inconsistently send an access request for resource 'res3' 
+
+[27/Feb/2018 16:22:33] INFO [AuthorizationManagement.views:119] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+
+[27/Feb/2018 16:22:33] INFO [AuthorizationManagement.views:109] User evlogi tried to send a deletion request for non-existing resource 
+
+[27/Feb/2018 16:22:33] INFO [AuthorizationManagement.views:115] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+
+[27/Feb/2018 16:22:33] INFO [AuthorizationManagement.views:139] Deletion request for 'res4' resource was sent by evlogi 
+
+[27/Feb/2018 16:22:33] INFO [AuthorizationManagement.views:140] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+
+[27/Feb/2018 16:22:34] INFO [AuthorizationManagement.views:119] User admin tried to inconsistently send a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:33:41] INFO [AuthorizationManagement.views:788] User boncho tried to inconsistently create a resource 
+
+[27/Feb/2018 16:33:42] INFO [AuthorizationManagement.views:252] User boncho tried to approve a non-existing access request
+[27/Feb/2018 16:33:42] INFO [AuthorizationManagement.views:257] User evlogi tried to approve an access request without being owner of the requested resource
+[27/Feb/2018 16:33:42] INFO [AuthorizationManagement.views:276] Request from evlogi to access 'res' was approved by boncho 
+
+[27/Feb/2018 16:33:42] INFO [AuthorizationManagement.views:277] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
+
+[27/Feb/2018 16:33:43] INFO [AuthorizationManagement.views:682] User evlogi tried to approve a deletion request without being an administrator
+[27/Feb/2018 16:33:43] INFO [AuthorizationManagement.views:677] User boncho tried to approve a non-existing deletion request
+[27/Feb/2018 16:33:43] INFO [AuthorizationManagement.views:711] An email was sent from admin to boncho, Subject: Deletion Request for 'res' accepted 
+
+[27/Feb/2018 16:33:43] INFO [AuthorizationManagement.views:719] An email was sent to all 'res' owners, Object: 'res' is deleted 
+[27/Feb/2018 16:33:43] INFO [AuthorizationManagement.views:725] Request from boncho to delete 'res' accepted by admin 
+
+[27/Feb/2018 16:33:44] INFO [AuthorizationManagement.views:374] User boncho tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:33:44] INFO [AuthorizationManagement.views:369] User boncho tried to cancel an access request for non-existing resource 
+
+[27/Feb/2018 16:33:44] INFO [AuthorizationManagement.views:392] Access request for 'res' was canceled by evlogi 
+
+[27/Feb/2018 16:33:44] INFO [AuthorizationManagement.views:393] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
+
+[27/Feb/2018 16:33:44] INFO [AuthorizationManagement.views:374] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:33:44] INFO [AuthorizationManagement.views:374] User admin tried to inconsistently cancel an access request for resource 'res3' 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:156] User evlogi tried to cancel a deletion request for non-existing resource 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:182] Deletion request for 'res' was canceled by boncho 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:183] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:166] User admin tried to cancel a deletion request for resource 'res' 
+
+[27/Feb/2018 16:33:45] INFO [AuthorizationManagement.views:630] User boncho tried to delete a non-existing resource
+[27/Feb/2018 16:33:46] INFO [AuthorizationManagement.views:635] User evlogi tried to delete the resource 'res' without being an administrator
+[27/Feb/2018 16:33:46] INFO [AuthorizationManagement.views:659] User admin deleted resource res 
+[27/Feb/2018 16:33:46] INFO [AuthorizationManagement.views:660] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[27/Feb/2018 16:33:46] INFO [AuthorizationManagement.views:291] User boncho tried to deny a non-existing access request
+[27/Feb/2018 16:33:46] INFO [AuthorizationManagement.views:296] User evlogi tried to deny an access request without being owner of the requested resource
+[27/Feb/2018 16:33:47] INFO [AuthorizationManagement.views:315] Request from evlogi to access 'res' was denied by boncho 
+
+[27/Feb/2018 16:33:47] INFO [AuthorizationManagement.views:316] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
+
+[27/Feb/2018 16:33:47] INFO [AuthorizationManagement.views:747] User evlogi tried to deny a deletion request without being an administrator
+[27/Feb/2018 16:33:47] INFO [AuthorizationManagement.views:742] User boncho tried to deny a non-existing deletion request
+[27/Feb/2018 16:33:47] INFO [AuthorizationManagement.views:764] Request from boncho to delete 'res' was denied by admin 
+
+[27/Feb/2018 16:33:47] INFO [AuthorizationManagement.views:765] An email was sent from admin to boncho, Subject: Deletion Request for 'res' denied
+
+[27/Feb/2018 16:33:49] INFO [AuthorizationManagement.views:407] User boncho tried to access a non-existing resource 
+
+[27/Feb/2018 16:33:50] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:33:50] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:33:51] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:33:52] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:33:52] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:33:55] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res' 
+
+[27/Feb/2018 16:33:55] INFO [AuthorizationManagement.views:329] User boncho tried to send an access request for non-existing resource 
+
+[27/Feb/2018 16:33:56] INFO [AuthorizationManagement.views:354] Access request for resource 'res4' with id '4' was sent by boncho 
+
+[27/Feb/2018 16:33:56] INFO [AuthorizationManagement.views:355] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
+
+[27/Feb/2018 16:33:56] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res4' 
+
+[27/Feb/2018 16:33:56] INFO [AuthorizationManagement.views:335] User admin tried to inconsistently send an access request for resource 'res3' 
+
+[27/Feb/2018 16:33:56] INFO [AuthorizationManagement.views:119] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+
+[27/Feb/2018 16:33:56] INFO [AuthorizationManagement.views:109] User evlogi tried to send a deletion request for non-existing resource 
+
+[27/Feb/2018 16:33:57] INFO [AuthorizationManagement.views:115] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+
+[27/Feb/2018 16:33:57] INFO [AuthorizationManagement.views:139] Deletion request for 'res4' resource was sent by evlogi 
+
+[27/Feb/2018 16:33:57] INFO [AuthorizationManagement.views:140] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+
+[27/Feb/2018 16:33:57] INFO [AuthorizationManagement.views:119] User admin tried to inconsistently send a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:35:29] INFO [AuthorizationManagement.views:788] User boncho tried to inconsistently create a resource 
+
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:276] Request from evlogi to access 'res' was approved by boncho 
+
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:277] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
+
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:252] User boncho tried to approve a non-existing access request
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:257] User evlogi tried to approve an access request without being owner of the requested resource
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:711] An email was sent from admin to boncho, Subject: Deletion Request for 'res' accepted 
+
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:719] An email was sent to all 'res' owners, Object: 'res' is deleted 
+[27/Feb/2018 16:35:30] INFO [AuthorizationManagement.views:725] Request from boncho to delete 'res' accepted by admin 
+
+[27/Feb/2018 16:35:31] INFO [AuthorizationManagement.views:682] User evlogi tried to approve a deletion request without being an administrator
+[27/Feb/2018 16:35:31] INFO [AuthorizationManagement.views:677] User boncho tried to approve a non-existing deletion request
+[27/Feb/2018 16:35:31] INFO [AuthorizationManagement.views:374] User boncho tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:35:31] INFO [AuthorizationManagement.views:392] Access request for 'res' was canceled by evlogi 
+
+[27/Feb/2018 16:35:31] INFO [AuthorizationManagement.views:393] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
+
+[27/Feb/2018 16:35:31] INFO [AuthorizationManagement.views:369] User boncho tried to cancel an access request for non-existing resource 
+
+[27/Feb/2018 16:35:32] INFO [AuthorizationManagement.views:374] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:35:32] INFO [AuthorizationManagement.views:374] User admin tried to inconsistently cancel an access request for resource 'res3' 
+
+[27/Feb/2018 16:35:32] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:35:32] INFO [AuthorizationManagement.views:182] Deletion request for 'res' was canceled by boncho 
+
+[27/Feb/2018 16:35:32] INFO [AuthorizationManagement.views:183] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
+
+[27/Feb/2018 16:35:32] INFO [AuthorizationManagement.views:156] User evlogi tried to cancel a deletion request for non-existing resource 
+
+[27/Feb/2018 16:35:33] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
+
+[27/Feb/2018 16:35:33] INFO [AuthorizationManagement.views:166] User admin tried to cancel a deletion request for resource 'res' 
+
+[27/Feb/2018 16:35:33] INFO [AuthorizationManagement.views:659] User admin deleted resource res 
+[27/Feb/2018 16:35:33] INFO [AuthorizationManagement.views:660] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[27/Feb/2018 16:35:33] INFO [AuthorizationManagement.views:630] User boncho tried to delete a non-existing resource
+[27/Feb/2018 16:35:34] INFO [AuthorizationManagement.views:635] User evlogi tried to delete the resource 'res' without being an administrator
+[27/Feb/2018 16:35:34] INFO [AuthorizationManagement.views:315] Request from evlogi to access 'res' was denied by boncho 
+
+[27/Feb/2018 16:35:34] INFO [AuthorizationManagement.views:316] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
+
+[27/Feb/2018 16:35:34] INFO [AuthorizationManagement.views:291] User boncho tried to deny a non-existing access request
+[27/Feb/2018 16:35:34] INFO [AuthorizationManagement.views:296] User evlogi tried to deny an access request without being owner of the requested resource
+[27/Feb/2018 16:35:35] INFO [AuthorizationManagement.views:764] Request from boncho to delete 'res' was denied by admin 
+
+[27/Feb/2018 16:35:35] INFO [AuthorizationManagement.views:765] An email was sent from admin to boncho, Subject: Deletion Request for 'res' denied
+
+[27/Feb/2018 16:35:35] INFO [AuthorizationManagement.views:747] User evlogi tried to deny a deletion request without being an administrator
+[27/Feb/2018 16:35:35] INFO [AuthorizationManagement.views:742] User boncho tried to deny a non-existing deletion request
+[27/Feb/2018 16:35:37] INFO [AuthorizationManagement.views:407] User boncho tried to access a non-existing resource 
+
+[27/Feb/2018 16:35:38] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:35:38] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:35:38] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:35:40] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:35:40] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:35:43] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res' 
+
+[27/Feb/2018 16:35:43] INFO [AuthorizationManagement.views:354] Access request for resource 'res4' with id '4' was sent by boncho 
+
+[27/Feb/2018 16:35:43] INFO [AuthorizationManagement.views:355] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
+
+[27/Feb/2018 16:35:44] INFO [AuthorizationManagement.views:329] User boncho tried to send an access request for non-existing resource 
+
+[27/Feb/2018 16:35:44] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res4' 
+
+[27/Feb/2018 16:35:44] INFO [AuthorizationManagement.views:335] User admin tried to inconsistently send an access request for resource 'res3' 
+
+[27/Feb/2018 16:35:44] INFO [AuthorizationManagement.views:119] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+
+[27/Feb/2018 16:35:44] INFO [AuthorizationManagement.views:139] Deletion request for 'res4' resource was sent by evlogi 
+
+[27/Feb/2018 16:35:44] INFO [AuthorizationManagement.views:140] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+
+[27/Feb/2018 16:35:45] INFO [AuthorizationManagement.views:109] User evlogi tried to send a deletion request for non-existing resource 
+
+[27/Feb/2018 16:35:45] INFO [AuthorizationManagement.views:115] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+
+[27/Feb/2018 16:35:45] INFO [AuthorizationManagement.views:119] User admin tried to inconsistently send a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:37:15] INFO [AuthorizationManagement.views:788] User boncho tried to inconsistently create a resource 
+
+[27/Feb/2018 16:37:15] INFO [AuthorizationManagement.views:276] Request from evlogi to access 'res' was approved by boncho 
+
+[27/Feb/2018 16:37:15] INFO [AuthorizationManagement.views:277] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
+
+[27/Feb/2018 16:37:15] INFO [AuthorizationManagement.views:252] User boncho tried to approve a non-existing access request
+[27/Feb/2018 16:37:16] INFO [AuthorizationManagement.views:257] User evlogi tried to approve an access request without being owner of the requested resource
+[27/Feb/2018 16:37:16] INFO [AuthorizationManagement.views:711] An email was sent from admin to boncho, Subject: Deletion Request for 'res' accepted 
+
+[27/Feb/2018 16:37:16] INFO [AuthorizationManagement.views:719] An email was sent to all 'res' owners, Object: 'res' is deleted 
+[27/Feb/2018 16:37:16] INFO [AuthorizationManagement.views:725] Request from boncho to delete 'res' accepted by admin 
+
+[27/Feb/2018 16:37:16] INFO [AuthorizationManagement.views:682] User evlogi tried to approve a deletion request without being an administrator
+[27/Feb/2018 16:37:16] INFO [AuthorizationManagement.views:677] User boncho tried to approve a non-existing deletion request
+[27/Feb/2018 16:37:17] INFO [AuthorizationManagement.views:374] User boncho tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:37:17] INFO [AuthorizationManagement.views:392] Access request for 'res' was canceled by evlogi 
+
+[27/Feb/2018 16:37:17] INFO [AuthorizationManagement.views:393] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
+
+[27/Feb/2018 16:37:17] INFO [AuthorizationManagement.views:369] User boncho tried to cancel an access request for non-existing resource 
+
+[27/Feb/2018 16:37:17] INFO [AuthorizationManagement.views:374] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
+
+[27/Feb/2018 16:37:17] INFO [AuthorizationManagement.views:374] User admin tried to inconsistently cancel an access request for resource 'res3' 
+
+[27/Feb/2018 16:37:18] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res4' 
+
+[27/Feb/2018 16:37:18] INFO [AuthorizationManagement.views:182] Deletion request for 'res' was canceled by boncho 
+
+[27/Feb/2018 16:37:18] INFO [AuthorizationManagement.views:183] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
+
+[27/Feb/2018 16:37:18] INFO [AuthorizationManagement.views:156] User evlogi tried to cancel a deletion request for non-existing resource 
+
+[27/Feb/2018 16:37:18] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
+
+[27/Feb/2018 16:37:18] INFO [AuthorizationManagement.views:166] User admin tried to cancel a deletion request for resource 'res' 
+
+[27/Feb/2018 16:37:19] INFO [AuthorizationManagement.views:659] User admin deleted resource res 
+[27/Feb/2018 16:37:19] INFO [AuthorizationManagement.views:660] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[27/Feb/2018 16:37:19] INFO [AuthorizationManagement.views:630] User boncho tried to delete a non-existing resource
+[27/Feb/2018 16:37:19] INFO [AuthorizationManagement.views:635] User evlogi tried to delete the resource 'res' without being an administrator
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:315] Request from evlogi to access 'res' was denied by boncho 
+
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:316] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
+
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:291] User boncho tried to deny a non-existing access request
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:296] User evlogi tried to deny an access request without being owner of the requested resource
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:764] Request from boncho to delete 'res' was denied by admin 
+
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:765] An email was sent from admin to boncho, Subject: Deletion Request for 'res' denied
+
+[27/Feb/2018 16:37:20] INFO [AuthorizationManagement.views:747] User evlogi tried to deny a deletion request without being an administrator
+[27/Feb/2018 16:37:21] INFO [AuthorizationManagement.views:742] User boncho tried to deny a non-existing deletion request
+[27/Feb/2018 16:37:23] INFO [AuthorizationManagement.views:407] User boncho tried to access a non-existing resource 
+
+[27/Feb/2018 16:37:24] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:37:24] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:37:24] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:37:25] INFO [AuthorizationManagement.views:471] User evlogi tried to edit the permissions of resource res 
+
+[27/Feb/2018 16:37:26] INFO [AuthorizationManagement.views:457] User boncho tried to edit the permissions of a non-existing resource 
+
+[27/Feb/2018 16:37:29] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res' 
+
+[27/Feb/2018 16:37:29] INFO [AuthorizationManagement.views:354] Access request for resource 'res4' with id '4' was sent by boncho 
+
+[27/Feb/2018 16:37:29] INFO [AuthorizationManagement.views:355] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
+
+[27/Feb/2018 16:37:29] INFO [AuthorizationManagement.views:329] User boncho tried to send an access request for non-existing resource 
+
+[27/Feb/2018 16:37:29] INFO [AuthorizationManagement.views:335] User evlogi tried to inconsistently send an access request for resource 'res4' 
+
+[27/Feb/2018 16:37:30] INFO [AuthorizationManagement.views:335] User admin tried to inconsistently send an access request for resource 'res3' 
+
+[27/Feb/2018 16:37:30] INFO [AuthorizationManagement.views:119] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+
+[27/Feb/2018 16:37:30] INFO [AuthorizationManagement.views:139] Deletion request for 'res4' resource was sent by evlogi 
+
+[27/Feb/2018 16:37:30] INFO [AuthorizationManagement.views:140] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+
+[27/Feb/2018 16:37:30] INFO [AuthorizationManagement.views:109] User evlogi tried to send a deletion request for non-existing resource 
+
+[27/Feb/2018 16:37:30] INFO [AuthorizationManagement.views:115] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+
+[27/Feb/2018 16:37:31] INFO [AuthorizationManagement.views:119] User admin tried to inconsistently send a deletion request for resource 'res4' 
+

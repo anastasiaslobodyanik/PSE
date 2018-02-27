@@ -12,6 +12,8 @@
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{pbox}
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \hypersetup{
  		pdftitle={VForWater-Implementierung},
  }
@@ -90,71 +92,144 @@ Dieses Dokument beschreibt ...
 \section{Komponenten-Test}
 Views unit Tests
 
-\begin{longtable}[c]{|p{0.4cm}|p{2.5cm}|p{3.5cm}|p{5cm}|p{2cm}|p{1.8cm}|}
+\begin{longtable}[c]{|p{0.4cm}|P{2.5cm}|p{3.5cm}|p{5cm}|p{3cm}|}
 \caption{My caption}
 \label{my-label}\\
 \hline
-\textbf{\#} & \textbf{Testcase}&\textbf{Methoden}& \textbf{Beschreibung} & \textbf{Erwartung} & \textbf{Ergebnis} \\ \hline
+\textbf{\#} & \textbf{Testcase}&\textbf{Methoden}& \textbf{Beschreibung} & \textbf{Ergebnis} \\ \hline
 \endfirsthead
 %
 \endhead
 %
-\multirow{2}{*}{}1 & \multirow{2}{*}{} TestHomeView & test-not-logged-in & Getestet, ob die Homeseite gezeigt wird, wenn man nicht eingeloggt ist. Das wird durch den zurückgegebene HTTP-Statuscode gemacht.& 302  & 302 \\ \cline{3-6} &   & test-normal & Getestet, ob die Homeseite gezeigt wird, wenn man eingeloggt ist.  & 200 & 200 \\ \hline
-\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourceManager&  test-not-logged-in & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man nicht eingeloggt ist. & 302  & 302  \\ \cline{3-6} & & test-logged-in-no-admin & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man eingeloggt ist, aber zwar nicht als Admin. & 302 & 302 \\ \cline{3-6} & & test-normal & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man als Admin  eingeloggt ist. & 200 & 200  \\ \hline
-\multirow{3}{*}{} 3& \multirow{3}{*}{} TestUserManager&  test-not-logged-in & Getestet, ob die UserManagerseite gezeigt wird, wenn man nicht eingeloggt ist. & 302  & 302  \\ \cline{3-6} & & test-logged-in-no-admin & Getestet, ob die UserManagerseite gezeigt wird, wenn man eingeloggt ist, aber zwar nicht als Admin. & 302 & 302 \\ \cline{3-6} & & test-normal & Getestet, ob die UserManagerseite gezeigt wird, wenn man als Admin  eingeloggt ist. & 200 & 200  \\ \hline
-\multirow{5}{*}{} 4& \multirow{5}{*}{} TestProfileView& test-not-logged-in & Getestet, ob die Profileseite gezeigt wird, wenn man nicht eingeloggt ist.& 302  & 302 \\ \cline{3-6} &   & test-normal & Getestet, ob die Profileseite gezeigt wird, wenn man eingeloggt ist.  & 200 & 200 \\ \cline{3-6} 
-                  &                   & test-pagination-user & Getestet, ob der Benutzer die zwei Zugriffsrequesten sieht, die ihm gesendet wurden. & 2 & 2 \\ \cline{3-6} 
-                  &                   & test-pagination-admin-page-1 & Getestet, ob der Admin  vier von den fünf Requesten, die ihm gesendet wurden,  auf der ersten Seite sieht. & 2 & 2 \\ \cline{3-6} 
-                  &                   & test-pagination-admin-page-2 & Getestet, ob der Admin  das Fünfte von den fünf Requesten, die ihm gesendet wurden,  auf der zweiten Seite sieht.& 2 & 2 \\  \hline
-\multirow{3}{*}{} 5& \multirow{3}{*}{} TestMyResourcesView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{4}{*}{}6 & \multirow{4}{*}{} TestSendDeletionRequest&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{4}{*}{}7& \multirow{4}{*}{} TestCancelDeletionRequest&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{3}{*}{}8 & \multirow{3}{*}{} TestApproveAccesRequest&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{3}{*}{} 9& \multirow{3}{*}{} TestDenyAccesRequest&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{4}{*}{} 10& \multirow{4}{*}{} TestSendAccessRequest&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{4}{*}{} 11& \multirow{4}{*}{} TestCancelAccessRequest&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{3}{*}{} 12& \multirow{3}{*}{} TestDeleteResourceView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{2}{*}{} 13& \multirow{2}{*}{} TestDeleteResourceView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{3}{*}{} 14& \multirow{3}{*}{} TestEditNameView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{4}{*}{}15 & \multirow{4}{*}{} TestResourcesOverview&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{5}{*}{}16& \multirow{5}{*}{} TestResourcesOverviewSearch&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
-\multirow{7}{*}{} 17& \multirow{7}{*}{} TestPermissionEditingView&  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \cline{3-6} 
-                  &                   &  &  &  &  \\ \hline
+\multirow{2}{*}{}1 & \multirow{2}{*}{} TestHomeView & test-not-logged-in & Getestet, ob die Homeseite gezeigt wird, wenn man nicht eingeloggt ist. Das wird durch den zurückgegebene HTTP-Statuscode gemacht.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} &   & test-normal & Getestet, ob die Homeseite gezeigt wird, wenn man eingeloggt ist.  & HTPP Status Code 200: OK \\ \hline
+
+\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourceManager&  test-not-logged-in & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man nicht eingeloggt ist. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} & & test-logged-in-no-admin & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man eingeloggt ist, aber zwar nicht als Admin. & HTTP Status Code 302: Der Benutzer wird zur Adminloginseite weitergeleitet \\ \cline{3-5} & & test-normal & Getestet, ob die ResourceManagerseite gezeigt wird, wenn man als Admin  eingeloggt ist. & HTPP Status Code 200: OK  \\ \hline
+
+\multirow{3}{*}{} 3& \multirow{3}{*}{} TestUserManager&  test-not-logged-in & Getestet, ob die UserManagerseite gezeigt wird, wenn man nicht eingeloggt ist. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} & & test-logged-in-no-admin & Getestet, ob die UserManagerseite gezeigt wird, wenn man eingeloggt ist, aber zwar nicht als Admin. & HTTP Status Code 302: Der Benutzer wird zur Adminloginseite weitergeleitet \\ \cline{3-5} & & test-normal & Getestet, ob die UserManagerseite gezeigt wird, wenn man als Admin  eingeloggt ist. & HTPP Status Code 200: OK \\ \hline
+
+\multirow{5}{*}{} 4& \multirow{5}{*}{} TestProfileView& test-not-logged-in & Getestet, ob die Profileseite gezeigt wird, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} &   & test-normal & Getestet, ob die Profileseite gezeigt wird, wenn man eingeloggt ist.  & HTPP Status Code 200: OK \\ \cline{3-5} 
+                  &                   & test-pagination-user & Getestet, ob der Benutzer die zwei Zugriffsrequesten sieht, die ihm gesendet wurden. & Anzahl der gezeigten Requeste auf der Seite - 2 \\ \cline{3-5} 
+                  &                   & test-pagination-admin-page-1 & Getestet, ob der Admin  vier von den fünf Requesten, die ihm gesendet wurden,  auf der ersten Seite sieht. & Anzahl der gezeigten Requeste auf der ersten Seite - 4 \\ \cline{3-5} 
+                  &                   & test-pagination-admin-page-2 & Getestet, ob der Admin  das Fünfte von den fünf Requesten, die ihm gesendet wurden,  auf der zweiten Seite sieht.& Anzahl der gezeigten Requeste auf der zweiten Seite - 1 \\  \hline
+   
+                  
+\multirow{3}{*}{} 5& \multirow{3}{*}{} TestMyResourcesView& test-not-logged-in & Getestet, ob die MyResourcesseite gezeigt wird, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} &   & test-normal & Getestet, ob die MyResourcesseite gezeigt wird, wenn man eingeloggt ist.  & HTPP Status Code 200: OK \\ \cline{3-5}& & test-resources-shown & Getestet, ob der Benutzer seine zwei Ressourcen auf der MyResourcesseite  sieht. &  Anzahl der gezeigten Ressourcen auf der Seite - 2  \\ \hline
+
+
+\multirow{6}{*}{}6 & \multirow{6}{*}{} TestSendDeletionRequestView& test-not-logged-in & Getestet, ob man ein Löschrequest senden kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+                  &                   & test-not-existing-resource &  Getestet, man ein Löschrequest für eine Ressource senden kann, wenn die Ressource nicht existiert  &  HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet  \\ \cline{3-5} 
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Löschrequest senden kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet    \\ \cline{3-5} 
+                  &                   & test-staff-user &Getestet, ob der Admin ein Löschrequest senden kann.  &HTTP Status Code 302: Der Admin wird zur MyResourcesseite weitergeleitet \\ \cline{3-5} 
+                  &                   & test-deletion-request-exists  & Getestet, was passiert, wenn ein Löschrequest für diese Ressource schon existiert.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet   \\ \cline{3-5} 
+                  &                  & test-normal  & Getestet, was es im normalen Fall passiert, wenn man eine Löschrequest sendet. & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet   \\ \hline
+                  
+                  
+\multirow{6}{*}{}7& \multirow{6}{*}{} TestCancelDeletionRequestView& test-not-logged-in & Getestet, ob man ein Löschrequest ablehnen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Löschrequest ablehnen kann. & 403   \\ \cline{3-5} 
+                  &                   & test-staff-user &Getestet, ob der Admin ein Löschrequest ablehnen kann(Admin kann keine Löschrequeste senden).  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}
+                  &                   &TODO  &  &    \\ \hline
+                  
+                  
+                  
+\multirow{4}{*}{}8 & \multirow{4}{*}{} TestApproveAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest genehmigen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet   \\ \cline{3-5}  
+                  &                   &  &  &    \\ \cline{3-5}
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Zugriffsrequest genehmigen kann. & 403  \\ \cline{3-5}
+                  &                   & TODO  &  &    \\ \hline
+                  
+                  
+                  
+\multirow{4}{*}{} 9& \multirow{4}{*}{} TestDenyAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest verweigern kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5}  
+                  &                   &  &  &    \\ \cline{3-5}
+                  &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Zugriffsrequest verweigern kann. & 403   \\ \cline{3-5}
+                  &                   & TODO  &  &    \\ \hline
+                  
+                  
+                  
+\multirow{6}{*}{} 10& \multirow{6}{*}{} TestSendAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest senden kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}
+				  &                   & test-reader &Getestet, ob ein Benutzer, der die Ressource schon zugreifen darf, ein Zugriffsrequest senden kann. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5}
+                  &                   & test-staff-user &Getestet, ob der Admin ein Zugriffsrequest senden kann.  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5}  
+                  &                   &  &  &    \\ \cline{3-5}
+                  &                   &TODO  &  &    \\ \hline
+                  
+                  
+                  
+\multirow{6}{*}{} 11& \multirow{6}{*}{} TestCancelAccessRequestView& test-not-logged-in & Getestet, ob man ein Zugriffsrequest ablehnen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}
+                  &                   & test-reader &Getestet, ob ein Benutzer, der die Ressource schon zugreifen darf, ein Zugriffsrequest ablehnen kann. & HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+                  &                   & test-staff-user &Getestet, ob der Admin ein Zugriffsrequest ablehnen kann(Der Admin kann keine Zugriffsrequeste senden ).  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}
+
+                  &                   &TODO  &  &    \\ \hline
+                  
+                  
+                  
+\multirow{4}{*}{} 12& \multirow{4}{*}{} TestDeleteResourceView&  &  &   \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+				  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{2}{*}{} 13& \multirow{2}{*}{} TestEditNameView&  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{3}{*}{} 14& \multirow{3}{*}{} TestResourcesOverview&  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{4}{*}{}15 & \multirow{4}{*}{} TestResourcesOverviewSearch&  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{8}{*}{}16& \multirow{8}{*}{} TestPermissionEditingView&  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{8}{*}{} 17& \multirow{8}{*}{} TestPermissionEditingViewSearch&  &  &   \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5} 
+				  &                   &  &  &    \\ \cline{3-5} 
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{3}{*}{} 18& \multirow{7}{*}{} TestAddNewResourceView&  &  &   \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{4}{*}{} 19& \multirow{7}{*}{} TestOpenResourceView&  &  &   \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{4}{*}{} 20& \multirow{7}{*}{} TestApproveDeletionRequestView&  &  &   \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \hline
+                  
+                  
+\multirow{4}{*}{} 21& \multirow{7}{*}{} TestDenyDeletionRequestView&  &  &   \\ \cline{3-5} 
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \cline{3-5}  
+                  &                   &  &  &    \\ \hline
+                  
+                  
 \end{longtable}
 \newpage
 
