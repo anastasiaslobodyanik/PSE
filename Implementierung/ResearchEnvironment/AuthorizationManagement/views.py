@@ -461,9 +461,6 @@ class PermissionEditingView(generic.ListView):
                 return redirect('/')
                 
         
-        #redirects the staff users to resource-manager
-        if request.user.is_staff :
-            return redirect('/resource-manager/AuthorizationManagement/resource/'+self.kwargs['resourceid']+'/change/')
         #checks if the current user has permission to access this resource
         if resource.owners.filter(id=request.user.id).exists():
             return super().dispatch(request,*args, **kwargs)
@@ -603,7 +600,7 @@ class PermissionEditingViewSearch(PermissionEditingView):
         
     def get(self,request,*args, **kwargs):
         self.query = self.request.GET['q']
-        self.model = User.objects.filter(username__icontains=self.query)
+        self.model = User.objects.filter(Q(username__icontains=self.query) | Q(first_name__icontains=self.query) | Q(last_name__icontains=self.query))
         return super(generic.ListView,self).get(request,*args, **kwargs)
     
     def get_context_data(self, **kwargs):
