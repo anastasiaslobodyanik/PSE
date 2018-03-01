@@ -48,8 +48,11 @@ class="active";
             <p>CreationDate: <strong>{{res.creationDate}}</strong></p>
             <p>Description: <strong>{{res.description}}</strong></p>
             {% if res in can_access or is_admin%}
-            <button class="acc-btn-info-dialog">
+           <!-- <button class="acc-btn-info-dialog">
             <a href="../../resources/{{res.id}}" class="acc-info-dialog"download>Access</a>
+            </button> -->
+            <button class="acc-tmp-btn" onclick="window.location.href='../resources/{{res.id}}'">
+            Access
             </button>
             {% endif %}
          </div>
@@ -57,7 +60,7 @@ class="active";
 	  
 	  <!-- user can access the resource if he has permissions or is an admin -->
       {% if res in can_access or is_admin %}
-      <a href="../resources/{{res.id}}" class="access-btn"download>Access</a>	
+      <a href="../resources/{{res.id}}" class="access-btn">Access</a>	
 	  
 	  <!-- if the user has sent an access request he has the option to cancel it -->
       {% elif res in requested_resources %}

@@ -131,7 +131,7 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
                   &                  & test-normal  & Getestet, was es im normalen Fall passiert, wenn man eine Löschrequest sendet. & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet   \\ \hline
                   
                   
-\multirow{6}{*}{}7& \multirow{6}{*}{} TestCancelDeletionRequestView& test-not-logged-in & Getestet, ob man ein Löschrequest ablehnen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
+\multirow{6}{*}{}7& \multirow{6}{*}{} TestCancelDeletionRequestView& test-not-logged-in & Getestet, ob man ein Löschrequest stornieren kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
                   &                   & test-not-existing-resource  & Getestet, ob man für eine nicht existierte Ressource einen Löschrequest zu stornieren versucht.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet   \\ \cline{3-5} 
                   &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Löschrequest stornieren kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet   \\ \cline{3-5} 
                   &                   & test-staff-user &Getestet, ob der Admin ein Löschrequest ablehnen kann(Admin kann keine Löschrequeste senden).  &HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet  \\ \cline{3-5} 
@@ -179,8 +179,8 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
                   &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man eine Ressource löscht.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet    \\ \hline
                   
                   
-\multirow{2}{*}{} 13& \multirow{2}{*}{} TestEditNameView& test-not-logged-in & Getestet, ob man seinen Name editieren kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet    \\ \cline{3-5} 
-                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man seinen Name editiert.  & HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet    \\ \hline
+\multirow{2}{*}{} 13& \multirow{2}{*}{} TestEditNameView& test-not-logged-in & Getestet, ob man seinen Name ändern kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet.    \\ \cline{3-5} 
+                  &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man seinen Name ändert.  & HTTP Status Code 302: Der Benutzer wird zur Profileseite weitergeleitet.    \\ \hline
                   
                   
 \multirow{3}{*}{} 14& \multirow{3}{*}{} TestResourcesOverview& test-not-logged-in & Getestet, ob die ResourcesOverviewseite gezeigt ist, wen man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleite   \\ \cline{3-5} 

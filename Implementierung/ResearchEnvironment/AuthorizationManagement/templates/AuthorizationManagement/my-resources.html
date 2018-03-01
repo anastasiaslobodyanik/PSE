@@ -39,14 +39,17 @@
          <p>Type: <strong>{{resource.type}}</strong></p>
          <p>CreationDate: <strong>{{resource.creationDate}}</strong></p>
          <p>Description: <strong>{{resource.description}}</strong></p>
-         <button class="acc-btn-info-dialog">
+       <!--  <button class="acc-btn-info-dialog">
          <a href="../../resources/{{resource.id}}" class="acc-info-dialog"download>Access</a>
-         </button>
+         </button> -->
+         <button class="acc-tmp-btn" onclick="window.location.href='../../resources/{{resource.id}}'">
+            Access
+          </button>
       </div>
    </div>
    
    <!-- access button -->
-   <a href="../../resources/{{resource.id}}" class="acc-btn"download>Access</a>
+   <a href="../../resources/{{resource.id}}" class="acc-btn">Access</a>
    
    <!-- edit permissions button -->
    <a href="/profile/my-resources/{{resource.id}}-edit-users-permissions" class="edit-perm"> Edit Permissions</a>
