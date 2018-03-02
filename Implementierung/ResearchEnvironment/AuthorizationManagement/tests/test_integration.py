@@ -1,10 +1,6 @@
 from django.test import Client, TestCase
-from django.contrib.auth.models import User
 from AuthorizationManagement.models import *
-from test.support import resource
-from django.contrib.gis.geoip2 import resources
-from test.libregrtest.cmdline import resources_list
-from nt import access
+
 
 def setUpUsers():
     test_admin = User.objects.create(username='admin')
@@ -21,15 +17,15 @@ def setUpUsers():
     test_user2.set_password('123456') 
     test_user2.save()
      
-    return {'test_admin':test_admin,'test_user1':test_user,'test_user2':test_user2}
+    return {'test_admin': test_admin, 'test_user1': test_user, 'test_user2': test_user2}
     
 def setUpResourceAndRequests(users):
 
-    res1 = Resource.objects.create(name='res1',type='text',description='desc',link='res.txt')
+    res1 = Resource.objects.create(name='res1', type='text', description='desc', link='res.txt')
     res1.readers.add(users['test_user1'].id)
     res1.owners.add(users['test_user1'].id)
     
-    res2 = Resource.objects.create(name='resource2',type='text', description='description', link='res2.txt')
+    res2 = Resource.objects.create(name='resource2', type='text', description='description', link='res2.txt')
     res2.readers.add(users['test_user2'].id)
     res2.owners.add(users['test_user2'].id)
     res2.readers.add(users['test_user1'].id)
@@ -41,13 +37,13 @@ def setUpResourceAndRequests(users):
     res3.save()
     
     res4 = Resource.objects.create(name='resource4', type='text', description='description', link='res4.txt')
-    res4.readers.add(users['test_user1'].id);
-    res4.owners.add(users['test_user1'].id);
+    res4.readers.add(users['test_user1'].id)
+    res4.owners.add(users['test_user1'].id)
     res4.save()
     
     res5 = Resource.objects.create(name='resource5', type='text', description='description', link='res5.txt')
-    res5.readers.add(users['test_user2'].id);
-    res5.owners.add(users['test_user2'].id);
+    res5.readers.add(users['test_user2'].id)
+    res5.owners.add(users['test_user2'].id)
     res5.save()
     
     req1 = AccessRequest.objects.create(sender=users['test_user2'], resource=res1)
@@ -68,7 +64,8 @@ def deleteResourcesAndRequests():
     AccessRequest.objects.all().delete()
     DeletionRequest.objects.all().delete()
     Resource.objects.all().delete()
-    
+
+
 class TestUserData(TestCase):       
     @classmethod
     def setUpClass(cls):
@@ -87,17 +84,17 @@ class TestUserData(TestCase):
         super().tearDownClass()
         
     def test_edit_name(self): 
-        self.client.post('/profile/edit-name/', {'firstName':'bob', 'lastName': 'dealan'})
+        self.client.post('/profile/edit-name/', {'firstName': 'bob', 'lastName': 'dylan'})
         self.assertEqual(User.objects.get_by_natural_key('user1').first_name, 'bob')
         
     def test_my_requests(self):
-        response = self.client.get('/profile/');
+        response = self.client.get('/profile/')
         resources = Owner.objects.get_by_natural_key('user1').owner.all()
         requests = AccessRequest.objects.all().filter(resource__in=resources)
         self.assertCountEqual(response.context['requests_list'], requests)
     
     def test_my_resources(self):
-        response = self.client.get('/profile/my-resources/');
+        response = self.client.get('/profile/my-resources/')
         resources = Owner.objects.get_by_natural_key('user1').owner.all()
         self.assertCountEqual(response.context['resource_list'], resources)
     
@@ -120,12 +117,12 @@ class TestResourcesData(TestCase):
         super().tearDownClass()
         
     def test_resources_overview(self):
-        response = self.client.get('/resources-overview/');
+        response = self.client.get('/resources-overview/')
         resources = Resource.objects.all()
         self.assertCountEqual(response.context['resources_list'], resources)
     
     def test_access_permissions(self):
-        response = self.client.get('/resources-overview/');
+        response = self.client.get('/resources-overview/')
         resources = CustomUser.objects.get_by_natural_key('user1').reader.all()
         self.assertCountEqual(response.context['can_access'], resources)
     
@@ -154,21 +151,20 @@ class TestRequestsData(TestCase):
 
         for resource in resources:
             if resource not in resources_can_access:
-                self.client.post('/send-access-request/' + str(resource.id), {'descr':'message'})
-        requests = AccessRequest.objects.filter(sender = CustomUser.objects.get_by_natural_key('user1'))
+                self.client.post('/send-access-request/' + str(resource.id), {'descr': 'message'})
+        requests = AccessRequest.objects.filter(sender=CustomUser.objects.get_by_natural_key('user1'))
         
         self.assertEqual(requests.count(), resources.count() - resources_can_access.count())
         
     def test_cancel_access_request(self):
         self.client.login(username='user2', password='123456')
-        response=self.client.get('/resources-overview/')
+        response = self.client.get('/resources-overview/')
         requested_resources = response.context['requested_resources']
         
         for resource in requested_resources:
-            self.client.post('/cancel-access-request/' + str(resource.id), {'descr':'message'})
+            self.client.post('/cancel-access-request/' + str(resource.id), {'descr': 'message'})
             
         self.assertFalse(AccessRequest.objects.filter(sender=CustomUser.objects.get_by_natural_key('user1')).exists())
-        
     
     def test_create_deletion_request(self):
         self.client.login(username='user1', password='123456')
@@ -177,29 +173,29 @@ class TestRequestsData(TestCase):
         resources = response.context['resource_list']
         
         for resource in resources:
-            self.client.post('/send-deletion-request/' + str(resource.id), {'descr':'message'})
+            self.client.post('/send-deletion-request/' + str(resource.id), {'descr': 'message'})
             
         self.assertEqual(DeletionRequest.objects.filter(sender=user).count(), user.owner.all().count())
     
     def test_cancel_deletion_request(self):
         self.client.login(username='user2', password='123456')
-        response=self.client.get('/profile/my-resources/')
+        response = self.client.get('/profile/my-resources/')
         requested_resources = response.context['deletion_requested']
         
         for resource in requested_resources:
-            self.client.post('/cancel-deletion-request/' + str(resource.id), {'descr':'message'})
+            self.client.post('/cancel-deletion-request/' + str(resource.id), {'descr': 'message'})
             
         self.assertFalse(DeletionRequest.objects.filter(sender=Owner.objects.get_by_natural_key('user2')).exists())
         
     def test_accept_access_request(self):
         self.client.login(username='user1', password='123456')
-        response=self.client.get('/profile/')
-        requests = response.context['requests_list'];
+        response = self.client.get('/profile/')
+        requests = response.context['requests_list']
         
         for request in requests:
             sender = request.sender
             resource = request.resource
-            self.client.post('/approve-access-request/' + str(request.id), {'descr':'message'})
+            self.client.post('/approve-access-request/' + str(request.id), {'descr': 'message'})
             resources = sender.reader.all()
             self.assertTrue(resource in resources)
         
@@ -209,13 +205,13 @@ class TestRequestsData(TestCase):
         
     def test_deny_access_request(self):
         self.client.login(username='user1', password='123456')
-        response=self.client.get('/profile/')
-        requests = response.context['requests_list'];
+        response = self.client.get('/profile/')
+        requests = response.context['requests_list']
         
         for request in requests:
             sender = request.sender
             resource = request.resource
-            self.client.post('/deny-access-request/' + str(request.id), {'descr':'message'})
+            self.client.post('/deny-access-request/' + str(request.id), {'descr': 'message'})
             resources = sender.reader.all()
             self.assertFalse(resource in resources)
         
@@ -226,12 +222,12 @@ class TestRequestsData(TestCase):
     def test_accept_deletion_request(self):
         self.client.login(username='admin', password='123456')
         response=self.client.get('/profile/')
-        requests = response.context['requests_list'];
+        requests = response.context['requests_list']
         
         for request in requests:
             if isinstance(request, DeletionRequest):
                 resource = request.resource
-                self.client.post('/approve-deletion-request/' + str(request.id), {'descr':'message'})
+                self.client.post('/approve-deletion-request/' + str(request.id), {'descr': 'message'})
                 self.assertTrue(resource not in Resource.objects.all())
          
         requests = DeletionRequest.objects.all()
@@ -239,13 +235,13 @@ class TestRequestsData(TestCase):
         
     def test_deny_deletion_request(self):
         self.client.login(username='admin', password='123456')
-        response=self.client.get('/profile/')
-        requests = response.context['requests_list'];
+        response = self.client.get('/profile/')
+        requests = response.context['requests_list']
         
         for request in requests:
             if isinstance(request, DeletionRequest):
                 resource = request.resource
-                self.client.post('/deny-deletion-request/' + str(request.id), {'descr':'message'})
+                self.client.post('/deny-deletion-request/' + str(request.id), {'descr': 'message'})
                 self.assertTrue(resource in Resource.objects.all())
          
         requests = DeletionRequest.objects.all()
@@ -273,8 +269,3 @@ class TestRequestsData(TestCase):
 #     
 #     def test_manage_users(self):
 #         pass
-    
-    
-    
-     
-        
