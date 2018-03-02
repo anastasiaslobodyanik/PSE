@@ -45,7 +45,7 @@ class HomeView(generic.View):
 class ProfileView(generic.ListView):
     model = AccessRequest.objects.none()
     template_name = 'AuthorizationManagement/profile.html'
-    context_object_name = "requests_list"
+    context_object_name = 'requests_list'
     paginate_by = 4
     
     def get(self,request):
