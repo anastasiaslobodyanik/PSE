@@ -414,9 +414,8 @@ class OpenResourceView(generic.View):
         try:
             resource=Resource.objects.get(id=pk)   
         except Resource.DoesNotExist:
-            # redirects the current user to the 404 if a resource with a such id does not exist 
             logger.info("User %s tried to access a non-existing resource \n" % (request.user.username))
-            raise Http404
+            return redirect("/resources-overview")
         
         # raises the PermissionDenied exception if the current user is a staff user or has no access permission to this resource
         if (not resource.readers.filter(id=request.user.id).exists())and (not request.user.is_staff) :
@@ -467,10 +466,7 @@ class PermissionEditingView(generic.ListView):
             resource=Resource.objects.get(id=self.kwargs['resourceid'])   
         except Resource.DoesNotExist:
             logger.info("User %s tried to edit the permissions of a non-existing resource \n" % (request.user.username))
-            if request.method == 'GET':
-                raise Http404
-            else:
-                return redirect('/')
+            return redirect('/')
                 
         
         #checks if the current user has permission to access this resource
@@ -796,10 +792,9 @@ class AddNewResourceView(generic.View):
             instance.readers.add(request.user.id)
 
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
-            return redirect("/profile/my-resources")# what happens in the browser after submitting
         else:
             logger.info("User %s tried to inconsistently create a resource \n" % request.user.username)
-            return redirect("/profile/my-resources")
+        return redirect("/profile/my-resources")
 
     def get(self,request):
         form = AddNewResourceForm()

@@ -678,7 +678,7 @@ class TestPermissionEditingView(TestCase):
     def test_not_existing_resource_get(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/profile/my-resources/50-edit-users-permissions/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
                
     def test_not_existing_resource_post(self):
         self.client.login(username='boncho', password='123456')
@@ -689,28 +689,22 @@ class TestPermissionEditingView(TestCase):
         self.client.login(username='evlogi', password='123456')
         response = self.client.get('/profile/my-resources/1-edit-users-permissions/')
         self.assertEqual(response.status_code, 403)   
-        
-    def test_admin(self):      
-        self.client.login(username='admin', password='123456')
-        response = self.client.get('/profile/my-resources/1-edit-users-permissions/')
-        self.assertEqual(response.status_code, 302)   
-        
+               
     def test_normal_get(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/profile/my-resources/1-edit-users-permissions/')
         self.assertEqual(response.status_code, 200) 
-        
-    def test_shown_users(self):
-        self.client.login(username='boncho', password='123456')
-        response = self.client.get('/profile/my-resources/1-edit-users-permissions/')
-        self.assertTrue('user_list' in response.context)
-        self.assertEqual(len(response.context['user_list']), 2)
-        
+                
     def test_normal_post(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/profile/my-resources/1-edit-users-permissions/')
         self.assertEqual(response.status_code, 302) 
         
+    def test_pagination_users(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/profile/my-resources/1-edit-users-permissions/')
+        self.assertTrue('user_list' in response.context)
+        self.assertEqual(len(response.context['user_list']), 2)     
         
 class TestPermissionEditingViewSearch(TestCase):
          
@@ -732,8 +726,13 @@ class TestPermissionEditingViewSearch(TestCase):
     def test_not_logged_in(self):
         response = self.client.get('/profile/my-resources/1-edit-users-permissions/search?q=evl')
         self.assertEqual(response.status_code, 302)
+     
+    def test_not_existing_resource_get(self):
+        self.client.login(username='boncho', password='123456')
+        response = self.client.get('/profile/my-resources/50-edit-users-permissions/search?q=evl')
+        self.assertEqual(response.status_code, 302)
         
-    def test_not_existing_resource(self):
+    def test_not_existing_resource_post(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/profile/my-resources/50-edit-users-permissions/search?q=evl')
         self.assertEqual(response.status_code, 302)
@@ -741,12 +740,7 @@ class TestPermissionEditingViewSearch(TestCase):
     def test_not_authorized_user(self):
         self.client.login(username='evlogi', password='123456')
         response = self.client.get('/profile/my-resources/1-edit-users-permissions/search?q=evl')
-        self.assertEqual(response.status_code, 403)   
-        
-    def test_admin(self):      
-        self.client.login(username='admin', password='123456')
-        response = self.client.get('/profile/my-resources/1-edit-users-permissions/search?q=evl')
-        self.assertEqual(response.status_code, 302)   
+        self.assertEqual(response.status_code, 403)     
         
     def test_no_query(self):
         self.client.login(username='boncho', password='123456')
@@ -793,9 +787,9 @@ class TestAddNewResourceView(TestCase):
         response = self.client.get('/profile/my-resources/add-new-resource/')
         self.assertEqual(response.status_code, 200) 
         
-    def test_invalid_form(self):
+    def test_no_resource_form(self):
         self.client.login(username='boncho', password='123456')
-        response = self.client.post('/profile/my-resources/add-new-resource/',{'name':'a','type':'a','description':'a','link':'a'})
+        response = self.client.post('/profile/my-resources/add-new-resource/',{'name':'a','type':'a','description':'a','link':''})
         self.assertEqual(response.status_code, 302) 
         
 class TestOpenResourceView(TestCase):
@@ -822,7 +816,7 @@ class TestOpenResourceView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/resources/50')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
         
     def test_not_reader(self):
         self.client.login(username='boncho', password='123456')
