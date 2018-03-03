@@ -159,7 +159,7 @@ class CancelDeletionRequestView(generic.View):
         except Resource.DoesNotExist:
             # redirects the current user to the 404 if a resource with such an id does not exist
             logger.info("User %s tried to cancel a deletion request for non-existing resource \n" % (request.user.username))
-            return redirect("/profile/my-resources")
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user has no ownership for this resource
         if  not res.owners.filter(id= request.user.id).exists():
