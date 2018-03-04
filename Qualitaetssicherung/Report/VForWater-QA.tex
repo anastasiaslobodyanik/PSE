@@ -247,7 +247,111 @@ Um diese Verbindung zu testen, haben wir automatische Unit-Tests benutzt (Tabell
 \newpage
 \section{System-Test} \label{systemtest}
 System-Test im Sinne der Software-Entwicklung ist der abschließende Test, der vom Entwickler durchgeführt wird. Das Ziel dieses Tests ist das Verhalten des Produkts als Ganzes in einer realen Umgebung (immer noch ohne Kunden) zu beobachten.\\
-Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Als Basis dafür dienen die im Pflichtenheft vordefinierte globale Testfälle. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - für Benutzer, für Besitzer und für Administrator.
+Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - für Benutzer, für Besitzer und für Administrator.
+
+\begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
+\caption{Manuelle Tests für User}
+\label{my-label}\\
+\hline
+\textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
+\endfirsthead
+%
+\endhead
+%
+\multirow{2}{*}{} T010 : Profilübersicht& \multirow{2}{*}{} F010 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Profile seite ist angezeigt: user name, requests list, my resources button \\ \cline{3-4}    &  & Ausloggen  & Profile seite kann nicht geöffnet werden \\ \hline
+
+\multirow{2}{*}{} T020 : Name editieren& \multirow{2}{*}{} F020 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Profile seite ist angezeigt: user name, requests list, my resources button \\ \cline{3-4}    &  & Klicke auf den Name  & Name und vorname felder sind angezeigt \\ \cline{3-4}    &  & Schreibe Name und Vorname  & Neue Name und Vorname werden in der Felder geschrieben \\ \cline{3-4}    &  & Klicke auf ok Button  & Neue Name und Vorname werden im Profile seite correct angezeigt \\ \hline
+
+\multirow{2}{*}{} T030 : Ressourcenzugriff& \multirow{2}{*}{} F030 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Profile seite ist angezeigt: user name, requests list, my resources button \\ \cline{3-4}    &  & Klicke auf My Resources  & Erstelle Resource Button ("+" button) und die Liste von Resourcen sind angezeigt \\ \hline
+
+\multirow{2}{*}{} T040 : Ressourcenerstellung& \multirow{2}{*}{} F040 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Profile seite ist angezeigt: user name, requests list, my resources button \\ \cline{3-4}    &  & Klicke auf My Resources  & Erstelle Resource Button("+" button und die Liste von Resourcen sind angezeigt \\ \cline{3-4}    &  & Klicke auf Add Resource Button ("+" button)  & Name, Type, Description felder , Link und add Button sind angezeigt \\ \cline{3-4}    &  & Fülle die Name , Type ,Description felds aus, füge ein link hinzu and klicke auf  Add Button  & Auf  my Resources-Seite weitergeleitet,erstellte Resource ist  in der Liste verfügbar \\ \hline
+
+\multirow{2}{*}{} T050 : Access Request senden& \multirow{2}{*}{} F050 & Einloggen & Resources Overview Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Resources Overview  & Resources-seite ist angezeigt , einschließlich einer Liste von Ressourcen und einem Suchfeld \\ \cline{3-4}    &  & Klicke auf send Request  & Nachricht Dialog ist angezeigt , mit freiwilligen beschreibungsfeld  , Yes und  close Button \\ \cline{3-4}    &  & Klicke auf yes Button  & Cancel request Button ist nun angezeigt anstatt von send Request \\ \hline
+
+\multirow{2}{*}{} T060 : Benachrichtigung& \multirow{2}{*}{} F060 & Einloggen & Resources Overview Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Resources Overview  & Resources-seite ist angezeigt , einschließlich einer Liste von Ressourcen und einem Suchfeld \\ \cline{3-4}    &  & Klicke auf send Request &Cancel request Button ist nun angezeigt anstatt von send Request \\ \cline{3-4}    &  & Anfrage Acceptieren/ablehnen (Aus dem Besitzer konto)  & \multirow{2}{*}{} Logdatei enthält Email und Beschreibung  \\ \cline{3-3}    &  & Öffene das Logdatei  & \\ \cline{3-3}    &  & Suche nach dem email  &  \\ \hline
+
+\multirow{2}{*}{} T070 : Multiple Request& \multirow{2}{*}{} F080 & Einloggen & Resources Overview Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Resources Overview  & Resources-seite ist angezeigt , einschließlich einer Liste von Ressourcen und einem Suchfeld \\ \cline{3-4}    &  & Klicke auf send Request  & Nachricht Dialog ist angezeigt , mit freiwilligen beschreibeungsfeld  , Yes und  close Button \\ \cline{3-4}    &  & Klicke auf yes Button  & Cancel request Button ist nun angezeigt anstatt von send Request für alle Resourcen \\ \cline{3-4}    &  & Klicke auf send Request von einer andere Resource  & Nachricht Dialog ist angezeigt , mit freiwilligen beschreibeungsfeld  , Yes und  close Button \\ \cline{3-4}    &  & Klicke auf yes Button  & Cancel request Button ist nun angezeigt anstatt von send Request für alle Resourcen \\ \cline{3-4}    &  & Klicke auf send Request von einer anderer Resource  & Nachricht Dialog ist angezeigt , mit freiwilligen beschreibeungsfeld  , Yes und  close Button \\ \cline{3-4}    &  & Klicke auf yes Button  & Cancel request Button ist nun angezeigt anstatt von send Request für alle Resourcen \\ \cline{3-4}    &  & Klicke auf send Request von einer anderer Resource  & Nachricht Dialog ist angezeigt , mit freiwilligen beschreibeungsfeld  , Yes und  close Button \\ \cline{3-4}    &  & Öffene das Logdatei  & alle requests wurden in der Logdatei geschrieben \\ \hline
+\end{longtable}
+
+
+
+
+
+\newpage
+\begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
+\caption{Manuelle Tests für Admin}
+\label{my-label}\\
+\hline
+\textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
+\endfirsthead
+%
+\endhead
+%
+\multirow{2}{*}{} T80 : Löschrequest ablehnen& \multirow{2}{*}{} F110 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Eine Liste mit Löschrequesten ist zu sehen \\ \cline{3-4}    &  & Deny Button zum gewünschten Request klicken  & Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Das Ablehnen bestätigen  & Die Ressource wird nicht gelöscht
+Requst wird von DB gelöscht \\ \hline
+
+\multirow{2}{*}{} T90 : Löschrequest genehmigen& \multirow{2}{*}{} F110 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Eine Liste mit Löschrequesten ist zu sehen \\ \cline{3-4}    &  & Deny Button zum gewünschten Request klicken  & Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Die Genehmigung  bestätigen  & Die Ressource wird von DB gelöscht und der Request wird von DB gelöscht
+Requst wird von DB gelöscht \\ \hline
+
+\multirow{2}{*}{} T100 : Ressource löschen& \multirow{2}{*}{} F120 & Einloggen & Button Profile ist angezeigt  \\ \cline{3-4}    &  &Auf Profile klicken  & Ein Button My Resources ist zu sehen \\ \cline{3-4}    &  & Auf My Resources klicken  &Alle Ressourcen, die der Admin besitzt, sind in einer Liste zu sehen \\ \cline{3-4}    &  & Delete Button zur ensprechenden Ressource klicken  &Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Das Löschen bestätigen  &Die Ressource wird von DB gelöscht \\ \hline
+
+\multirow{2}{*}{} T110 : Besitzerrechte geben& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Owners den Benutzer markieren und auf Save Button klicken  & Der ausgewählte Benutzer ist schon Besitzer dieser Ressource \\ \hline
+
+\multirow{2}{*}{} T120 : Besitzerrechte entziehen& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Owners den Benutzer demarkieren und auf Save Button klicken  & Der ausgewählte Benutzer ist nicht mehr Besitzer dieser Ressource \\ \hline
+
+\multirow{2}{*}{} T130 : Zugriffsrechte geben& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld readers den Benutzer markieren und auf Save Button klicken  & Der ausgewählte Benutzer ist schon leser dieser Ressource \\ \hline
+
+\multirow{2}{*}{} T140 : Besitzerrechte entziehen& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Readers den Benutzer demarkieren und auf Save Button klicken  & Der ausgewählte Benutzer ist nicht mehr leser dieser Ressource \\ \hline
+
+\multirow{2}{*}{} T150 : Account und Daten eines Benutzers löschen& \multirow{2}{*}{} F140 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Users klicken  & Eine Admin-Seite wird geöffnet mit einer
+Link zur Liste aller Users \\ \cline{3-4}    &  & Auf Users (unter
+Authentication and Authorization) klicken  & Liste mit allen Benutzern im System wird angezeigt (+ Option zum Suchen) \\ \cline{3-4}    &  & Benutzer finden und auf seinen Benutzernamen klicken  & Optionen zum Editieren der Daten dieses Benutzers \\ \cline{3-4}    &  & Unten links auf Delete klicken  & Eine Seite zur Bestätigung wird geöffnet \\ \cline{3-4}    &  & Löschen bestätigen  & Der ausgewählte Benutzer (und seine Requeste) werden gelöscht \\ \hline
+
+\multirow{2}{*}{} T160 : Nach einem Benutzer suchen und ihn blockieren& \multirow{2}{*}{} F160,
+F170 & Einloggen & Button Manage Users ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Users klicken  & Eine Admin-Seite wird geöffnet mit einer Link zur Liste aller Users \\ \cline{3-4}    &  & Auf Users (unter
+Authentication and Authorization) klicken  & Liste mit allen Benutzern im System wird angezeigt (+ Option zum Suchen) \\ \cline{3-4}    &  & Benutzer finden und auf seinen Benutzernamen klicken  & Optionen zum Editieren der Daten dieses Benutzers \\ \cline{3-4}    &  & Den Haken von Active entfernen und auf Save Button klicken  & Der ausgewählte Benutzer kann das Portal (temporär) nicht benutzen  \\ \hline
+\end{longtable}
+
+\newpage
+\begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
+\caption{Manuelle Tests für Owner}
+\label{my-label}\\
+\hline
+\textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
+\endfirsthead
+%
+\endhead
+%
+\multirow{2}{*}{} T170 : Übersicht der Requests& \multirow{2}{*}{} F180 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Liste der erhaltenen Requests wird angezeigt \\ \hline
+
+\multirow{2}{*}{} T180 : Übersicht der Ressourcen& \multirow{2}{*}{} F190 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf My Resources  & Liste der eigenen Ressourcen wird angezeigt  \\ \hline
+
+\multirow{2}{*}{} T190 : Vergabe der Zugriffsrechten& \multirow{2}{*}{} F200 & Einloggen & Button Profile ist angezeigt  \\ \cline{3-4}    &  &Auf Profile klicken  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Auf My Resources klicken  &Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Resource werden angezeigt: Access, Edit Permission, Delete \\ \cline{3-4}    &  & Klicke auf edit Permissions  &Suchen Feld wird angezeigt \\ \cline{3-4}    &  & Schreibe den Username und Klicke auf Search Button  &gesuchter User wird angezeigt \\ \cline{3-4}    &  & Klicke auf Reader Button und Confirm  &User soll als Reader angezeigt werden und Access Button soll jetzt beim User konto angezeigt werden \\ \hline
+
+\multirow{2}{*}{} T200 : Request auf Zugriffsrechte ablehnen& \multirow{2}{*}{} F210 & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Liste der erhaltenen Requests wird angezeigt \\ \cline{3-4}    &  & Klicke auf Deny Button  & Dialogbox wird angezeiget, sie enthält ein schreibfeld, yes und close Buttons \\ \cline{3-4}    &  & Klicke auf yes Button  & Request soll nicht mehr angezeigt werden und User soll nicht als Reader angezeigt werden  \\ \hline
+
+\multirow{2}{*}{} T210 : Request auf Zugriffsrechte acceptieren& \multirow{2}{*}{} F210 & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Liste der erhaltenen Requests wird angezeigt \\ \cline{3-4}    &  & Klicke auf Deny Button  & Dialogbox wird angezeiget, sie enthält ein schreibfeld, yes und close Buttons \\ \cline{3-4}    &  & Klicke auf yes Button  & Request soll nicht mehr angezeigt werden  \\ \cline{3-4}    &  & Klicke auf My Resources , edit Permission   & User soll als Reader angezeigt werden \\ \hline
+
+\multirow{2}{*}{} T220 : Vergabe der Besitzerrechte& \multirow{2}{*}{} F220 & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf My Resources  & Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Resource werden angezeigt: Access, Edit Permission, Delete \\ \cline{3-4}    &  & Klicke auf edit Permissions  & Suchen Feld wird angezeigt  \\ \cline{3-4}    &  & Schreibe den Username und Klicke auf Search Button   & gesuchter User wird angezeigt \\ \cline{3-4}    &  & SKlicke auf owner Button und Confirm
+   & User soll als ownerer angezeigt werden \\ \hline
+
+\multirow{2}{*}{} T230 : Löschrequest senden& \multirow{2}{*}{} F230 & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf My Resources  & Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Resource werden angezeigt: Access, Edit Permission, Delete \\ \cline{3-4}    &  & Klicke auf Delete Button  & Dialogbox wird angezeiget , sie enthält ein schreibfeld , yes und close Buttons \\ \cline{3-4}    &  & Klicke auf yes Button  & Cancel Deletion request Button wird statt Delete button angezeigt  \\ \hline
+
+\multirow{2}{*}{} T240 : Löschbenachrichtigungen&  \multirow{2}{*}{} F240  & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf My Resources  & Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Resource werden angezeigt: Access, Edit Permission, Delete \\ \cline{3-4}    &  & Klicke auf Delete Button  & Dialogbox wird angezeiget , sie enthält ein schreibfeld , yes und close Buttons \\ \cline{3-4}    &  & Klicke auf yes Button  & Cancel Deletion request Button wird statt Delete button angezeigt \\ \cline{3-4}    &  & Einloggen mit Admin und klicke auf Profil  & Deletion Request wird in der Profil-seite angezeigt \\ \cline{3-4}    &  & Klicke auf Accept & Dialogbox wird angezeiget , sie enthält ein schreibfeld , yes und close Buttons \\ \cline{3-4}    &  & Klicke auf yes  & Deletion Request wird in der Profil-seite nicht mehr angezeigt \\ \cline{3-4}    &  & Logdatei öffnen  & Logdatei enthält alle gesendete email, für alle besitzer \\ \hline
+
+\multirow{2}{*}{} T250 : Zugriffsrechte zu mehreren Nutzern vergeben& \multirow{2}{*}{} F250 & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf My Resources  & Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Resource werden angezeigt: Access, Edit Permission, Delete \\ \cline{3-4}    &  & Klicke auf edit Permissions  & Suchen Feld wird angezeigt \\ \cline{3-4}    &  & Schreibe "user" und Klicke auf Search Button  & alle Users werden angezeigt \\ \cline{3-4}    &  & Klicke auf Reader Button für alle Users und Confirm  & alle Users sollen als Reader angezeigt werden  \\ \hline
+
+
+
+\end{longtable}
 
 \newpage
 \section{Zusammenfassung} \label{zusammenfassung}
