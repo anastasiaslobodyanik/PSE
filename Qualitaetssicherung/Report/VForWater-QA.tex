@@ -90,7 +90,7 @@
 \end{flushright}
 Das Testen in der Software-Entwicklung ist der Prozess der Untersuchung des Produktes auf Unterschiede zwischen seinem beobachteten Verhalten und dem erwarteten Verhalten des modellierten Systems.
 In dem Wasserfall-Vorgehensmodell wird die Testphase direkt vor der Auslieferung des Produkts durchgeführt und wird als Sicherstellung festgelegter Qualitätsanforderungen betrachtet.\\
-Testphase ist mit anderen Entwicklungsphasen eng verbunden. Die erste Tests werden schon in der Implentierungsphase erstellt: Unit-Tests zu jedem View entsprechen dem Komponenten-Test, dessen Ziel ist, Fehler in jedem Teil des Systems aufzufinden. Diese Tests werden im Kapitel \hyperref[komponententest]{\textit{Komponenten-Test}} beschrieben.\\
+Testphase ist mit anderen Entwicklungsphasen eng verbunden. Die erste Tests werden schon in der Implentierungsphase erstellt: Unittests zu jedem View entsprechen dem Komponenten-Test, dessen Ziel ist, Fehler in jedem Teil des Systems aufzufinden. Diese Tests werden im Kapitel \hyperref[komponententest]{\textit{Komponenten-Test}} beschrieben.\\
 Das Zusammenspiel einzelnen Komponenten wird im Integration-Test geprüft. In dieser Phase wird Rückblick auf Artefakt des Entwurfs genommen, um die Integrationsstrategie während dem Test zu berücksichtigen. Tests, die diese Phase umschließt, beschreiben wir im Kapitel \hyperref[integrationtest]{\textit{Integration-Test}}.\\
 Der abschließende Teil der Testphase ist System-Test, der alle Komponenten zusammen prüft. In unserem Projekt werden dafür manuelle Tests angewendet, die ermöglichen, Benutzerszenarien nah zu Realität durchzuarbeiten. Testcases (Testszenarien) in dieser Phase werden anhand funktioneller Anforderungen aus dem Pflichtenheft erstellt und im Kapitel \hyperref[systemtest]{System-Test} beschrieben.\\
 In der \hyperref[zusammenfassung]{Zusammenfassung} werden Ergebnisse der Testphase betrachtet: Codeüberdeckung vor und nach der Phase, behobene Fehler und unsere Beurteilung der Lieferfertigkeit des Produktes.
@@ -242,7 +242,41 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
 
 \section{Integration-Test} \label{integrationtest}
 Integration-Tests dienen dazu, das Zusammenspiel aller Komponenten zu \"uberpr\"ufen. W\"ahrend dieser Phase werden Tests entsprechend der Modularit\"at erstellt, welche im Entwurf festgelegt wurden. Django-Applications arbeiten mit dem Prinzip ,,Model View Template``, welches die Benutzeraktionen des Templates mit Hilfe der View entnimmt und diese direkt in die Datenbank integriert.\\
-Um diese Verbindung zu testen, haben wir automatische Unit-Tests benutzt (Tabelle), die den Datenbankzustand vor und nach der Ausf\"urung der View-Funktionen pr\"ufen.
+Um diese Verbindung zu testen, haben wir automatische Unittests benutzt (Tabelle \ref{it-tabelle} ), die den Datenbankzustand vor und nach der Ausf\"urung der View-Funktionen pr\"ufen.\\
+
+\begin{longtable}[c]{|p{0.4cm}|P{2cm}|p{3cm}|p{4.cm}|p{4.5cm}|}
+\caption{Integration-Tests. Jede Klasse enthält eine Gruppe von Methoden (Testcases) entsprächen der Datenart, mit denen in diesen Methoden gearbeitet wird. Jede Methode testet einen Vorgang, der in der Beschreibung erläutert wird. Ergebnis-Spalte beschreibt das erwartete Verhalten des Systems.}
+\label{it-tabelle}\\
+\hline
+\textbf{\#} & \textbf{Klasse}&\centerline{\textbf{Methode}}& \centerline{\textbf{Beschreibung}} & \centerline{\textbf{Ergebnis}} \\ \hline
+\endfirsthead
+%
+\endhead
+%
+\multirow{3}{*}{}1 & \multirow{2}{*}{} TestUserdata & 
+test-edit-name & Test öffnet Profilseite des eingeloggten Benutzers und ändert seine Vor- und Nachnamen. & Neue Vor- und Nachname werden in der Datenbank gespeichert.
+\\ \cline{3-5} &   & test-my-requests & Test öffnet Profilseite des eingeloggten Benutzers und fragt die Liste der angezeigten Requests ab. & Die angezeigte Liste entspricht der Liste aller Requests in der Datenbank, die an den Benutzer adressiert sind.
+\\ \cline{3-5} &   & test-my-resources & Test öffnet ,,My Resources``-Seite des eingeloggten Benutzers und fragt die Liste der angezeigten Ressourcen ab. & Die angezeigte Liste entspricht der Liste aller Ressourcen in der Datenbank, für die der Benutzer Besitzerrechte hat. \\ \hline
+
+\multirow{3}{*}{} 2& \multirow{3}{*}{} TestResourcesData&  
+test-resources-overview & Test öffnet ,,Resources Overview``-Seite und fragt die Liste der angezeigten Ressourcen ab. & Die Liste enthält alle Ressourcen, die in der Datenbank gespeichert sind.  
+\\ \cline{3-5} & & test-access-permissions & Test öffnet ,,Resources Overview``-Seite und fragt die Liste der Ressourcen, für die der Access-Button angezeigt wird, ab. & Die angezeigte Liste entspricht der Liste aller Ressourcen in der Datenbank, für die der Benutzer Leserechte hat.
+
+\\ \cline{3-5} & & test-resource-permissions & Test öffnet ,,Edit permissions``-Seite für jede Ressource, die der eingeloggte Benutzer besitzt und fragt die Listen der angezeigten Besitzer- und Leserechte ab. & Die Listen entsprechen der Listen aller Benutzer, die als Besitzer, bzw. Leser dieser Ressource in der Datenbank gespeichert sind. \\ \hline
+
+\multirow{8}{*}{} 2& \multirow{3}{*}{} TestRequestsData&  
+test-create-access-request & Test öffnet ,,Resources Overview``-Seite und sendet Zugriffsrequests für alle Ressourcen, für die kein ,,Access``-Button angezeigt wird. & Für alle Ressourcen, für die der Benutzer keine Leserechte hat, werden Zugriffsrequests in der Datenbank gespeichert. 
+\\ \cline{3-5} & & test-cancel-access-request & Test öffnet ,,Resources Overview``-Seite und löscht alle Zugriffsrequests, die angezeigt werden. & In der Datenbank  sind keine Zugriffsrequests von dem Benutzer gespeichert.
+\\ \cline{3-5} & & test-create-deletion-request. & Test öffnet ,,My Resources``-Seite des eingeloggten Benutzers und sendet Löschrequests für alle Ressourcen, die angezeigt werden. & In der Datenbank sind Löschrequests für alle Ressourcen, für die der Benutzer Besitzerrechte hat, gespeichert.  
+\\ \cline{3-5} & & test-cancesl-deletion-request & Test öffnet ,,My Resources``-Seite des eingeloggten Benutzers und löscht alle Löschrequests, die angezeigt werden. & In der Datenbank  sind keine Löschrequests von dem Benutzer gespeichert.
+\\ \cline{3-5} & & test-accept-access-request & Test öffnet Profilseite des eingeloggten Benutzers und nimmt alle angezeigten Zugriffsrequests an. & In der Datenbank sind Leserechte für entsprechende Sender und Ressourcen gespeichert. Bearbeitete Requests werden aus der Datenbank gelöscht.
+\\ \cline{3-5} & & test-deny-access-request & Test öffnet Profilseite des eingeloggten Benutzers und lehnt alle angezeigten Zugriffsrequests ab. & In der Datenbank sind keine Leserechte für entsprechende Sender und Ressourcen gespeichert. Bearbeitete Requests werden aus der Datenbank gelöscht.
+\\ \cline{3-5} & & test-accept-deletion-request & Test öffnet Profilseite des eingeloggten Admins und nimmt alle angezeigten Löschrequests an. & Bearbeitete Requests und entsprechende Ressourcen werden aus der Datenbank gelöscht.
+\\ \cline{3-5} & & test-deny-deletion-request & Test öffnet Profilseite des eingeloggten Admins und lehnt alle angezeigten Löschrequests ab. & Bearbeitete Requests werden  aus der Datenbank gelöscht und entsprechende Ressourcen bleiben in der Datenbank gespeichert.\\ \hline
+                  
+                  
+
+\end{longtable}
 
 \newpage
 \section{System-Test} \label{systemtest}
