@@ -5,11 +5,6 @@ from .models import *
 admin.site.register(Resource)
 admin.site.register(AccessRequest)
 admin.site.register(DeletionRequest)
-
-
-
-# Register your models here.
- 
  
 #this is the subpage 'Manage Resources' only displayable to the admin
 class ResourceManager(AdminSite):      

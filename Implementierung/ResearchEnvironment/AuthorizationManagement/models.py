@@ -4,6 +4,7 @@ from datetime import datetime
 from django.core.mail.message import EmailMessage
 import logging
 from django.template.loader import render_to_string
+from django.core.validators import MaxLengthValidator
 
 
 
@@ -20,21 +21,20 @@ class Owner(CustomUser):
         
 # corresponds to the table in the database storing all information about a resource
 class Resource(models.Model):
-    type = models.CharField(max_length=50, default = '')
-    name = models.CharField(max_length=150, default = '')
-    description = models.CharField(max_length=250, default = '')
+    type = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
+    description = models.CharField(max_length=250, blank=True)
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owners = models.ManyToManyField(Owner, related_name= 'owner')
     link = models.FileField(upload_to='')
-
 
     
 class Request(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     resource = models.ForeignKey(Resource, on_delete = models.CASCADE)
-    description = models.CharField(max_length=250, default = '')
+    description = models.CharField(max_length=250, blank=True)
     type=""
     
     class Meta:

@@ -589,6 +589,7 @@ class PermissionEditingView(generic.ListView):
         context['readers'] = Resource.objects.get(id=self.kwargs['resourceid']).readers.all()
         context['query'] = self.query
         context['query_pagination_string'] = ''
+        context['is_admin']=self.request.user.is_staff
         return context
     
     
@@ -790,7 +791,6 @@ class AddNewResourceView(generic.View):
             instance.save()
             instance.owners.add(request.user.id)
             instance.readers.add(request.user.id)
-
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
         else:
             logger.info("User %s tried to inconsistently create a resource \n" % request.user.username)
