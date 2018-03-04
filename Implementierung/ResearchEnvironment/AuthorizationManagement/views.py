@@ -532,6 +532,8 @@ class PermissionEditingView(generic.ListView):
                 if userId in new_owners_list and int(userId) not in real_owners_list:
                     
                     resource.owners.add(owner)
+                    if not resource.readers.filter(id=userId).exists():
+                        resource.readers.add(user)
                     
                     html_content=render_to_string('AuthorizationManagement/mail/ownership-granted-mail.html', {'user' : request.user,
                                                                                                         'resource' : resource})                                                               
