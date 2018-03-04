@@ -15,7 +15,7 @@ from django.http import Http404
 from django.template import RequestContext
 from django.core.mail.message import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from _csv import reader, Error
 import mimetypes
 from test.support import resource
@@ -23,6 +23,7 @@ from pip._vendor.requests.api import request
 from django.db.models import Q
 from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 from itertools import chain
 from AuthorizationManagement.apps import AuthorizationmanagementConfig
@@ -792,6 +793,7 @@ class AddNewResourceView(generic.View):
             instance.owners.add(request.user.id)
             instance.readers.add(request.user.id)
             logger.info("User %s created the '%s' Resource \n" % (request.user.username,instance.name))
+            
         else:
             logger.info("User %s tried to inconsistently create a resource \n" % request.user.username)
         return redirect("/profile/my-resources")
@@ -806,8 +808,6 @@ class AddNewResourceView(generic.View):
         args['is_admin'] = self.request.user.is_staff
         args['user'] = self.request.user
         return render_to_response('AuthorizationManagement/add-new-resource.html', args)
-    
-
     
 # the view for editing the name of the user
 @method_decorator(never_cache, name='dispatch')

@@ -23,7 +23,8 @@ class Owner(CustomUser):
 class Resource(models.Model):
     type = models.CharField(max_length=50)
     name = models.CharField(max_length=150)
-    description = models.CharField(max_length=250, blank=True)
+    description = models.TextField(max_length=250, blank=True,
+                                   validators=[MaxLengthValidator(250)])
     creationDate = models.DateTimeField(default=datetime.now, blank=True)
     readers = models.ManyToManyField(CustomUser, related_name= 'reader')
     owners = models.ManyToManyField(Owner, related_name= 'owner')
