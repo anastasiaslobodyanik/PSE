@@ -457,7 +457,7 @@ class PermissionEditingView(generic.ListView):
     resource = Resource.objects.all()
     query = ''
     context_object_name = "user_list"
-    paginate_by = 2
+    paginate_by = 10
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
