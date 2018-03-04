@@ -1,144 +1,278 @@
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:739] Request from user2 to delete 'resource5' accepted by admin 
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_accessrequest" ("id", "resource_id", "sender_id", "creationDate", "description") SELECT "id", "resource_id", "sender_id", "creationDate", 'default_description' FROM "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_resource_id_4e78ec33" ON "AuthorizationManagement_accessrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_sender_id_83d895c0" ON "AuthorizationManagement_accessrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_deletionrequest" RENAME TO "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_deletionrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_deletionrequest" ("id", "resource_id", "sender_id", "creationDate", "description") SELECT "id", "resource_id", "sender_id", "creationDate", 'default_description' FROM "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_resource_id_1babe983" ON "AuthorizationManagement_deletionrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_sender_id_5ece76ae" ON "AuthorizationManagement_deletionrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq ON "AuthorizationManagement_accessrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq ON "AuthorizationManagement_deletionrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP INDEX "AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP INDEX "AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq ON "AuthorizationManagement_accessrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq ON "AuthorizationManagement_deletionrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type" varchar(50) NOT NULL, "name" varchar(150) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "type", "name", "description", "creationDate", "link") SELECT "id", "type", "name", "description", "creationDate", coalesce("link", NULL) FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_accessrequest" RENAME TO "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_accessrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_accessrequest" ("id", "resource_id", "sender_id", "creationDate", "description") SELECT "id", "resource_id", "sender_id", "creationDate", "description" FROM "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq ON "AuthorizationManagement_accessrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_resource_id_4e78ec33" ON "AuthorizationManagement_accessrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_sender_id_83d895c0" ON "AuthorizationManagement_accessrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_deletionrequest" RENAME TO "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_deletionrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_deletionrequest" ("id", "resource_id", "sender_id", "creationDate", "description") SELECT "id", "resource_id", "sender_id", "creationDate", "description" FROM "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq ON "AuthorizationManagement_deletionrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_resource_id_1babe983" ON "AuthorizationManagement_deletionrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_sender_id_5ece76ae" ON "AuthorizationManagement_deletionrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type" varchar(50) NOT NULL, "name" varchar(150) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "type", "name", "creationDate", "link", "description") SELECT "id", "type", "name", "creationDate", "link", "description" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type" varchar(50) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "name" varchar(150) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "type", "description", "creationDate", "link", "name") SELECT "id", "type", "description", "creationDate", "link", "name" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "type" varchar(50) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "name", "description", "creationDate", "link", "type") SELECT "id", "name", "description", "creationDate", "link", "type" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type" varchar(50) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "name" varchar(150) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "type", "description", "creationDate", "link", "name") SELECT "id", "type", "description", "creationDate", "link", "name" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "type" varchar(50) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "name", "description", "creationDate", "link", "type") SELECT "id", "name", "description", "creationDate", "link", "type" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_accessrequest" RENAME TO "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_accessrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_accessrequest" ("id", "sender_id", "creationDate", "description", "resource_id") SELECT "id", "sender_id", "creationDate", "description", "resource_id" FROM "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq ON "AuthorizationManagement_accessrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_sender_id_83d895c0" ON "AuthorizationManagement_accessrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_resource_id_4e78ec33" ON "AuthorizationManagement_accessrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_accessrequest" RENAME TO "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_accessrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_accessrequest" ("id", "resource_id", "creationDate", "description", "sender_id") SELECT "id", "resource_id", "creationDate", "description", "sender_id" FROM "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq ON "AuthorizationManagement_accessrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_resource_id_4e78ec33" ON "AuthorizationManagement_accessrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_sender_id_83d895c0" ON "AuthorizationManagement_accessrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_deletionrequest" RENAME TO "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_deletionrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_deletionrequest" ("id", "sender_id", "creationDate", "description", "resource_id") SELECT "id", "sender_id", "creationDate", "description", "resource_id" FROM "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq ON "AuthorizationManagement_deletionrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_sender_id_5ece76ae" ON "AuthorizationManagement_deletionrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_resource_id_1babe983" ON "AuthorizationManagement_deletionrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_deletionrequest" RENAME TO "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_deletionrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_deletionrequest" ("id", "resource_id", "creationDate", "description", "sender_id") SELECT "id", "resource_id", "creationDate", "description", "sender_id" FROM "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq ON "AuthorizationManagement_deletionrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_resource_id_1babe983" ON "AuthorizationManagement_deletionrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_sender_id_5ece76ae" ON "AuthorizationManagement_deletionrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_accessrequest" RENAME TO "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_accessrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_accessrequest" ("id", "resource_id", "sender_id", "creationDate", "description") SELECT "id", "resource_id", "sender_id", "creationDate", "description" FROM "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_accessrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_accessrequest_sender_id_resource_id_88143379_uniq ON "AuthorizationManagement_accessrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_resource_id_4e78ec33" ON "AuthorizationManagement_accessrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_accessrequest_sender_id_83d895c0" ON "AuthorizationManagement_accessrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_deletionrequest" RENAME TO "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_deletionrequest" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "resource_id" integer NOT NULL REFERENCES "AuthorizationManagement_resource" ("id") DEFERRABLE INITIALLY DEFERRED, "sender_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "creationDate" datetime NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_deletionrequest" ("id", "resource_id", "sender_id", "creationDate", "description") SELECT "id", "resource_id", "sender_id", "creationDate", "description" FROM "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_deletionrequest__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE UNIQUE INDEX AuthorizationManagement_deletionrequest_sender_id_resource_id_d0c20997_uniq ON "AuthorizationManagement_deletionrequest" ("sender_id", "resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_resource_id_1babe983" ON "AuthorizationManagement_deletionrequest" ("resource_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "AuthorizationManagement_deletionrequest_sender_id_5ece76ae" ON "AuthorizationManagement_deletionrequest" ("sender_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type" varchar(50) NOT NULL, "name" varchar(150) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "description" varchar(250) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "type", "name", "creationDate", "link", "description") SELECT "id", "type", "name", "creationDate", "link", "description" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "type" varchar(50) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "name", "description", "creationDate", "link", "type") SELECT "id", "name", "description", "creationDate", "link", "type" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type" varchar(50) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "name" varchar(150) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "type", "description", "creationDate", "link", "name") SELECT "id", "type", "description", "creationDate", "link", "name" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "AuthorizationManagement_resource" RENAME TO "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "AuthorizationManagement_resource" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL, "description" varchar(250) NOT NULL, "creationDate" datetime NOT NULL, "link" varchar(100) NOT NULL, "type" varchar(50) NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "AuthorizationManagement_resource" ("id", "name", "description", "creationDate", "link", "type") SELECT "id", "name", "description", "creationDate", "link", "type" FROM "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "AuthorizationManagement_resource__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "action_time" datetime NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] INSERT INTO "django_admin_log" ("id", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id", "action_time") SELECT "id", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id", "action_time" FROM "django_admin_log__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] DROP TABLE "django_admin_log__old"; (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); (params ())
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); (params None)
+[04/Mar/2018 19:29:13] DEBUG [django.db.backends.schema:108] CREATE INDEX "django_session_expire_date_a5c62663" ON "django_session" ("expire_date"); (params ())
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:284] Request from user2 to access 'resource4' was approved by user1 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:725] An email was sent from admin to user2, Subject: Deletion Request for 'resource2' accepted 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:285] An email was sent from user1 to user2, Subject: Access request for 'resource4' approved 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:733] An email was sent to all 'resource2' owners, Object: 'resource2' is deleted 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:739] Request from user2 to delete 'resource2' accepted by admin 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:284] Request from user2 to access 'res1' was approved by user1 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:403] Access request for 'res1' was canceled by user2 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:285] An email was sent from user1 to user2, Subject: Access request for 'res1' approved 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:404] An email was sent from user2 to 'res1' owners, Subject: Cancel the Access Request for 'res1' 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:725] An email was sent from admin to user2, Subject: Deletion Request for 'resource5' accepted 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:403] Access request for 'resource3' was canceled by user2 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:733] An email was sent to all 'resource5' owners, Object: 'resource5' is deleted 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:739] Request from user2 to delete 'resource5' accepted by admin 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:404] An email was sent from user2 to 'resource3' owners, Subject: Cancel the Access Request for 'resource3' 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:725] An email was sent from admin to user2, Subject: Deletion Request for 'resource2' accepted 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:403] Access request for 'resource4' was canceled by user2 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:733] An email was sent to all 'resource2' owners, Object: 'resource2' is deleted 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:739] Request from user2 to delete 'resource2' accepted by admin 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:404] An email was sent from user2 to 'resource4' owners, Subject: Cancel the Access Request for 'resource4' 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:403] Access request for 'res1' was canceled by user2 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:187] Deletion request for 'resource2' was canceled by user2 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:404] An email was sent from user2 to 'res1' owners, Subject: Cancel the Access Request for 'res1' 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:188] An email was sent to the Staff members from user2, Subject: Cancel the Deletion Request for 'resource2' 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:403] Access request for 'resource3' was canceled by user2 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:187] Deletion request for 'resource5' was canceled by user2 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:404] An email was sent from user2 to 'resource3' owners, Subject: Cancel the Access Request for 'resource3' 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:188] An email was sent to the Staff members from user2, Subject: Cancel the Deletion Request for 'resource5' 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:403] Access request for 'resource4' was canceled by user2 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:364] Access request for resource 'resource3' with id '3' was sent by user1 
+[04/Mar/2018 19:29:14] INFO [AuthorizationManagement.views:404] An email was sent from user2 to 'resource4' owners, Subject: Cancel the Access Request for 'resource4' 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:365] An email was sent from user1 to 'resource3' owners, Subject: Access Request for 'resource3' 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:187] Deletion request for 'resource2' was canceled by user2 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:364] Access request for resource 'resource5' with id '5' was sent by user1 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:188] An email was sent to the Staff members from user2, Subject: Cancel the Deletion Request for 'resource2' 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:365] An email was sent from user1 to 'resource5' owners, Subject: Access Request for 'resource5' 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:187] Deletion request for 'resource5' was canceled by user2 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:143] Deletion request for 'res1' resource was sent by user1 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:188] An email was sent to the Staff members from user2, Subject: Cancel the Deletion Request for 'resource5' 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:144] An email was sent to the Staff members from user1, Subject: Deletion Request for 'res1' 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:364] Access request for resource 'resource3' with id '3' was sent by user1 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:143] Deletion request for 'resource4' resource was sent by user1 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:365] An email was sent from user1 to 'resource3' owners, Subject: Access Request for 'resource3' 
 
-[04/Mar/2018 19:23:01] INFO [AuthorizationManagement.views:144] An email was sent to the Staff members from user1, Subject: Deletion Request for 'resource4' 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:364] Access request for resource 'resource5' with id '5' was sent by user1 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:324] Request from user2 to access 'resource4' was denied by user1 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:365] An email was sent from user1 to 'resource5' owners, Subject: Access Request for 'resource5' 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:325] An email was sent from user1 to user2, Subject: Access Request for 'resource4' denied 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:143] Deletion request for 'res1' resource was sent by user1 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:324] Request from user2 to access 'res1' was denied by user1 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:144] An email was sent to the Staff members from user1, Subject: Deletion Request for 'res1' 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:325] An email was sent from user1 to user2, Subject: Access Request for 'res1' denied 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:143] Deletion request for 'resource4' resource was sent by user1 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:779] Request from user2 to delete 'resource5' was denied by admin 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:144] An email was sent to the Staff members from user1, Subject: Deletion Request for 'resource4' 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:780] An email was sent from admin to user2, Subject: Deletion Request for 'resource5' denied
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:324] Request from user2 to access 'resource4' was denied by user1 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:779] Request from user2 to delete 'resource2' was denied by admin 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:325] An email was sent from user1 to user2, Subject: Access Request for 'resource4' denied 
 
-[04/Mar/2018 19:23:02] INFO [AuthorizationManagement.views:780] An email was sent from admin to user2, Subject: Deletion Request for 'resource2' denied
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:324] Request from user2 to access 'res1' was denied by user1 
 
-[04/Mar/2018 19:23:04] INFO [AuthorizationManagement.views:802] User boncho tried to inconsistently create a resource 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:325] An email was sent from user1 to user2, Subject: Access Request for 'res1' denied 
 
-[04/Mar/2018 19:23:04] INFO [AuthorizationManagement.views:284] Request from evlogi to access 'res' was approved by boncho 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:779] Request from user2 to delete 'resource5' was denied by admin 
 
-[04/Mar/2018 19:23:04] INFO [AuthorizationManagement.views:285] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:780] An email was sent from admin to user2, Subject: Deletion Request for 'resource5' denied
 
-[04/Mar/2018 19:23:04] INFO [AuthorizationManagement.views:260] User boncho tried to approve a non-existing access request
-[04/Mar/2018 19:23:04] INFO [AuthorizationManagement.views:265] User evlogi tried to approve an access request without being owner of the requested resource
-[04/Mar/2018 19:23:05] INFO [AuthorizationManagement.views:725] An email was sent from admin to boncho, Subject: Deletion Request for 'res' accepted 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:779] Request from user2 to delete 'resource2' was denied by admin 
 
-[04/Mar/2018 19:23:05] INFO [AuthorizationManagement.views:733] An email was sent to all 'res' owners, Object: 'res' is deleted 
-[04/Mar/2018 19:23:05] INFO [AuthorizationManagement.views:739] Request from boncho to delete 'res' accepted by admin 
+[04/Mar/2018 19:29:15] INFO [AuthorizationManagement.views:780] An email was sent from admin to user2, Subject: Deletion Request for 'resource2' denied
 
-[04/Mar/2018 19:23:05] INFO [AuthorizationManagement.views:696] User evlogi tried to approve a deletion request without being an administrator
-[04/Mar/2018 19:23:05] INFO [AuthorizationManagement.views:691] User boncho tried to approve a non-existing deletion request
-[04/Mar/2018 19:23:06] INFO [AuthorizationManagement.views:403] Access request for 'res' was canceled by evlogi 
+[04/Mar/2018 19:29:17] INFO [AuthorizationManagement.views:802] User boncho tried to inconsistently create a resource 
 
-[04/Mar/2018 19:23:06] INFO [AuthorizationManagement.views:404] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
+[04/Mar/2018 19:29:18] INFO [AuthorizationManagement.views:284] Request from evlogi to access 'res' was approved by boncho 
 
-[04/Mar/2018 19:23:06] INFO [AuthorizationManagement.views:380] User boncho tried to cancel an access request for non-existing resource 
+[04/Mar/2018 19:29:18] INFO [AuthorizationManagement.views:285] An email was sent from boncho to evlogi, Subject: Access request for 'res' approved 
 
-[04/Mar/2018 19:23:06] INFO [AuthorizationManagement.views:385] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
+[04/Mar/2018 19:29:18] INFO [AuthorizationManagement.views:260] User boncho tried to approve a non-existing access request
+[04/Mar/2018 19:29:18] INFO [AuthorizationManagement.views:265] User evlogi tried to approve an access request without being owner of the requested resource
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:725] An email was sent from admin to boncho, Subject: Deletion Request for 'res' accepted 
 
-[04/Mar/2018 19:23:06] INFO [AuthorizationManagement.views:385] User admin tried to inconsistently cancel an access request for resource 'res3' 
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:733] An email was sent to all 'res' owners, Object: 'res' is deleted 
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:739] Request from boncho to delete 'res' accepted by admin 
 
-[04/Mar/2018 19:23:07] INFO [AuthorizationManagement.views:187] Deletion request for 'res' was canceled by boncho 
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:696] User evlogi tried to approve a deletion request without being an administrator
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:691] User boncho tried to approve a non-existing deletion request
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:403] Access request for 'res' was canceled by evlogi 
 
-[04/Mar/2018 19:23:07] INFO [AuthorizationManagement.views:188] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
+[04/Mar/2018 19:29:19] INFO [AuthorizationManagement.views:404] An email was sent from evlogi to 'res' owners, Subject: Cancel the Access Request for 'res' 
 
-[04/Mar/2018 19:23:07] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for non-existing resource 
+[04/Mar/2018 19:29:20] INFO [AuthorizationManagement.views:380] User boncho tried to cancel an access request for non-existing resource 
 
-[04/Mar/2018 19:23:07] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
+[04/Mar/2018 19:29:20] INFO [AuthorizationManagement.views:385] User evlogi tried to inconsistently cancel an access request for resource 'res4' 
 
-[04/Mar/2018 19:23:07] INFO [AuthorizationManagement.views:171] User admin tried to cancel a deletion request for resource 'res' 
+[04/Mar/2018 19:29:20] INFO [AuthorizationManagement.views:385] User admin tried to inconsistently cancel an access request for resource 'res3' 
 
-[04/Mar/2018 19:23:08] INFO [AuthorizationManagement.views:672] User admin deleted resource res 
-[04/Mar/2018 19:23:08] INFO [AuthorizationManagement.views:673] An email was sent to all 'res' owners, Subject: 'res' is deleted 
-[04/Mar/2018 19:23:08] INFO [AuthorizationManagement.views:643] User boncho tried to delete a non-existing resource
-[04/Mar/2018 19:23:08] INFO [AuthorizationManagement.views:648] User evlogi tried to delete the resource 'res' without being an administrator
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:324] Request from evlogi to access 'res' was denied by boncho 
+[04/Mar/2018 19:29:20] INFO [AuthorizationManagement.views:187] Deletion request for 'res' was canceled by boncho 
 
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:325] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
+[04/Mar/2018 19:29:20] INFO [AuthorizationManagement.views:188] An email was sent to the Staff members from boncho, Subject: Cancel the Deletion Request for 'res' 
 
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:300] User boncho tried to deny a non-existing access request
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:305] User evlogi tried to deny an access request without being owner of the requested resource
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:779] Request from boncho to delete 'res' was denied by admin 
+[04/Mar/2018 19:29:21] INFO [AuthorizationManagement.views:161] User evlogi tried to cancel a deletion request for non-existing resource 
 
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:780] An email was sent from admin to boncho, Subject: Deletion Request for 'res' denied
+[04/Mar/2018 19:29:21] INFO [AuthorizationManagement.views:166] User evlogi tried to cancel a deletion request for resource 'res' without being an owner! 
 
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:762] User evlogi tried to deny a deletion request without being an administrator
-[04/Mar/2018 19:23:09] INFO [AuthorizationManagement.views:757] User boncho tried to deny a non-existing deletion request
-[04/Mar/2018 19:23:12] INFO [AuthorizationManagement.views:416] User boncho tried to access a non-existing resource 
+[04/Mar/2018 19:29:21] INFO [AuthorizationManagement.views:171] User admin tried to cancel a deletion request for resource 'res' 
 
-[04/Mar/2018 19:23:13] INFO [AuthorizationManagement.views:477] User evlogi tried to edit the permissions of resource res 
+[04/Mar/2018 19:29:21] INFO [AuthorizationManagement.views:672] User admin deleted resource res 
+[04/Mar/2018 19:29:21] INFO [AuthorizationManagement.views:673] An email was sent to all 'res' owners, Subject: 'res' is deleted 
+[04/Mar/2018 19:29:21] INFO [AuthorizationManagement.views:643] User boncho tried to delete a non-existing resource
+[04/Mar/2018 19:29:22] INFO [AuthorizationManagement.views:648] User evlogi tried to delete the resource 'res' without being an administrator
+[04/Mar/2018 19:29:22] INFO [AuthorizationManagement.views:324] Request from evlogi to access 'res' was denied by boncho 
 
-[04/Mar/2018 19:23:13] INFO [AuthorizationManagement.views:468] User boncho tried to edit the permissions of a non-existing resource 
+[04/Mar/2018 19:29:22] INFO [AuthorizationManagement.views:325] An email was sent from boncho to evlogi, Subject: Access Request for 'res' denied 
 
-[04/Mar/2018 19:23:14] INFO [AuthorizationManagement.views:477] User evlogi tried to edit the permissions of resource res 
+[04/Mar/2018 19:29:22] INFO [AuthorizationManagement.views:300] User boncho tried to deny a non-existing access request
+[04/Mar/2018 19:29:22] INFO [AuthorizationManagement.views:305] User evlogi tried to deny an access request without being owner of the requested resource
+[04/Mar/2018 19:29:23] INFO [AuthorizationManagement.views:779] Request from boncho to delete 'res' was denied by admin 
 
-[04/Mar/2018 19:23:14] INFO [AuthorizationManagement.views:468] User boncho tried to edit the permissions of a non-existing resource 
+[04/Mar/2018 19:29:23] INFO [AuthorizationManagement.views:780] An email was sent from admin to boncho, Subject: Deletion Request for 'res' denied
 
-[04/Mar/2018 19:23:18] INFO [AuthorizationManagement.views:345] User evlogi tried to inconsistently send an access request for resource 'res' 
+[04/Mar/2018 19:29:23] INFO [AuthorizationManagement.views:762] User evlogi tried to deny a deletion request without being an administrator
+[04/Mar/2018 19:29:23] INFO [AuthorizationManagement.views:757] User boncho tried to deny a non-existing deletion request
+[04/Mar/2018 19:29:25] INFO [AuthorizationManagement.views:416] User boncho tried to access a non-existing resource 
 
-[04/Mar/2018 19:23:18] INFO [AuthorizationManagement.views:364] Access request for resource 'res4' with id '4' was sent by boncho 
+[04/Mar/2018 19:29:26] INFO [AuthorizationManagement.views:477] User evlogi tried to edit the permissions of resource res 
 
-[04/Mar/2018 19:23:18] INFO [AuthorizationManagement.views:365] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
+[04/Mar/2018 19:29:26] INFO [AuthorizationManagement.views:468] User boncho tried to edit the permissions of a non-existing resource 
 
-[04/Mar/2018 19:23:18] INFO [AuthorizationManagement.views:339] User boncho tried to send an access request for non-existing resource 
+[04/Mar/2018 19:29:27] INFO [AuthorizationManagement.views:477] User evlogi tried to edit the permissions of resource res 
 
-[04/Mar/2018 19:23:18] INFO [AuthorizationManagement.views:345] User evlogi tried to inconsistently send an access request for resource 'res4' 
+[04/Mar/2018 19:29:27] INFO [AuthorizationManagement.views:468] User boncho tried to edit the permissions of a non-existing resource 
 
-[04/Mar/2018 19:23:18] INFO [AuthorizationManagement.views:345] User admin tried to inconsistently send an access request for resource 'res3' 
+[04/Mar/2018 19:29:31] INFO [AuthorizationManagement.views:345] User evlogi tried to inconsistently send an access request for resource 'res' 
 
-[04/Mar/2018 19:23:19] INFO [AuthorizationManagement.views:123] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+[04/Mar/2018 19:29:31] INFO [AuthorizationManagement.views:364] Access request for resource 'res4' with id '4' was sent by boncho 
 
-[04/Mar/2018 19:23:19] INFO [AuthorizationManagement.views:143] Deletion request for 'res4' resource was sent by evlogi 
+[04/Mar/2018 19:29:31] INFO [AuthorizationManagement.views:365] An email was sent from boncho to 'res4' owners, Subject: Access Request for 'res4' 
 
-[04/Mar/2018 19:23:19] INFO [AuthorizationManagement.views:144] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+[04/Mar/2018 19:29:31] INFO [AuthorizationManagement.views:339] User boncho tried to send an access request for non-existing resource 
 
-[04/Mar/2018 19:23:19] INFO [AuthorizationManagement.views:113] User evlogi tried to send a deletion request for non-existing resource 
+[04/Mar/2018 19:29:31] INFO [AuthorizationManagement.views:345] User evlogi tried to inconsistently send an access request for resource 'res4' 
 
-[04/Mar/2018 19:23:19] INFO [AuthorizationManagement.views:119] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+[04/Mar/2018 19:29:31] INFO [AuthorizationManagement.views:345] User admin tried to inconsistently send an access request for resource 'res3' 
 
-[04/Mar/2018 19:23:19] INFO [AuthorizationManagement.views:123] User admin tried to inconsistently send a deletion request for resource 'res4' 
+[04/Mar/2018 19:29:32] INFO [AuthorizationManagement.views:123] User evlogi tried to inconsistently send a deletion request for resource 'res3' 
+
+[04/Mar/2018 19:29:32] INFO [AuthorizationManagement.views:143] Deletion request for 'res4' resource was sent by evlogi 
+
+[04/Mar/2018 19:29:32] INFO [AuthorizationManagement.views:144] An email was sent to the Staff members from evlogi, Subject: Deletion Request for 'res4' 
+
+[04/Mar/2018 19:29:32] INFO [AuthorizationManagement.views:113] User evlogi tried to send a deletion request for non-existing resource 
+
+[04/Mar/2018 19:29:32] INFO [AuthorizationManagement.views:119] User boncho tried to send a deletion request for resource 'res4' without being an owner! 
+
+[04/Mar/2018 19:29:32] INFO [AuthorizationManagement.views:123] User admin tried to inconsistently send a deletion request for resource 'res4' 
 

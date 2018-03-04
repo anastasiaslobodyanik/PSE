@@ -124,7 +124,7 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
 
 
 \multirow{6}{*}{}6 & \multirow{6}{*}{} TestSendDeletionRequestView& test-not-logged-in & Getestet, ob man ein Löschrequest senden kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet \\ \cline{3-5} 
-                  &                   & test-not-existing-resource &  Getestet, man ein Löschrequest für eine Ressource senden kann, wenn die Ressource nicht existiert  &  HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet  \\ \cline{3-5} 
+                  &                   & test-not-existing-resource &  Getestet, man ein Löschrequest für eine Ressource senden kann, wenn die Ressource nicht existiert  & HTTP Status Code 404: Page not found  \\ \cline{3-5} 
                   &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, ein Löschrequest senden kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet    \\ \cline{3-5} 
                   &                   & test-staff-user &Getestet, ob der Admin ein Löschrequest senden kann.  &HTTP Status Code 302: Der Admin wird zur MyResourcesseite weitergeleitet \\ \cline{3-5} 
                   &                   & test-deletion-request-exists  & Getestet, was passiert, wenn ein Löschrequest für diese Ressource schon existiert.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet   \\ \cline{3-5} 
@@ -135,7 +135,7 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
                   &                   & test-not-existing-resource  & Getestet, ob man für eine nicht existierte Ressource einen Löschrequest zu stornieren versucht.  & HTTP Status Code 404: Page not found  \\ \cline{3-5} 
                   &                   & test-not-owner &Getestet, ob ein Benutzer, der die Ressource nicht besitzt, einen Löschrequest stornieren kann. & HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet   \\ \cline{3-5} 
                   &                   & test-staff-user &Getestet, ob der Admin einen Löschrequest stornieren kann(Admin kann keine Löschrequeste senden).  &HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet.  \\ \cline{3-5} 
-                  &                   & test-deletion-request-doesnt-exist  & Getestet, ob man einen nicht existierten Löschrequest zu stornieren versucht.  &  HTTP Status Code 404: Page not found  \\ \cline{3-5}
+                  &                   & test-deletion-request-doesnt-exist  & Getestet was passiet, wenn man einen nicht existierten Löschrequest zu stornieren versucht.  &  HTTP Status Code 404: Page not found  \\ \cline{3-5}
                   &                   & test-normal  & Getestet, was es im normalen Fall passiert, wenn man einen Löschrequest storniert. & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet    \\ \hline
                   
                   
@@ -195,8 +195,8 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
                   
                   
 \multirow{8}{*}{}16& \multirow{8}{*}{} TestPermissionEditingView& test-not-logged-in &  Getestet, ob man die EditPermissionsseite von einer Ressource sehen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet   \\ \cline{3-5}  
-                  &                   & test-not-existing-resource-get &  Getestet, ob man die EditPermissionsseite von einer Ressource sehen kann, wenn die Ressource nicht existiert.  & HTTP Status Code 302: Der Benutzer wird zur Homeseite weitergeleitet  \\ \cline{3-5} 
-                  &                   & test-not-existing-resource-post &  Getestet, ob man die Rechte für eine Ressource ändern kann, wenn die Ressource nicht existiert.  &  HTTP Status Code 302: Der Benutzer wird zur Homeseite weitergeleitet  \\ \cline{3-5} 
+                  &                   & test-not-existing-resource-get &  Getestet, ob man die EditPermissionsseite von einer Ressource sehen kann, wenn die Ressource nicht existiert.  & HTTP Status Code 404: Page not found  \\ \cline{3-5} 
+                  &                   & test-not-existing-resource-post &  Getestet, ob man die Rechte für eine Ressource ändern kann, wenn die Ressource nicht existiert.  &  HTTP Status Code 404: Page not found  \\ \cline{3-5} 
                   &  & test-not-authorized-user &Getestet, ob ein Benutzer die EditPermissionSeite von einer Ressource sehen kann, wenn man kein Besitzer der Ressource ist.  &  HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet  \\ \cline{3-5} 
                  &   & test-normal-get & Getestet, ob die EditPermissionseite im normalen Fall gezeigt wird.  & HTPP Status Code 200: OK   \\ \cline{3-5} 
                               &   & test-normal-post & Getestet, ob  man die Rechte für eine Ressource im normalen Fall ändern kann.  & HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleitet  \\ \cline{3-5}  
@@ -204,7 +204,7 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
                   
                   
 \multirow{8}{*}{} 17& \multirow{8}{*}{} TestPermissionEditingViewSearch& test-not-logged-in &  Getestet, ob man die EditPermissionsSearchseite von einer Ressource sehen kann, wenn man nicht eingeloggt ist.& HTTP Status Code 302: Der Benutzer wird zur Loginseite weitergeleitet   \\ \cline{3-5}  
-                  &                   & test-not-existing-resource-get &  Getestet, ob man die EditPermissionsSearchseite von einer Ressource sehen kann, wenn die Ressource nicht existiert.  & HTTP Status Code 302: Der Benutzer wird zur Homeseite weitergeleitet  \\ \cline{3-5} 
+                  &                   & test-not-existing-resource-get &  Getestet, ob man die EditPermissionsSearchseite von einer Ressource sehen kann, wenn die Ressource nicht existiert.  & HTTP Status Code 404: Page not found  \\ \cline{3-5} 
                   &                   & test-not-existing-resource-post &  Getestet, ob man die Rechte für eine Ressource ändern kann, wenn die Ressource nicht existiert.  &  HTTP Status Code 302: Der Benutzer wird zur Homeseite weitergeleitet  \\ \cline{3-5} 
                   &  & test-not-authorized-user &Getestet, ob ein Benutzer die EditPermissionsSearchseite von einer Ressource sehen kann, wenn man kein Besitzer der Ressource ist.  &  HTTP Status Code 403: Der Benutzer wird zur PermissionDeniedseite weitergeleitet  \\ \cline{3-5} 
                   &                   &test-no-query  &  Getestet was passiert, wenn der Benutzer keinen Zeichen für die Suchabfrage eingibt& HTTP Status Code 302: Der Benutzer wird zur MyResourcesseite weitergeleite  \\ \cline{3-5}
