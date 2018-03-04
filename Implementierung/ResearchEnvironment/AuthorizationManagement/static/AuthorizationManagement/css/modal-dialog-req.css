@@ -134,6 +134,7 @@
 	margin-top: 5px;
   font-size:15px;
 	color: white;
+  cursor: pointer;
 }
 .info {
 	text-align:left;

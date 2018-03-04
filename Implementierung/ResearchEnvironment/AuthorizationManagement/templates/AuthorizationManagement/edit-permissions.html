@@ -12,6 +12,7 @@
 
 <!-- the user can search for other users, whom he wants to grant permissions-->
 <div class="search">
+   <p>Resource: <strong>{{resource.name}}</strong> </p> <br>
    <p>Search for user:</p>
    <form action="/profile/my-resources/{{resource.id}}-edit-users-permissions/search" method="get">
       <input type="text" name='q' value="{{query}}" class="search-box" >

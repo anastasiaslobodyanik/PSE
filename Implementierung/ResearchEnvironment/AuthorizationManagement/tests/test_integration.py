@@ -24,6 +24,7 @@ def setUpResourceAndRequests(users):
     res1 = Resource.objects.create(name='res1', type='text', description='desc', link='res.txt')
     res1.readers.add(users['test_user1'].id)
     res1.owners.add(users['test_user1'].id)
+    res1.readers.add(users['test_admin'].id)
     
     res2 = Resource.objects.create(name='resource2', type='text', description='description', link='res2.txt')
     res2.readers.add(users['test_user2'].id)
@@ -125,6 +126,17 @@ class TestResourcesData(TestCase):
         response = self.client.get('/resources-overview/')
         resources = CustomUser.objects.get_by_natural_key('user1').reader.all()
         self.assertCountEqual(response.context['can_access'], resources)
+        
+    def test_resource_permissions(self):
+        response = self.client.get('/profile/my-resources/')
+        resources = response.context['resource_list']
+        for resource in resources:
+            response = self.client.get('/profile/my-resources/' + str(resource.id) + '-edit-users-permissions/');
+            owners = response.context['owners']
+            readers = response.context['readers']
+            
+            self.assertCountEqual(readers, resource.readers.all())
+            self.assertCountEqual(owners, resource.owners.all())
     
     
 class TestRequestsData(TestCase):
@@ -246,26 +258,5 @@ class TestRequestsData(TestCase):
          
         requests = DeletionRequest.objects.all()
         self.assertFalse(requests.exists())
-    
-# class TestAdminData(TestCase):
-#     @classmethod
-#     def setUpClass(cls):
-#         super().setUpClass()
-#         users = setUpUsers()
-#         setUpResourceAndRequests(users)
-#     
-#     def setUp(self):
-#         self.client = Client()
-#         self.client.login(username='admin', password='123456')
-#                 
-#     @classmethod
-#     def tearDownClass(cls):
-#         deleteUsers()
-#         deleteResourcesAndRequests()
-#         super().tearDownClass()
-#         
-#     def test_manage_ressources(self):
-#         pass
-#     
-#     def test_manage_users(self):
-#         pass
+
+        
