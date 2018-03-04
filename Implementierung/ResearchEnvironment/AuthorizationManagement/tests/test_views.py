@@ -317,7 +317,7 @@ class TestCancelDeletionRequestView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='evlogi', password='123456')
         response = self.client.post('/cancel-deletion-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     def test_not_owner(self):
         self.client.login(username='evlogi', password='123456')
@@ -333,7 +333,7 @@ class TestCancelDeletionRequestView(TestCase):
     def test_deletion_request_doesnt_exist(self):
         self.client.login(username='evlogi', password='123456')
         response = self.client.post('/cancel-deletion-request/4')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
               
     def test_normal(self):       
         self.client.login(username='boncho', password='123456')
@@ -366,7 +366,7 @@ class TestApproveAccessRequestView(TestCase):
     def test_not_existing_request(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/approve-access-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     
     def test_not_owner(self):
@@ -405,7 +405,7 @@ class TestDenyAccessRequestView(TestCase):
     def test_not_existing_request(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/deny-access-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     
     def test_not_owner(self):
@@ -444,7 +444,7 @@ class TestSendAccessRequestView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/send-access-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         
     def test_reader(self):
         self.client.login(username='evlogi', password='123456')
@@ -491,23 +491,23 @@ class TestCancelAccessRequestView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/cancel-access-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         
     def test_reader(self):
         self.client.login(username='evlogi', password='123456')
         response = self.client.post('/cancel-access-request/4')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         
     
     def test_staff_user(self):
         self.client.login(username='admin', password='123456')
         response = self.client.post('/cancel-access-request/3')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     def test_access_request_doesnt_exist(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/cancel-access-request/4')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
        
     def test_normal(self):       
         self.client.login(username='evlogi', password='123456')
@@ -538,7 +538,7 @@ class TestDeleteResourceView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/delete-resource/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     def test_not_staff_user(self):
         self.client.login(username='evlogi', password='123456')
@@ -856,7 +856,7 @@ class TestApproveDeletionRequestView(TestCase):
     def test_not_existing_request(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/approve-deletion-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     
     def test_not_admin(self):
@@ -896,7 +896,7 @@ class TestDenyDeletionRequestView(TestCase):
     def test_not_existing_request(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/deny-deletion-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     
     def test_not_admin(self):

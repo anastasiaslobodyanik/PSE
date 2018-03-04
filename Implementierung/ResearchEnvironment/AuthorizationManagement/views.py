@@ -22,7 +22,7 @@ from test.support import resource
 from pip._vendor.requests.api import request
 from django.db.models import Q
 from django.views.decorators.cache import never_cache
-
+from django.shortcuts import get_object_or_404
 
 from itertools import chain
 from AuthorizationManagement.apps import AuthorizationmanagementConfig
@@ -157,22 +157,22 @@ class CancelDeletionRequestView(generic.View):
         try:
             res=Resource.objects.get(id=pk)
         except Resource.DoesNotExist:
-            # redirects the current user to profile/my-resources if a resource with such an id does not exist
+            # redirects the current user to the 404 if a resource with such an id does not exist
             logger.info("User %s tried to cancel a deletion request for non-existing resource \n" % (request.user.username))
-            return redirect("/profile/my-resources")
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user has no ownership for this resource
         if  not res.owners.filter(id= request.user.id).exists():
             logger.info("User %s tried to cancel a deletion request for resource '%s' without being an owner! \n" % (request.user.username,res.name))
             raise PermissionDenied
             
-        # redirects the current user to /profile/my-resources if the user is a staff user or there is no deletion request 
-        if request.user.is_staff or  not DeletionRequest.objects.filter(resource=res,sender = request.user).exists():
+        # redirects the current user to /profile/my-resources if the user is a staff user 
+        if request.user.is_staff :
             logger.info("User %s tried to cancel a deletion request for resource '%s' \n" % (request.user.username,res.name))
             return redirect("/profile/my-resources")
         
-        requests_of_user = DeletionRequest.objects.filter(sender=request.user) 
-        request_to_delete = requests_of_user.get(resource__id=pk)
+        #requests_of_user = DeletionRequest.objects.filter(sender=request.user) 
+        request_to_delete = get_object_or_404(DeletionRequest,sender=request.user, resource=res)
         
         # notifies all the staff users 
         html_content = render_to_string('AuthorizationManagement/mail/deletion-request-canceled-mail.html', {'user' : request.user,
@@ -256,9 +256,9 @@ class ApproveAccessRequest(generic.View):
         try:
             req=AccessRequest.objects.get(id=pk)
         except AccessRequest.DoesNotExist:
-            # redirects the current user to profile if a request with a such id does not exist
+            # redirects the current user to the 404 if a request with a such id does not exist
             logger.info("User %s tried to approve a non-existing access request" % (request.user))
-            return redirect('/profile')
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user has no ownership for this resource
         if not req.resource.owners.filter(id = request.user.id).exists():
@@ -296,9 +296,9 @@ class DenyAccessRequest(generic.View):
         try:
             req=AccessRequest.objects.get(id=pk)
         except AccessRequest.DoesNotExist:
-            # redirects the current user to profile if a request with a such id does not exist
+            # redirects the current user to the 404 if a request with a such id does not exist
             logger.info("User %s tried to deny a non-existing access request" % (request.user))
-            return redirect('/profile')
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user has no ownership for this resource
         if not req.resource.owners.filter(id = request.user.id).exists():
@@ -335,9 +335,9 @@ class SendAccessRequestView(generic.View):
         try:
             res=Resource.objects.get(id=pk)
         except Resource.DoesNotExist:
-            # redirects the current user to resources-overview if a resource with a such id does not exist
+            # redirects the current user to the 404 if a resource with a such id does not exist
             logger.info("User %s tried to send an access request for non-existing resource \n" % (request.user.username))
-            return redirect("/resources-overview") 
+            raise Http404() 
 
         # redirects the current user to resources-overview if the user is a staff user or already has an access permission to this resource
         # or if the user has already requested to access this resource
@@ -376,18 +376,18 @@ class CancelAccessRequest(generic.View):
         try:
             res=Resource.objects.get(id=pk)
         except Resource.DoesNotExist:
-            # redirects the current user to resources-overview if a resource with a such id does not exist
+            # redirects the current user to the 404 if a resource with a such id does not exist
             logger.info("User %s tried to cancel an access request for non-existing resource \n" % (request.user.username))
-            return redirect("/resources-overview")
+            raise Http404()
            
-        # redirects the current user to resources-overview if the user is a staff user or already has an access permission to this resource or if there is no access request
-        if res.readers.filter(id= request.user.id).exists() or request.user.is_staff or  not AccessRequest.objects.filter(resource=res,sender = request.user).exists():
+        # redirects the current user to the 404 if the user is a staff user or already has an access permission to this resource 
+        if res.readers.filter(id= request.user.id).exists() or request.user.is_staff:
             logger.info("User %s tried to inconsistently cancel an access request for resource '%s' \n" % (request.user.username,res.name))
-            return redirect("/resources-overview")
+            raise Http404()
         
         # deletes the request
-        requests_of_user = AccessRequest.objects.filter(sender=request.user)
-        request_to_delete = requests_of_user.get(resource__id=pk)
+        #requests_of_user = AccessRequest.objects.filter(sender=request.user)
+        request_to_delete = get_object_or_404(AccessRequest,sender=request.user,resource=res)
         request_to_delete.delete()
         
         # notifies all owners  via email
@@ -633,9 +633,9 @@ class DeleteResourceView(generic.View):
         try:
             res=Resource.objects.get(id=pk)   
         except Resource.DoesNotExist:
-            # redirects the current user if a resource with a such id does not exist
+            # raises Http404 if a resource with a such id does not exist
             logger.info("User %s tried to delete a non-existing resource" % (request.user))
-            return redirect("/profile/my-resources")
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user is not a staff user
         if not request.user.is_staff :
@@ -681,9 +681,9 @@ class ApproveDeletionRequest(generic.View):
         try:
             req=DeletionRequest.objects.get(id=pk)
         except DeletionRequest.DoesNotExist:
-            # redirects the current user if a request with a such id does not exist
+            # raises Http404 if a request with a such id does not exist
             logger.info("User %s tried to approve a non-existing deletion request" % (request.user))
-            return redirect('/profile')
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user is a staff user
         if not request.user.is_staff :
@@ -747,9 +747,9 @@ class DenyDeletionRequest(generic.View):
         try:
             req=DeletionRequest.objects.get(id=pk)
         except DeletionRequest.DoesNotExist:
-            # redirects the current user if a request with a such id does not exist
+            # raises Http404 if a request with a such id does not exist
             logger.info("User %s tried to deny a non-existing deletion request" % (request.user))
-            return redirect('/profile')
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user is a staff user
         if not request.user.is_staff:
