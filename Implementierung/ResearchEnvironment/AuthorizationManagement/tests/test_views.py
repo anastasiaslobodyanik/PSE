@@ -272,7 +272,7 @@ class TestSendDeletionRequestView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='evlogi', password='123456')
         response = self.client.post('/send-deletion-request/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     def test_not_owner(self):
         self.client.login(username='boncho', password='123456')
@@ -678,12 +678,12 @@ class TestPermissionEditingView(TestCase):
     def test_not_existing_resource_get(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/profile/my-resources/50-edit-users-permissions/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
                
     def test_not_existing_resource_post(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/profile/my-resources/50-edit-users-permissions/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         
     def test_not_authorized_user(self):
         self.client.login(username='evlogi', password='123456')
@@ -730,12 +730,12 @@ class TestPermissionEditingViewSearch(TestCase):
     def test_not_existing_resource_get(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/profile/my-resources/50-edit-users-permissions/search?q=evl')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         
     def test_not_existing_resource_post(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.post('/profile/my-resources/50-edit-users-permissions/search?q=evl')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
     
     def test_not_authorized_user(self):
         self.client.login(username='evlogi', password='123456')
@@ -816,7 +816,7 @@ class TestOpenResourceView(TestCase):
     def test_not_existing_resource(self):
         self.client.login(username='boncho', password='123456')
         response = self.client.get('/resources/50')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         
     def test_not_reader(self):
         self.client.login(username='boncho', password='123456')
