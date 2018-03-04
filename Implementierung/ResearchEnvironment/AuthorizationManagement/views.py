@@ -111,7 +111,7 @@ class SendDeletionRequestView(generic.View):
         except Resource.DoesNotExist:
             # redirects the current user to profile/my-resources if a resource with such an id does not exist
             logger.info("User %s tried to send a deletion request for non-existing resource \n" % (request.user.username))
-            return redirect("/profile/my-resources")
+            raise Http404()
         
         
         # raises the PermissionDenied exception if the current user has no ownership for this resource
@@ -409,13 +409,12 @@ class CancelAccessRequest(generic.View):
 class OpenResourceView(generic.View):
     def get(self,request,*args, **kwargs):
         pk = self.kwargs['resourceid'] # gets the id of the resource which is included in the url
-        
-         
+             
         try:
             resource=Resource.objects.get(id=pk)   
         except Resource.DoesNotExist:
             logger.info("User %s tried to access a non-existing resource \n" % (request.user.username))
-            return redirect("/resources-overview")
+            raise Http404()
         
         # raises the PermissionDenied exception if the current user is a staff user or has no access permission to this resource
         if (not resource.readers.filter(id=request.user.id).exists())and (not request.user.is_staff) :
@@ -465,8 +464,10 @@ class PermissionEditingView(generic.ListView):
         try:
             resource=Resource.objects.get(id=self.kwargs['resourceid'])   
         except Resource.DoesNotExist:
-            logger.info("User %s tried to edit the permissions of a non-existing resource \n" % (request.user.username))
-            return redirect('/')
+            if request.method=="POST":
+                logger.info("User %s tried to edit the permissions of a non-existing resource \n" % (request.user.username))
+            raise Http404()
+        
                 
         
         #checks if the current user has permission to access this resource
@@ -496,6 +497,7 @@ class PermissionEditingView(generic.ListView):
                 if userId in new_readers_list and int(userId) not in real_readers_list:
                     
                     resource.readers.add(user)
+                    AccessRequest.objects.filter(sender = user,resource=resource).delete()
                     
                     html_content=render_to_string('AuthorizationManagement/mail/access-granted-mail.html', {'user' : request.user,
                                                                                                     'resource' : resource})                                                               
@@ -534,6 +536,7 @@ class PermissionEditingView(generic.ListView):
                     resource.owners.add(owner)
                     if not resource.readers.filter(id=userId).exists():
                         resource.readers.add(user)
+                        AccessRequest.objects.filter(sender = user,resource=resource).delete()
                     
                     html_content=render_to_string('AuthorizationManagement/mail/ownership-granted-mail.html', {'user' : request.user,
                                                                                                         'resource' : resource})                                                               
@@ -550,6 +553,7 @@ class PermissionEditingView(generic.ListView):
                 elif userId not in new_owners_list and int(userId) in real_owners_list and len(resource.owners.all() ) > 1:
                     
                     resource.owners.remove(owner)
+                    DeletionRequest.objects.filter(sender = owner,resource=resource).delete()
                     
                     if int(userId) == self.request.user.id:
                         user_removed_own_right = True
