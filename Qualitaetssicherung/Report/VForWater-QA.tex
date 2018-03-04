@@ -241,7 +241,8 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
 
 
 \section{Integration-Test} \label{integrationtest}
-Test des Zusammenspiels der Komponenten.
+Integration-Tests dienen dazu, das Zusammenspiel aller Komponenten zu \"uberpr\"ufen. W\"ahrend dieser Phase werden Tests entsprechend der Modularit\"at erstellt, welche im Entwurf festgelegt wurden. Django-Applications arbeiten mit dem Prinzip ,,Model View Template``, welches die Benutzeraktionen des Templates mit Hilfe der View entnimmt und diese direkt in die Datenbank integriert.\\
+Um diese Verbindung zu testen, haben wir automatische Unit-Tests benutzt (Tabelle), die den Datenbankzustand vor und nach der Ausf\"urung der View-Funktionen pr\"ufen.
 
 \newpage
 \section{System-Test} \label{systemtest}
