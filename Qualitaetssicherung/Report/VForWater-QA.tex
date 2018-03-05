@@ -281,11 +281,12 @@ test-create-access-request & Test öffnet ,,Resources Overview``-Seite und sende
 \newpage
 \section{System-Test} \label{systemtest}
 System-Test im Sinne der Software-Entwicklung ist der abschließende Test, der vom Entwickler durchgeführt wird. Das Ziel dieses Tests ist das Verhalten des Produkts als Ganzes in einer realen Umgebung (immer noch ohne Kunden) zu beobachten.\\
-Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - für Benutzer, für Besitzer und für Administrator.
+Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Als Basis dafür dienen die im Pflichtenheft vordefinierte globale Testfälle. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - solche die Benutzer \ref{manTestsBenutzer}, Besitzer \ref{manTestsBesitzer} oder Administrator \ref{manTestsAdmin} betreffen.\\
+Um die Kompatibilität des Produkts mit verschiedenen Umgebungen zu testen, haben wir die System-Tests erfolgreich mit vier modernen Browser (deren Benutzung schon im Pflichtenheft als Kriterium gesetzt wurde) - Chrome, Firefox, Safari und Microsoft Edge auf vier Betriebssysteme - Windows 8, Windows 10, Mac und Linux durchgeführt.  
 
 \begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
-\caption{Manuelle Tests für User}
-\label{my-label}\\
+\caption{Manuelle Tests für Benutzer}
+\label{manTestsBenutzer}\\
 \hline
 \textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
 \endfirsthead
@@ -308,56 +309,10 @@ Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. 
 \end{longtable}
 
 
-
-
-
 \newpage
 \begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
-\caption{Manuelle Tests für Admin}
-\label{my-label}\\
-\hline
-\textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
-\endfirsthead
-%
-\endhead
-%
-\multirow{2}{*}{} T80 : Löschrequest ablehnen& \multirow{2}{*}{} F110 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Eine Liste mit Löschrequesten ist zu sehen \\ \cline{3-4}    &  & Deny Button zum gewünschten Request klicken  & Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Das Ablehnen bestätigen  & Die Ressource wird nicht gelöscht
-Requst wird von DB gelöscht \\ \hline
-
-\multirow{2}{*}{} T90 : Löschrequest genehmigen& \multirow{2}{*}{} F110 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Eine Liste mit Löschrequesten ist zu sehen \\ \cline{3-4}    &  & Deny Button zum gewünschten Request klicken  & Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Die Genehmigung  bestätigen  & Die Ressource wird von DB gelöscht und der Request wird von DB gelöscht
-Requst wird von DB gelöscht \\ \hline
-
-\multirow{2}{*}{} T100 : Ressource löschen& \multirow{2}{*}{} F120 & Einloggen & Button Profile ist angezeigt  \\ \cline{3-4}    &  &Auf Profile klicken  & Ein Button My Resources ist zu sehen \\ \cline{3-4}    &  & Auf My Resources klicken  &Alle Ressourcen, die der Admin besitzt, sind in einer Liste zu sehen \\ \cline{3-4}    &  & Delete Button zur ensprechenden Ressource klicken  &Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Das Löschen bestätigen  &Die Ressource wird von DB gelöscht \\ \hline
-
-\multirow{2}{*}{} T110 : Besitzerrechte geben& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
-Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
-Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Owners den Benutzer markieren und auf Save Button klicken  & Der ausgewählte Benutzer ist schon Besitzer dieser Ressource \\ \hline
-
-\multirow{2}{*}{} T120 : Besitzerrechte entziehen& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
-Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
-Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Owners den Benutzer demarkieren und auf Save Button klicken  & Der ausgewählte Benutzer ist nicht mehr Besitzer dieser Ressource \\ \hline
-
-\multirow{2}{*}{} T130 : Zugriffsrechte geben& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
-Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
-Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld readers den Benutzer markieren und auf Save Button klicken  & Der ausgewählte Benutzer ist schon leser dieser Ressource \\ \hline
-
-\multirow{2}{*}{} T140 : Besitzerrechte entziehen& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
-Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
-Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Readers den Benutzer demarkieren und auf Save Button klicken  & Der ausgewählte Benutzer ist nicht mehr leser dieser Ressource \\ \hline
-
-\multirow{2}{*}{} T150 : Account und Daten eines Benutzers löschen& \multirow{2}{*}{} F140 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Users klicken  & Eine Admin-Seite wird geöffnet mit einer
-Link zur Liste aller Users \\ \cline{3-4}    &  & Auf Users (unter
-Authentication and Authorization) klicken  & Liste mit allen Benutzern im System wird angezeigt (+ Option zum Suchen) \\ \cline{3-4}    &  & Benutzer finden und auf seinen Benutzernamen klicken  & Optionen zum Editieren der Daten dieses Benutzers \\ \cline{3-4}    &  & Unten links auf Delete klicken  & Eine Seite zur Bestätigung wird geöffnet \\ \cline{3-4}    &  & Löschen bestätigen  & Der ausgewählte Benutzer (und seine Requeste) werden gelöscht \\ \hline
-
-\multirow{2}{*}{} T160 : Nach einem Benutzer suchen und ihn blockieren& \multirow{2}{*}{} F160,
-F170 & Einloggen & Button Manage Users ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Users klicken  & Eine Admin-Seite wird geöffnet mit einer Link zur Liste aller Users \\ \cline{3-4}    &  & Auf Users (unter
-Authentication and Authorization) klicken  & Liste mit allen Benutzern im System wird angezeigt (+ Option zum Suchen) \\ \cline{3-4}    &  & Benutzer finden und auf seinen Benutzernamen klicken  & Optionen zum Editieren der Daten dieses Benutzers \\ \cline{3-4}    &  & Den Haken von Active entfernen und auf Save Button klicken  & Der ausgewählte Benutzer kann das Portal (temporär) nicht benutzen  \\ \hline
-\end{longtable}
-
-\newpage
-\begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
-\caption{Manuelle Tests für Owner}
-\label{my-label}\\
+\caption{Manuelle Tests für Besitzer}
+\label{manTestsBesitzer}\\
 \hline
 \textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
 \endfirsthead
@@ -383,9 +338,51 @@ Authentication and Authorization) klicken  & Liste mit allen Benutzern im System
 
 \multirow{2}{*}{} T250 : Zugriffsrechte zu mehreren Nutzern vergeben& \multirow{2}{*}{} F250 & Einloggen & Profil Button wird angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & My Resources Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf My Resources  & Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Resource werden angezeigt: Access, Edit Permission, Delete \\ \cline{3-4}    &  & Klicke auf edit Permissions  & Suchen Feld wird angezeigt \\ \cline{3-4}    &  & Schreibe "user" und Klicke auf Search Button  & alle Users werden angezeigt \\ \cline{3-4}    &  & Klicke auf Reader Button für alle Users und Confirm  & alle Users sollen als Reader angezeigt werden  \\ \hline
 
-
-
 \end{longtable}
+
+\newpage
+\begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
+	\caption{Manuelle Tests für Administrator}
+	\label{manTestsAdmin}\\
+	\hline
+	\textbf{Testcase}&\textbf{FA}& \textbf{Action} & \textbf{Reaction} \\ \hline
+	\endfirsthead
+	%
+	\endhead
+	%
+	\multirow{2}{*}{} T80 : Löschrequest ablehnen& \multirow{2}{*}{} F110 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Eine Liste mit Löschrequesten ist zu sehen \\ \cline{3-4}    &  & Deny Button zum gewünschten Request klicken  & Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Das Ablehnen bestätigen  & Die Ressource wird nicht gelöscht
+	Requst wird von DB gelöscht \\ \hline
+	
+	\multirow{2}{*}{} T90 : Löschrequest genehmigen& \multirow{2}{*}{} F110 & Einloggen & Profile Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf Profile  & Eine Liste mit Löschrequesten ist zu sehen \\ \cline{3-4}    &  & Deny Button zum gewünschten Request klicken  & Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Die Genehmigung  bestätigen  & Die Ressource wird von DB gelöscht und der Request wird von DB gelöscht
+	Requst wird von DB gelöscht \\ \hline
+	
+	\multirow{2}{*}{} T100 : Ressource löschen& \multirow{2}{*}{} F120 & Einloggen & Button Profile ist angezeigt  \\ \cline{3-4}    &  &Auf Profile klicken  & Ein Button My Resources ist zu sehen \\ \cline{3-4}    &  & Auf My Resources klicken  &Alle Ressourcen, die der Admin besitzt, sind in einer Liste zu sehen \\ \cline{3-4}    &  & Delete Button zur ensprechenden Ressource klicken  &Ein Dialogfenster wird angezeigt \\ \cline{3-4}    &  & Das Löschen bestätigen  &Die Ressource wird von DB gelöscht \\ \hline
+	
+	\multirow{2}{*}{} T110 : Besitzerrechte geben& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+	Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+	Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Owners den Benutzer markieren und auf Save Button klicken  & Der ausgewählte Benutzer ist schon Besitzer dieser Ressource \\ \hline
+	
+	\multirow{2}{*}{} T120 : Besitzerrechte entziehen& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+	Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+	Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Owners den Benutzer demarkieren und auf Save Button klicken  & Der ausgewählte Benutzer ist nicht mehr Besitzer dieser Ressource \\ \hline
+	
+	\multirow{2}{*}{} T130 : Zugriffsrechte geben& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+	Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+	Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld readers den Benutzer markieren und auf Save Button klicken  & Der ausgewählte Benutzer ist schon leser dieser Ressource \\ \hline
+	
+	\multirow{2}{*}{} T140 : Besitzerrechte entziehen& \multirow{2}{*}{} F130 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Resources klicken  & Eine Admin-Seite wird geöffnet mit einer
+	Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Auf Resources (unter
+	Authorizationmanagement)klicken  & Link zur Liste aller Ressourcen \\ \cline{3-4}    &  & Ressource finden und darauf klicken  & Optionen zum Editieren dieser Ressource sowie ihrer Leser und Besitzer \\ \cline{3-4}    &  & Im Feld Readers den Benutzer demarkieren und auf Save Button klicken  & Der ausgewählte Benutzer ist nicht mehr leser dieser Ressource \\ \hline
+	
+	\multirow{2}{*}{} T150 : Account und Daten eines Benutzers löschen& \multirow{2}{*}{} F140 & Einloggen & Button Manage Resources ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Users klicken  & Eine Admin-Seite wird geöffnet mit einer
+	Link zur Liste aller Users \\ \cline{3-4}    &  & Auf Users (unter
+	Authentication and Authorization) klicken  & Liste mit allen Benutzern im System wird angezeigt (+ Option zum Suchen) \\ \cline{3-4}    &  & Benutzer finden und auf seinen Benutzernamen klicken  & Optionen zum Editieren der Daten dieses Benutzers \\ \cline{3-4}    &  & Unten links auf Delete klicken  & Eine Seite zur Bestätigung wird geöffnet \\ \cline{3-4}    &  & Löschen bestätigen  & Der ausgewählte Benutzer (und seine Requeste) werden gelöscht \\ \hline
+	
+	\multirow{2}{*}{} T160 : Nach einem Benutzer suchen und ihn blockieren& \multirow{2}{*}{} F160,
+	F170 & Einloggen & Button Manage Users ist angezeigt  \\ \cline{3-4}    &  & Auf Manage Users klicken  & Eine Admin-Seite wird geöffnet mit einer Link zur Liste aller Users \\ \cline{3-4}    &  & Auf Users (unter
+	Authentication and Authorization) klicken  & Liste mit allen Benutzern im System wird angezeigt (+ Option zum Suchen) \\ \cline{3-4}    &  & Benutzer finden und auf seinen Benutzernamen klicken  & Optionen zum Editieren der Daten dieses Benutzers \\ \cline{3-4}    &  & Den Haken von Active entfernen und auf Save Button klicken  & Der ausgewählte Benutzer kann das Portal (temporär) nicht benutzen  \\ \hline
+\end{longtable}
+
 
 \newpage
 \section{Zusammenfassung} \label{zusammenfassung}
