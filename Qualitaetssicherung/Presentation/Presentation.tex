@@ -1,0 +1,204 @@
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+
+\definecolor{water}{HTML}{3fb0ac}
+\colorlet{beamer@blendedblue}{water}
+
+\usebackgroundtemplate%
+{
+		
+		 %  \includegraphics[scale=0.5]{res/logo.png} 
+		      
+}
+
+\setbeamertemplate{footline}
+{
+\vspace{1.5cm}
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.8\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\pgfsetfillopacity{1}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
+
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage[german]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{textpos}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Qualitätssicherung]{Autorisierungsmanagement für eine virtuelle
+Forschungsumgebung für Geodaten \\ \textbf{QUALITÄTSSICHERUNG}} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[]{
+Bachvarov, Aleksandar\\
+Dimitrov, Atanas\\
+Mortazavi Moshkenan, Houraalsadat\\
+Sakly, Khalil\\
+Slobodyanik, Anastasia\\
+Voneva, Sonya
+} % Your name
+
+\institute[] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Karlsruher Institut für Technologie % Your institution for the title page
+
+}
+\date{07. März 2018} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{70mm}(.90\textwidth,-1cm)
+\includegraphics[height=1cm,width=1cm]{res/logo}
+\end{textblock*}}
+
+
+\begin{frame}
+\frametitle{Einleitung}
+\framesubtitle{Testphasen}
+
+\begin{center}
+\includegraphics[height=\textheight]{res/testphasen.png}
+\end{center}
+
+
+
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Komponenten-Test}
+\framesubtitle{Unittests}
+
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Integration-Test}
+\framesubtitle{Automatisierte Tests}
+
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{System-Test}
+\framesubtitle{Manuelle Tests}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Fehler}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Codeüberdeckung}
+\framesubtitle{Vor der Testphase}
+\begin{center}
+\includegraphics[scale=0.6]{res/coverage_before.png}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Codeüberdeckung}
+\framesubtitle{Nach der Testphase}
+\begin{center}
+\includegraphics[scale=0.5]{res/coverage_after.png}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Fazit}
+
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
