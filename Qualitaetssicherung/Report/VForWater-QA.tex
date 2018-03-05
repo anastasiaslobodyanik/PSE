@@ -91,8 +91,8 @@
 Das Testen in der Software-Entwicklung ist der Prozess der Untersuchung des Produktes auf Unterschiede zwischen seinem beobachteten Verhalten und dem erwarteten Verhalten des modellierten Systems.
 In dem Wasserfall-Vorgehensmodell wird die Testphase direkt vor der Auslieferung des Produkts durchgeführt und als Sicherstellung festgelegter Qualitätsanforderungen betrachtet.\\
 Die Testphase ist mit anderen Entwicklungsphasen eng verbunden. Die ersten Tests werden schon in der Implentierungsphase erstellt: Unittests zu jedem View entsprechen dem Komponenten-Test, dessen Ziel ist, Fehler in jedem Teil des Systems aufzufinden. Diese Tests werden im Kapitel \hyperref[komponententest]{\textit{Komponenten-Test}} beschrieben.\\
-Das Zusammenspiel einzelner Komponenten wird im Integration-Test geprüft. In dieser Phase wird ein Rückblick auf das Artefakt des Entwurfs genommen, um die Integrationsstrategie während dem Test zu berücksichtigen. Tests, die diese Phase umschlie{\ss}t, beschreiben wir im Kapitel \hyperref[integrationtest]{\textit{Integration-Test}}.\\
-Der abschlie{\ss}ende Teil der Testphase ist der System-Test, der alle Komponenten zusammen prüft. In unserem Projekt werden dafür manuelle Tests angewendet, die ermöglichen, Benutzerszenarien realitätsnah durchzuarbeiten. Testcases (Testszenarien) in dieser Phase werden anhand funktioneller Anforderungen aus dem Pflichtenheft erstellt und im Kapitel \hyperref[systemtest]{System-Test} beschrieben.\\
+Das Zusammenspiel einzelner Komponenten wird im Integrationstest geprüft. In dieser Phase wird ein Rückblick auf das Artefakt des Entwurfs genommen, um die Integrationsstrategie während dem Test zu berücksichtigen. Tests, die diese Phase umschlie{\ss}t, beschreiben wir im Kapitel \hyperref[integrationtest]{\textit{Integrationstest}}.\\
+Der abschlie{\ss}ende Teil der Testphase ist der System-Test, der alle Komponenten zusammen prüft. In unserem Projekt werden dafür manuelle Tests angewendet, die ermöglichen, Benutzerszenarien realitätsnah durchzuarbeiten. Testcases (Testszenarien) in dieser Phase werden anhand funktioneller Anforderungen aus dem Pflichtenheft erstellt und im Kapitel \hyperref[System-Test]{System-Test} beschrieben.\\
 Während der Testphase gefundene und behobene  Defekte werden im Kapitel \hyperref[bugs]{\textit{Aufgetretene Probleme}} erfasst.\\
 In der \hyperref[zusammenfassung]{\textit{Zusammenfassung}} werden Ergebnisse der Testphase betrachtet: Codeüberdeckung vor und nach der Phase, behobene Fehler und unsere Beurteilung der Lieferfertigkeit des Produktes.
  \newpage
@@ -241,12 +241,12 @@ In der vorliegenden Tabelle wird beschrieben, welche Test-Klassen implementiert 
 \newpage
 
 
-\section{Integration-Test} \label{integrationtest}
-Integration-Tests dienen dazu, das Zusammenspiel aller Komponenten zu \"uberpr\"ufen. W\"ahrend dieser Phase werden Tests entsprechend der Modularit\"at erstellt, welche im Entwurf festgelegt wurden. Django-Applications arbeiten mit dem Prinzip ,,Model View Template``, welches die Benutzeraktionen des Templates mit Hilfe der View entnimmt und diese direkt in die Datenbank integriert.\\
+\section{Integrationstest} \label{integrationtest}
+Integrationstests dienen dazu, das Zusammenspiel aller Komponenten zu \"uberpr\"ufen. W\"ahrend dieser Phase werden Tests entsprechend der Modularit\"at erstellt, welche im Entwurf festgelegt wurden. Django-Applications arbeiten mit dem Prinzip ,,Model View Template``, welches die Benutzeraktionen des Templates mit Hilfe der View entnimmt und diese direkt in die Datenbank integriert.\\
 Um diese Verbindung zu testen, haben wir automatische Unittests benutzt (Tabelle \ref{it-tabelle} ), die den Datenbankzustand vor und nach der Ausf\"urung der View-Funktionen pr\"ufen.\\
 
 \begin{longtable}[c]{|p{0.4cm}|P{2cm}|p{2cm}|p{5cm}|p{4.5cm}|}
-\caption{Integration-Tests. Jede Klasse enthält eine Gruppe von Methoden (Testcases), die mit entsprechender Datenart arbeiten. Jede Methode testet einen Vorgang, der in der Beschreibung erläutert wird. Die Ergebnis-Spalte beschreibt das erwartete Verhalten des Systems.}
+\caption{Integrationstests. Jede Klasse enthält eine Gruppe von Methoden (Testcases), die mit entsprechender Datenart arbeiten. Jede Methode testet einen Vorgang, der in der Beschreibung erläutert wird. Die Ergebnis-Spalte beschreibt das erwartete Verhalten des Systems.}
 \label{it-tabelle}\\
 \hline
 \textbf{\#} & \textbf{Klasse}&\centerline{\textbf{Methode}}& \centerline{\textbf{Beschreibung}} & \centerline{\textbf{Ergebnis}} \\ \hline
@@ -280,9 +280,9 @@ test-create-access-request & Test öffnet die ,,Resources Overview``-Seite und s
 \end{longtable}
 
 \newpage
-\section{System-Test} \label{systemtest}
+\section{System-Test} \label{System-Test}
 System-Test im Sinne der Software-Entwicklung ist der abschließende Test, der vom Entwickler durchgeführt wird. Das Ziel dieses Tests ist das Verhalten des Produkts als Ganzes in einer realen Umgebung (immer noch ohne Kunden) zu beobachten.\\
-Im Rahmen unseres Projekts bezeichnen wir manuelle Tests als System-Tests. Sie entsprechen möglichen Szenarien, die durch Interaktion des Benutzers mit dem System entstehen. Als Basis dafür dienen die im Pflichtenheft vordefinierte globale Testfälle. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - solche die Benutzer \ref{manTestsBenutzer}, Besitzer \ref{manTestsBesitzer} oder Administrator \ref{manTestsAdmin} betreffen.\\
+Im Rahmen unseres Projekts sind die System-Tests als manuelle Tests bezeichnet. Sie entsprechen möglichen Szenarien, die durch Interaktion mit dem System entstehen. Als Basis dafür dienen die im Pflichtenheft vordefinierte globale Testfälle. Für die klare Unterscheidung zwischen den verschiedenen Rollen, die man im Portal haben kann, sind die manuelle Tests in drei Gruppen aufgeteilt - solche die Benutzer \ref{manTestsBenutzer}, Besitzer \ref{manTestsBesitzer} oder Administrator \ref{manTestsAdmin} betreffen.\\
 Um die Kompatibilität des Produkts mit verschiedenen Umgebungen zu testen, haben wir die System-Tests erfolgreich mit vier modernen Browser (deren Benutzung schon im Pflichtenheft als Kriterium gesetzt wurde) - Chrome, Firefox, Safari und Microsoft Edge auf vier Betriebssysteme - Windows 8, Windows 10, Mac und Linux durchgeführt.  
 
 \begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
@@ -454,6 +454,15 @@ Folgende Defekte wurden in der Benutzeroberfläche gefunden. Behebung dieser Def
 
 \newpage
 \section{Zusammenfassung} \label{zusammenfassung}
-Testüberdeckung. Fazit über die Qualität des Produkts.
+Während der Testphase unseres Projektes wurden unterschiedliche Testverfahren angewendet. Mit der Django-Funktionalitäten wurden automatische Tests erstellt und ausgeführt: 91 Unittests und 14 Integrationstests verschaffen eine Codeüberdeckung über 90\% (Abbildung \ref{coverage}). \\
+
+ \begin{figure}[ht!]
+ 	\centering
+ 	\includegraphics[width=1\textwidth]{res/coverage_after.png}
+ 	\caption{Codeüberdeckung nach der Testphase. Grün sind Werte, die sich während der Testphase verbessert haben, markiert. Rot sind reduzierte Werte markiert. In der Spalte \textbf{delta} wird positive Differenz zwischen Überdeckung vor und nach der Testphase gezeigt.}
+\label{coverage}
+ \end{figure}
+ Als System-Test wurden 25 manuellen Test entsprechend dem Pflichtenheft definiert und in ausführlichen Szenarien mit mehreren Benutzer in realer Umgebung ausgeführt.\\
+Während dem Testen wurden 16 Probleme aufgefunden und behoben. Somit ist die Testphase abgeschlossen und das Produkt ist bereit für Einsatz und Wartung. 
 \end{document}
 \grid
