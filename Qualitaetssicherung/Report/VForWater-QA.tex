@@ -305,12 +305,9 @@ Um die Kompatibilität des Produkts mit verschiedenen Umgebungen zu testen, habe
 \multirow{2}{*}{} T050 : Access Request senden& \multirow{2}{*}{} F050 & Klicke auf den ,,Resources Overview``-Button  &Die ,,Resources``-Seite ist angezeigt , einschlie{\ss}lich einer Liste von Ressourcen und eines Suchfeldes \\ \cline{3-4}    &  & Klicke auf den ,,Send Request``-Button  &Der Nachricht-Dialog ist angezeigt , mit optionalem Beschreibungsfeld  , ,,Yes`` und  ,,Close``-Button \\ \cline{3-4}    &  & Klicke auf den ,,Yes``-Button  & Statt des ,,Send Request``-Buttons ist der ,,Cancel Request``-Button angezeigt\\ \hline
 
 \multirow{2}{*}{} T060 : Benachrichtigung& \multirow{2}{*}{} F060 & Klicke auf den ,,Resources Overview``-Button  &Die ,,Resources``-Seite ist angezeigt , einschlie{\ss}lich einer Liste von Ressourcen und eines Suchfeldes \\ \cline{3-4}    &  & Klicke auf den ,,Send Request``-Button & Statt des ,,Send Request``-Buttons ist der ,,Cancel Request``-Button angezeigt  \\ \cline{3-4}    &  &Die Anfrage akzeptieren/ablehnen (aus dem Besitzer-Konto)  & \multirow{2}{*}{} Die Logdatei enthält eine Email und eine Beschreibung  \\ \cline{3-3}    &  & Öffne die Logdatei  & \\ \cline{3-3}    &  & Suche nach der Email  &  \\ \hline
-
-%\multirow{2}{*}{} T080 : Multiple Request& \multirow{2}{*}{} F080 & Einloggen & ,,Resources Overview``-Button ist angezeigt  \\ \cline{3-4}    &  & Klicke auf ,,Resources Overview``-Button  & ,,Resources``-Seite ist angezeigt , einschließlich einer Liste von Ressourcen und einem Suchfeld \\ \cline{3-4}    &  & Klicke auf ,,Send Request``-Button  & Nachricht Dialog ist angezeigt , mit freiwilligen Beschreibungsfeld  , ,,Yes``- und  ,,Close``-Button \\ \cline{3-4}    &  & Klicke auf ,,Yes``-Button  & ,,Cancel Request``-Button ist nun angezeigt anstatt von ,,Send Request``-Button für alle Ressourcen \\ \cline{3-4}    &  & Klicke auf ,,Send Request``-Button von einer andere Ressource  & Nachricht Dialog ist angezeigt , mit freiwilligen Beschreibungsfeld  , ,,Yes``- und ,,Close``-Button \\ \cline{3-4}    &  & Klicke auf ,,Yes``-Button  & ,,Cancel Request``-Button ist nun angezeigt anstatt von ,,Send Request``-Button für alle Ressourcen \\ \cline{3-4}    &  & Klicke auf ,,Send Request``-Button von einer anderer Ressource  & Nachricht Dialog ist angezeigt , mit freiwilligen beschreibeungsfeld  , ,,Yes``- und ,,Close``-Button \\ \cline{3-4}    &  & Klicke auf ,,Yes``-Button  & ,,Cancel Request``-Button ist nun angezeigt anstatt von ,,Send Request``-Button für alle Ressourcen \\ \cline{3-4}    &  & Klicke auf ,,Send Request``-Button von einer anderer Ressource  & Nachricht Dialog ist angezeigt , mit freiwilligen Beschreibungsfeld  , ,,Yes``- und ,,Close``-Button \\ \cline{3-4}    &  & Öffne die Logdatei  & alle Requests wurden in der Logdatei geschrieben \\ \hline
 \end{longtable}
 
 
-\newpage
 \begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
 \caption{Manuelle Tests für den Besitzer: Jeder Testcase (TXXX-Nummer entspricht der Nummer im Pflichtenheft) testet die entsprechende funktionale Anforderung (FA) aus dem Pflichtenheft. Alle Testcases implizieren, dass der Benutzer eingeloggt ist.}
 \label{manTestsBesitzer}\\
@@ -336,11 +333,8 @@ Um die Kompatibilität des Produkts mit verschiedenen Umgebungen zu testen, habe
 
 \multirow{2}{*}{} T290 : Löschbenachrichtigungen&  \multirow{2}{*}{} F240  &Auf den ,,Profile``-Button klicken  & Der ,,My Resources``-Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf den ,,My Resources``-Button  & Die Liste der eigenen Ressourcen wird angezeigt, folgende Buttons werden für jede Ressource angezeigt: ,,Access``, ,,Edit Permissions``, ,,Delete`` \\ \cline{3-4}    &  & Klicke auf den ,,Delete``-Button  & Eine Dialogbox wird angezeigt , sie enthält ein Eingabefeld , ein ,,Yes``- und ,,Close``-Button \\ \cline{3-4}    &  & Klicke auf den ,,Yes``-Button  & Der ,,Cancel Deletion Request``-Button wird statt des ,,Delete``-Buttons angezeigt \\ \cline{3-4}    &  & Einloggen als Administrator und klicke auf den ,,Profile``-Button  & Löschrequest wird in der Profilseite angezeigt \\ \cline{3-4}    &  & Klicke auf den ,,Accept``-Button & Eine Dialogbox wird angezeigt , sie enthält ein Schreibfeld , einen ,,Yes``- und ,,Close``-Button \\ \cline{3-4}    &  & Klicke auf den ,,Yes``-Button  & Löschrequest wird in der Profilseite nicht mehr angezeigt \\ \cline{3-4}    &  & Die Logdatei öffnen  & Die Logdatei enthält alle gesendeten Emails für alle Besitzern \\ \hline
 
-%\multirow{2}{*}{} T300 : Zugriffsrechte zu mehreren Nutzern vergeben& \multirow{2}{*}{} F250 & Einloggen & ,,Profile``-Button ist angezeigt  \\ \cline{3-4}    &  &Auf ,,Profile``-Button klicken  & ,,My Resources``-Button wird angezeigt \\ \cline{3-4}    &  & Klicke auf ,,My Resources``  & Liste der eigenen Ressourcen wird angezeigt, Folgende Button für jede Ressource werden angezeigt: ,,Access``, ,,Edit Permissions``, ,,Delete`` \\ \cline{3-4}    &  & Klicke auf ,,Edit Permissions``-Button  & Suchen Feld wird angezeigt \\ \cline{3-4}    &  & Schreibe "user" und Klicke auf ,,Search``-Button  & alle Users werden angezeigt \\ \cline{3-4}    &  & Klicke auf ,,Reader``-Button für alle Users und ,,Confirm``-Button  & alle Users sollen als Leser angezeigt werden  \\ \hline
-
 \end{longtable}
 
-\newpage
 \begin{longtable}[c]{|P{2.5cm}|p{1.0cm}|p{5cm}|p{6.5cm}|}
 	\caption{Manuelle Tests für den Administrator: Jeder Testcase (TXXX-Nummer entspricht der Nummer im Pflichtenheft) testet die entsprechende funktionale Anforderung (FA) aus dem Pflichtenheft. Alle Testcases implizieren, dass der Benutzer mit Administratorrechte eingeloggt ist.}
 	\label{manTestsAdmin}\\
@@ -427,6 +421,7 @@ Folgende Defekte wurden in der Benutzeroberfläche gefunden. Behebung dieser Def
 		\item \textit{Problem:}\\ Unbegrenzte Eingabe in einigen Textfelder möglich.\\
 			\textit{Lösung:}\\ Änderung des Feldtyps und eingabe maximaler Länge.
 		\item \textit{Problem:}\\ ,,Access``-Button nicht auf der ganzen Fläche anklickbar.\\
+\newpage
 			\textit{Lösung:}\\ Löschung des Links vom Button-Überschrift.
 		\item \textit{Problem:}\\ Der Name der Ressource wird auf der ,,Edit permissions``-Seite nicht angezeigt.\\
 			\textit{Lösung:}\\ Erweiterung des Templates.
@@ -446,7 +441,7 @@ Während der Testphase unseres Projektes wurden unterschiedliche Testverfahren a
  	\caption{Codeüberdeckung nach der Testphase. Grün sind Werte, die sich während der Testphase verbessert haben, markiert. Rot sind reduzierte Werte markiert. In der Spalte \textbf{delta} wird positive Differenz zwischen Überdeckung vor und nach der Testphase gezeigt.}
 \label{coverage}
  \end{figure}
- Als Systemtest wurden 25 manuellen Test entsprechend dem Pflichtenheft definiert und in ausführlichen Szenarien mit mehreren Benutzer in realer Umgebung ausgeführt.\\
+ Als Systemtest wurden 25 manuelle Test entsprechend dem Pflichtenheft definiert und in ausführlichen Szenarien mit mehreren Benutzer in realer Umgebung ausgeführt.\\
 Während dem Testen wurden 16 Probleme aufgefunden und behoben. Somit ist die Testphase abgeschlossen und das Produkt ist für Einsatz und Wartung bereit. 
 \end{document}
 \grid
