@@ -242,8 +242,8 @@ In der vorliegenden Tabelle \ref{kom-tabelle} wird beschrieben, welche Test-Klas
 
 
 \section{Integrationstest} \label{integrationtest}
-Integrationstests dienen dazu, das Zusammenspiel aller Komponenten zu überprüfen. Während dieser Phase werden Tests entsprechend der Modularität, welche im Entwurf festgelegt wurde, erstellt. Django-Applications arbeiten nach dem Prinzip ,,Model View Template``, welches die Benutzeraktionen des Templates mit Hilfe der View entnimmt und diese direkt in die Datenbank integriert.\\
-Um diese Verbindung zu testen, haben wir automatische Unittests benutzt (Tabelle \ref{it-tabelle} ), die den Datenbankzustand vor und nach der Ausführung der View-Funktionen prüfen.\\
+Integrationstests dienen dazu, das Zusammenspiel aller Komponenten zu überprüfen. Während dieser Phase werden Tests entsprechend der Modularität, welche im Entwurf festgelegt wurde, erstellt. Django-Applications arbeiten nach dem Prinzip ,,Model View Template``, was bedeutet, dass der Benutzer durch Templates mit dem System interagiert und die Templates durch View-Funktionen die Models (Datenbank) steuern.\\
+Um diese Verbindung zu pr\"ufen, haben wir automatische Tests benutzt (Tabelle \ref{it-tabelle} ), die den Datenbankzustand vor und nach der Ausführung der View-Funktionen prüfen.\\
 
 \begin{longtable}[c]{|p{0.4cm}|P{2cm}|p{2cm}|p{5cm}|p{4.5cm}|}
 \caption{Integrationstests. Jede Klasse enthält eine Gruppe von Methoden (Testcases), die mit entsprechender Datenart arbeiten. Jede Methode testet einen Vorgang, der in der Beschreibung erläutert wird. Die Ergebnis-Spalte beschreibt das erwartete Verhalten des Systems.}
@@ -370,22 +370,22 @@ Um die Kompatibilität des Produkts mit verschiedenen Umgebungen zu testen, habe
 \end{longtable}
 \newpage
 \section{Aufgetretene Probleme} \label{bugs}
-Während der Testphase sind einige Fehler aufgetreten. Diese Fehler wurden von uns in einem Bugtracker (basiert auf Trello) erfasst und bearbeitet. Jeder Fall wurde nach der Art des Fehlers klassifiziert:
+Während der Testphase sind einige Fehler aufgetreten. Diese Fehler wurden von uns in einem Bugtracker (basiert auf Trello) erfasst und anschlie{\ss}end bearbeitet. Jeder Fall wurde nach der Art des Fehlers klassifiziert:
 
 \renewcommand{\labelitemii}{$\bullet$}
 \begin{itemize}
 \item[] \textbf{Applikationslogik}\\\\
-Folgende Fehler waren für Konsistenz des Systems kritisch und mussten umgehend behoben werden.
+Folgende Fehler waren für die Konsistenz des Systems kritisch und mussten umgehend behoben werden.
 	\begin{itemize}
 		\item \textit{Problem:}\\ Eine eingegebene Nachricht des Administrators beim Ablehnen eines Löschrequests wird in der Email-Benachrichtigung  nicht angezeigt.\\
 			\textit{Lösung:}\\ Erweiterung des Email-Templates
 		\item \textit{Problem:} \\Auf der Seite ,,Resources overview`` wird kein ,,Access``-Button für eine Ressource  angezeigt, wenn der Benutzer die Besitzerrechte für diese Ressource von einem Administrator bekommen hat.\\
-		\textit{Lösung:} \\Wird der Benutzer in ,,owners``-Liste der Ressource hinzugefügt, so wird er auch zur ,,Readers`` eingebunden.
+		\textit{Lösung:} \\Wird der Benutzer in ,,Owners``-Liste der Ressource hinzugefügt, so wird er auch zur ,,Readers`` eingebunden.
 		
 		\item \textit{Problem:}\\
 		Löschrequests von einem Benutzer werden nicht gelöscht, wenn seine Besitzerrechte entzogen werden.\\
 		\textit{Lösung:}\\
-		Werden Besitzerrechte entzogen, so werden auch alle existierende Löschrequests mit entsprechenden Sender und Ressource als Attribute gelöscht.
+		Werden die Besitzerrechte entzogen, so werden auch alle existierende Löschrequests mit entsprechenden Sender und Ressource als Attributen gelöscht.
 		\item \textit{Problem:}\\
 		Der Zugriffsrequest von einem Benutzer wird nicht gelöscht, wenn dem die Zugriffsrechte manuell hinzugefügt werden.\\
 		\textit{Lösung:}\\
@@ -411,7 +411,7 @@ In folgenden Fällen hat angemessenes Feedback des Systems gefehlt. Diese Defekt
 	\end{itemize}
 			
 \item[] \textbf{Benutzerfreundlichkeit}\\\\
-Folgende Defekte hatten zwar keinen Einfluss auf die Konsistenz des Systems, konnten aber einige Schwierigkeiten für Benutzer darstellen.
+Folgende Defekte hatten zwar keinen Einfluss auf die Konsistenz des Systems, konnten aber einige Schwierigkeiten für den Benutzer darstellen.
 	\begin{itemize}
 		\item \textit{Problem:}\\ Die Benutzersuche auf der ,,Edit permissions``-Seite ausschlie{\ss}lich mit dem Benutzernamen möglich.\\
 			\textit{Lösung:} \\Erweiterung der Suchmethode: die Suche mit Email, Vor- und Nachnamen hinzugefügt.
@@ -447,6 +447,6 @@ Während der Testphase unseres Projektes wurden unterschiedliche Testverfahren a
 \label{coverage}
  \end{figure}
  Als Systemtest wurden 25 manuellen Test entsprechend dem Pflichtenheft definiert und in ausführlichen Szenarien mit mehreren Benutzer in realer Umgebung ausgeführt.\\
-Während dem Testen wurden 16 Probleme aufgefunden und behoben. Somit ist die Testphase abgeschlossen und das Produkt ist bereit für Einsatz und Wartung. 
+Während dem Testen wurden 16 Probleme aufgefunden und behoben. Somit ist die Testphase abgeschlossen und das Produkt ist für Einsatz und Wartung bereit. 
 \end{document}
 \grid
