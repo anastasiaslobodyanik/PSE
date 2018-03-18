@@ -92,6 +92,8 @@
 }
 
 \usepackage{graphicx} % Allows including images
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage[german]{babel}
 \usepackage[utf8x]{inputenc}
@@ -138,7 +140,7 @@ Voneva, Sonya\\ \vspace{.75cm}
 \framesubtitle{Ziel des Produkts}
 
 \begin{itemize}
-	\item<1-7> Zugriffsanfragen senden
+	\item<1-7> Zugriffsanfragen für Ressourcen senden
 	\item<2-7> Ressourcen nutzen
 	\item<3-7> Neue Ressourcen erstellen
 \end{itemize}
@@ -223,10 +225,30 @@ Voneva, Sonya\\ \vspace{.75cm}
 \begin{frame}
 	\frametitle{Wie haben wir das gemacht}
 	\framesubtitle{Tools}
-	\includegraphics<1>[width=6.7cm, height=3.2cm]{res/tools1}
-	\includegraphics<2>[width=\textwidth]{res/tools2}
-	\includegraphics<3>[width=\textwidth]{res/tools3}
-	\includegraphics<4>[width=\textwidth]{res/tools4}
+	\begin{figure} \centering
+		\begin{subfigure}[t]{\linewidth}
+			\includegraphics<1-4>[width=60mm]{res/eclipse}
+		\end{subfigure} %
+		
+		\begin{subfigure}[t]{\linewidth}    
+			\includegraphics<1-4>[width=30mm]{res/pydev}
+		\end{subfigure} 
+		\vspace{-0.5cm}
+		
+		\begin{subfigure}[h]{\linewidth}    
+			\includegraphics<2-4>[width=40mm, right]{res/latex}
+		\end{subfigure} 
+		\vspace{-1cm}
+		
+		\begin{subfigure}[b]{\linewidth}    
+			\includegraphics<3-4>[width=40mm]{res/git} 
+		\end{subfigure} 
+		\vspace{-1cm}
+		
+		\begin{subfigure}[t]{\linewidth}    
+			\includegraphics<4>[width=25mm, center]{res/trello}  
+		\end{subfigure} 
+	\end{figure}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
