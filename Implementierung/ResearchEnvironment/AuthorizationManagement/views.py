@@ -655,11 +655,6 @@ class DeleteResourceView(generic.View):
                                          'message': request.POST['descr']})
         text_content = strip_tags(html_content)
 
-
-        # deletes all the access permissions to this resource
-        res.owners.clear()
-        res.readers.clear()
-
         # deletes all the requests for this resource
         AccessRequest.objects.filter(resource=res).delete()
         DeletionRequest.objects.filter(resource=res).delete()
@@ -699,18 +694,20 @@ class ApproveDeletionRequest(generic.View):
         
         message = req.description # gets the description of the request
 
-        html_content = render_to_string('AuthorizationManagement/mail/delete-request-accepted-mail.html',
+        html_content1 = render_to_string('AuthorizationManagement/mail/delete-request-accepted-mail.html',
                                         {'user': request.user,
                                          'resource': req.resource,
-                                         'request': req,
                                          'message': message})
-        text_content = strip_tags(html_content)
+        text_content1 = strip_tags(html_content1)
+        
+        html_content2 = render_to_string('AuthorizationManagement/mail/resource-deleted-mail.html',
+                                        {'user': request.user,
+                                         'resource': req.resource,
+                                         'message': message})
+        text_content2 = strip_tags(html_content2)
 
         res = req.resource
 
-        # deletes all the permissions to this resource
-        res.owners.clear()
-        res.readers.clear()
 
         # deletes all the requests for this resource
         AccessRequest.objects.filter(resource=res).delete()
@@ -720,16 +717,16 @@ class ApproveDeletionRequest(generic.View):
         # sends an email to the sender of the request
         email_to = req.sender.email
         email_from = request.user.email
-        msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
-        msg.attach_alternative(html_content, "text/html")
+        msg = EmailMultiAlternatives('Deletion Request approved', text_content1, email_from, [email_to])
+        msg.attach_alternative(html_content1, "text/html")
         msg.send()
         logger.info("An email was sent from %s to %s, Subject: Deletion Request for '%s' accepted \n" % (request.user.username,req.sender,req.resource.name))
 
         # notifies all the owners
         email_to = [x[0] for x in res.owners.values_list('email')]
         email_from = request.user.email
-        msg = EmailMultiAlternatives('Deletion Request approved', text_content, email_from, [email_to])
-        msg.attach_alternative(html_content, "text/html")
+        msg = EmailMultiAlternatives('Resource deleted', text_content2, email_from, [email_to])
+        msg.attach_alternative(html_content2, "text/html")
         msg.send()
         logger.info("An email was sent to all '%s' owners, Object: '%s' is deleted " % (req.resource.name,req.resource.name))
         
